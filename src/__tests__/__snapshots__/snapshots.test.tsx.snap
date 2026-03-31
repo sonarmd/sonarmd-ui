@@ -296,12 +296,12 @@ exports[`CheckboxGroup > renders with one option selected 1`] = `
   >
     <label
       class="_label_33d967"
-      for="_r_0_"
+      for=":r0:"
     >
       Sizes
     </label>
     <div
-      aria-labelledby="_r_0_-label"
+      aria-labelledby=":r0:-label"
       class="_group_5958cf _vertical_5958cf"
       role="group"
     >
@@ -755,7 +755,7 @@ exports[`DatePicker > renders with no value 1`] = `
   >
     <label
       class="_label_33d967"
-      for="_r_9_"
+      for=":r9:"
     >
       Date
     </label>
@@ -769,7 +769,7 @@ exports[`DatePicker > renders with no value 1`] = `
           aria-invalid="false"
           autocomplete="off"
           class="_input_ef7e38"
-          id="_r_9_"
+          id=":r9:"
           placeholder="MM/DD/YYYY"
           type="text"
           value=""
@@ -816,7 +816,7 @@ exports[`DateRangePicker > renders with no value 1`] = `
   >
     <label
       class="_label_33d967"
-      for="_r_a_"
+      for=":ra:"
     >
       Date range
     </label>
@@ -825,7 +825,7 @@ exports[`DateRangePicker > renders with no value 1`] = `
       aria-haspopup="dialog"
       aria-invalid="false"
       class="_trigger_638e37"
-      id="_r_a_"
+      id=":ra:"
       type="button"
     >
       <span
@@ -872,7 +872,7 @@ exports[`Dropdown > renders closed with placeholder 1`] = `
   >
     <label
       class="_label_33d967"
-      for="_r_4_"
+      for=":r4:"
     >
       Category
     </label>
@@ -881,7 +881,7 @@ exports[`Dropdown > renders closed with placeholder 1`] = `
       aria-haspopup="listbox"
       aria-invalid="false"
       class="_trigger_1f39d3 _md_1f39d3"
-      id="_r_4_"
+      id=":r4:"
       type="button"
     >
       <span
@@ -928,7 +928,7 @@ exports[`Dropdown > renders with selected value 1`] = `
       aria-haspopup="listbox"
       aria-invalid="false"
       class="_trigger_1f39d3 _md_1f39d3"
-      id="_r_5_"
+      id=":r5:"
       type="button"
     >
       <span
@@ -1510,7 +1510,7 @@ exports[`MultiSelect > renders with no selection 1`] = `
   >
     <label
       class="_label_33d967"
-      for="_r_7_"
+      for=":r7:"
     >
       Tags
     </label>
@@ -1519,7 +1519,7 @@ exports[`MultiSelect > renders with no selection 1`] = `
       aria-haspopup="listbox"
       aria-invalid="false"
       class="_triggerArea_e760e9"
-      id="_r_7_"
+      id=":r7:"
       role="button"
       tabindex="0"
     >
@@ -1563,7 +1563,7 @@ exports[`MultiSelect > renders with selections 1`] = `
       aria-haspopup="listbox"
       aria-invalid="false"
       class="_triggerArea_e760e9"
-      id="_r_8_"
+      id=":r8:"
       role="button"
       tabindex="0"
     >
@@ -1659,7 +1659,6 @@ exports[`PageHeader > renders with back link 1`] = `
   >
     <a
       class="_back_eb25c9"
-      data-discover="true"
       href="/reports"
     >
       <svg
@@ -1793,7 +1792,7 @@ exports[`RadioGroup > renders with selection 1`] = `
       Choice
     </label>
     <div
-      aria-labelledby="_r_1_-label"
+      aria-labelledby=":r1:-label"
       class="_group_7fcaa1 _vertical_7fcaa1"
       role="radiogroup"
     >
@@ -1889,14 +1888,12 @@ exports[`Sidebar > renders collapsed 1`] = `
     >
       <a
         class="_item_db19ec"
-        data-discover="true"
         data-nav-key="dashboard"
         href="/"
       />
       <a
         aria-current="page"
         class="_item_db19ec _itemActive_db19ec"
-        data-discover="true"
         data-nav-key="analytics"
         href="/analytics"
       />
@@ -1917,7 +1914,6 @@ exports[`Sidebar > renders nav items 1`] = `
       <a
         aria-current="page"
         class="_item_db19ec _itemActive_db19ec"
-        data-discover="true"
         data-nav-key="dashboard"
         href="/"
       >
@@ -1929,7 +1925,6 @@ exports[`Sidebar > renders nav items 1`] = `
       </a>
       <a
         class="_item_db19ec"
-        data-discover="true"
         data-nav-key="analytics"
         href="/analytics"
       >
@@ -1941,7 +1936,6 @@ exports[`Sidebar > renders nav items 1`] = `
       </a>
       <a
         class="_item_db19ec"
-        data-discover="true"
         data-nav-key="settings"
         href="/settings"
       >
@@ -2178,12 +2172,12 @@ exports[`Toggle > renders off 1`] = `
 <DocumentFragment>
   <label
     class="_root_76a0f7"
-    for="_r_2_"
+    for=":r2:"
   >
     <input
       aria-checked="false"
       class="_input_76a0f7"
-      id="_r_2_"
+      id=":r2:"
       role="switch"
       type="checkbox"
     />
@@ -2207,13 +2201,13 @@ exports[`Toggle > renders on 1`] = `
 <DocumentFragment>
   <label
     class="_root_76a0f7"
-    for="_r_3_"
+    for=":r3:"
   >
     <input
       aria-checked="true"
       checked=""
       class="_input_76a0f7"
-      id="_r_3_"
+      id=":r3:"
       role="switch"
       type="checkbox"
     />
@@ -2250,7 +2244,7 @@ exports[`Typeahead > renders empty state 1`] = `
   >
     <label
       class="_label_33d967"
-      for="_r_6_"
+      for=":r6:"
     >
       Search
     </label>
@@ -2263,7 +2257,7 @@ exports[`Typeahead > renders empty state 1`] = `
         aria-invalid="false"
         autocomplete="off"
         class="_input_3c3d0d"
-        id="_r_6_"
+        id=":r6:"
         placeholder="Type to search…"
         role="combobox"
         type="text"
