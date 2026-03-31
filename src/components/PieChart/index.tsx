@@ -1,6 +1,8 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useCallback, useRef, useEffect} from 'react';
 import ReactECharts from 'echarts-for-react';
+import type {EChartsInstance} from 'echarts-for-react';
 import {chartColors, echartsDefaults} from '../../sonarmd-tokens';
+import {useThrottle} from '../../hooks/useThrottle';
 import {Skeleton} from '../Skeleton';
 import {EmptyState} from '../EmptyState';
 import styles from './PieChart.module.css';
@@ -24,7 +26,7 @@ export interface PieChartProps {
   className?: string;
 }
 
-export function PieChart({
+export const PieChart = React.memo(function PieChart({
   data,
   donut = false,
   height = 300,
@@ -36,6 +38,24 @@ export function PieChart({
   centerContent,
   className,
 }: PieChartProps): JSX.Element {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const chartInstanceRef = useRef<EChartsInstance | null>(null);
+
+  const throttledResize = useThrottle(() => {
+    chartInstanceRef.current?.resize();
+  }, 200);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver(throttledResize);
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [throttledResize]);
+
+  const handleChartReady = useCallback((chart: EChartsInstance) => {
+    chartInstanceRef.current = chart;
+  }, []);
+
   const option = useMemo(() => {
     const seriesData = data.map((item, i) => ({
       name: item.name,
@@ -109,14 +129,15 @@ export function PieChart({
   }
 
   return (
-    <div className={[styles.root, className].filter(Boolean).join(' ')}>
+    <div ref={containerRef} className={[styles.root, className].filter(Boolean).join(' ')}>
       <div className={styles.wrapper}>
         <ReactECharts
           option={option}
           theme="sonarmd"
           style={{height, width: '100%'}}
-          opts={{renderer: 'svg'}}
+          opts={{renderer: 'svg'}} lazyUpdate
           notMerge
+          onChartReady={handleChartReady}
           {...(onEvents ? {onEvents} : {})}
         />
         {donut && centerContent && (
@@ -125,4 +146,4 @@ export function PieChart({
       </div>
     </div>
   );
-}
+});

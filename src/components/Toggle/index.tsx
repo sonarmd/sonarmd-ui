@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React, { useId, useCallback, useMemo } from 'react';
 import styles from './Toggle.module.css';
 
 export interface ToggleProps {
@@ -11,47 +11,58 @@ export interface ToggleProps {
   labelPosition?: 'left' | 'right';
 }
 
-export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(function Toggle(
-  { label, checked, onChange, size = 'md', disabled, name, labelPosition = 'right' },
-  ref,
-) {
-  const inputId = useId();
+export const Toggle = React.memo(
+  React.forwardRef<HTMLInputElement, ToggleProps>(function Toggle(
+    { label, checked, onChange, size = 'md', disabled, name, labelPosition = 'right' },
+    ref,
+  ) {
+    const inputId = useId();
 
-  const rootClasses = [
-    styles.root,
-    size !== 'md' ? styles[size] : '',
-    disabled ? styles.disabled : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
+    const rootClasses = useMemo(
+      () =>
+        [styles.root, size !== 'md' ? styles[size] : '', disabled ? styles.disabled : '']
+          .filter(Boolean)
+          .join(' '),
+      [size, disabled],
+    );
 
-  const labelEl = <span className={styles.label}>{label}</span>;
+    const handleChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        onChange(e.target.checked);
+      },
+      [onChange],
+    );
 
-  const track = (
-    <>
-      <input
-        ref={ref}
-        id={inputId}
-        type="checkbox"
-        role="switch"
-        aria-checked={checked}
-        className={styles.input}
-        checked={checked}
-        disabled={disabled}
-        name={name}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-      <span className={styles.track}>
-        <span className={styles.thumb} />
-      </span>
-    </>
-  );
+    const labelEl = <span className={styles.label}>{label}</span>;
 
-  return (
-    <label htmlFor={inputId} className={rootClasses}>
-      {labelPosition === 'left' && labelEl}
-      {track}
-      {labelPosition === 'right' && labelEl}
-    </label>
-  );
-});
+    const track = (
+      <>
+        <input
+          ref={ref}
+          id={inputId}
+          type="checkbox"
+          role="switch"
+          aria-checked={checked}
+          className={styles.input}
+          checked={checked}
+          disabled={disabled}
+          name={name}
+          onChange={handleChange}
+        />
+        <span className={styles.track}>
+          <span className={styles.thumb} />
+        </span>
+      </>
+    );
+
+    return (
+      <label htmlFor={inputId} className={rootClasses}>
+        {labelPosition === 'left' && labelEl}
+        {track}
+        {labelPosition === 'right' && labelEl}
+      </label>
+    );
+  }),
+);
+
+Toggle.displayName = 'Toggle';

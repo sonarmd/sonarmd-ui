@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from './Badge.module.css';
 
 export type BadgeVariant = 'primary' | 'success' | 'warning' | 'danger' | 'neutral' | 'cyan' | 'magenta';
@@ -11,16 +11,17 @@ export interface BadgeProps {
   className?: string;
 }
 
-export function Badge({
+export const Badge = React.memo(function Badge({
   children,
   variant = 'neutral',
   dot = false,
   size = 'md',
   className,
 }: BadgeProps): JSX.Element {
-  const classes = [styles.badge, styles[variant], styles[size], className]
-    .filter(Boolean)
-    .join(' ');
+  const classes = useMemo(
+    () => [styles.badge, styles[variant], styles[size], className].filter(Boolean).join(' '),
+    [variant, size, className],
+  );
 
   return (
     <span className={classes}>
@@ -28,4 +29,4 @@ export function Badge({
       {children}
     </span>
   );
-}
+});

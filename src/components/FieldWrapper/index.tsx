@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import styles from './FieldWrapper.module.css';
 
 export interface FieldWrapperProps {
@@ -11,7 +11,7 @@ export interface FieldWrapperProps {
   className?: string;
 }
 
-export function FieldWrapper({
+export const FieldWrapper = React.memo(function FieldWrapper({
   label,
   htmlFor,
   required,
@@ -47,4 +47,4 @@ export function FieldWrapper({
       )}
     </div>
   );
-}
+});

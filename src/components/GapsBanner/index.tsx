@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useMemo} from 'react';
 import styles from './GapsBanner.module.css';
 
 export interface GapsBannerProps {
@@ -27,7 +27,7 @@ function DismissIcon() {
   );
 }
 
-export function GapsBanner({
+export const GapsBanner = React.memo(function GapsBanner({
   title,
   description,
   variant = 'info',
@@ -36,11 +36,22 @@ export function GapsBanner({
   onDismiss,
   className,
 }: GapsBannerProps): JSX.Element {
-  const variantClass = styles[variant];
+  const bannerClassName = useMemo(
+    () => [styles.banner, styles[variant], className].filter(Boolean).join(' '),
+    [variant, className],
+  );
+
+  const handleDismiss = useCallback(() => {
+    onDismiss?.();
+  }, [onDismiss]);
+
+  const handleActionClick = useCallback(() => {
+    action?.onClick();
+  }, [action]);
 
   return (
     <div
-      className={[styles.banner, variantClass, className].filter(Boolean).join(' ')}
+      className={bannerClassName}
       role="status"
       aria-live="polite"
     >
@@ -51,7 +62,7 @@ export function GapsBanner({
       {(action || dismissible) && (
         <div className={styles.right}>
           {action && (
-            <button type="button" className={styles.actionBtn} onClick={action.onClick}>
+            <button type="button" className={styles.actionBtn} onClick={handleActionClick}>
               {action.label}
             </button>
           )}
@@ -59,7 +70,7 @@ export function GapsBanner({
             <button
               type="button"
               className={styles.dismissBtn}
-              onClick={onDismiss}
+              onClick={handleDismiss}
               aria-label="Dismiss"
             >
               <DismissIcon />
@@ -69,4 +80,4 @@ export function GapsBanner({
       )}
     </div>
   );
-}
+});

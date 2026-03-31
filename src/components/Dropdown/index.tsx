@@ -1,6 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { List, RowComponentProps } from 'react-window';
 import { FieldWrapper } from '../FieldWrapper';
+import { usePortal } from '../../hooks/usePortal';
 import styles from './Dropdown.module.css';
 
 export interface DropdownOption {
@@ -56,7 +58,7 @@ function CheckIcon() {
   );
 }
 
-export function Dropdown({
+export const Dropdown = React.memo(function Dropdown({
   label,
   error,
   hint,
@@ -83,20 +85,41 @@ export function Dropdown({
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  const selectedOption = options.find((o) => o.value === value) ?? null;
+  // Rule 9: stable refs for keyboard handler
+  const activeIndexRef = useRef(activeIndex);
+  activeIndexRef.current = activeIndex;
 
-  const filteredOptions = searchable && searchQuery
-    ? options.filter((o) => o.label.toLowerCase().includes(searchQuery.toLowerCase()))
-    : options;
+  // Rule 6: portal container
+  const portalEl = usePortal();
+
+  // Rule 4: derived state via useMemo
+  const selectedOption = useMemo(
+    () => options.find((o) => o.value === value) ?? null,
+    [options, value],
+  );
+
+  // Rule 4: filtered options
+  const filteredOptions = useMemo(
+    () =>
+      searchable && searchQuery
+        ? options.filter((o) => o.label.toLowerCase().includes(searchQuery.toLowerCase()))
+        : options,
+    [options, searchable, searchQuery],
+  );
+
+  // Rule 7: lookup map for data-attribute handler
+  const optionsByValue = useMemo(
+    () => new Map(options.map((o) => [o.value, o])),
+    [options],
+  );
 
   const positionMenu = useCallback(() => {
     if (!triggerRef.current) return;
     const rect = triggerRef.current.getBoundingClientRect();
-    const menuHeight = 280; // estimated max height
+    const menuHeight = 280;
     const spaceBelow = window.innerHeight - rect.bottom;
     const spaceAbove = rect.top;
     const showAbove = spaceBelow < menuHeight && spaceAbove > spaceBelow;
-
     setMenuStyle({
       top: showAbove ? undefined : rect.bottom + 4,
       bottom: showAbove ? window.innerHeight - rect.top + 4 : undefined,
@@ -120,13 +143,37 @@ export function Dropdown({
     triggerRef.current?.focus();
   }, []);
 
-  const selectOption = useCallback(
-    (opt: DropdownOption) => {
-      if (opt.disabled) return;
-      onChange(opt.value);
-      closeMenu();
+  // Rule 3: stable option click handler using data attributes (Rule 7)
+  const handleOptionClick = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      const val = (e.target as HTMLElement)
+        .closest('[data-option-value]')
+        ?.getAttribute('data-option-value');
+      if (val == null) return;
+      const opt = optionsByValue.get(val);
+      if (opt && !opt.disabled) {
+        onChange(opt.value);
+        setIsOpen(false);
+        setSearchQuery('');
+        setActiveIndex(-1);
+        triggerRef.current?.focus();
+      }
     },
-    [onChange, closeMenu],
+    [optionsByValue, onChange],
+  );
+
+  // Rule 3: stable trigger click handler
+  const handleTriggerClick = useCallback(() => {
+    isOpen ? closeMenu() : openMenu();
+  }, [isOpen, closeMenu, openMenu]);
+
+  // Rule 3: stable clear button handler
+  const handleClearClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      onChange(null);
+    },
+    [onChange],
   );
 
   // Click outside
@@ -152,48 +199,128 @@ export function Dropdown({
     }
   }, [isOpen, searchable]);
 
-  const handleTriggerKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      isOpen ? closeMenu() : openMenu();
-    } else if (e.key === 'Escape') {
-      closeMenu();
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (!isOpen) openMenu();
-      setActiveIndex((i) => Math.min(i + 1, filteredOptions.length - 1));
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setActiveIndex((i) => Math.max(i - 1, 0));
-    }
-  };
-
-  const handleMenuKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      setActiveIndex((i) => Math.min(i + 1, filteredOptions.length - 1));
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setActiveIndex((i) => Math.max(i - 1, 0));
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      if (activeIndex >= 0 && filteredOptions[activeIndex]) {
-        selectOption(filteredOptions[activeIndex]);
+  // Rule 9: stable keyboard handlers reading from refs
+  const handleTriggerKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        isOpen ? closeMenu() : openMenu();
+      } else if (e.key === 'Escape') {
+        closeMenu();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!isOpen) openMenu();
+        setActiveIndex((i) => Math.min(i + 1, filteredOptions.length - 1));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setActiveIndex((i) => Math.max(i - 1, 0));
       }
-    } else if (e.key === 'Escape') {
-      closeMenu();
-    }
+    },
+    [isOpen, closeMenu, openMenu, filteredOptions.length],
+  );
+
+  const handleMenuKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setActiveIndex((i) => Math.min(i + 1, filteredOptions.length - 1));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setActiveIndex((i) => Math.max(i - 1, 0));
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const idx = activeIndexRef.current;
+        if (idx >= 0 && filteredOptions[idx]) {
+          const opt = filteredOptions[idx];
+          if (!opt.disabled) {
+            onChange(opt.value);
+            closeMenu();
+          }
+        }
+      } else if (e.key === 'Escape') {
+        closeMenu();
+      }
+    },
+    [filteredOptions, onChange, closeMenu],
+  );
+
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setActiveIndex(-1);
+  }, []);
+
+  // Rule 2: triggerClasses via useMemo
+  const triggerClasses = useMemo(
+    () =>
+      [
+        styles.trigger,
+        styles[size],
+        isOpen ? styles.triggerOpen : '',
+        error ? styles.triggerError : '',
+        disabled ? styles.triggerDisabled : '',
+      ]
+        .filter(Boolean)
+        .join(' '),
+    [size, isOpen, error, disabled],
+  );
+
+  // Rule 12: react-window for large option lists
+  const useVirtualList = filteredOptions.length > 100;
+
+  // rowProps data passed to the List row component
+  const virtualRowProps = useMemo(
+    () => ({ filteredOptions, value, activeIndex, renderOption }),
+    [filteredOptions, value, activeIndex, renderOption],
+  );
+
+  type DropdownRowProps = {
+    filteredOptions: DropdownOption[];
+    value: string | null;
+    activeIndex: number;
+    renderOption?: (option: DropdownOption, isSelected: boolean) => React.ReactNode;
   };
 
-  const triggerClasses = [
-    styles.trigger,
-    styles[size],
-    isOpen ? styles.triggerOpen : '',
-    error ? styles.triggerError : '',
-    disabled ? styles.triggerDisabled : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const OptionRow = useCallback(
+    ({ index, style, filteredOptions: opts, value: val, activeIndex: ai, renderOption: ro }: RowComponentProps<DropdownRowProps>) => {
+      const opt = opts[index];
+      const isSelected = opt.value === val;
+      const isHighlighted = index === ai;
+      const optClasses = [
+        styles.option,
+        isHighlighted ? styles.optionHighlighted : '',
+        isSelected ? styles.optionSelected : '',
+        opt.disabled ? styles.optionDisabled : '',
+      ]
+        .filter(Boolean)
+        .join(' ');
+      return (
+        <div
+          style={style}
+          className={optClasses}
+          role="option"
+          aria-selected={isSelected}
+          data-option-value={opt.value}
+          onMouseEnter={() => setActiveIndex(index)}
+        >
+          {ro ? (
+            ro(opt, isSelected)
+          ) : (
+            <>
+              {opt.icon && <span className={styles.optionIcon}>{opt.icon}</span>}
+              <span className={styles.optionContent}>
+                <span>{opt.label}</span>
+                {opt.description && (
+                  <span className={styles.optionDesc}>{opt.description}</span>
+                )}
+              </span>
+              {isSelected && <CheckIcon />}
+            </>
+          )}
+        </div>
+      );
+    },
+    [],
+  );
 
   const menu = (
     <div
@@ -211,16 +338,21 @@ export function Dropdown({
           type="text"
           placeholder="Search…"
           value={searchQuery}
-          onChange={(e) => {
-            setSearchQuery(e.target.value);
-            setActiveIndex(-1);
-          }}
+          onChange={handleSearchChange}
           onKeyDown={handleMenuKeyDown}
         />
       )}
-      <div className={styles.optionList}>
+      <div className={styles.optionList} onClick={handleOptionClick}>
         {filteredOptions.length === 0 ? (
           <div className={styles.noResults}>No results</div>
+        ) : useVirtualList ? (
+          <List
+            rowHeight={36}
+            rowCount={filteredOptions.length}
+            rowComponent={OptionRow}
+            rowProps={virtualRowProps}
+            style={{ height: 240 }}
+          />
         ) : (
           filteredOptions.map((opt, idx) => {
             const isSelected = opt.value === value;
@@ -240,8 +372,8 @@ export function Dropdown({
                 className={optClasses}
                 role="option"
                 aria-selected={isSelected}
+                data-option-value={opt.value}
                 onMouseEnter={() => setActiveIndex(idx)}
-                onClick={() => selectOption(opt)}
               >
                 {renderOption ? (
                   renderOption(opt, isSelected)
@@ -282,7 +414,7 @@ export function Dropdown({
         id={triggerId.current}
         type="button"
         className={triggerClasses}
-        onClick={() => (isOpen ? closeMenu() : openMenu())}
+        onClick={handleTriggerClick}
         onKeyDown={handleTriggerKeyDown}
         disabled={disabled}
         aria-haspopup="listbox"
@@ -303,10 +435,7 @@ export function Dropdown({
             <button
               type="button"
               className={styles.clearBtn}
-              onClick={(e) => {
-                e.stopPropagation();
-                onChange(null);
-              }}
+              onClick={handleClearClick}
               aria-label="Clear selection"
             >
               <XIcon />
@@ -315,9 +444,7 @@ export function Dropdown({
           <ChevronDown className={`${styles.chevron}${isOpen ? ` ${styles.chevronOpen}` : ''}`} />
         </span>
       </button>
-      {isOpen && ReactDOM.createPortal(menu, document.body)}
+      {isOpen && ReactDOM.createPortal(menu, portalEl)}
     </FieldWrapper>
   );
-}
-
-
+});

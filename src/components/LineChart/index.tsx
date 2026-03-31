@@ -1,6 +1,8 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useCallback, useRef, useEffect} from 'react';
 import ReactECharts from 'echarts-for-react';
+import type {EChartsInstance} from 'echarts-for-react';
 import {chartColors, echartsDefaults} from '../../sonarmd-tokens';
+import {useThrottle} from '../../hooks/useThrottle';
 import {Skeleton} from '../Skeleton';
 import {EmptyState} from '../EmptyState';
 import styles from './LineChart.module.css';
@@ -27,7 +29,7 @@ export interface LineChartProps {
   className?: string;
 }
 
-export function LineChart({
+export const LineChart = React.memo(function LineChart({
   data,
   xKey,
   series,
@@ -41,6 +43,24 @@ export function LineChart({
   formatYAxis,
   className,
 }: LineChartProps): JSX.Element {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const chartInstanceRef = useRef<EChartsInstance | null>(null);
+
+  const throttledResize = useThrottle(() => {
+    chartInstanceRef.current?.resize();
+  }, 200);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver(throttledResize);
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [throttledResize]);
+
+  const handleChartReady = useCallback((chart: EChartsInstance) => {
+    chartInstanceRef.current = chart;
+  }, []);
+
   const option = useMemo(() => {
     const labels = data.map((d) => String(d[xKey] ?? ''));
 
@@ -127,15 +147,16 @@ export function LineChart({
   }
 
   return (
-    <div className={[styles.root, className].filter(Boolean).join(' ')}>
+    <div ref={containerRef} className={[styles.root, className].filter(Boolean).join(' ')}>
       <ReactECharts
         option={option}
         theme="sonarmd"
         style={{height, width: '100%'}}
-        opts={{renderer: 'svg'}}
+        opts={{renderer: 'svg'}} lazyUpdate
         notMerge
+        onChartReady={handleChartReady}
         {...(onEvents ? {onEvents} : {})}
       />
     </div>
   );
-}
+});

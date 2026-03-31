@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { FieldWrapper } from '../FieldWrapper';
 import styles from './TextInput.module.css';
 
@@ -12,8 +12,8 @@ export interface TextInputProps extends Omit<React.InputHTMLAttributes<HTMLInput
   required?: boolean;
 }
 
-export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
-  function TextInput(
+export const TextInput = React.memo(
+  React.forwardRef<HTMLInputElement, TextInputProps>(function TextInput(
     {
       label,
       error,
@@ -29,16 +29,33 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
     },
     ref,
   ) {
-    const inputId = id ?? (name ? `input-${name}` : undefined);
+    const inputId = useMemo(
+      () => id ?? (name ? `input-${name}` : undefined),
+      [id, name],
+    );
 
-    const wrapperClasses = [
-      styles.wrapper,
-      size !== 'md' ? styles[size] : '',
-      iconLeft ? styles.hasIconLeft : '',
-      iconRight ? styles.hasIconRight : '',
-    ]
-      .filter(Boolean)
-      .join(' ');
+    const ariaDescribedBy = useMemo(
+      () =>
+        error && inputId
+          ? `${inputId}-error`
+          : hint && inputId
+            ? `${inputId}-hint`
+            : undefined,
+      [error, hint, inputId],
+    );
+
+    const wrapperClasses = useMemo(
+      () =>
+        [
+          styles.wrapper,
+          size !== 'md' ? styles[size] : '',
+          iconLeft ? styles.hasIconLeft : '',
+          iconRight ? styles.hasIconRight : '',
+        ]
+          .filter(Boolean)
+          .join(' '),
+      [size, iconLeft, iconRight],
+    );
 
     return (
       <FieldWrapper
@@ -57,13 +74,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
             name={name}
             className={styles.input}
             aria-invalid={error ? 'true' : undefined}
-            aria-describedby={
-              error && inputId
-                ? `${inputId}-error`
-                : hint && inputId
-                  ? `${inputId}-hint`
-                  : undefined
-            }
+            aria-describedby={ariaDescribedBy}
             required={required}
             {...inputProps}
           />
@@ -71,5 +82,7 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
         </div>
       </FieldWrapper>
     );
-  },
+  }),
 );
+
+TextInput.displayName = 'TextInput';

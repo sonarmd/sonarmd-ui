@@ -1,6 +1,8 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useCallback, useRef, useEffect} from 'react';
 import ReactECharts from 'echarts-for-react';
+import type {EChartsInstance} from 'echarts-for-react';
 import {chartColors, echartsDefaults} from '../../sonarmd-tokens';
+import {useThrottle} from '../../hooks/useThrottle';
 import {Skeleton} from '../Skeleton';
 import {EmptyState} from '../EmptyState';
 import styles from './BubbleChart.module.css';
@@ -28,7 +30,7 @@ export interface BubbleChartProps {
   className?: string;
 }
 
-export function BubbleChart({
+export const BubbleChart = React.memo(function BubbleChart({
   data,
   xLabel,
   yLabel,
@@ -40,6 +42,24 @@ export function BubbleChart({
   formatY,
   className,
 }: BubbleChartProps): JSX.Element {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const chartInstanceRef = useRef<EChartsInstance | null>(null);
+
+  const throttledResize = useThrottle(() => {
+    chartInstanceRef.current?.resize();
+  }, 200);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver(throttledResize);
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [throttledResize]);
+
+  const handleChartReady = useCallback((chart: EChartsInstance) => {
+    chartInstanceRef.current = chart;
+  }, []);
+
   const option = useMemo(() => {
     // Group points by color into separate series for distinct rendering
     const colorMap = new Map<string, BubbleDataPoint[]>();
@@ -146,15 +166,16 @@ export function BubbleChart({
   }
 
   return (
-    <div className={[styles.root, className].filter(Boolean).join(' ')}>
+    <div ref={containerRef} className={[styles.root, className].filter(Boolean).join(' ')}>
       <ReactECharts
         option={option}
         theme="sonarmd"
         style={{height, width: '100%'}}
-        opts={{renderer: 'svg'}}
+        opts={{renderer: 'svg'}} lazyUpdate
         notMerge
+        onChartReady={handleChartReady}
         {...(onEvents ? {onEvents} : {})}
       />
     </div>
   );
-}
+});

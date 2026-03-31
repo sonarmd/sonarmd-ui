@@ -1,4 +1,4 @@
-import { useId, useRef, useCallback } from 'react';
+import React, { useId, useRef, useCallback, useMemo } from 'react';
 import { FieldWrapper } from '../FieldWrapper';
 import { Radio } from '../Radio';
 import styles from './RadioGroup.module.css';
@@ -23,7 +23,7 @@ export interface RadioGroupProps {
   name: string;
 }
 
-export function RadioGroup({
+export const RadioGroup = React.memo(function RadioGroup({
   label,
   error,
   hint,
@@ -41,21 +41,35 @@ export function RadioGroup({
 
   const radioRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const enabledIndices = options
-    .map((opt, i) => ({ opt, i }))
-    .filter(({ opt }) => !opt.disabled && !disabled)
-    .map(({ i }) => i);
+  // Keep current value in a ref so handleKeyDown never stales on value changes
+  const valueRef = useRef(value);
+  valueRef.current = value;
+
+  const enabledIndices = useMemo(
+    () =>
+      options
+        .map((opt, i) => ({ opt, i }))
+        .filter(({ opt }) => !opt.disabled && !disabled)
+        .map(({ i }) => i),
+    [options, disabled],
+  );
+
+  // Stable ref so handleKeyDown can read current enabledIndices without re-creating
+  const enabledIndicesRef = useRef(enabledIndices);
+  enabledIndicesRef.current = enabledIndices;
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft'].includes(e.key)) return;
       e.preventDefault();
 
-      const currentIndex = options.findIndex((opt) => opt.value === value);
-      const enabledCount = enabledIndices.length;
+      const currentValue = valueRef.current;
+      const currentEnabledIndices = enabledIndicesRef.current;
+      const currentIndex = options.findIndex((opt) => opt.value === currentValue);
+      const enabledCount = currentEnabledIndices.length;
       if (enabledCount === 0) return;
 
-      const currentEnabledPos = enabledIndices.indexOf(currentIndex);
+      const currentEnabledPos = currentEnabledIndices.indexOf(currentIndex);
       let nextEnabledPos: number;
 
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
@@ -67,19 +81,33 @@ export function RadioGroup({
             : (currentEnabledPos - 1 + enabledCount) % enabledCount;
       }
 
-      const nextIndex = enabledIndices[nextEnabledPos];
+      const nextIndex = currentEnabledIndices[nextEnabledPos];
       onChange(options[nextIndex].value);
       radioRefs.current[nextIndex]?.focus();
     },
-    [options, value, onChange, enabledIndices],
+    [options, onChange],
   );
 
-  const groupClasses = [
-    styles.group,
-    orientation === 'horizontal' ? styles.horizontal : styles.vertical,
-  ].join(' ');
+  const handleChange = useCallback(
+    (optValue: string) => {
+      onChange(optValue);
+    },
+    [onChange],
+  );
 
-  const hasDescriptions = options.some((opt) => opt.description);
+  const groupClasses = useMemo(
+    () =>
+      [
+        styles.group,
+        orientation === 'horizontal' ? styles.horizontal : styles.vertical,
+      ].join(' '),
+    [orientation],
+  );
+
+  const hasDescriptions = useMemo(
+    () => options.some((opt) => opt.description),
+    [options],
+  );
 
   return (
     <FieldWrapper
@@ -123,7 +151,7 @@ export function RadioGroup({
                   value={opt.value}
                   checked={isSelected}
                   disabled={isDisabled}
-                  onChange={() => onChange(opt.value)}
+                  onChange={() => handleChange(opt.value)}
                   tabIndex={isSelected || (!value && i === 0) ? 0 : -1}
                 />
                 {opt.description && (
@@ -144,7 +172,7 @@ export function RadioGroup({
               value={opt.value}
               checked={isSelected}
               disabled={isDisabled}
-              onChange={() => onChange(opt.value)}
+              onChange={() => handleChange(opt.value)}
               tabIndex={isSelected || (!value && i === 0) ? 0 : -1}
             />
           );
@@ -152,4 +180,4 @@ export function RadioGroup({
       </div>
     </FieldWrapper>
   );
-}
+});

@@ -3,10 +3,12 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
+  useReducer,
   useRef,
-  useState,
 } from 'react';
 import ReactDOM from 'react-dom';
+import { usePortal } from '../../hooks/usePortal';
 import styles from './Toast.module.css';
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -20,27 +22,56 @@ export interface ToastItem {
   action?: { label: string; onClick: () => void };
 }
 
-export interface ToastContextValue {
-  addToast: (toast: Omit<ToastItem, 'id'>) => string;
-  removeToast: (id: string) => void;
-}
-
 export interface ToastProviderProps {
   children: React.ReactNode;
   position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
   maxToasts?: number;
 }
 
-// ── Context ───────────────────────────────────────────────────────────────────
+// Backwards-compatible alias: previously the single context value shape.
+// Now reflects the dispatch context (addToast + removeToast) which is the
+// stable, dispatch-only surface. State (the toast array) is on ToastStateContext.
+export interface ToastContextValue {
+  addToast: (toast: Omit<ToastItem, 'id'>) => string;
+  removeToast: (id: string) => void;
+}
 
-const ToastContext = createContext<ToastContextValue | null>(null);
+// ── Reducer ───────────────────────────────────────────────────────────────────
 
-export function useToast(): ToastContextValue {
-  const ctx = useContext(ToastContext);
-  if (!ctx) {
-    throw new Error('useToast must be used within a ToastProvider');
+type ToastAction =
+  | { type: 'ADD'; toast: ToastItem; maxToasts: number }
+  | { type: 'REMOVE'; id: string };
+
+function toastReducer(state: ToastItem[], action: ToastAction): ToastItem[] {
+  switch (action.type) {
+    case 'ADD': {
+      const next = [...state, action.toast];
+      return next.length > action.maxToasts ? next.slice(next.length - action.maxToasts) : next;
+    }
+    case 'REMOVE':
+      return state.filter((t) => t.id !== action.id);
   }
-  return ctx;
+}
+
+// ── Contexts ──────────────────────────────────────────────────────────────────
+
+// State context: consumers re-render when the toast list changes
+const ToastStateContext = createContext<ToastItem[]>([]);
+
+// Dispatch context: stable — consumers NEVER re-render due to toast list changes
+const ToastDispatchContext = createContext<{
+  addToast: (toast: Omit<ToastItem, 'id'>) => string;
+  removeToast: (id: string) => void;
+} | null>(null);
+
+export function useToast() {
+  const dispatch = useContext(ToastDispatchContext);
+  if (!dispatch) throw new Error('useToast must be used within a ToastProvider');
+  return dispatch;
+}
+
+export function useToastState(): ToastItem[] {
+  return useContext(ToastStateContext);
 }
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
@@ -96,16 +127,27 @@ interface ToastItemComponentProps {
   isLeft: boolean;
 }
 
-function ToastItemComponent({ toast, onRemove, isLeft }: ToastItemComponentProps): JSX.Element {
+const ToastItemComponent = React.memo(function ToastItemComponent({
+  toast,
+  onRemove,
+  isLeft,
+}: ToastItemComponentProps): JSX.Element {
   const duration = toast.duration !== undefined ? toast.duration : 5000;
-  const [paused, setPaused] = useState(false);
+
+  // Rule 6: timer state lives in refs, not React state — avoids re-renders
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const remainingRef = useRef(duration);
-  const startedAtRef = useRef<number>(Date.now());
+  const startTimeRef = useRef<number>(Date.now());
+  // paused drives the CSS class — kept as state since it affects rendering
+  const [paused, setPaused] = React.useState(false);
+
+  const handleDismiss = useCallback(() => {
+    onRemove(toast.id);
+  }, [onRemove, toast.id]);
 
   const startTimer = useCallback(() => {
     if (duration === 0) return;
-    startedAtRef.current = Date.now();
+    startTimeRef.current = Date.now();
     timerRef.current = setTimeout(() => {
       onRemove(toast.id);
     }, remainingRef.current);
@@ -115,7 +157,7 @@ function ToastItemComponent({ toast, onRemove, isLeft }: ToastItemComponentProps
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
-      remainingRef.current -= Date.now() - startedAtRef.current;
+      remainingRef.current -= Date.now() - startTimeRef.current;
     }
     setPaused(true);
   }, []);
@@ -124,6 +166,11 @@ function ToastItemComponent({ toast, onRemove, isLeft }: ToastItemComponentProps
     setPaused(false);
     startTimer();
   }, [startTimer]);
+
+  const handleActionClick = useCallback(() => {
+    toast.action!.onClick();
+    onRemove(toast.id);
+  }, [toast.action, onRemove, toast.id]);
 
   useEffect(() => {
     startTimer();
@@ -160,7 +207,7 @@ function ToastItemComponent({ toast, onRemove, isLeft }: ToastItemComponentProps
         <button
           type="button"
           className={styles.toastClose}
-          onClick={() => onRemove(toast.id)}
+          onClick={handleDismiss}
           aria-label="Close notification"
         >
           <CloseIcon />
@@ -171,10 +218,7 @@ function ToastItemComponent({ toast, onRemove, isLeft }: ToastItemComponentProps
           <button
             type="button"
             className={styles.toastActionBtn}
-            onClick={() => {
-              toast.action!.onClick();
-              onRemove(toast.id);
-            }}
+            onClick={handleActionClick}
           >
             {toast.action.label}
           </button>
@@ -190,9 +234,9 @@ function ToastItemComponent({ toast, onRemove, isLeft }: ToastItemComponentProps
       )}
     </div>
   );
-}
+});
 
-// ── ToastProvider ─────────────────────────────────────────────────────────────
+// ── ToastContainer ────────────────────────────────────────────────────────────
 
 const positionClassMap: Record<NonNullable<ToastProviderProps['position']>, string> = {
   'top-right': styles.topRight,
@@ -201,33 +245,20 @@ const positionClassMap: Record<NonNullable<ToastProviderProps['position']>, stri
   'bottom-left': styles.bottomLeft,
 };
 
-export function ToastProvider({
-  children,
-  position = 'top-right',
-  maxToasts = 5,
-}: ToastProviderProps): JSX.Element {
-  const [toasts, setToasts] = useState<ToastItem[]>([]);
+interface ToastContainerProps {
+  position: NonNullable<ToastProviderProps['position']>;
+}
 
-  const addToast = useCallback(
-    (toast: Omit<ToastItem, 'id'>): string => {
-      const id = Math.random().toString(36).slice(2);
-      setToasts((prev) => {
-        const next = [...prev, { ...toast, id }];
-        return next.length > maxToasts ? next.slice(next.length - maxToasts) : next;
-      });
-      return id;
-    },
-    [maxToasts],
-  );
-
-  const removeToast = useCallback((id: string) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
-  }, []);
-
+// Reads from ToastStateContext — re-renders only when toast list changes
+const ToastContainer = React.memo(function ToastContainer({
+  position,
+}: ToastContainerProps): JSX.Element {
+  const toasts = useToastState();
+  const { removeToast } = useToast();
   const isLeft = position === 'top-left' || position === 'bottom-left';
   const containerClasses = [styles.container, positionClassMap[position]].join(' ');
 
-  const portal = ReactDOM.createPortal(
+  return (
     <div className={containerClasses} aria-label="Notifications">
       {toasts.map((toast) => (
         <ToastItemComponent
@@ -237,14 +268,47 @@ export function ToastProvider({
           isLeft={isLeft}
         />
       ))}
-    </div>,
-    document.body,
+    </div>
   );
+});
+
+// ── ToastProvider ─────────────────────────────────────────────────────────────
+
+export function ToastProvider({
+  children,
+  position = 'top-right',
+  maxToasts = 5,
+}: ToastProviderProps): JSX.Element {
+  const [toasts, dispatch] = useReducer(toastReducer, []);
+
+  // Rule 6: maxToasts stored in ref so addToast callback never needs to change
+  const maxToastsRef = useRef(maxToasts);
+  maxToastsRef.current = maxToasts;
+
+  const addToast = useCallback((toast: Omit<ToastItem, 'id'>): string => {
+    const id = Math.random().toString(36).slice(2);
+    dispatch({ type: 'ADD', toast: { ...toast, id }, maxToasts: maxToastsRef.current });
+    return id;
+  }, []);
+
+  const removeToast = useCallback((id: string) => {
+    dispatch({ type: 'REMOVE', id });
+  }, []);
+
+  // useMemo keeps the dispatch context object reference stable
+  const dispatchValue = useMemo(() => ({ addToast, removeToast }), [addToast, removeToast]);
+
+  const portalEl = usePortal();
 
   return (
-    <ToastContext.Provider value={{ addToast, removeToast }}>
+    <ToastDispatchContext.Provider value={dispatchValue}>
       {children}
-      {portal}
-    </ToastContext.Provider>
+      {ReactDOM.createPortal(
+        <ToastStateContext.Provider value={toasts}>
+          <ToastContainer position={position} />
+        </ToastStateContext.Provider>,
+        portalEl,
+      )}
+    </ToastDispatchContext.Provider>
   );
 }

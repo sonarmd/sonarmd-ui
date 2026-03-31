@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { usePortal } from '../../hooks/usePortal';
 import styles from './Modal.module.css';
 
 export interface ModalProps {
@@ -34,7 +35,7 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
   );
 }
 
-export function Modal({
+export const Modal = React.memo(function Modal({
   open,
   onClose,
   title,
@@ -45,7 +46,12 @@ export function Modal({
   closeOnEscape = true,
 }: ModalProps): JSX.Element | null {
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const previousFocusRef = useRef<HTMLElement | null>(null);
+  // Rule 6: previously focused element stored in ref, not state
+  const prevFocusRef = useRef<HTMLElement | null>(null);
+  // Rule 6: focusable elements cached in ref to avoid repeated DOM queries in the Tab handler
+  const focusableElementsRef = useRef<HTMLElement[]>([]);
+
+  const portalEl = usePortal();
 
   // Lock body scroll when open; restore on cleanup
   useEffect(() => {
@@ -67,28 +73,28 @@ export function Modal({
     return () => document.removeEventListener('keydown', handler);
   }, [open, closeOnEscape, onClose]);
 
-  // Store previously focused element; restore on close
+  // Store previously focused element; restore focus on close
   useEffect(() => {
     if (open) {
-      previousFocusRef.current = document.activeElement as HTMLElement;
+      prevFocusRef.current = document.activeElement as HTMLElement;
     } else {
-      previousFocusRef.current?.focus();
+      prevFocusRef.current?.focus();
     }
   }, [open]);
 
-  // Focus first focusable element when modal opens
+  // Focus first focusable element when modal opens; prime the ref cache
   useEffect(() => {
     if (!open || !modalRef.current) return;
-    const focusable = getFocusableElements(modalRef.current);
-    if (focusable.length > 0) {
-      focusable[0].focus();
+    focusableElementsRef.current = getFocusableElements(modalRef.current);
+    if (focusableElementsRef.current.length > 0) {
+      focusableElementsRef.current[0].focus();
     }
   }, [open]);
 
   // Focus trap
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'Tab' || !modalRef.current) return;
-    const focusable = getFocusableElements(modalRef.current);
+    const focusable = focusableElementsRef.current;
     if (focusable.length === 0) return;
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
@@ -113,6 +119,10 @@ export function Modal({
     },
     [closeOnOverlayClick, onClose],
   );
+
+  const handleCloseClick = useCallback(() => {
+    onClose();
+  }, [onClose]);
 
   if (!open) return null;
 
@@ -139,7 +149,7 @@ export function Modal({
             <button
               type="button"
               className={styles.closeBtn}
-              onClick={onClose}
+              onClick={handleCloseClick}
               aria-label="Close dialog"
             >
               <CloseIcon />
@@ -150,6 +160,6 @@ export function Modal({
         {footer && <div className={styles.footer}>{footer}</div>}
       </div>
     </div>,
-    document.body,
+    portalEl,
   );
-}
+});

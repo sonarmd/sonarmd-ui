@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useMemo} from 'react';
 import styles from './FilterBar.module.css';
 
 export interface FilterBarProps {
@@ -8,17 +8,26 @@ export interface FilterBarProps {
   className?: string;
 }
 
-export function FilterBar({
+export const FilterBar = React.memo(function FilterBar({
   children,
   onClear,
   activeFilterCount,
   className,
 }: FilterBarProps): JSX.Element {
+  const barClassName = useMemo(
+    () => `${styles.bar}${className ? ` ${className}` : ''}`,
+    [className],
+  );
+
+  const handleClear = useCallback(() => {
+    onClear?.();
+  }, [onClear]);
+
   return (
-    <div className={`${styles.bar}${className ? ` ${className}` : ''}`}>
+    <div className={barClassName}>
       <div className={styles.filters}>{children}</div>
       {onClear && (
-        <button type="button" className={styles.clearBtn} onClick={onClear}>
+        <button type="button" className={styles.clearBtn} onClick={handleClear}>
           {activeFilterCount != null && activeFilterCount > 0 && (
             <span className={styles.badge}>{activeFilterCount}</span>
           )}
@@ -27,4 +36,4 @@ export function FilterBar({
       )}
     </div>
   );
-}
+});

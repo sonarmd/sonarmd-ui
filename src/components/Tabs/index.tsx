@@ -1,4 +1,4 @@
-import React, {useCallback, useRef} from 'react';
+import React, {useCallback, useMemo, useRef} from 'react';
 import styles from './Tabs.module.css';
 
 export interface Tab {
@@ -18,7 +18,7 @@ export interface TabsProps {
   className?: string;
 }
 
-export function Tabs({
+export const Tabs = React.memo(function Tabs({
   tabs,
   activeTab,
   onChange,
@@ -27,11 +27,17 @@ export function Tabs({
   className,
 }: TabsProps): JSX.Element {
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+  const activeTabRef = useRef(activeTab);
+  activeTabRef.current = activeTab;
+  const tabsRef = useRef(tabs);
+  tabsRef.current = tabs;
 
   const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent, currentKey: string) => {
-      const enabledTabs = tabs.filter((t) => !t.disabled);
-      const currentIndex = enabledTabs.findIndex((t) => t.key === currentKey);
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      const currentTabs = tabsRef.current;
+      const currentActiveTab = activeTabRef.current;
+      const enabledTabs = currentTabs.filter((t) => !t.disabled);
+      const currentIndex = enabledTabs.findIndex((t) => t.key === currentActiveTab);
       let nextIndex = -1;
 
       if (e.key === 'ArrowRight') {
@@ -51,17 +57,25 @@ export function Tabs({
       onChange(nextKey);
       tabRefs.current.get(nextKey)?.focus();
     },
-    [tabs, onChange],
+    [onChange],
   );
 
-  const variantClass = styles[variant];
-  const sizeClass = size === 'sm' ? styles.sm : '';
+  const handleTabClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      const key = e.currentTarget.dataset.tabKey;
+      if (key) onChange(key);
+    },
+    [onChange],
+  );
+
+  const tablistClassName = useMemo(() => {
+    const variantClass = styles[variant];
+    const sizeClass = size === 'sm' ? styles.sm : '';
+    return [styles.tablist, variantClass, sizeClass, className].filter(Boolean).join(' ');
+  }, [variant, size, className]);
 
   return (
-    <div
-      role="tablist"
-      className={[styles.tablist, variantClass, sizeClass, className].filter(Boolean).join(' ')}
-    >
+    <div role="tablist" className={tablistClassName} onKeyDown={handleKeyDown}>
       {tabs.map((tab) => {
         const isSelected = tab.key === activeTab;
         const isDisabled = tab.disabled ?? false;
@@ -80,10 +94,8 @@ export function Tabs({
             aria-disabled={isDisabled || undefined}
             disabled={isDisabled}
             tabIndex={isSelected ? 0 : -1}
-            onClick={() => {
-              if (!isDisabled) onChange(tab.key);
-            }}
-            onKeyDown={(e) => handleKeyDown(e, tab.key)}
+            data-tab-key={tab.key}
+            onClick={handleTabClick}
           >
             {tab.icon && tab.icon}
             {tab.label}
@@ -95,4 +107,4 @@ export function Tabs({
       })}
     </div>
   );
-}
+});

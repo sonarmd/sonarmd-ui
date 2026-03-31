@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useLayoutEffect, useMemo, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Tooltip} from '../Tooltip';
 import styles from './Sidebar.module.css';
@@ -69,9 +69,16 @@ interface NavItemRowProps {
 function NavItemRow({item, activeKey, onNavigate, collapsed, depth = 0}: NavItemRowProps) {
   const [open, setOpen] = useState(false);
   const subItemsRef = useRef<HTMLDivElement>(null);
+  const contentHeightRef = useRef<number | undefined>(undefined);
   const hasChildren = item.children && item.children.length > 0;
   const isActive = item.key === activeKey;
   const isDisabled = item.disabled ?? false;
+
+  useLayoutEffect(() => {
+    if (subItemsRef.current) {
+      contentHeightRef.current = subItemsRef.current.scrollHeight;
+    }
+  });
 
   const handleClick = useCallback(() => {
     if (isDisabled) return;
@@ -82,13 +89,13 @@ function NavItemRow({item, activeKey, onNavigate, collapsed, depth = 0}: NavItem
     }
   }, [isDisabled, hasChildren, onNavigate, item.key]);
 
-  const itemClasses = [
-    styles.item,
-    isActive ? styles.itemActive : '',
-    isDisabled ? styles.itemDisabled : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const itemClasses = useMemo(
+    () =>
+      [styles.item, isActive ? styles.itemActive : '', isDisabled ? styles.itemDisabled : '']
+        .filter(Boolean)
+        .join(' '),
+    [isActive, isDisabled],
+  );
 
   const itemContent = (
     <>
@@ -113,9 +120,7 @@ function NavItemRow({item, activeKey, onNavigate, collapsed, depth = 0}: NavItem
     <Link
       to={item.to}
       className={itemClasses}
-      onClick={() => {
-        if (!isDisabled) onNavigate(item.key);
-      }}
+      data-nav-key={item.key}
       aria-current={isActive ? 'page' : undefined}
       aria-disabled={isDisabled || undefined}
       tabIndex={isDisabled ? -1 : undefined}
@@ -127,6 +132,7 @@ function NavItemRow({item, activeKey, onNavigate, collapsed, depth = 0}: NavItem
       type="button"
       className={itemClasses}
       onClick={handleClick}
+      data-nav-key={item.key}
       aria-expanded={hasChildren ? open : undefined}
       aria-disabled={isDisabled || undefined}
       disabled={isDisabled}
@@ -151,9 +157,7 @@ function NavItemRow({item, activeKey, onNavigate, collapsed, depth = 0}: NavItem
           ref={subItemsRef}
           className={styles.subItems}
           style={{
-            height: open
-              ? subItemsRef.current?.scrollHeight ?? 'auto'
-              : 0,
+            height: open ? (contentHeightRef.current ?? subItemsRef.current?.scrollHeight ?? 'auto') : 0,
           }}
         >
           {item.children!.map((child) => (
@@ -172,7 +176,18 @@ function NavItemRow({item, activeKey, onNavigate, collapsed, depth = 0}: NavItem
   );
 }
 
-export function Sidebar({
+function flattenItems(items: NavItem[]): NavItem[] {
+  const result: NavItem[] = [];
+  for (const item of items) {
+    result.push(item);
+    if (item.children?.length) {
+      result.push(...flattenItems(item.children));
+    }
+  }
+  return result;
+}
+
+export const Sidebar = React.memo(function Sidebar({
   items,
   activeKey,
   onNavigate,
@@ -181,10 +196,38 @@ export function Sidebar({
   header,
   footer,
 }: SidebarProps): JSX.Element {
+  const sidebarClassName = useMemo(
+    () => `${styles.sidebar}${collapsed ? ` ${styles.collapsed}` : ''}`,
+    [collapsed],
+  );
+
+  const itemsByKey = useMemo(
+    () => new Map(flattenItems(items).map((i) => [i.key, i])),
+    [items],
+  );
+
+  const handleToggleCollapse = useCallback(() => {
+    onToggleCollapse?.();
+  }, [onToggleCollapse]);
+
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      const key = (e.target as HTMLElement).closest('[data-nav-key]')?.getAttribute('data-nav-key');
+      if (!key) return;
+      const item = itemsByKey.get(key);
+      if (!item || item.disabled) return;
+      if (!item.children?.length) {
+        onNavigate(key);
+      }
+    },
+    [itemsByKey, onNavigate],
+  );
+
   return (
     <nav
-      className={`${styles.sidebar}${collapsed ? ` ${styles.collapsed}` : ''}`}
+      className={sidebarClassName}
       aria-label="Main navigation"
+      onClick={handleNavClick}
     >
       {header && <div className={styles.header}>{header}</div>}
       {onToggleCollapse && (
@@ -192,7 +235,7 @@ export function Sidebar({
           <button
             type="button"
             className={styles.collapseBtn}
-            onClick={onToggleCollapse}
+            onClick={handleToggleCollapse}
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
             <CollapseIcon collapsed={collapsed} />
@@ -213,4 +256,4 @@ export function Sidebar({
       {footer && <div className={styles.footer}>{footer}</div>}
     </nav>
   );
-}
+});

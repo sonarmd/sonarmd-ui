@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import styles from './Alert.module.css';
 
 export type AlertVariant = 'info' | 'success' | 'warning' | 'error';
@@ -66,7 +66,7 @@ const defaultIcons: Record<AlertVariant, JSX.Element> = {
   error: <IconError />,
 };
 
-export function Alert({
+export const Alert = React.memo(function Alert({
   variant,
   title,
   children,
@@ -75,8 +75,15 @@ export function Alert({
   icon,
   className,
 }: AlertProps): JSX.Element {
-  const classes = [styles.alert, styles[variant], className].filter(Boolean).join(' ');
+  const classes = useMemo(
+    () => [styles.alert, styles[variant], className].filter(Boolean).join(' '),
+    [variant, className],
+  );
   const resolvedIcon = icon !== undefined ? icon : defaultIcons[variant];
+
+  const handleDismiss = useCallback(() => {
+    onDismiss?.();
+  }, [onDismiss]);
 
   return (
     <div className={classes} role="alert">
@@ -89,7 +96,7 @@ export function Alert({
         <button
           type="button"
           className={styles.dismissBtn}
-          onClick={onDismiss}
+          onClick={handleDismiss}
           aria-label="Dismiss"
         >
           <DismissIcon />
@@ -97,4 +104,4 @@ export function Alert({
       )}
     </div>
   );
-}
+});

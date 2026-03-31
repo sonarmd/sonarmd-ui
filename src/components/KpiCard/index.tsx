@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo, useCallback} from 'react';
 import styles from './KpiCard.module.css';
 
 export interface KpiCardTrend {
@@ -24,16 +24,14 @@ const TREND_SYMBOL: Record<KpiCardTrend['direction'], string> = {
   flat: '→',
 };
 
-function trendSentimentClass(
-  trend: KpiCardTrend,
-): string {
+function trendSentimentClass(trend: KpiCardTrend): string {
   const sentiment = trend.sentiment ?? 'neutral';
   if (sentiment === 'positive') return styles.positive;
   if (sentiment === 'negative') return styles.negative;
   return styles.neutral;
 }
 
-export function KpiCard({
+export const KpiCard = React.memo(function KpiCard({
   title,
   value,
   subtitle,
@@ -45,20 +43,39 @@ export function KpiCard({
 }: KpiCardProps): JSX.Element {
   const isInteractive = Boolean(onClick);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>): void => {
-    if (onClick && (e.key === 'Enter' || e.key === ' ')) {
-      e.preventDefault();
-      onClick();
-    }
-  };
+  const cardClasses = useMemo(
+    () =>
+      [
+        styles.card,
+        isInteractive ? styles.interactive : undefined,
+        className,
+      ]
+        .filter(Boolean)
+        .join(' '),
+    [isInteractive, className],
+  );
 
-  const cardClasses = [
-    styles.card,
-    isInteractive ? styles.interactive : undefined,
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const trendDisplay = useMemo(() => {
+    if (!trend) return null;
+    return {
+      symbol: TREND_SYMBOL[trend.direction],
+      sentimentClass: trendSentimentClass(trend),
+    };
+  }, [trend]);
+
+  const handleClick = useCallback(() => {
+    onClick?.();
+  }, [onClick]);
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>): void => {
+      if (onClick && (e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        onClick();
+      }
+    },
+    [onClick],
+  );
 
   if (isLoading) {
     return (
@@ -76,7 +93,7 @@ export function KpiCard({
       className={cardClasses}
       role={isInteractive ? 'button' : undefined}
       tabIndex={isInteractive ? 0 : undefined}
-      onClick={onClick}
+      onClick={isInteractive ? handleClick : undefined}
       onKeyDown={isInteractive ? handleKeyDown : undefined}
     >
       <div className={styles.header}>
@@ -85,11 +102,11 @@ export function KpiCard({
       </div>
       <span className={styles.value}>{value}</span>
       {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
-      {trend && (
-        <span className={[styles.trend, trendSentimentClass(trend)].join(' ')}>
-          {TREND_SYMBOL[trend.direction]} {trend.value}
+      {trendDisplay && trend && (
+        <span className={[styles.trend, trendDisplay.sentimentClass].join(' ')}>
+          {trendDisplay.symbol} {trend.value}
         </span>
       )}
     </div>
   );
-}
+});

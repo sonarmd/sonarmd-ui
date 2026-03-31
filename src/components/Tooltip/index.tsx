@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react';
 import ReactDOM from 'react-dom';
+import { usePortal } from '../../hooks/usePortal';
 import styles from './Tooltip.module.css';
 
 export interface TooltipProps {
@@ -29,7 +30,7 @@ const arrowClassMap: Record<NonNullable<TooltipProps['placement']>, string> = {
   right: styles.arrowRight,
 };
 
-export function Tooltip({
+export const Tooltip = React.memo(function Tooltip({
   content,
   children,
   placement = 'top',
@@ -44,7 +45,10 @@ export function Tooltip({
 
   const triggerRef = useRef<Element | null>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
+  // Rule 6: timer lives in a ref, not state
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const portalEl = usePortal();
 
   const show = useCallback(() => {
     timerRef.current = setTimeout(() => setVisible(true), delay);
@@ -58,6 +62,7 @@ export function Tooltip({
     setVisible(false);
   }, []);
 
+  // Rule 8: position measurement runs before paint (useLayoutEffect)
   useLayoutEffect(() => {
     if (!visible || !triggerRef.current || !tooltipRef.current) return;
 
@@ -137,8 +142,8 @@ export function Tooltip({
             {content}
             <span className={[styles.arrow, arrowClassMap[placement]].join(' ')} />
           </div>,
-          document.body,
+          portalEl,
         )}
     </>
   );
-}
+});

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import styles from './ChartCard.module.css';
 
 export interface ChartCardProps {
@@ -13,7 +13,7 @@ export interface ChartCardProps {
   className?: string;
 }
 
-export function ChartCard({
+export const ChartCard = React.memo(function ChartCard({
   title,
   subtitle,
   action,
@@ -24,6 +24,11 @@ export function ChartCard({
   children,
   className,
 }: ChartCardProps): JSX.Element {
+  const cardClassName = useMemo(
+    () => `${styles.card}${className ? ` ${className}` : ''}`,
+    [className],
+  );
+
   const renderBody = () => {
     if (isLoading) {
       return (
@@ -45,7 +50,7 @@ export function ChartCard({
   };
 
   return (
-    <div className={`${styles.card}${className ? ` ${className}` : ''}`}>
+    <div className={cardClassName}>
       <div className={styles.header}>
         <div className={styles.titles}>
           <p className={styles.title}>{title}</p>
@@ -56,4 +61,4 @@ export function ChartCard({
       {renderBody()}
     </div>
   );
-}
+});

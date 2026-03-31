@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import styles from './Skeleton.module.css';
 
 export interface SkeletonProps {
@@ -9,21 +9,43 @@ export interface SkeletonProps {
   className?: string;
 }
 
-export function Skeleton({
+export const Skeleton = React.memo(function Skeleton({
   variant = 'text',
   width,
   height,
   lines = 1,
   className,
 }: SkeletonProps): JSX.Element {
-  const sizeStyle: React.CSSProperties = {
-    ...(width !== undefined ? {width} : {}),
-    ...(height !== undefined ? {height} : {}),
-  };
+  const sizeStyle = useMemo<React.CSSProperties>(
+    () => ({
+      ...(width !== undefined ? {width} : {}),
+      ...(height !== undefined ? {height} : {}),
+    }),
+    [width, height],
+  );
+
+  const singleClassName = useMemo(
+    () =>
+      [
+        styles.skeleton,
+        variant === 'text' ? styles.text : undefined,
+        variant === 'circle' ? styles.circle : undefined,
+        variant === 'rect' ? styles.rect : undefined,
+        className,
+      ]
+        .filter(Boolean)
+        .join(' '),
+    [variant, className],
+  );
+
+  const groupClassName = useMemo(
+    () => [styles.textGroup, className].filter(Boolean).join(' '),
+    [className],
+  );
 
   if (variant === 'text' && lines > 1) {
     return (
-      <div className={[styles.textGroup, className].filter(Boolean).join(' ')}>
+      <div className={groupClassName}>
         {Array.from({length: lines}).map((_, i) => (
           <div
             key={i}
@@ -41,18 +63,5 @@ export function Skeleton({
     );
   }
 
-  return (
-    <div
-      className={[
-        styles.skeleton,
-        variant === 'text' ? styles.text : undefined,
-        variant === 'circle' ? styles.circle : undefined,
-        variant === 'rect' ? styles.rect : undefined,
-        className,
-      ]
-        .filter(Boolean)
-        .join(' ')}
-      style={sizeStyle}
-    />
-  );
-}
+  return <div className={singleClassName} style={sizeStyle} />;
+});

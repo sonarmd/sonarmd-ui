@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import React, { useId, useRef, useCallback, useMemo } from 'react';
 import { FieldWrapper } from '../FieldWrapper';
 import { Checkbox } from '../Checkbox';
 import styles from './CheckboxGroup.module.css';
@@ -22,7 +22,7 @@ export interface CheckboxGroupProps {
   name?: string;
 }
 
-export function CheckboxGroup({
+export const CheckboxGroup = React.memo(function CheckboxGroup({
   label,
   error,
   hint,
@@ -38,18 +38,32 @@ export function CheckboxGroup({
   const labelId = `${groupId}-label`;
   const fieldId = name ?? groupId;
 
-  const groupClasses = [
-    styles.group,
-    orientation === 'horizontal' ? styles.horizontal : styles.vertical,
-  ].join(' ');
+  // Keep a ref to the current value array so handleGroupChange never stales
+  const valueRef = useRef(value);
+  valueRef.current = value;
 
-  const handleChange = (optionValue: string, checked: boolean) => {
-    if (checked) {
-      onChange([...value, optionValue]);
-    } else {
-      onChange(value.filter((v) => v !== optionValue));
-    }
-  };
+  const groupClasses = useMemo(
+    () =>
+      [
+        styles.group,
+        orientation === 'horizontal' ? styles.horizontal : styles.vertical,
+      ].join(' '),
+    [orientation],
+  );
+
+  // Single stable handler — reads opt value from data attribute, current array from ref
+  const handleGroupChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const optValue =
+        (e.currentTarget.closest?.('[data-option-value]') as HTMLElement | null)
+          ?.dataset.optionValue ?? (e.currentTarget as HTMLInputElement & { dataset: DOMStringMap }).dataset?.optionValue;
+      if (!optValue) return;
+      const checked = e.currentTarget.checked;
+      const current = valueRef.current;
+      onChange(checked ? [...current, optValue] : current.filter((v) => v !== optValue));
+    },
+    [onChange],
+  );
 
   return (
     <FieldWrapper
@@ -68,17 +82,18 @@ export function CheckboxGroup({
         className={groupClasses}
       >
         {options.map((opt) => (
-          <Checkbox
-            key={opt.value}
-            label={opt.label}
-            name={name}
-            value={opt.value}
-            checked={value.includes(opt.value)}
-            disabled={disabled || opt.disabled}
-            onChange={(e) => handleChange(opt.value, e.target.checked)}
-          />
+          <div key={opt.value} data-option-value={opt.value}>
+            <Checkbox
+              label={opt.label}
+              name={name}
+              value={opt.value}
+              checked={value.includes(opt.value)}
+              disabled={disabled || opt.disabled}
+              onChange={handleGroupChange}
+            />
+          </div>
         ))}
       </div>
     </FieldWrapper>
   );
-}
+});

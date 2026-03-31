@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {Link} from 'react-router-dom';
 import styles from './PageHeader.module.css';
 
@@ -16,7 +16,7 @@ export interface PageHeaderProps {
   breadcrumbs?: BreadcrumbItem[];
 }
 
-export function PageHeader({
+export const PageHeader = React.memo(function PageHeader({
   title,
   subtitle,
   backTo,
@@ -24,22 +24,27 @@ export function PageHeader({
   actions,
   breadcrumbs,
 }: PageHeaderProps): JSX.Element {
+  const renderedBreadcrumbs = useMemo(() => {
+    if (!breadcrumbs || breadcrumbs.length === 0) return null;
+    return breadcrumbs.map((crumb, i) => (
+      <React.Fragment key={i}>
+        {i > 0 && <span className={styles.breadcrumbSep}>/</span>}
+        {crumb.to ? (
+          <Link to={crumb.to} className={styles.breadcrumbLink}>
+            {crumb.label}
+          </Link>
+        ) : (
+          <span>{crumb.label}</span>
+        )}
+      </React.Fragment>
+    ));
+  }, [breadcrumbs]);
+
   return (
     <header className={styles.header}>
-      {breadcrumbs && breadcrumbs.length > 0 && (
+      {renderedBreadcrumbs && (
         <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
-          {breadcrumbs.map((crumb, i) => (
-            <React.Fragment key={i}>
-              {i > 0 && <span className={styles.breadcrumbSep}>/</span>}
-              {crumb.to ? (
-                <Link to={crumb.to} className={styles.breadcrumbLink}>
-                  {crumb.label}
-                </Link>
-              ) : (
-                <span>{crumb.label}</span>
-              )}
-            </React.Fragment>
-          ))}
+          {renderedBreadcrumbs}
         </nav>
       )}
       {backTo && (
@@ -65,4 +70,4 @@ export function PageHeader({
       </div>
     </header>
   );
-}
+});

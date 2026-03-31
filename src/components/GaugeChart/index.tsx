@@ -1,6 +1,8 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useCallback, useRef, useEffect} from 'react';
 import ReactECharts from 'echarts-for-react';
+import type {EChartsInstance} from 'echarts-for-react';
 import {echartsDefaults} from '../../sonarmd-tokens';
+import {useThrottle} from '../../hooks/useThrottle';
 import {Skeleton} from '../Skeleton';
 import styles from './GaugeChart.module.css';
 
@@ -27,7 +29,7 @@ const DEFAULT_THRESHOLDS: GaugeThreshold[] = [
   {at: 1.0, color: '#2BA854'},
 ];
 
-export function GaugeChart({
+export const GaugeChart = React.memo(function GaugeChart({
   value,
   min = 0,
   max = 100,
@@ -38,6 +40,24 @@ export function GaugeChart({
   isLoading = false,
   className,
 }: GaugeChartProps): JSX.Element {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const chartInstanceRef = useRef<EChartsInstance | null>(null);
+
+  const throttledResize = useThrottle(() => {
+    chartInstanceRef.current?.resize();
+  }, 200);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver(throttledResize);
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [throttledResize]);
+
+  const handleChartReady = useCallback((chart: EChartsInstance) => {
+    chartInstanceRef.current = chart;
+  }, []);
+
   const option = useMemo(() => {
     const axisLineColors = thresholds.map((t) => [t.at, t.color] as [number, string]);
 
@@ -97,14 +117,15 @@ export function GaugeChart({
   }
 
   return (
-    <div className={[styles.root, className].filter(Boolean).join(' ')}>
+    <div ref={containerRef} className={[styles.root, className].filter(Boolean).join(' ')}>
       <ReactECharts
         option={option}
         theme="sonarmd"
         style={{height, width: '100%'}}
-        opts={{renderer: 'svg'}}
+        opts={{renderer: 'svg'}} lazyUpdate
         notMerge
+        onChartReady={handleChartReady}
       />
     </div>
   );
-}
+});

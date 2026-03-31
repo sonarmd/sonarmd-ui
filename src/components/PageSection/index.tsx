@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import styles from './PageSection.module.css';
 
 export interface PageSectionProps {
@@ -9,17 +9,22 @@ export interface PageSectionProps {
   className?: string;
 }
 
-export function PageSection({
+export const PageSection = React.memo(function PageSection({
   title,
   subtitle,
   action,
   children,
   className,
 }: PageSectionProps): JSX.Element {
+  const sectionClassName = useMemo(
+    () => `${styles.section}${className ? ` ${className}` : ''}`,
+    [className],
+  );
+
   const hasHeader = title || subtitle || action;
 
   return (
-    <section className={`${styles.section}${className ? ` ${className}` : ''}`}>
+    <section className={sectionClassName}>
       {hasHeader && (
         <div className={styles.header}>
           {(title || subtitle) && (
@@ -34,4 +39,4 @@ export function PageSection({
       {children}
     </section>
   );
-}
+});

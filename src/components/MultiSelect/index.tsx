@@ -1,7 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { List, RowComponentProps } from 'react-window';
 import { FieldWrapper } from '../FieldWrapper';
 import type { DropdownOption } from '../Dropdown';
+import { usePortal } from '../../hooks/usePortal';
 import styles from './MultiSelect.module.css';
 
 export type { DropdownOption } from '../Dropdown';
@@ -40,7 +42,7 @@ function CheckIcon() {
   );
 }
 
-export function MultiSelect({
+export const MultiSelect = React.memo(function MultiSelect({
   label,
   error,
   hint,
@@ -67,10 +69,40 @@ export function MultiSelect({
   const menuRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const filteredOptions =
-    searchable && searchQuery
-      ? options.filter((o) => o.label.toLowerCase().includes(searchQuery.toLowerCase()))
-      : options;
+  // Rule 9: stable ref for keyboard handler
+  const activeIndexRef = useRef(activeIndex);
+  activeIndexRef.current = activeIndex;
+
+  // Rule 6: value ref for stable handlers
+  const valueRef = useRef(value);
+  valueRef.current = value;
+
+  // Rule 8: portal container
+  const portalEl = usePortal();
+
+  // Rule 4: filtered options via useMemo
+  const filteredOptions = useMemo(
+    () =>
+      searchable && searchQuery
+        ? options.filter((o) => o.label.toLowerCase().includes(searchQuery.toLowerCase()))
+        : options,
+    [options, searchable, searchQuery],
+  );
+
+  // Rule 4: selected values Set
+  const selectedSet = useMemo(() => new Set(value), [value]);
+
+  // Rule 7: lookup map for data-attribute handlers
+  const optionsByValue = useMemo(
+    () => new Map(options.map((o) => [o.value, o])),
+    [options],
+  );
+
+  // Rule 4: selected labels for pill display
+  const selectedLabels = useMemo(
+    () => value.map((v) => options.find((o) => o.value === v)?.label ?? v),
+    [value, options],
+  );
 
   const positionMenu = useCallback(() => {
     if (!triggerRef.current) return;
@@ -100,27 +132,52 @@ export function MultiSelect({
     setActiveIndex(-1);
   }, []);
 
-  const toggleOption = useCallback(
-    (opt: DropdownOption) => {
-      if (opt.disabled) return;
-      const isSelected = value.includes(opt.value);
+  // Rule 7: data-attribute handler for option toggles
+  const handleOptionClick = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      const val = (e.target as HTMLElement)
+        .closest('[data-option-value]')
+        ?.getAttribute('data-option-value');
+      if (!val) return;
+      const opt = optionsByValue.get(val);
+      if (!opt || opt.disabled) return;
+      const current = valueRef.current;
+      const isSelected = selectedSet.has(val);
       if (isSelected) {
-        onChange(value.filter((v) => v !== opt.value));
+        onChange(current.filter((v) => v !== val));
       } else {
-        if (maxSelections !== undefined && value.length >= maxSelections) return;
-        onChange([...value, opt.value]);
+        if (maxSelections !== undefined && current.length >= maxSelections) return;
+        onChange([...current, val]);
       }
     },
-    [value, onChange, maxSelections],
+    [optionsByValue, selectedSet, onChange, maxSelections],
   );
 
-  const removeValue = useCallback(
-    (v: string, e: React.MouseEvent) => {
+  // Rule 7: data-attribute handler for pill removals
+  const handlePillRemove = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
-      onChange(value.filter((x) => x !== v));
+      const val = (e.currentTarget as HTMLElement)
+        .closest('[data-pill-value]')
+        ?.getAttribute('data-pill-value');
+      if (val) onChange(valueRef.current.filter((v) => v !== val));
     },
-    [value, onChange],
+    [onChange],
   );
+
+  // Rule 3: stable clear all handler
+  const handleClearAll = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      onChange([]);
+    },
+    [onChange],
+  );
+
+  // Rule 3: stable trigger click handler
+  const handleTriggerClick = useCallback(() => {
+    isOpen ? closeMenu() : openMenu();
+  }, [isOpen, closeMenu, openMenu]);
 
   // Click outside
   useEffect(() => {
@@ -142,34 +199,137 @@ export function MultiSelect({
     }
   }, [isOpen, searchable]);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      closeMenu();
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (!isOpen) openMenu();
-      setActiveIndex((i) => Math.min(i + 1, filteredOptions.length - 1));
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setActiveIndex((i) => Math.max(i - 1, 0));
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      if (activeIndex >= 0 && filteredOptions[activeIndex]) {
-        toggleOption(filteredOptions[activeIndex]);
+  // Rule 9: stable keyboard handler reading from activeIndexRef
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeMenu();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!isOpen) openMenu();
+        setActiveIndex((i) => Math.min(i + 1, filteredOptions.length - 1));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setActiveIndex((i) => Math.max(i - 1, 0));
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const idx = activeIndexRef.current;
+        if (idx >= 0 && filteredOptions[idx]) {
+          const opt = filteredOptions[idx];
+          if (!opt.disabled) {
+            const current = valueRef.current;
+            const isSelected = selectedSet.has(opt.value);
+            if (isSelected) {
+              onChange(current.filter((v) => v !== opt.value));
+            } else {
+              if (maxSelections !== undefined && current.length >= maxSelections) return;
+              onChange([...current, opt.value]);
+            }
+          }
+        }
       }
-    }
+    },
+    [isOpen, openMenu, closeMenu, filteredOptions, selectedSet, onChange, maxSelections],
+  );
+
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+    setActiveIndex(-1);
+    if (!isOpen) openMenu();
+  }, [isOpen, openMenu]);
+
+  const handleSearchClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+  }, []);
+
+  // Rule 2: triggerAreaClasses via useMemo
+  const triggerAreaClasses = useMemo(
+    () =>
+      [
+        styles.triggerArea,
+        isOpen ? styles.triggerAreaOpen : '',
+        error ? styles.triggerAreaError : '',
+        disabled ? styles.triggerAreaDisabled : '',
+      ]
+        .filter(Boolean)
+        .join(' '),
+    [isOpen, error, disabled],
+  );
+
+  // Rule 12: react-window for large option lists
+  const useVirtualList = filteredOptions.length > 100;
+
+  const virtualRowProps = useMemo(
+    () => ({
+      filteredOptions,
+      selectedSet,
+      activeIndex,
+      maxSelections,
+      valueLength: value.length,
+      renderOption,
+    }),
+    [filteredOptions, selectedSet, activeIndex, maxSelections, value.length, renderOption],
+  );
+
+  type MultiSelectRowProps = {
+    filteredOptions: DropdownOption[];
+    selectedSet: Set<string>;
+    activeIndex: number;
+    maxSelections?: number;
+    valueLength: number;
+    renderOption?: (option: DropdownOption, isSelected: boolean) => React.ReactNode;
   };
 
-  const triggerAreaClasses = [
-    styles.triggerArea,
-    isOpen ? styles.triggerAreaOpen : '',
-    error ? styles.triggerAreaError : '',
-    disabled ? styles.triggerAreaDisabled : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
-
-  const selectedLabels = value.map((v) => options.find((o) => o.value === v)?.label ?? v);
+  const OptionRow = useCallback(
+    ({
+      index,
+      style,
+      filteredOptions: opts,
+      selectedSet: selSet,
+      activeIndex: ai,
+      maxSelections: maxSel,
+      valueLength: valLen,
+      renderOption: ro,
+    }: RowComponentProps<MultiSelectRowProps>) => {
+      const opt = opts[index];
+      const isSelected = selSet.has(opt.value);
+      const isHighlighted = index === ai;
+      const isMaxed = !isSelected && maxSel !== undefined && valLen >= maxSel;
+      const optClasses = [
+        styles.option,
+        isHighlighted ? styles.optionHighlighted : '',
+        isSelected ? styles.optionSelected : '',
+        isMaxed || opt.disabled ? styles.optionMaxed : '',
+      ]
+        .filter(Boolean)
+        .join(' ');
+      return (
+        <div
+          style={style}
+          className={optClasses}
+          role="option"
+          aria-selected={isSelected}
+          data-option-value={opt.value}
+          onMouseEnter={() => setActiveIndex(index)}
+        >
+          {ro ? (
+            ro(opt, isSelected)
+          ) : (
+            <>
+              {opt.icon && <span>{opt.icon}</span>}
+              <span>{opt.label}</span>
+              {isSelected && (
+                <span className={styles.checkmark}>
+                  <CheckIcon />
+                </span>
+              )}
+            </>
+          )}
+        </div>
+      );
+    },
+    [],
+  );
 
   const menu = (
     <div
@@ -179,12 +339,20 @@ export function MultiSelect({
       role="listbox"
       aria-multiselectable="true"
     >
-      <div className={styles.optionList}>
+      <div className={styles.optionList} onClick={handleOptionClick}>
         {filteredOptions.length === 0 ? (
           <div className={styles.noResults}>No results</div>
+        ) : useVirtualList ? (
+          <List
+            rowHeight={36}
+            rowCount={filteredOptions.length}
+            rowComponent={OptionRow}
+            rowProps={virtualRowProps}
+            style={{ height: 240 }}
+          />
         ) : (
           filteredOptions.map((opt, idx) => {
-            const isSelected = value.includes(opt.value);
+            const isSelected = selectedSet.has(opt.value);
             const isHighlighted = idx === activeIndex;
             const isMaxed =
               !isSelected && maxSelections !== undefined && value.length >= maxSelections;
@@ -203,8 +371,8 @@ export function MultiSelect({
                 className={optClasses}
                 role="option"
                 aria-selected={isSelected}
+                data-option-value={opt.value}
                 onMouseEnter={() => setActiveIndex(idx)}
-                onClick={() => toggleOption(opt)}
               >
                 {renderOption ? (
                   renderOption(opt, isSelected)
@@ -242,7 +410,7 @@ export function MultiSelect({
         ref={triggerRef}
         id={wrapperId.current}
         className={triggerAreaClasses}
-        onClick={() => (isOpen ? closeMenu() : openMenu())}
+        onClick={handleTriggerClick}
         onKeyDown={handleKeyDown}
         tabIndex={disabled ? -1 : 0}
         role="button"
@@ -255,12 +423,12 @@ export function MultiSelect({
           <span className={styles.placeholder}>{placeholder}</span>
         )}
         {value.map((v, i) => (
-          <span key={v} className={styles.pill}>
+          <span key={v} className={styles.pill} data-pill-value={v}>
             {selectedLabels[i]}
             <button
               type="button"
               className={styles.pillRemove}
-              onClick={(e) => removeValue(v, e)}
+              onClick={handlePillRemove}
               aria-label={`Remove ${selectedLabels[i]}`}
             >
               &times;
@@ -274,12 +442,8 @@ export function MultiSelect({
             type="text"
             placeholder={value.length === 0 ? placeholder : ''}
             value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setActiveIndex(-1);
-              if (!isOpen) openMenu();
-            }}
-            onClick={(e) => e.stopPropagation()}
+            onChange={handleSearchChange}
+            onClick={handleSearchClick}
             onKeyDown={handleKeyDown}
           />
         )}
@@ -288,10 +452,7 @@ export function MultiSelect({
             <button
               type="button"
               className={styles.clearAll}
-              onClick={(e) => {
-                e.stopPropagation();
-                onChange([]);
-              }}
+              onClick={handleClearAll}
               aria-label="Clear all"
             >
               Clear
@@ -302,7 +463,7 @@ export function MultiSelect({
           />
         </span>
       </div>
-      {isOpen && ReactDOM.createPortal(menu, document.body)}
+      {isOpen && ReactDOM.createPortal(menu, portalEl)}
     </FieldWrapper>
   );
-}
+});

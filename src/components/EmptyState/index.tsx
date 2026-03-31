@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import styles from './EmptyState.module.css';
 
 const DefaultIcon = (): JSX.Element => (
@@ -28,23 +28,27 @@ export interface EmptyStateProps {
   className?: string;
 }
 
-export function EmptyState({
+export const EmptyState = React.memo(function EmptyState({
   icon,
   title,
   description,
   action,
   className,
 }: EmptyStateProps): JSX.Element {
+  const handleActionClick = useCallback(() => {
+    action?.onClick();
+  }, [action]);
+
   return (
     <div className={[styles.root, className].filter(Boolean).join(' ')}>
       <span className={styles.icon}>{icon ?? <DefaultIcon />}</span>
       <p className={styles.title}>{title}</p>
       {description && <p className={styles.description}>{description}</p>}
       {action && (
-        <button type="button" className={styles.actionBtn} onClick={action.onClick}>
+        <button type="button" className={styles.actionBtn} onClick={handleActionClick}>
           {action.label}
         </button>
       )}
     </div>
   );
-}
+});

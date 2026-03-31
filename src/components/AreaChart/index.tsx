@@ -1,6 +1,8 @@
-import React, {useMemo} from 'react';
+import React, {useMemo, useCallback, useRef, useEffect} from 'react';
 import ReactECharts from 'echarts-for-react';
+import type {EChartsInstance} from 'echarts-for-react';
 import {chartColors, echartsDefaults, areaGradient} from '../../sonarmd-tokens';
+import {useThrottle} from '../../hooks/useThrottle';
 import {Skeleton} from '../Skeleton';
 import {EmptyState} from '../EmptyState';
 import styles from './AreaChart.module.css';
@@ -29,7 +31,7 @@ function hexToRgbaInline(color: string, alpha: number): string {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-export function AreaChart({
+export const AreaChart = React.memo(function AreaChart({
   data,
   xKey,
   yKey,
@@ -43,6 +45,24 @@ export function AreaChart({
   formatTooltip,
   className,
 }: AreaChartProps): JSX.Element {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const chartInstanceRef = useRef<EChartsInstance | null>(null);
+
+  const throttledResize = useThrottle(() => {
+    chartInstanceRef.current?.resize();
+  }, 200);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver(throttledResize);
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [throttledResize]);
+
+  const handleChartReady = useCallback((chart: EChartsInstance) => {
+    chartInstanceRef.current = chart;
+  }, []);
+
   const option = useMemo(() => {
     const labels = data.map((d) => String(d[xKey] ?? ''));
     const values = data.map((d) => (d[yKey] as number) ?? 0);
@@ -112,15 +132,16 @@ export function AreaChart({
   }
 
   return (
-    <div className={[styles.root, className].filter(Boolean).join(' ')}>
+    <div ref={containerRef} className={[styles.root, className].filter(Boolean).join(' ')}>
       <ReactECharts
         option={option}
         theme="sonarmd"
         style={{height, width: '100%'}}
-        opts={{renderer: 'svg'}}
+        opts={{renderer: 'svg'}} lazyUpdate
         notMerge
+        onChartReady={handleChartReady}
         {...(onEvents ? {onEvents} : {})}
       />
     </div>
   );
-}
+});

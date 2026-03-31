@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { FieldWrapper } from '../FieldWrapper';
 import styles from './TextArea.module.css';
 
@@ -14,8 +14,8 @@ export interface TextAreaProps
   minRows?: number;
 }
 
-export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  function TextArea(
+export const TextArea = React.memo(
+  React.forwardRef<HTMLTextAreaElement, TextAreaProps>(function TextArea(
     {
       label,
       error,
@@ -39,7 +39,26 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const resolvedRef = (forwardedRef as React.RefObject<HTMLTextAreaElement>) ?? innerRef;
 
-    const textareaId = id ?? (name ? `textarea-${name}` : undefined);
+    const textareaId = useMemo(
+      () => id ?? (name ? `textarea-${name}` : undefined),
+      [id, name],
+    );
+
+    const ariaDescribedBy = useMemo(
+      () =>
+        error && textareaId
+          ? `${textareaId}-error`
+          : hint && textareaId
+            ? `${textareaId}-hint`
+            : undefined,
+      [error, hint, textareaId],
+    );
+
+    const textareaClasses = useMemo(
+      () =>
+        [styles.textarea, autoResize ? styles.autoResize : ''].filter(Boolean).join(' '),
+      [autoResize],
+    );
 
     const resize = useCallback(() => {
       const el = resolvedRef.current;
@@ -72,10 +91,6 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       [resize, onInput],
     );
 
-    const textareaClasses = [styles.textarea, autoResize ? styles.autoResize : '']
-      .filter(Boolean)
-      .join(' ');
-
     return (
       <FieldWrapper
         label={label}
@@ -92,13 +107,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           className={textareaClasses}
           rows={minRows}
           aria-invalid={error ? 'true' : undefined}
-          aria-describedby={
-            error && textareaId
-              ? `${textareaId}-error`
-              : hint && textareaId
-                ? `${textareaId}-hint`
-                : undefined
-          }
+          aria-describedby={ariaDescribedBy}
           required={required}
           onInput={handleInput}
           style={style}
@@ -106,5 +115,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         />
       </FieldWrapper>
     );
-  },
+  }),
 );
+
+TextArea.displayName = 'TextArea';

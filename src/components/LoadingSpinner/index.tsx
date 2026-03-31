@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import styles from './LoadingSpinner.module.css';
 
 export interface LoadingSpinnerProps {
@@ -7,15 +7,20 @@ export interface LoadingSpinnerProps {
   className?: string;
 }
 
-export function LoadingSpinner({
+export const LoadingSpinner = React.memo(function LoadingSpinner({
   size = 'md',
   color,
   className,
 }: LoadingSpinnerProps): JSX.Element {
+  const spinnerStyle = useMemo<React.CSSProperties>(
+    () => ({color: color ?? 'var(--smd-color-primary-50)'}),
+    [color],
+  );
+
   return (
     <svg
       className={[styles.spinner, styles[size], className].filter(Boolean).join(' ')}
-      style={{color: color ?? 'var(--smd-color-primary-50)'}}
+      style={spinnerStyle}
       viewBox="0 0 24 24"
       fill="none"
     >
@@ -35,4 +40,4 @@ export function LoadingSpinner({
       />
     </svg>
   );
-}
+});

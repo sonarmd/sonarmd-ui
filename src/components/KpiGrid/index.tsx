@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import styles from './KpiGrid.module.css';
 import {KpiCard} from '../KpiCard';
 import type {KpiCardProps} from '../KpiCard';
@@ -15,12 +15,21 @@ const COLS_CLASS: Record<2 | 3 | 4, string> = {
   4: styles.cols4,
 };
 
-export function KpiGrid({items, columns = 4, isLoading}: KpiGridProps): JSX.Element {
+export const KpiGrid = React.memo(function KpiGrid({
+  items,
+  columns = 4,
+  isLoading,
+}: KpiGridProps): JSX.Element {
+  const gridClassName = useMemo(
+    () => [styles.grid, COLS_CLASS[columns]].join(' '),
+    [columns],
+  );
+
   return (
-    <div className={[styles.grid, COLS_CLASS[columns]].join(' ')}>
+    <div className={gridClassName}>
       {items.map((item, i) => (
         <KpiCard key={item.title + String(i)} {...item} isLoading={isLoading ?? item.isLoading} />
       ))}
     </div>
   );
-}
+});

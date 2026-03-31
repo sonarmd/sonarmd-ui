@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Modal } from '../Modal';
 import styles from './ConfirmDialog.module.css';
 
@@ -18,7 +18,7 @@ function Spinner(): JSX.Element {
   return <span className={styles.spinner} aria-hidden="true" />;
 }
 
-export function ConfirmDialog({
+export const ConfirmDialog = React.memo(function ConfirmDialog({
   open,
   onConfirm,
   onCancel,
@@ -29,14 +29,25 @@ export function ConfirmDialog({
   variant = 'danger',
   loading = false,
 }: ConfirmDialogProps): JSX.Element {
-  const confirmClasses = [styles.confirmBtn, styles[variant]].filter(Boolean).join(' ');
+  const confirmClasses = useMemo(
+    () => [styles.confirmBtn, styles[variant]].filter(Boolean).join(' '),
+    [variant],
+  );
+
+  const handleConfirm = useCallback(() => {
+    onConfirm();
+  }, [onConfirm]);
+
+  const handleCancel = useCallback(() => {
+    onCancel();
+  }, [onCancel]);
 
   const footer = (
     <>
       <button
         type="button"
         className={styles.cancelBtn}
-        onClick={onCancel}
+        onClick={handleCancel}
         disabled={loading}
       >
         {cancelLabel}
@@ -44,7 +55,7 @@ export function ConfirmDialog({
       <button
         type="button"
         className={confirmClasses}
-        onClick={onConfirm}
+        onClick={handleConfirm}
         disabled={loading}
         aria-busy={loading}
       >
@@ -57,7 +68,7 @@ export function ConfirmDialog({
   return (
     <Modal
       open={open}
-      onClose={onCancel}
+      onClose={handleCancel}
       title={title}
       size="sm"
       footer={footer}
@@ -67,4 +78,4 @@ export function ConfirmDialog({
       <div className={styles.message}>{message}</div>
     </Modal>
   );
-}
+});

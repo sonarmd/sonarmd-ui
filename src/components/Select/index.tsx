@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { FieldWrapper } from '../FieldWrapper';
 import styles from './Select.module.css';
 
@@ -18,62 +18,76 @@ export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
   placeholder?: string;
 }
 
-export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(function Select(
-  {
-    label,
-    error,
-    hint,
-    size = 'md',
-    required,
-    options,
-    placeholder,
-    id,
-    name,
-    className,
-    ...selectProps
-  },
-  ref,
-) {
-  const selectId = id ?? (name ? `select-${name}` : undefined);
+export const Select = React.memo(
+  React.forwardRef<HTMLSelectElement, SelectProps>(function Select(
+    {
+      label,
+      error,
+      hint,
+      size = 'md',
+      required,
+      options,
+      placeholder,
+      id,
+      name,
+      className,
+      ...selectProps
+    },
+    ref,
+  ) {
+    const selectId = useMemo(
+      () => id ?? (name ? `select-${name}` : undefined),
+      [id, name],
+    );
 
-  const selectClasses = [styles.select, size !== 'md' ? styles[size] : ''].filter(Boolean).join(' ');
+    const ariaDescribedBy = useMemo(
+      () =>
+        error && selectId
+          ? `${selectId}-error`
+          : hint && selectId
+            ? `${selectId}-hint`
+            : undefined,
+      [error, hint, selectId],
+    );
 
-  return (
-    <FieldWrapper
-      label={label}
-      htmlFor={selectId}
-      required={required}
-      error={error}
-      hint={hint}
-      className={className}
-    >
-      <select
-        ref={ref}
-        id={selectId}
-        name={name}
-        className={selectClasses}
-        aria-invalid={error ? 'true' : undefined}
-        aria-describedby={
-          error && selectId
-            ? `${selectId}-error`
-            : hint && selectId
-              ? `${selectId}-hint`
-              : undefined
-        }
+    const selectClasses = useMemo(
+      () => [styles.select, size !== 'md' ? styles[size] : ''].filter(Boolean).join(' '),
+      [size],
+    );
+
+    return (
+      <FieldWrapper
+        label={label}
+        htmlFor={selectId}
         required={required}
-        {...selectProps}
+        error={error}
+        hint={hint}
+        className={className}
       >
-        {placeholder && (
-          <option value="" disabled>
-            {placeholder}
-          </option>
-        )}
-        {options.map((opt) => (
-          <option key={opt.value} value={opt.value} disabled={opt.disabled}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
-    </FieldWrapper>
-  );
-});
+        <select
+          ref={ref}
+          id={selectId}
+          name={name}
+          className={selectClasses}
+          aria-invalid={error ? 'true' : undefined}
+          aria-describedby={ariaDescribedBy}
+          required={required}
+          {...selectProps}
+        >
+          {placeholder && (
+            <option value="" disabled>
+              {placeholder}
+            </option>
+          )}
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value} disabled={opt.disabled}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+      </FieldWrapper>
+    );
+  }),
+);
+
+Select.displayName = 'Select';

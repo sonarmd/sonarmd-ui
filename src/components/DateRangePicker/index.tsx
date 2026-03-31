@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { FieldWrapper } from '../FieldWrapper';
+import { usePortal } from '../../hooks/usePortal';
 import styles from './DateRangePicker.module.css';
 
 export interface DateRange {
@@ -116,7 +117,8 @@ interface CalPanelProps {
   hideNext?: boolean;
 }
 
-function CalPanel({
+// Rule 1: memo on CalPanel since it receives stable callback props
+const CalPanel = React.memo(function CalPanel({
   year,
   month,
   today,
@@ -132,8 +134,14 @@ function CalPanel({
   hidePrev,
   hideNext,
 }: CalPanelProps) {
-  const firstDay = getFirstDayOfMonth(year, month);
-  const daysInMonth = getDaysInMonth(year, month);
+  // Rule 4: compute grid values via useMemo
+  const { firstDay, daysInMonth } = useMemo(
+    () => ({
+      firstDay: getFirstDayOfMonth(year, month),
+      daysInMonth: getDaysInMonth(year, month),
+    }),
+    [year, month],
+  );
 
   // Effective end for hover range display
   const rangeEnd = end ?? hoverDate;
@@ -208,9 +216,9 @@ function CalPanel({
       </div>
     </div>
   );
-}
+});
 
-export function DateRangePicker({
+export const DateRangePicker = React.memo(function DateRangePicker({
   label,
   error,
   hint,
@@ -218,7 +226,7 @@ export function DateRangePicker({
   required,
   value,
   onChange,
-  placeholder = 'MM/DD/YYYY – MM/DD/YYYY',
+  placeholder = 'MM/DD/YYYY \u2013 MM/DD/YYYY',
   minDate,
   maxDate,
   disabled = false,
@@ -227,7 +235,7 @@ export function DateRangePicker({
   name,
 }: DateRangePickerProps): JSX.Element {
   const triggerId = useRef(`drp-${Math.random().toString(36).slice(2)}`);
-  const today = new Date();
+  const today = useRef(new Date()).current;
 
   const [isOpen, setIsOpen] = useState(false);
   const [popoverStyle, setPopoverStyle] = useState<React.CSSProperties>({});
@@ -235,12 +243,8 @@ export function DateRangePicker({
   const [selecting, setSelecting] = useState<'start' | 'end'>('start');
 
   // Left calendar always shows the month before right
-  const initMonth = value.start
-    ? value.start.getMonth()
-    : today.getMonth();
-  const initYear = value.start
-    ? value.start.getFullYear()
-    : today.getFullYear();
+  const initMonth = value.start ? value.start.getMonth() : today.getMonth();
+  const initYear = value.start ? value.start.getFullYear() : today.getFullYear();
 
   const [leftMonth, setLeftMonth] = useState(initMonth);
   const [leftYear, setLeftYear] = useState(initYear);
@@ -248,9 +252,18 @@ export function DateRangePicker({
   const triggerRef = useRef<HTMLButtonElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
 
-  // Compute right calendar month/year from left
-  const rightMonth = leftMonth === 11 ? 0 : leftMonth + 1;
-  const rightYear = leftMonth === 11 ? leftYear + 1 : leftYear;
+  // Rule 6: selecting ref for stable handleDayClick
+  const selectingRef = useRef(selecting);
+  selectingRef.current = selecting;
+
+  // Rule 8: portal container
+  const portalEl = usePortal();
+
+  // Rule 4: right calendar month/year derived from left
+  const { rightMonth, rightYear } = useMemo(() => ({
+    rightMonth: leftMonth === 11 ? 0 : leftMonth + 1,
+    rightYear: leftMonth === 11 ? leftYear + 1 : leftYear,
+  }), [leftMonth, leftYear]);
 
   const positionPopover = useCallback(() => {
     if (!triggerRef.current) return;
@@ -270,7 +283,6 @@ export function DateRangePicker({
     if (disabled) return;
     positionPopover();
     setIsOpen(true);
-    // Reset selecting state
     setSelecting(value.start && !value.end ? 'end' : 'start');
   }, [disabled, positionPopover, value.start, value.end]);
 
@@ -296,17 +308,15 @@ export function DateRangePicker({
     return () => document.removeEventListener('mousedown', handleMouseDown);
   }, [isOpen, closePopover]);
 
+  // Rule 9: day click reads selecting from ref
   const handleDayClick = useCallback(
     (date: Date) => {
-      if (selecting === 'start' || (value.start && value.end)) {
-        // Start fresh selection
+      if (selectingRef.current === 'start' || (value.start && value.end)) {
         onChange({ start: date, end: null });
         setSelecting('end');
       } else {
-        // Selecting end
         const start = value.start!;
         if (dayOf(date) < dayOf(start)) {
-          // Swap: clicked before start
           onChange({ start: date, end: start });
         } else {
           onChange({ start, end: date });
@@ -314,58 +324,90 @@ export function DateRangePicker({
         closePopover();
       }
     },
-    [selecting, value.start, value.end, onChange, closePopover],
+    [value.start, value.end, onChange, closePopover],
   );
 
-  const prevLeftMonth = () => {
+  // Rule 3: stable nav handlers
+  const prevLeftMonth = useCallback(() => {
     if (leftMonth === 0) {
       setLeftMonth(11);
       setLeftYear((y) => y - 1);
     } else {
       setLeftMonth((m) => m - 1);
     }
-  };
+  }, [leftMonth]);
 
-  const nextLeftMonth = () => {
+  const nextLeftMonth = useCallback(() => {
     if (leftMonth === 11) {
       setLeftMonth(0);
       setLeftYear((y) => y + 1);
     } else {
       setLeftMonth((m) => m + 1);
     }
-  };
+  }, [leftMonth]);
 
-  const displayText = () => {
+  // Rule 7: data-attribute handler for preset clicks
+  const handlePresetClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      const idx = parseInt(e.currentTarget.dataset.presetIndex ?? '0', 10);
+      if (presets?.[idx]) {
+        onChange(presets[idx].range);
+        closePopover();
+      }
+    },
+    [presets, onChange, closePopover],
+  );
+
+  // Rule 3: stable trigger click handler
+  const handleTriggerClick = useCallback(() => {
+    isOpen ? closePopover() : openPopover();
+  }, [isOpen, closePopover, openPopover]);
+
+  // Rule 3: stable clear handler
+  const handleClearClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      onChange({ start: null, end: null });
+    },
+    [onChange],
+  );
+
+  // Rule 4: display text derived
+  const display = useMemo(() => {
     if (!value.start && !value.end) return null;
-    const startStr = value.start ? formatDate(value.start) : '…';
-    const endStr = value.end ? formatDate(value.end) : '…';
+    const startStr = value.start ? formatDate(value.start) : '\u2026';
+    const endStr = value.end ? formatDate(value.end) : '\u2026';
     return `${startStr} \u2013 ${endStr}`;
-  };
+  }, [value.start, value.end]);
 
-  const triggerClasses = [
-    styles.trigger,
-    isOpen ? styles.triggerOpen : '',
-    error ? styles.triggerError : '',
-    disabled ? styles.triggerDisabled : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
+  // Rule 2: triggerClasses via useMemo
+  const triggerClasses = useMemo(
+    () =>
+      [
+        styles.trigger,
+        isOpen ? styles.triggerOpen : '',
+        error ? styles.triggerError : '',
+        disabled ? styles.triggerDisabled : '',
+      ]
+        .filter(Boolean)
+        .join(' '),
+    [isOpen, error, disabled],
+  );
 
-  const display = displayText();
+  // Rule 4: hoverDate for selecting state
+  const effectiveHoverDate = selecting === 'end' ? hoverDate : null;
 
   const popover = (
     <div ref={popoverRef} className={styles.popover} style={popoverStyle}>
       {presets && presets.length > 0 && (
         <div className={styles.presets}>
-          {presets.map((p) => (
+          {presets.map((p, i) => (
             <button
               key={p.label}
               type="button"
               className={styles.presetBtn}
-              onClick={() => {
-                onChange(p.range);
-                closePopover();
-              }}
+              data-preset-index={i}
+              onClick={handlePresetClick}
             >
               {p.label}
             </button>
@@ -379,7 +421,7 @@ export function DateRangePicker({
           today={today}
           start={value.start}
           end={value.end}
-          hoverDate={selecting === 'end' ? hoverDate : null}
+          hoverDate={effectiveHoverDate}
           minDate={minDate}
           maxDate={maxDate}
           onDayClick={handleDayClick}
@@ -394,7 +436,7 @@ export function DateRangePicker({
           today={today}
           start={value.start}
           end={value.end}
-          hoverDate={selecting === 'end' ? hoverDate : null}
+          hoverDate={effectiveHoverDate}
           minDate={minDate}
           maxDate={maxDate}
           onDayClick={handleDayClick}
@@ -426,7 +468,7 @@ export function DateRangePicker({
         id={triggerId.current}
         type="button"
         className={triggerClasses}
-        onClick={() => (isOpen ? closePopover() : openPopover())}
+        onClick={handleTriggerClick}
         disabled={disabled}
         aria-haspopup="dialog"
         aria-expanded={isOpen}
@@ -441,10 +483,7 @@ export function DateRangePicker({
             <button
               type="button"
               className={styles.clearBtn}
-              onClick={(e) => {
-                e.stopPropagation();
-                onChange({ start: null, end: null });
-              }}
+              onClick={handleClearClick}
               aria-label="Clear dates"
             >
               <XIcon />
@@ -453,7 +492,7 @@ export function DateRangePicker({
           <CalendarIcon />
         </span>
       </button>
-      {isOpen && ReactDOM.createPortal(popover, document.body)}
+      {isOpen && ReactDOM.createPortal(popover, portalEl)}
     </FieldWrapper>
   );
-}
+});
