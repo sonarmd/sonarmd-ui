@@ -1,0 +1,217 @@
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--smd-input-height-md);
+  padding: 0 var(--smd-input-px-md);
+  border: 1px solid var(--smd-border-default);
+  border-radius: var(--smd-radius-md);
+  font-size: var(--smd-input-font-md);
+  color: var(--smd-text-primary);
+  background: var(--smd-bg-base);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--smd-duration-base), box-shadow var(--smd-duration-base);
+}
+
+.trigger:focus {
+  border-color: var(--smd-border-focus);
+  box-shadow: var(--smd-shadow-focus);
+}
+
+.triggerOpen {
+  border-color: var(--smd-border-focus);
+  box-shadow: var(--smd-shadow-focus);
+}
+
+.triggerError {
+  border-color: var(--smd-border-error);
+}
+
+.triggerDisabled {
+  background: var(--smd-bg-subtle);
+  color: var(--smd-text-disabled);
+  cursor: not-allowed;
+}
+
+.triggerPlaceholder {
+  color: var(--smd-text-disabled);
+}
+
+.triggerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--smd-space-1);
+  color: var(--smd-text-tertiary);
+  flex-shrink: 0;
+}
+
+.clearBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--smd-text-tertiary);
+  display: flex;
+  align-items: center;
+  border-radius: var(--smd-radius-sm);
+  line-height: 1;
+}
+
+.clearBtn:hover {
+  color: var(--smd-text-primary);
+}
+
+/* Popover */
+.popover {
+  position: fixed;
+  background: var(--smd-bg-base);
+  border: 1px solid var(--smd-border-default);
+  border-radius: var(--smd-radius-lg);
+  box-shadow: var(--smd-shadow-lg);
+  z-index: var(--smd-z-dropdown);
+  padding: var(--smd-space-4);
+  animation: calOpen var(--smd-duration-base) var(--smd-ease-out);
+  display: flex;
+  gap: var(--smd-space-4);
+}
+
+@keyframes calOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Presets sidebar */
+.presets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--smd-space-1);
+  min-width: 120px;
+  border-right: 1px solid var(--smd-border-default);
+  padding-right: var(--smd-space-4);
+}
+
+.presetBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: var(--smd-space-2) var(--smd-space-3);
+  border-radius: var(--smd-radius-md);
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-text-secondary);
+  transition: background var(--smd-duration-fast);
+  white-space: nowrap;
+}
+
+.presetBtn:hover {
+  background: var(--smd-bg-subtle);
+}
+
+/* Two-calendar layout */
+.calendars {
+  display: flex;
+  gap: var(--smd-space-6);
+}
+
+/* Single calendar panel */
+.calPanel {
+  width: 252px;
+}
+
+.calHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--smd-space-3);
+}
+
+.calNavBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--smd-space-1);
+  border-radius: var(--smd-radius-sm);
+  color: var(--smd-text-secondary);
+  display: flex;
+}
+
+.calNavBtn:hover {
+  background: var(--smd-bg-subtle);
+}
+
+.calNavBtnHidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.calTitle {
+  font-size: var(--smd-font-size-base);
+  font-weight: var(--smd-font-weight-semibold);
+  color: var(--smd-text-primary);
+}
+
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calDow {
+  font-size: var(--smd-font-size-xs);
+  font-weight: var(--smd-font-weight-medium);
+  color: var(--smd-text-tertiary);
+  text-align: center;
+  padding: var(--smd-space-1) 0;
+}
+
+.calDay {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--smd-radius-sm);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-text-primary);
+  transition: background var(--smd-duration-fast), color var(--smd-duration-fast);
+}
+
+.calDay:hover:not(:disabled) {
+  background: var(--smd-bg-subtle);
+}
+
+.calDay[data-today='true'] {
+  outline: 1.5px solid var(--smd-color-primary-30);
+  outline-offset: -1px;
+}
+
+.calDay[data-selected-start='true'],
+.calDay[data-selected-end='true'] {
+  background: var(--smd-color-primary-50);
+  color: white;
+  border-radius: var(--smd-radius-sm);
+}
+
+.calDay[data-in-range='true'] {
+  background: var(--smd-color-primary-10);
+  border-radius: 0;
+}
+
+.calDay:disabled {
+  color: var(--smd-text-disabled);
+  cursor: not-allowed;
+}
+
+.calEmpty {
+  aspect-ratio: 1;
+}

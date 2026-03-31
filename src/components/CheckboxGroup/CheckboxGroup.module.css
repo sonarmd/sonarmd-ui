@@ -1,0 +1,13 @@
+.group {
+  display: flex;
+  gap: var(--smd-space-3);
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+}

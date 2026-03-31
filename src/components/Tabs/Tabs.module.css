@@ -1,0 +1,118 @@
+.tablist {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+
+/* ── underline variant ── */
+.underline {
+  border-bottom: 1px solid var(--smd-border-default);
+}
+
+.underline .tab {
+  position: relative;
+  padding: var(--smd-space-3) var(--smd-space-4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--smd-font-size-base);
+  font-weight: var(--smd-font-weight-medium);
+  color: var(--smd-text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: var(--smd-space-2);
+  white-space: nowrap;
+  transition: color var(--smd-duration-base);
+  margin-bottom: -1px;
+}
+
+.underline .tab:hover {
+  color: var(--smd-text-secondary);
+}
+
+.underline .tab[aria-selected='true'] {
+  color: var(--smd-color-primary-50);
+}
+
+.underline .tab[aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--smd-color-primary-50);
+  border-radius: var(--smd-radius-full) var(--smd-radius-full) 0 0;
+}
+
+/* ── pills variant ── */
+.pills {
+  gap: var(--smd-space-1);
+  background: var(--smd-bg-subtle);
+  border-radius: var(--smd-radius-lg);
+  padding: var(--smd-space-1);
+}
+
+.pills .tab {
+  padding: var(--smd-space-2) var(--smd-space-4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: var(--smd-font-size-base);
+  font-weight: var(--smd-font-weight-medium);
+  color: var(--smd-text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: var(--smd-space-2);
+  border-radius: var(--smd-radius-md);
+  transition:
+    background var(--smd-duration-base),
+    color var(--smd-duration-base);
+  white-space: nowrap;
+}
+
+.pills .tab:hover {
+  color: var(--smd-text-secondary);
+}
+
+.pills .tab[aria-selected='true'] {
+  background: var(--smd-bg-base);
+  color: var(--smd-text-primary);
+  box-shadow: var(--smd-shadow-sm);
+}
+
+/* ── shared ── */
+.tab:disabled,
+.tab[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--smd-border-focus);
+  outline-offset: 2px;
+  border-radius: var(--smd-radius-sm);
+}
+
+.tabBadge {
+  background: var(--smd-color-gray-20);
+  color: var(--smd-text-tertiary);
+  border-radius: var(--smd-radius-full);
+  font-size: var(--smd-font-size-xs);
+  font-weight: var(--smd-font-weight-bold);
+  padding: 1px var(--smd-space-1);
+  min-width: 18px;
+  text-align: center;
+}
+
+.tab[aria-selected='true'] .tabBadge {
+  background: var(--smd-color-primary-10);
+  color: var(--smd-color-primary-50);
+}
+
+/* ── size sm ── */
+.sm .tab {
+  padding: var(--smd-space-2) var(--smd-space-3);
+  font-size: var(--smd-font-size-sm);
+}

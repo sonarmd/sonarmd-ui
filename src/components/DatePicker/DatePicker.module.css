@@ -1,0 +1,181 @@
+.wrapper {
+  position: relative;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  height: var(--smd-input-height-md);
+  padding: 0 40px 0 var(--smd-input-px-md);
+  border: 1px solid var(--smd-border-default);
+  border-radius: var(--smd-radius-md);
+  font-size: var(--smd-input-font-md);
+  color: var(--smd-text-primary);
+  background: var(--smd-bg-base);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--smd-duration-base), box-shadow var(--smd-duration-base);
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border-color: var(--smd-border-focus);
+  box-shadow: var(--smd-shadow-focus);
+}
+
+.inputError {
+  border-color: var(--smd-border-error);
+}
+
+.inputOpen {
+  border-color: var(--smd-border-focus);
+  box-shadow: var(--smd-shadow-focus);
+}
+
+.inputDisabled {
+  background: var(--smd-bg-subtle);
+  color: var(--smd-text-disabled);
+  cursor: not-allowed;
+}
+
+.input::placeholder {
+  color: var(--smd-text-disabled);
+}
+
+.iconBtn {
+  position: absolute;
+  right: var(--smd-space-2);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--smd-text-tertiary);
+  display: flex;
+  padding: var(--smd-space-1);
+  border-radius: var(--smd-radius-sm);
+}
+
+.iconBtn:hover {
+  color: var(--smd-text-primary);
+}
+
+/* Size variants */
+.sm .input {
+  height: var(--smd-input-height-sm);
+  font-size: var(--smd-input-font-sm);
+  padding-left: var(--smd-input-px-sm);
+}
+
+.lg .input {
+  height: var(--smd-input-height-lg);
+  font-size: var(--smd-input-font-lg);
+  padding-left: var(--smd-input-px-lg);
+}
+
+/* Calendar popover */
+.calendar {
+  position: fixed;
+  background: var(--smd-bg-base);
+  border: 1px solid var(--smd-border-default);
+  border-radius: var(--smd-radius-lg);
+  box-shadow: var(--smd-shadow-lg);
+  z-index: var(--smd-z-dropdown);
+  padding: var(--smd-space-4);
+  width: 280px;
+  animation: calOpen var(--smd-duration-base) var(--smd-ease-out);
+}
+
+@keyframes calOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.calHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--smd-space-3);
+}
+
+.calNavBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--smd-space-1);
+  border-radius: var(--smd-radius-sm);
+  color: var(--smd-text-secondary);
+  display: flex;
+}
+
+.calNavBtn:hover {
+  background: var(--smd-bg-subtle);
+}
+
+.calTitle {
+  font-size: var(--smd-font-size-base);
+  font-weight: var(--smd-font-weight-semibold);
+  color: var(--smd-text-primary);
+}
+
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calDow {
+  font-size: var(--smd-font-size-xs);
+  font-weight: var(--smd-font-weight-medium);
+  color: var(--smd-text-tertiary);
+  text-align: center;
+  padding: var(--smd-space-1) 0;
+}
+
+.calDay {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--smd-radius-sm);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-text-primary);
+  transition: background var(--smd-duration-fast), color var(--smd-duration-fast);
+}
+
+.calDay:hover:not(:disabled) {
+  background: var(--smd-bg-subtle);
+}
+
+.calDay[data-today='true'] {
+  outline: 1.5px solid var(--smd-color-primary-30);
+  outline-offset: -1px;
+}
+
+.calDay[data-selected='true'] {
+  background: var(--smd-color-primary-50);
+  color: white;
+}
+
+.calDay:disabled {
+  color: var(--smd-text-disabled);
+  cursor: not-allowed;
+}
+
+.calEmpty {
+  aspect-ratio: 1;
+}

@@ -1,0 +1,41 @@
+.group {
+  display: flex;
+  gap: var(--smd-space-3);
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: 1.5px solid var(--smd-border-default);
+  border-radius: var(--smd-radius-md);
+  padding: var(--smd-space-3) var(--smd-space-4);
+  cursor: pointer;
+  transition: border-color var(--smd-duration-base) var(--smd-ease-default);
+}
+
+.card:hover {
+  border-color: var(--smd-color-primary-30);
+}
+
+.cardSelected {
+  border-color: var(--smd-color-primary-50);
+  background: var(--smd-color-primary-10);
+}
+
+.cardDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cardDescription {
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-text-tertiary);
+  margin-top: var(--smd-space-1);
+}

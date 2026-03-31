@@ -1,0 +1,89 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--smd-space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.root.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.track {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: var(--smd-radius-full);
+  background: var(--smd-border-strong);
+  transition: background var(--smd-duration-base) var(--smd-ease-default);
+  flex-shrink: 0;
+}
+
+.input:checked ~ .track {
+  background: var(--smd-color-primary-50);
+}
+
+.input:focus-visible ~ .track {
+  outline: 2px solid var(--smd-border-focus);
+  outline-offset: 2px;
+}
+
+.thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--smd-radius-full);
+  background: white;
+  box-shadow: var(--smd-shadow-sm);
+  transition: transform var(--smd-duration-base) var(--smd-ease-default);
+}
+
+.input:checked ~ .track .thumb {
+  transform: translateX(16px);
+}
+
+.label {
+  font-size: var(--smd-font-size-base);
+  color: var(--smd-text-primary);
+}
+
+/* size sm */
+.sm .track {
+  width: 28px;
+  height: 16px;
+}
+
+.sm .thumb {
+  width: 12px;
+  height: 12px;
+}
+
+.sm .input:checked ~ .track .thumb {
+  transform: translateX(12px);
+}
+
+/* size lg */
+.lg .track {
+  width: 44px;
+  height: 24px;
+}
+
+.lg .thumb {
+  width: 20px;
+  height: 20px;
+}
+
+.lg .input:checked ~ .track .thumb {
+  transform: translateX(20px);
+}

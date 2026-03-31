@@ -1,0 +1,195 @@
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--smd-input-height-md);
+  padding: 0 var(--smd-input-px-md);
+  border: 1px solid var(--smd-border-default);
+  border-radius: var(--smd-radius-md);
+  font-size: var(--smd-input-font-md);
+  color: var(--smd-text-primary);
+  background: var(--smd-bg-base);
+  cursor: pointer;
+  gap: var(--smd-space-2);
+  outline: none;
+  transition: border-color var(--smd-duration-base) var(--smd-ease-default),
+    box-shadow var(--smd-duration-base) var(--smd-ease-default);
+}
+
+.trigger:focus {
+  border-color: var(--smd-border-focus);
+  box-shadow: var(--smd-shadow-focus);
+}
+
+.triggerOpen {
+  border-color: var(--smd-border-focus);
+  box-shadow: var(--smd-shadow-focus);
+}
+
+.triggerError {
+  border-color: var(--smd-border-error);
+}
+
+.triggerDisabled {
+  background: var(--smd-bg-subtle);
+  color: var(--smd-text-disabled);
+  cursor: not-allowed;
+}
+
+.placeholder {
+  color: var(--smd-text-disabled);
+}
+
+.triggerLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--smd-space-2);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.triggerLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.triggerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--smd-space-1);
+  color: var(--smd-text-tertiary);
+  flex-shrink: 0;
+}
+
+.clearBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--smd-text-tertiary);
+  display: flex;
+  align-items: center;
+  border-radius: var(--smd-radius-sm);
+  line-height: 1;
+}
+
+.clearBtn:hover {
+  color: var(--smd-text-primary);
+}
+
+.chevron {
+  transition: transform var(--smd-duration-base) var(--smd-ease-default);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* Menu portal */
+.menu {
+  position: fixed;
+  background: var(--smd-bg-base);
+  border: 1px solid var(--smd-border-default);
+  border-radius: var(--smd-radius-md);
+  box-shadow: var(--smd-shadow-lg);
+  z-index: var(--smd-z-dropdown);
+  min-width: 160px;
+  overflow: hidden;
+  animation: dropdownOpen var(--smd-duration-base) var(--smd-ease-out);
+}
+
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--smd-space-2) var(--smd-input-px-md);
+  border: none;
+  border-bottom: 1px solid var(--smd-border-default);
+  font-size: var(--smd-font-size-base);
+  color: var(--smd-text-primary);
+  outline: none;
+  background: var(--smd-bg-base);
+  box-sizing: border-box;
+}
+
+.optionList {
+  max-height: 240px;
+  overflow-y: auto;
+  padding: var(--smd-space-1) 0;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--smd-space-2);
+  padding: var(--smd-space-2) var(--smd-input-px-md);
+  cursor: pointer;
+  font-size: var(--smd-font-size-base);
+  color: var(--smd-text-primary);
+  transition: background var(--smd-duration-fast) var(--smd-ease-default);
+}
+
+.option:hover,
+.optionHighlighted {
+  background: var(--smd-bg-subtle);
+}
+
+.optionSelected {
+  color: var(--smd-color-primary-50);
+  font-weight: var(--smd-font-weight-medium);
+}
+
+.optionDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.optionContent {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.optionIcon {
+  flex-shrink: 0;
+  color: var(--smd-text-tertiary);
+}
+
+.optionDesc {
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-text-tertiary);
+}
+
+.noResults {
+  padding: var(--smd-space-3) var(--smd-input-px-md);
+  font-size: var(--smd-font-size-base);
+  color: var(--smd-text-tertiary);
+  text-align: center;
+}
+
+/* Size variants on trigger */
+.sm {
+  height: var(--smd-input-height-sm);
+  font-size: var(--smd-input-font-sm);
+  padding: 0 var(--smd-input-px-sm);
+}
+
+.lg {
+  height: var(--smd-input-height-lg);
+  font-size: var(--smd-input-font-lg);
+  padding: 0 var(--smd-input-px-lg);
+}

@@ -1,0 +1,65 @@
+.card {
+  background: var(--smd-bg-base);
+  border: 1px solid var(--smd-border-default);
+  border-radius: var(--smd-radius-lg);
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--smd-space-5) var(--smd-space-5) 0;
+  gap: var(--smd-space-3);
+}
+
+.titles {
+  flex: 1;
+}
+
+.title {
+  font-size: var(--smd-font-size-base);
+  font-weight: var(--smd-font-weight-semibold);
+  color: var(--smd-text-primary);
+}
+
+.subtitle {
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-text-tertiary);
+  margin-top: var(--smd-space-1);
+}
+
+.action {
+  flex-shrink: 0;
+}
+
+.body {
+  padding: var(--smd-space-4) var(--smd-space-5) var(--smd-space-5);
+}
+
+.skeleton {
+  background: var(--smd-color-gray-20);
+  border-radius: var(--smd-radius-md);
+  animation: pulse 1.5s ease-in-out infinite;
+  margin: var(--smd-space-4) var(--smd-space-5) var(--smd-space-5);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--smd-text-tertiary);
+  font-size: var(--smd-font-size-sm);
+  padding: var(--smd-space-10) var(--smd-space-5);
+  margin: 0;
+}

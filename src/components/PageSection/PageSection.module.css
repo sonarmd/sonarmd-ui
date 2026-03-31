@@ -1,0 +1,32 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--smd-space-4);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--smd-space-4);
+}
+
+.titles {
+  flex: 1;
+}
+
+.title {
+  font-size: var(--smd-font-size-xl);
+  font-weight: var(--smd-font-weight-semibold);
+  color: var(--smd-text-primary);
+}
+
+.subtitle {
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-text-tertiary);
+  margin-top: var(--smd-space-1);
+}
+
+.action {
+  flex-shrink: 0;
+}

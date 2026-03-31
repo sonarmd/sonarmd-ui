@@ -1,0 +1,82 @@
+.wrapper {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: var(--smd-input-height-md);
+  padding: 0 var(--smd-input-px-md);
+  border: 1px solid var(--smd-border-default);
+  border-radius: var(--smd-radius-md);
+  font-size: var(--smd-input-font-md);
+  color: var(--smd-text-primary);
+  background: var(--smd-bg-base);
+  outline: none;
+  transition:
+    border-color var(--smd-duration-base) var(--smd-ease-default),
+    box-shadow var(--smd-duration-base) var(--smd-ease-default);
+}
+
+.input:focus {
+  border-color: var(--smd-border-focus);
+  box-shadow: var(--smd-shadow-focus);
+}
+
+.input[aria-invalid='true'] {
+  border-color: var(--smd-border-error);
+}
+
+.input[aria-invalid='true']:focus {
+  box-shadow: var(--smd-shadow-focus-error);
+}
+
+.input:disabled {
+  background: var(--smd-bg-subtle);
+  color: var(--smd-text-disabled);
+  cursor: not-allowed;
+}
+
+.input::placeholder {
+  color: var(--smd-text-disabled);
+}
+
+/* size variants */
+.sm .input {
+  height: var(--smd-input-height-sm);
+  padding: 0 var(--smd-input-px-sm);
+  font-size: var(--smd-input-font-sm);
+}
+
+.lg .input {
+  height: var(--smd-input-height-lg);
+  padding: 0 var(--smd-input-px-lg);
+  font-size: var(--smd-input-font-lg);
+}
+
+/* icon slots */
+.hasIconLeft .input {
+  padding-left: 32px;
+}
+
+.hasIconRight .input {
+  padding-right: 32px;
+}
+
+.iconLeft,
+.iconRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--smd-text-tertiary);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.iconLeft {
+  left: var(--smd-space-2);
+}
+
+.iconRight {
+  right: var(--smd-space-2);
+}

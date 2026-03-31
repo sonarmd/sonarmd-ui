@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--smd-space-1);
+}
+
+.label {
+  font-size: var(--smd-font-size-sm);
+  font-weight: var(--smd-font-weight-medium);
+  color: var(--smd-text-secondary);
+}
+
+.label[data-required]::after {
+  content: ' *';
+  color: var(--smd-color-negative-30);
+}
+
+.hint {
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-text-tertiary);
+}
+
+.error {
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-color-negative-30);
+}

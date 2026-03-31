@@ -1,0 +1,88 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--smd-space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.box {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--smd-border-strong);
+  border-radius: var(--smd-radius-sm);
+  background: var(--smd-bg-base);
+  flex-shrink: 0;
+  transition:
+    background var(--smd-duration-base) var(--smd-ease-default),
+    border-color var(--smd-duration-base) var(--smd-ease-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input:checked ~ .box,
+.input:indeterminate ~ .box {
+  background: var(--smd-color-primary-50);
+  border-color: var(--smd-color-primary-50);
+}
+
+.input:focus-visible ~ .box {
+  outline: 2px solid var(--smd-border-focus);
+  outline-offset: 2px;
+}
+
+.input:disabled ~ .box {
+  background: var(--smd-bg-subtle);
+  border-color: var(--smd-border-default);
+}
+
+.input:disabled ~ .label {
+  color: var(--smd-text-disabled);
+}
+
+.box::after {
+  content: '';
+  display: none;
+}
+
+.input:checked ~ .box::after {
+  display: block;
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+.input:indeterminate ~ .box::after {
+  display: block;
+  width: 8px;
+  height: 2px;
+  background: white;
+  border-radius: 1px;
+}
+
+.label {
+  font-size: var(--smd-font-size-base);
+  color: var(--smd-text-primary);
+  line-height: var(--smd-line-height-base);
+}
+
+/* size variants */
+.sm .box {
+  width: 14px;
+  height: 14px;
+}
+
+.lg .box {
+  width: 20px;
+  height: 20px;
+}

@@ -1,0 +1,216 @@
+import React, {useCallback, useRef, useState} from 'react';
+import {Link} from 'react-router-dom';
+import {Tooltip} from '../Tooltip';
+import styles from './Sidebar.module.css';
+
+export interface NavItem {
+  key: string;
+  label: string;
+  icon?: React.ReactNode;
+  to?: string;
+  badge?: string | number;
+  children?: NavItem[];
+  disabled?: boolean;
+}
+
+export interface SidebarProps {
+  items: NavItem[];
+  activeKey: string;
+  onNavigate: (key: string) => void;
+  collapsed?: boolean;
+  onToggleCollapse?: () => void;
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
+}
+
+function ChevronRightIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M6 4l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CollapseIcon({collapsed}: {collapsed: boolean}) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+      style={{transform: collapsed ? 'rotate(180deg)' : undefined, transition: 'transform 0.2s'}}
+    >
+      <path
+        d="M10 4L6 8l4 4"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+interface NavItemRowProps {
+  item: NavItem;
+  activeKey: string;
+  onNavigate: (key: string) => void;
+  collapsed: boolean;
+  depth?: number;
+}
+
+function NavItemRow({item, activeKey, onNavigate, collapsed, depth = 0}: NavItemRowProps) {
+  const [open, setOpen] = useState(false);
+  const subItemsRef = useRef<HTMLDivElement>(null);
+  const hasChildren = item.children && item.children.length > 0;
+  const isActive = item.key === activeKey;
+  const isDisabled = item.disabled ?? false;
+
+  const handleClick = useCallback(() => {
+    if (isDisabled) return;
+    if (hasChildren) {
+      setOpen((prev) => !prev);
+    } else {
+      onNavigate(item.key);
+    }
+  }, [isDisabled, hasChildren, onNavigate, item.key]);
+
+  const itemClasses = [
+    styles.item,
+    isActive ? styles.itemActive : '',
+    isDisabled ? styles.itemDisabled : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const itemContent = (
+    <>
+      {item.icon && <span className={styles.itemIcon}>{item.icon}</span>}
+      {!collapsed && (
+        <>
+          <span className={styles.itemLabel}>{item.label}</span>
+          {item.badge != null && (
+            <span className={styles.itemBadge}>{item.badge}</span>
+          )}
+          {hasChildren && (
+            <span className={`${styles.itemArrow}${open ? ` ${styles.itemArrowOpen}` : ''}`}>
+              <ChevronRightIcon />
+            </span>
+          )}
+        </>
+      )}
+    </>
+  );
+
+  const itemEl = item.to && !hasChildren ? (
+    <Link
+      to={item.to}
+      className={itemClasses}
+      onClick={() => {
+        if (!isDisabled) onNavigate(item.key);
+      }}
+      aria-current={isActive ? 'page' : undefined}
+      aria-disabled={isDisabled || undefined}
+      tabIndex={isDisabled ? -1 : undefined}
+    >
+      {itemContent}
+    </Link>
+  ) : (
+    <button
+      type="button"
+      className={itemClasses}
+      onClick={handleClick}
+      aria-expanded={hasChildren ? open : undefined}
+      aria-disabled={isDisabled || undefined}
+      disabled={isDisabled}
+    >
+      {itemContent}
+    </button>
+  );
+
+  const wrappedItem = collapsed ? (
+    <Tooltip content={item.label} placement="right">
+      {itemEl}
+    </Tooltip>
+  ) : (
+    itemEl
+  );
+
+  return (
+    <>
+      {wrappedItem}
+      {hasChildren && !collapsed && (
+        <div
+          ref={subItemsRef}
+          className={styles.subItems}
+          style={{
+            height: open
+              ? subItemsRef.current?.scrollHeight ?? 'auto'
+              : 0,
+          }}
+        >
+          {item.children!.map((child) => (
+            <NavItemRow
+              key={child.key}
+              item={child}
+              activeKey={activeKey}
+              onNavigate={onNavigate}
+              collapsed={collapsed}
+              depth={depth + 1}
+            />
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
+
+export function Sidebar({
+  items,
+  activeKey,
+  onNavigate,
+  collapsed = false,
+  onToggleCollapse,
+  header,
+  footer,
+}: SidebarProps): JSX.Element {
+  return (
+    <nav
+      className={`${styles.sidebar}${collapsed ? ` ${styles.collapsed}` : ''}`}
+      aria-label="Main navigation"
+    >
+      {header && <div className={styles.header}>{header}</div>}
+      {onToggleCollapse && (
+        <div className={styles.collapseToggle}>
+          <button
+            type="button"
+            className={styles.collapseBtn}
+            onClick={onToggleCollapse}
+            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          >
+            <CollapseIcon collapsed={collapsed} />
+          </button>
+        </div>
+      )}
+      <div className={styles.nav}>
+        {items.map((item) => (
+          <NavItemRow
+            key={item.key}
+            item={item}
+            activeKey={activeKey}
+            onNavigate={onNavigate}
+            collapsed={collapsed}
+          />
+        ))}
+      </div>
+      {footer && <div className={styles.footer}>{footer}</div>}
+    </nav>
+  );
+}
