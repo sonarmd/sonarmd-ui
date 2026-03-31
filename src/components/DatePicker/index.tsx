@@ -2,6 +2,7 @@ import React, {
   forwardRef,
   useCallback,
   useEffect,
+  useId,
   useMemo,
   useRef,
   useState,
@@ -121,7 +122,7 @@ export const DatePicker = React.memo(
       },
       ref,
     ) {
-      const inputId = useRef(`datepicker-${Math.random().toString(36).slice(2)}`);
+      const inputId = useId();
       const today = useRef(new Date()).current;
 
       const [inputStr, setInputStr] = useState(value ? formatDate(value) : '');
@@ -389,7 +390,7 @@ export const DatePicker = React.memo(
       return (
         <FieldWrapper
           label={label}
-          htmlFor={inputId.current}
+          htmlFor={inputId}
           required={required}
           error={error}
           hint={hint}
@@ -405,7 +406,7 @@ export const DatePicker = React.memo(
                   if (typeof ref === 'function') ref(node);
                   else if (ref) (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
                 }}
-                id={inputId.current}
+                id={inputId}
                 type="text"
                 className={inputClasses}
                 value={inputStr}

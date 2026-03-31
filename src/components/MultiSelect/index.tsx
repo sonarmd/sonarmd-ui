@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { List, RowComponentProps } from 'react-window';
 import { FieldWrapper } from '../FieldWrapper';
@@ -59,7 +59,7 @@ export const MultiSelect = React.memo(function MultiSelect({
   className,
   name,
 }: MultiSelectProps): JSX.Element {
-  const wrapperId = useRef(`multiselect-${Math.random().toString(36).slice(2)}`);
+  const wrapperId = useId();
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -398,7 +398,7 @@ export const MultiSelect = React.memo(function MultiSelect({
   return (
     <FieldWrapper
       label={label}
-      htmlFor={wrapperId.current}
+      htmlFor={wrapperId}
       required={required}
       error={error}
       hint={hint}
@@ -408,7 +408,7 @@ export const MultiSelect = React.memo(function MultiSelect({
         value.map((v) => <input key={v} type="hidden" name={`${name}[]`} value={v} />)}
       <div
         ref={triggerRef}
-        id={wrapperId.current}
+        id={wrapperId}
         className={triggerAreaClasses}
         onClick={handleTriggerClick}
         onKeyDown={handleKeyDown}

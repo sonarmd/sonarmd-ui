@@ -2,6 +2,7 @@ import React, {
   forwardRef,
   useCallback,
   useEffect,
+  useId,
   useMemo,
   useRef,
   useState,
@@ -72,7 +73,7 @@ export const Typeahead = React.memo(
       },
       ref,
     ) {
-      const inputId = useRef(`typeahead-${Math.random().toString(36).slice(2)}`);
+      const inputId = useId();
       const [inputValue, setInputValue] = useState(value?.label ?? '');
       const [options, setOptions] = useState<TypeaheadOption[]>([]);
       const [isLoading, setIsLoading] = useState(false);
@@ -361,7 +362,7 @@ export const Typeahead = React.memo(
       return (
         <FieldWrapper
           label={label}
-          htmlFor={inputId.current}
+          htmlFor={inputId}
           required={required}
           error={error}
           hint={hint}
@@ -375,7 +376,7 @@ export const Typeahead = React.memo(
                 if (typeof ref === 'function') ref(node);
                 else if (ref) (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
               }}
-              id={inputId.current}
+              id={inputId}
               type="text"
               className={inputClasses}
               value={inputValue}

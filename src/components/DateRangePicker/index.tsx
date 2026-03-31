@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { FieldWrapper } from '../FieldWrapper';
 import { usePortal } from '../../hooks/usePortal';
@@ -234,8 +234,12 @@ export const DateRangePicker = React.memo(function DateRangePicker({
   presets,
   name,
 }: DateRangePickerProps): JSX.Element {
-  const triggerId = useRef(`drp-${Math.random().toString(36).slice(2)}`);
+  const triggerId = useId();
   const today = useRef(new Date()).current;
+
+  // Normalise: treat null as an empty range so internal code never needs to
+  // guard against value being null throughout.
+  const safeValue = value ?? {start: null, end: null};
 
   const [isOpen, setIsOpen] = useState(false);
   const [popoverStyle, setPopoverStyle] = useState<React.CSSProperties>({});
@@ -243,8 +247,8 @@ export const DateRangePicker = React.memo(function DateRangePicker({
   const [selecting, setSelecting] = useState<'start' | 'end'>('start');
 
   // Left calendar always shows the month before right
-  const initMonth = value.start ? value.start.getMonth() : today.getMonth();
-  const initYear = value.start ? value.start.getFullYear() : today.getFullYear();
+  const initMonth = safeValue.start ? safeValue.start.getMonth() : today.getMonth();
+  const initYear = safeValue.start ? safeValue.start.getFullYear() : today.getFullYear();
 
   const [leftMonth, setLeftMonth] = useState(initMonth);
   const [leftYear, setLeftYear] = useState(initYear);
@@ -283,8 +287,8 @@ export const DateRangePicker = React.memo(function DateRangePicker({
     if (disabled) return;
     positionPopover();
     setIsOpen(true);
-    setSelecting(value.start && !value.end ? 'end' : 'start');
-  }, [disabled, positionPopover, value.start, value.end]);
+    setSelecting(safeValue.start && !safeValue.end ? 'end' : 'start');
+  }, [disabled, positionPopover, safeValue.start, safeValue.end]);
 
   const closePopover = useCallback(() => {
     setIsOpen(false);
@@ -311,11 +315,11 @@ export const DateRangePicker = React.memo(function DateRangePicker({
   // Rule 9: day click reads selecting from ref
   const handleDayClick = useCallback(
     (date: Date) => {
-      if (selectingRef.current === 'start' || (value.start && value.end)) {
+      if (selectingRef.current === 'start' || (safeValue.start && safeValue.end)) {
         onChange({ start: date, end: null });
         setSelecting('end');
       } else {
-        const start = value.start!;
+        const start = safeValue.start!;
         if (dayOf(date) < dayOf(start)) {
           onChange({ start: date, end: start });
         } else {
@@ -324,7 +328,7 @@ export const DateRangePicker = React.memo(function DateRangePicker({
         closePopover();
       }
     },
-    [value.start, value.end, onChange, closePopover],
+    [safeValue.start, safeValue.end, onChange, closePopover],
   );
 
   // Rule 3: stable nav handlers
@@ -374,11 +378,11 @@ export const DateRangePicker = React.memo(function DateRangePicker({
 
   // Rule 4: display text derived
   const display = useMemo(() => {
-    if (!value.start && !value.end) return null;
-    const startStr = value.start ? formatDate(value.start) : '\u2026';
-    const endStr = value.end ? formatDate(value.end) : '\u2026';
+    if (!safeValue.start && !safeValue.end) return null;
+    const startStr = safeValue.start ? formatDate(safeValue.start) : '\u2026';
+    const endStr = safeValue.end ? formatDate(safeValue.end) : '\u2026';
     return `${startStr} \u2013 ${endStr}`;
-  }, [value.start, value.end]);
+  }, [safeValue.start, safeValue.end]);
 
   // Rule 2: triggerClasses via useMemo
   const triggerClasses = useMemo(
@@ -419,8 +423,8 @@ export const DateRangePicker = React.memo(function DateRangePicker({
           year={leftYear}
           month={leftMonth}
           today={today}
-          start={value.start}
-          end={value.end}
+          start={safeValue.start}
+          end={safeValue.end}
           hoverDate={effectiveHoverDate}
           minDate={minDate}
           maxDate={maxDate}
@@ -434,8 +438,8 @@ export const DateRangePicker = React.memo(function DateRangePicker({
           year={rightYear}
           month={rightMonth}
           today={today}
-          start={value.start}
-          end={value.end}
+          start={safeValue.start}
+          end={safeValue.end}
           hoverDate={effectiveHoverDate}
           minDate={minDate}
           maxDate={maxDate}
@@ -452,20 +456,20 @@ export const DateRangePicker = React.memo(function DateRangePicker({
   return (
     <FieldWrapper
       label={label}
-      htmlFor={triggerId.current}
+      htmlFor={triggerId}
       required={required}
       error={error}
       hint={hint}
     >
-      {name && value.start && (
-        <input type="hidden" name={`${name}_start`} value={value.start.toISOString()} />
+      {name && safeValue.start && (
+        <input type="hidden" name={`${name}_start`} value={safeValue.start.toISOString()} />
       )}
-      {name && value.end && (
-        <input type="hidden" name={`${name}_end`} value={value.end.toISOString()} />
+      {name && safeValue.end && (
+        <input type="hidden" name={`${name}_end`} value={safeValue.end.toISOString()} />
       )}
       <button
         ref={triggerRef}
-        id={triggerId.current}
+        id={triggerId}
         type="button"
         className={triggerClasses}
         onClick={handleTriggerClick}
@@ -479,7 +483,7 @@ export const DateRangePicker = React.memo(function DateRangePicker({
           {display ?? placeholder}
         </span>
         <span className={styles.triggerRight}>
-          {clearable && (value.start || value.end) && (
+          {clearable && (safeValue.start || safeValue.end) && (
             <button
               type="button"
               className={styles.clearBtn}

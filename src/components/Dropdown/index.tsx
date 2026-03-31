@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { List, RowComponentProps } from 'react-window';
 import { FieldWrapper } from '../FieldWrapper';
@@ -80,7 +80,7 @@ export const Dropdown = React.memo(function Dropdown({
   const [activeIndex, setActiveIndex] = useState(-1);
   const [menuStyle, setMenuStyle] = useState<React.CSSProperties>({});
 
-  const triggerId = useRef(`dropdown-${Math.random().toString(36).slice(2)}`);
+  const triggerId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -400,7 +400,7 @@ export const Dropdown = React.memo(function Dropdown({
   return (
     <FieldWrapper
       label={label}
-      htmlFor={triggerId.current}
+      htmlFor={triggerId}
       required={required}
       error={error}
       hint={hint}
@@ -411,7 +411,7 @@ export const Dropdown = React.memo(function Dropdown({
       )}
       <button
         ref={triggerRef}
-        id={triggerId.current}
+        id={triggerId}
         type="button"
         className={triggerClasses}
         onClick={handleTriggerClick}
