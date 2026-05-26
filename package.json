@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "SonarMD design system — reusable React component library",
   "type": "module",
+  "engines": {
+    "node": "^22.18.0"
+  },
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -40,7 +43,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:update": "vitest run -u",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
