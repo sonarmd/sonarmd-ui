@@ -11,13 +11,17 @@ permissions:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    # Match the org-wide runner standard set by sonarmd/workflows ci-core
+    # (PR #48): arm64 native, no cross-arch emulation.
+    runs-on: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # Pinned to the version in .node-version (matches AuraPlatform's
+          # engines pin). Update both together.
+          node-version: '22.18.0'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@sonarmd'
 
