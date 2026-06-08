@@ -45,8 +45,12 @@ vi.mock('react-window', () => ({
 // ── Imports ───────────────────────────────────────────────────────────────────
 
 import {
-  // Phase 1 — Form Primitives
+  // Phase 1 - Form Primitives
   FieldWrapper,
+  FormGrid,
+  FormSection,
+  FormActions,
+  Fade,
   TextInput,
   TextArea,
   Select,
@@ -802,6 +806,62 @@ describe('GapsBanner', () => {
         dismissible
         onDismiss={noop}
       />,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
+
+describe('FormGrid', () => {
+  it('renders a two-column grid', () => {
+    const {asFragment} = render(
+      <FormGrid columns={2} gap="md">
+        <TextInput name="first" label="First name" />
+        <TextInput name="last" label="Last name" />
+      </FormGrid>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('renders staggered', () => {
+    const {asFragment} = render(
+      <FormGrid columns={2} stagger>
+        <TextInput name="a" label="A" />
+        <TextInput name="b" label="B" />
+      </FormGrid>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
+
+describe('FormSection', () => {
+  it('renders fieldset with legend and description', () => {
+    const {asFragment} = render(
+      <FormSection title="Demographics" description="Used to personalize care.">
+        <TextInput name="dob" label="Date of birth" />
+      </FormSection>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
+
+describe('FormActions', () => {
+  it('renders end-aligned actions', () => {
+    const {asFragment} = render(
+      <FormActions>
+        <button type="button">Cancel</button>
+        <button type="submit">Save</button>
+      </FormActions>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
+
+describe('Fade', () => {
+  it('renders children with entrance class', () => {
+    const {asFragment} = render(
+      <Fade delay={60}>
+        <p>Loaded</p>
+      </Fade>,
     );
     expect(asFragment()).toMatchSnapshot();
   });

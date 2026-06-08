@@ -1,0 +1,61 @@
+.grid {
+  display: grid;
+  width: 100%;
+}
+
+.cols1 {
+  grid-template-columns: 1fr;
+}
+
+.cols2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cols3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gapsm {
+  gap: var(--smd-space-3);
+}
+
+.gapmd {
+  gap: var(--smd-space-4);
+}
+
+.gaplg {
+  gap: var(--smd-space-6);
+}
+
+/* min-width:0 lets children shrink instead of overflowing the track */
+.cell {
+  min-width: 0;
+}
+
+.reveal {
+  animation: smd-grid-reveal var(--smd-duration-slow) var(--smd-ease-out) both;
+}
+
+@keyframes smd-grid-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .cols2,
+  .cols3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+}

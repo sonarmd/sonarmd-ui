@@ -1,0 +1,27 @@
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--smd-space-3);
+  margin-top: var(--smd-space-6);
+}
+
+.start {
+  justify-content: flex-start;
+}
+
+.end {
+  justify-content: flex-end;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.sticky {
+  position: sticky;
+  bottom: 0;
+  margin-top: 0;
+  padding: var(--smd-space-4) 0;
+  background: var(--smd-bg-base);
+  border-top: 1px solid var(--smd-border-default);
+}
