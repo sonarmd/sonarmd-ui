@@ -2026,6 +2026,103 @@ exports[`RadioGroup > renders with selection 1`] = `
 </DocumentFragment>
 `;
 
+exports[`SecureField > renders error state 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for="secure-mrn"
+    >
+      MRN
+    </label>
+    <div
+      class="_wrapper_1b37da"
+    >
+      <input
+        aria-describedby="secure-mrn-error"
+        aria-invalid="true"
+        autocapitalize="off"
+        autocomplete="off"
+        autocorrect="off"
+        class="_input_1b37da"
+        data-sensitive=""
+        id="secure-mrn"
+        name="mrn"
+        spellcheck="false"
+        type="password"
+      />
+    </div>
+    <span
+      class="_error_33d967"
+      id="secure-mrn-error"
+      role="alert"
+    >
+      Required
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SecureField > renders masked with reveal toggle 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for="secure-ssn"
+    >
+      Social Security Number
+    </label>
+    <div
+      class="_wrapper_1b37da _hasToggle_1b37da"
+    >
+      <input
+        autocapitalize="off"
+        autocomplete="off"
+        autocorrect="off"
+        class="_input_1b37da"
+        data-sensitive=""
+        id="secure-ssn"
+        name="ssn"
+        placeholder="000-00-0000"
+        spellcheck="false"
+        type="password"
+      />
+      <button
+        aria-label="Show value"
+        aria-pressed="false"
+        class="_toggle_1b37da"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M1 8s2.6-5 7-5 7 5 7 5-2.6 5-7 5-7-5-7-5Z"
+            stroke="currentColor"
+            stroke-width="1.3"
+          />
+          <circle
+            cx="8"
+            cy="8"
+            r="2.1"
+            stroke="currentColor"
+            stroke-width="1.3"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`Select > renders with options 1`] = `
 <DocumentFragment>
   <div

@@ -51,6 +51,7 @@ import {
   FormSection,
   FormActions,
   Fade,
+  SecureField,
   TextInput,
   TextArea,
   Select,
@@ -862,6 +863,22 @@ describe('Fade', () => {
       <Fade delay={60}>
         <p>Loaded</p>
       </Fade>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
+
+describe('SecureField', () => {
+  it('renders masked with reveal toggle', () => {
+    const {asFragment} = render(
+      <SecureField name="ssn" label="Social Security Number" placeholder="000-00-0000" />,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('renders error state', () => {
+    const {asFragment} = render(
+      <SecureField name="mrn" label="MRN" error="Required" revealable={false} />,
     );
     expect(asFragment()).toMatchSnapshot();
   });

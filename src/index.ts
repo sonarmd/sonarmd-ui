@@ -11,6 +11,8 @@ export {FormActions} from './components/FormActions';
 export type {FormActionsProps} from './components/FormActions';
 export {Fade} from './components/Fade';
 export type {FadeProps} from './components/Fade';
+export {SecureField} from './components/SecureField';
+export type {SecureFieldProps} from './components/SecureField';
 
 export {TextInput} from './components/TextInput';
 export type {TextInputProps} from './components/TextInput';
