@@ -18,6 +18,14 @@ interface FormState {
 const isEmpty = (v: unknown): boolean =>
   v == null || v === '' || (Array.isArray(v) && v.length === 0);
 
+/** Coerce a stored value into something a native input accepts as defaultValue. */
+const toInputValue = (v: unknown): string | number | readonly string[] | undefined => {
+  if (v == null) return '';
+  if (typeof v === 'string' || typeof v === 'number') return v;
+  if (Array.isArray(v) && v.every((x): x is string => typeof x === 'string')) return v;
+  return String(v);
+};
+
 /**
  * Minimal external store. Field components subscribe to their own slice via
  * useSyncExternalStore, so a keystroke re-renders only the field that changed,
@@ -94,11 +102,18 @@ class FormStore {
   }
 }
 
-/** Props produced by register(), spreadable onto @sonarmd field components. */
+/**
+ * Props produced by register(), spreadable onto @sonarmd field components.
+ *
+ * The binding is uncontrolled: it seeds the input with `defaultValue` and syncs
+ * every change into the store, so the field owns its own text and never freezes
+ * waiting on a parent re-render. Live value/error for a single field comes from
+ * the subscribing `useField(name)`; submit-time errors surface through the
+ * subscribed `FormErrorSummary`.
+ */
 export interface FieldBinding {
   name: string;
-  value: unknown;
-  error: string | undefined;
+  defaultValue: string | number | readonly string[] | undefined;
   onChange: (arg: unknown) => void;
   onBlur: () => void;
 }
@@ -131,8 +146,7 @@ export function useForm<T extends Record<string, unknown>>(
       if (rules) store.rules[name] = rules;
       return {
         name,
-        value: store.getValue(name) ?? '',
-        error: store.getError(name),
+        defaultValue: toInputValue(store.getValue(name)),
         onChange: (arg: unknown) => {
           const next =
             arg && typeof arg === 'object' && 'target' in (arg as object)
