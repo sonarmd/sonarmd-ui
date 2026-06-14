@@ -145,6 +145,99 @@ exports[`BubbleChart > renders data points 1`] = `
 </DocumentFragment>
 `;
 
+exports[`Button > renders ghost compact 1`] = `
+<DocumentFragment>
+  <button
+    class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _compact_0829c1"
+    type="button"
+  >
+    <span
+      class="_label_0829c1"
+    >
+      Cancel
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button > renders loading state 1`] = `
+<DocumentFragment>
+  <button
+    aria-busy="true"
+    class="_button_0829c1 _primary_0829c1 _md_0829c1"
+    disabled=""
+    type="button"
+  >
+    <span
+      aria-hidden="true"
+      class="_spinner_0829c1"
+    />
+    <span
+      class="_label_0829c1 _loadingLabel_0829c1"
+    >
+      Save
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button > renders primary md 1`] = `
+<DocumentFragment>
+  <button
+    class="_button_0829c1 _primary_0829c1 _md_0829c1"
+    type="button"
+  >
+    <span
+      class="_label_0829c1"
+    >
+      Save
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Card > renders elevated compact 1`] = `
+<DocumentFragment>
+  <div
+    class="_card_f66b11 _elevated_f66b11 _compact_f66b11"
+  >
+    <p>
+      Body
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Card > renders with header and body 1`] = `
+<DocumentFragment>
+  <div
+    class="_card_f66b11 _default_f66b11 _comfortable_f66b11"
+  >
+    <div
+      class="_header_f66b11"
+    >
+      <div
+        class="_titles_f66b11"
+      >
+        <p
+          class="_title_f66b11"
+        >
+          Revenue
+        </p>
+        <p
+          class="_subtitle_f66b11"
+        >
+          Last 30 days
+        </p>
+      </div>
+    </div>
+    <p>
+      Body
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`ChartCard > renders empty state 1`] = `
 <DocumentFragment>
   <div

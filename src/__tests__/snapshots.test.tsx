@@ -45,6 +45,9 @@ vi.mock('react-window', () => ({
 // ── Imports ───────────────────────────────────────────────────────────────────
 
 import {
+  // Phase 0 - Action & Surface Primitives
+  Button,
+  Card,
   // Phase 1 - Form Primitives
   FieldWrapper,
   FormGrid,
@@ -122,7 +125,47 @@ const TIME_DATA = [
   {month: 'Mar', a: 120, b: 80},
 ];
 
-// ── Phase 1: Form Primitives ──────────────────────────────────────────────────
+// -- Phase 0: Action & Surface Primitives --------------------------------------
+
+describe('Button', () => {
+  it('renders primary md', () => {
+    const {asFragment} = render(<Button>Save</Button>);
+    expect(asFragment()).toMatchSnapshot();
+  });
+  it('renders loading state', () => {
+    const {asFragment} = render(<Button loading>Save</Button>);
+    expect(asFragment()).toMatchSnapshot();
+  });
+  it('renders ghost compact', () => {
+    const {asFragment} = render(
+      <Button variant="ghost" size="sm" density="compact">
+        Cancel
+      </Button>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
+
+describe('Card', () => {
+  it('renders with header and body', () => {
+    const {asFragment} = render(
+      <Card title="Revenue" subtitle="Last 30 days">
+        <p>Body</p>
+      </Card>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+  it('renders elevated compact', () => {
+    const {asFragment} = render(
+      <Card variant="elevated" density="compact">
+        <p>Body</p>
+      </Card>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
+
+// -- Phase 1: Form Primitives --------------------------------------------------
 
 describe('FieldWrapper', () => {
   it('renders with label and child input', () => {

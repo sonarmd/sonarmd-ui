@@ -1,4 +1,10 @@
-// ─── Layer 1: Form Primitives ────────────────────────────────────────────────
+// --- Layer 0: Action & Surface Primitives ------------------------------------
+export {Button} from './components/Button';
+export type {ButtonProps, ButtonVariant, ButtonSize, ButtonDensity} from './components/Button';
+export {Card} from './components/Card';
+export type {CardProps, CardVariant, CardDensity} from './components/Card';
+
+// --- Layer 1: Form Primitives ------------------------------------------------
 export {FieldWrapper} from './components/FieldWrapper';
 export type {FieldWrapperProps} from './components/FieldWrapper';
 

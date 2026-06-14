@@ -1,0 +1,11 @@
+{
+  "description": "CI performance budgets for the SonarMD benchmark app (brotli bytes). CI fails if @sonarmd/ui regresses past these, or if it is not the smallest total in a run.",
+  "sonarmd": {
+    "jsBr": 90000,
+    "cssBr": 16000,
+    "totalBr": 100000
+  },
+  "rules": {
+    "sonarmdMustBeSmallestTotal": true
+  }
+}

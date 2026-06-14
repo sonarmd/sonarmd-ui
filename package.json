@@ -23,6 +23,36 @@
       "import": "./dist/charts/index.js",
       "require": "./dist/charts/index.cjs"
     },
+    "./button": {
+      "types": "./dist/components/Button/index.d.ts",
+      "import": "./dist/components/Button/index.js",
+      "require": "./dist/components/Button/index.cjs"
+    },
+    "./card": {
+      "types": "./dist/components/Card/index.d.ts",
+      "import": "./dist/components/Card/index.js",
+      "require": "./dist/components/Card/index.cjs"
+    },
+    "./badge": {
+      "types": "./dist/components/Badge/index.d.ts",
+      "import": "./dist/components/Badge/index.js",
+      "require": "./dist/components/Badge/index.cjs"
+    },
+    "./text-input": {
+      "types": "./dist/components/TextInput/index.d.ts",
+      "import": "./dist/components/TextInput/index.js",
+      "require": "./dist/components/TextInput/index.cjs"
+    },
+    "./modal": {
+      "types": "./dist/components/Modal/index.d.ts",
+      "import": "./dist/components/Modal/index.js",
+      "require": "./dist/components/Modal/index.cjs"
+    },
+    "./data-table": {
+      "types": "./dist/components/DataTable/index.d.ts",
+      "import": "./dist/components/DataTable/index.js",
+      "require": "./dist/components/DataTable/index.cjs"
+    },
     "./tokens": {
       "types": "./dist/sonarmd-tokens.d.ts",
       "import": "./dist/sonarmd-tokens.js",

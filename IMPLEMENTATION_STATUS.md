@@ -13,6 +13,37 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## S2 - Performance-first + benchmarks  (IN PROGRESS)
+
+Owner directive (DECISIONS.md ADR-0001) supersedes V1_SPEC's theming-only S2.
+Branch: feat/s2-performance.
+
+### Done (Phase 1-2)
+- Benchmark infrastructure under `benchmarks/`: one dashboard shell (sidebar,
+  header, KPI cards, tabs, table, form, modal) built four ways, with a harness
+  (`measure.mjs`) that builds each app and measures JS/CSS transfer (gzip +
+  brotli) + bundle size into `benchmarks/results/`.
+- **Baseline proves the thesis** (total brotli, same shell):
+  @sonarmd/ui 60.35 kB; React Bootstrap 75.65 kB (+20%); Material UI 98.50 kB
+  (+39%); Ant Design 241.95 kB (+301%). @sonarmd/ui is the smallest total.
+  (MUI/AntD report 0 CSS because they inject styles via JS - reflected in their
+  larger JS.)
+- `Button` and `Card` primitives with the converged API (variant/size/density),
+  semantic tokens, forwardRef, visible focus, reduced-motion handling.
+- Per-component subpath exports (`./button`, `./card`, `./badge`, `./text-input`,
+  `./modal`, `./data-table`) alongside `.` and `./charts`.
+- Tree-shaking boundary gates (`src/testing/static/treeShaking.test.ts`): the
+  root never reaches echarts; importing Button never reaches Modal/Table/charts;
+  the charts entry does reach echarts (detector is non-vacuous).
+
+### Next (Phase 3-4)
+- Runtime metrics (FCP/LCP/TBT/TTI/hydration) via a headless browser in the
+  harness; wire `budgets.json` into CI as a release gate.
+- CSS authoring -> Sass per ADR-0001 (shared `core.css` once + per-component
+  CSS), migrating existing components incrementally, driven by the numbers.
+- Full per-component subpath coverage + API convergence across components.
+- Heavy-feature subpaths: `./data-grid`, `./icons`, `./advanced-table`.
+
 ## S1 - Packaging, minimization, tree-shaking  (DONE)
 
 Branch: feat/s1-packaging
