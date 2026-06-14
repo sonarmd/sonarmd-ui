@@ -1,0 +1,20 @@
+.fade {
+  animation: smd-fade-in var(--smd-duration-slow) var(--smd-ease-out) both;
+}
+
+@keyframes smd-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    animation: none;
+  }
+}

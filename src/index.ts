@@ -2,6 +2,24 @@
 export {FieldWrapper} from './components/FieldWrapper';
 export type {FieldWrapperProps} from './components/FieldWrapper';
 
+// Forms System: layout + motion foundation
+export {FormGrid} from './components/FormGrid';
+export type {FormGridProps} from './components/FormGrid';
+export {FormSection} from './components/FormSection';
+export type {FormSectionProps} from './components/FormSection';
+export {FormActions} from './components/FormActions';
+export type {FormActionsProps} from './components/FormActions';
+export {Fade} from './components/Fade';
+export type {FadeProps} from './components/Fade';
+export {SecureField} from './components/SecureField';
+export type {SecureFieldProps} from './components/SecureField';
+export {Form} from './components/Form';
+export type {FormProps} from './components/Form';
+export {FormErrorSummary} from './components/FormErrorSummary';
+export type {FormErrorSummaryProps} from './components/FormErrorSummary';
+export {useForm} from './hooks/useForm';
+export type {FieldRules, FieldBinding, UseFormReturn} from './hooks/useForm';
+
 export {TextInput} from './components/TextInput';
 export type {TextInputProps} from './components/TextInput';
 

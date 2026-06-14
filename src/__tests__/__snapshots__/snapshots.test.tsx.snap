@@ -1102,6 +1102,19 @@ exports[`EmptyState > renders with title and description 1`] = `
 </DocumentFragment>
 `;
 
+exports[`Fade > renders children with entrance class 1`] = `
+<DocumentFragment>
+  <div
+    class="_fade_9a2ddc"
+    style="animation-delay: 60ms;"
+  >
+    <p>
+      Loaded
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`FieldWrapper > renders with label and child input 1`] = `
 <DocumentFragment>
   <div
@@ -1145,6 +1158,179 @@ exports[`FilterBar > renders with active filters 1`] = `
       Clear filters
     </button>
   </div>
+</DocumentFragment>
+`;
+
+exports[`FormActions > renders end-aligned actions 1`] = `
+<DocumentFragment>
+  <div
+    class="_actions_a43f51 _end_a43f51"
+  >
+    <button
+      type="button"
+    >
+      Cancel
+    </button>
+    <button
+      type="submit"
+    >
+      Save
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FormGrid > renders a two-column grid 1`] = `
+<DocumentFragment>
+  <div
+    class="_grid_18c66e _cols2_18c66e _gapmd_18c66e"
+  >
+    <div
+      class="_cell_18c66e"
+    >
+      <div
+        class="_wrapper_33d967"
+      >
+        <label
+          class="_label_33d967"
+          for="input-first"
+        >
+          First name
+        </label>
+        <div
+          class="_wrapper_f9081f"
+        >
+          <input
+            class="_input_f9081f"
+            id="input-first"
+            name="first"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="_cell_18c66e"
+    >
+      <div
+        class="_wrapper_33d967"
+      >
+        <label
+          class="_label_33d967"
+          for="input-last"
+        >
+          Last name
+        </label>
+        <div
+          class="_wrapper_f9081f"
+        >
+          <input
+            class="_input_f9081f"
+            id="input-last"
+            name="last"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FormGrid > renders staggered 1`] = `
+<DocumentFragment>
+  <div
+    class="_grid_18c66e _cols2_18c66e _gapmd_18c66e"
+  >
+    <div
+      class="_cell_18c66e _reveal_18c66e"
+      style="animation-delay: 0ms;"
+    >
+      <div
+        class="_wrapper_33d967"
+      >
+        <label
+          class="_label_33d967"
+          for="input-a"
+        >
+          A
+        </label>
+        <div
+          class="_wrapper_f9081f"
+        >
+          <input
+            class="_input_f9081f"
+            id="input-a"
+            name="a"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="_cell_18c66e _reveal_18c66e"
+      style="animation-delay: 60ms;"
+    >
+      <div
+        class="_wrapper_33d967"
+      >
+        <label
+          class="_label_33d967"
+          for="input-b"
+        >
+          B
+        </label>
+        <div
+          class="_wrapper_f9081f"
+        >
+          <input
+            class="_input_f9081f"
+            id="input-b"
+            name="b"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FormSection > renders fieldset with legend and description 1`] = `
+<DocumentFragment>
+  <fieldset
+    class="_section_c8ef73"
+  >
+    <legend
+      class="_legend_c8ef73"
+    >
+      Demographics
+    </legend>
+    <p
+      class="_description_c8ef73"
+    >
+      Used to personalize care.
+    </p>
+    <div
+      class="_body_c8ef73"
+    >
+      <div
+        class="_wrapper_33d967"
+      >
+        <label
+          class="_label_33d967"
+          for="input-dob"
+        >
+          Date of birth
+        </label>
+        <div
+          class="_wrapper_f9081f"
+        >
+          <input
+            class="_input_f9081f"
+            id="input-dob"
+            name="dob"
+          />
+        </div>
+      </div>
+    </div>
+  </fieldset>
 </DocumentFragment>
 `;
 
@@ -1835,6 +2021,103 @@ exports[`RadioGroup > renders with selection 1`] = `
           Option B
         </span>
       </label>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SecureField > renders error state 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for="secure-mrn"
+    >
+      MRN
+    </label>
+    <div
+      class="_wrapper_1b37da"
+    >
+      <input
+        aria-describedby="secure-mrn-error"
+        aria-invalid="true"
+        autocapitalize="off"
+        autocomplete="off"
+        autocorrect="off"
+        class="_input_1b37da"
+        data-sensitive=""
+        id="secure-mrn"
+        name="mrn"
+        spellcheck="false"
+        type="password"
+      />
+    </div>
+    <span
+      class="_error_33d967"
+      id="secure-mrn-error"
+      role="alert"
+    >
+      Required
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SecureField > renders masked with reveal toggle 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for="secure-ssn"
+    >
+      Social Security Number
+    </label>
+    <div
+      class="_wrapper_1b37da _hasToggle_1b37da"
+    >
+      <input
+        autocapitalize="off"
+        autocomplete="off"
+        autocorrect="off"
+        class="_input_1b37da"
+        data-sensitive=""
+        id="secure-ssn"
+        name="ssn"
+        placeholder="000-00-0000"
+        spellcheck="false"
+        type="password"
+      />
+      <button
+        aria-label="Show value"
+        aria-pressed="false"
+        class="_toggle_1b37da"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M1 8s2.6-5 7-5 7 5 7 5-2.6 5-7 5-7-5-7-5Z"
+            stroke="currentColor"
+            stroke-width="1.3"
+          />
+          <circle
+            cx="8"
+            cy="8"
+            r="2.1"
+            stroke="currentColor"
+            stroke-width="1.3"
+          />
+        </svg>
+      </button>
     </div>
   </div>
 </DocumentFragment>
