@@ -104,12 +104,8 @@ exports[`Alert > renders info variant 1`] = `
 exports[`AreaChart > renders with data 1`] = `
 <DocumentFragment>
   <div
-    class="_root_bd3975"
-  >
-    <div
-      data-testid="echarts-chart"
-    />
-  </div>
+    data-testid="echarts-chart"
+  />
 </DocumentFragment>
 `;
 
@@ -136,24 +132,16 @@ exports[`Badge > renders primary variant 1`] = `
 exports[`BarChart > renders with data 1`] = `
 <DocumentFragment>
   <div
-    class="_root_f7cfe2"
-  >
-    <div
-      data-testid="echarts-chart"
-    />
-  </div>
+    data-testid="echarts-chart"
+  />
 </DocumentFragment>
 `;
 
 exports[`BubbleChart > renders data points 1`] = `
 <DocumentFragment>
   <div
-    class="_root_102a5a"
-  >
-    <div
-      data-testid="echarts-chart"
-    />
-  </div>
+    data-testid="echarts-chart"
+  />
 </DocumentFragment>
 `;
 
@@ -1337,12 +1325,8 @@ exports[`FormSection > renders fieldset with legend and description 1`] = `
 exports[`FunnelChart > renders stages 1`] = `
 <DocumentFragment>
   <div
-    class="_root_0b7cb9"
-  >
-    <div
-      data-testid="echarts-chart"
-    />
-  </div>
+    data-testid="echarts-chart"
+  />
 </DocumentFragment>
 `;
 
@@ -1429,12 +1413,8 @@ exports[`GapsBanner > renders warning with action 1`] = `
 exports[`GaugeChart > renders at 75% 1`] = `
 <DocumentFragment>
   <div
-    class="_root_a269ed"
-  >
-    <div
-      data-testid="echarts-chart"
-    />
-  </div>
+    data-testid="echarts-chart"
+  />
 </DocumentFragment>
 `;
 
@@ -1592,12 +1572,8 @@ exports[`KpiGrid > renders 4-column grid 1`] = `
 exports[`LineChart > renders with series 1`] = `
 <DocumentFragment>
   <div
-    class="_root_1cd8a5"
-  >
-    <div
-      data-testid="echarts-chart"
-    />
-  </div>
+    data-testid="echarts-chart"
+  />
 </DocumentFragment>
 `;
 
@@ -1914,15 +1890,11 @@ exports[`PageSection > renders with title and children 1`] = `
 exports[`PieChart > renders donut 1`] = `
 <DocumentFragment>
   <div
-    class="_root_f14d8d"
+    class="_wrapper_f14d8d"
   >
     <div
-      class="_wrapper_f14d8d"
-    >
-      <div
-        data-testid="echarts-chart"
-      />
-    </div>
+      data-testid="echarts-chart"
+    />
   </div>
 </DocumentFragment>
 `;
@@ -1930,15 +1902,11 @@ exports[`PieChart > renders donut 1`] = `
 exports[`PieChart > renders pie 1`] = `
 <DocumentFragment>
   <div
-    class="_root_f14d8d"
+    class="_wrapper_f14d8d"
   >
     <div
-      class="_wrapper_f14d8d"
-    >
-      <div
-        data-testid="echarts-chart"
-      />
-    </div>
+      data-testid="echarts-chart"
+    />
   </div>
 </DocumentFragment>
 `;
@@ -2272,24 +2240,16 @@ exports[`Skeleton > renders text variant 1`] = `
 exports[`StackedAreaChart > renders with series 1`] = `
 <DocumentFragment>
   <div
-    class="_root_ff3f3a"
-  >
-    <div
-      data-testid="echarts-chart"
-    />
-  </div>
+    data-testid="echarts-chart"
+  />
 </DocumentFragment>
 `;
 
 exports[`StackedBarChart > renders with series 1`] = `
 <DocumentFragment>
   <div
-    class="_root_4437a0"
-  >
-    <div
-      data-testid="echarts-chart"
-    />
-  </div>
+    data-testid="echarts-chart"
+  />
 </DocumentFragment>
 `;
 

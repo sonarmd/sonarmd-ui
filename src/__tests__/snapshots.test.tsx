@@ -15,8 +15,8 @@ import {vi} from 'vitest';
 
 // ── Mocks (hoisted by vitest) ─────────────────────────────────────────────────
 
-vi.mock('echarts-for-react', () => ({
-  default: () => <div data-testid="echarts-chart" />,
+vi.mock('../charts/ChartCanvas', () => ({
+  ChartCanvas: () => <div data-testid="echarts-chart" />,
 }));
 
 vi.mock('react-window', () => ({
@@ -80,7 +80,16 @@ import {
   KpiCard,
   KpiGrid,
   DataTable,
-  // Phase 5 — Charts
+  // Phase 6 - Layout
+  FilterBar,
+  PageHeader,
+  PageSection,
+  Tabs,
+  Sidebar,
+  GapsBanner,
+} from '../index';
+import {
+  // Phase 5 - Charts (now behind the ./charts subpath entry)
   BarChart,
   StackedBarChart,
   LineChart,
@@ -90,15 +99,8 @@ import {
   GaugeChart,
   FunnelChart,
   BubbleChart,
-  // Phase 6 — Layout
   ChartCard,
-  FilterBar,
-  PageHeader,
-  PageSection,
-  Tabs,
-  Sidebar,
-  GapsBanner,
-} from '../index';
+} from '../charts';
 
 // ── Shared fixtures ───────────────────────────────────────────────────────────
 
