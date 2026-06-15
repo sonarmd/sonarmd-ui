@@ -195,6 +195,16 @@ export const sidebar = {
   widthCollapsed:  '64px',
 } as const;
 
+// --- Z-Index -----------------------------------------------------------------
+
+/** Stacking order for layered surfaces. Consumed as --smd-z-* in CSS modules. */
+export const zIndex = {
+  'dropdown': '1000',
+  'modal':    '1100',
+  'toast':    '1200',
+  'tooltip':  '1300',
+} as const;
+
 // ─── Chart Tokens ──────────────────────────────────────────────────────────────
 
 /** Ordered for maximum visual distinction in multi-series charts */

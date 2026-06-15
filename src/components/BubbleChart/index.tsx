@@ -1,11 +1,8 @@
-import React, {useMemo, useCallback, useRef, useEffect} from 'react';
-import ReactECharts from 'echarts-for-react';
-import type {EChartsInstance} from 'echarts-for-react';
+import React, {useMemo, useCallback} from 'react';
+import type {ECElementEvent} from 'echarts/core';
 import {chartColors, echartsDefaults} from '../../sonarmd-tokens';
-import {useThrottle} from '../../hooks/useThrottle';
-import {Skeleton} from '../Skeleton';
-import {EmptyState} from '../EmptyState';
-import styles from './BubbleChart.module.css';
+import {ChartCanvas} from '../../charts/ChartCanvas';
+import type {ECOption} from '../../charts/echartsCore';
 
 export interface BubbleDataPoint {
   name: string;
@@ -42,25 +39,7 @@ export const BubbleChart = React.memo(function BubbleChart({
   formatY,
   className,
 }: BubbleChartProps): JSX.Element {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const chartInstanceRef = useRef<EChartsInstance | null>(null);
-
-  const throttledResize = useThrottle(() => {
-    chartInstanceRef.current?.resize();
-  }, 200);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-    const observer = new ResizeObserver(throttledResize);
-    observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, [throttledResize]);
-
-  const handleChartReady = useCallback((chart: EChartsInstance) => {
-    chartInstanceRef.current = chart;
-  }, []);
-
-  const option = useMemo(() => {
+  const option = useMemo((): ECOption => {
     // Group points by color into separate series for distinct rendering
     const colorMap = new Map<string, BubbleDataPoint[]>();
     data.forEach((pt) => {
@@ -77,7 +56,7 @@ export const BubbleChart = React.memo(function BubbleChart({
       emphasis: {focus: 'self' as const},
     }));
 
-    // Fall back to a single series using default color if no data
+    // Fall back to a single empty series so the axes still render
     const series =
       echartsSeries.length > 0
         ? echartsSeries
@@ -86,7 +65,7 @@ export const BubbleChart = React.memo(function BubbleChart({
               type: 'scatter' as const,
               symbolSize: (d: number[]) => Math.sqrt(d[2]) * 8,
               itemStyle: {color: chartColors[0]},
-              data: [] as number[][],
+              data: [] as Array<Array<number | string>>,
               emphasis: {focus: 'self' as const},
             },
           ];
@@ -133,49 +112,25 @@ export const BubbleChart = React.memo(function BubbleChart({
     };
   }, [data, xLabel, yLabel, formatX, formatY]);
 
-  const onEvents = useMemo(
-    () =>
-      onClick
-        ? {
-            click: (params: {value: [number, number, number, string]}) => {
-              const [x, y, size, name] = params.value;
-              const found = data.find(
-                (d) => d.x === x && d.y === y && d.size === size && d.name === name,
-              );
-              if (found) onClick(found);
-            },
-          }
-        : undefined,
+  const handleClick = useCallback(
+    (p: ECElementEvent) => {
+      const [x, y, size, name] = p.value as [number, number, number, string];
+      const found = data.find(
+        (d) => d.x === x && d.y === y && d.size === size && d.name === name,
+      );
+      if (found) onClick?.(found);
+    },
     [onClick, data],
   );
 
-  if (isLoading) {
-    return (
-      <div className={[styles.root, className].filter(Boolean).join(' ')}>
-        <Skeleton variant="rect" width="100%" height={height} />
-      </div>
-    );
-  }
-
-  if (isEmpty) {
-    return (
-      <div className={[styles.root, className].filter(Boolean).join(' ')}>
-        <EmptyState title="No data available" />
-      </div>
-    );
-  }
-
   return (
-    <div ref={containerRef} className={[styles.root, className].filter(Boolean).join(' ')}>
-      <ReactECharts
-        option={option}
-        theme="sonarmd"
-        style={{height, width: '100%'}}
-        opts={{renderer: 'svg'}} lazyUpdate
-        notMerge
-        onChartReady={handleChartReady}
-        {...(onEvents ? {onEvents} : {})}
-      />
-    </div>
+    <ChartCanvas
+      option={option}
+      height={height}
+      isLoading={isLoading}
+      isEmpty={isEmpty}
+      onClick={onClick ? handleClick : undefined}
+      className={className}
+    />
   );
 });

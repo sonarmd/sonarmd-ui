@@ -98,38 +98,10 @@ export type {KpiGridProps} from './components/KpiGrid';
 export {DataTable} from './components/DataTable';
 export type {DataTableProps, Column} from './components/DataTable';
 
-// ─── Layer 5: Chart Wrappers ─────────────────────────────────────────────────
-export {BarChart} from './components/BarChart';
-export type {BarChartProps} from './components/BarChart';
+// Chart components, ChartCard, and chart tokens live in the ./charts subpath
+// entry so the core surface ships zero echarts bytes.
 
-export {StackedBarChart} from './components/StackedBarChart';
-export type {StackedBarChartProps, BarSeries} from './components/StackedBarChart';
-
-export {LineChart} from './components/LineChart';
-export type {LineChartProps, LineSeries} from './components/LineChart';
-
-export {AreaChart} from './components/AreaChart';
-export type {AreaChartProps} from './components/AreaChart';
-
-export {StackedAreaChart} from './components/StackedAreaChart';
-export type {StackedAreaChartProps} from './components/StackedAreaChart';
-
-export {PieChart} from './components/PieChart';
-export type {PieChartProps, PieDataItem} from './components/PieChart';
-
-export {GaugeChart} from './components/GaugeChart';
-export type {GaugeChartProps, GaugeThreshold} from './components/GaugeChart';
-
-export {FunnelChart} from './components/FunnelChart';
-export type {FunnelChartProps, FunnelStage} from './components/FunnelChart';
-
-export {BubbleChart} from './components/BubbleChart';
-export type {BubbleChartProps, BubbleDataPoint} from './components/BubbleChart';
-
-// ─── Layer 6: Composition & Layout ───────────────────────────────────────────
-export {ChartCard} from './components/ChartCard';
-export type {ChartCardProps} from './components/ChartCard';
-
+// --- Layer 6: Composition & Layout -------------------------------------------
 export {FilterBar} from './components/FilterBar';
 export type {FilterBarProps} from './components/FilterBar';
 
@@ -163,7 +135,5 @@ export {
   inputPaddingX,
   inputFontSize,
   sidebar,
-  chartColors,
-  echartsDefaults,
-  areaGradient,
+  zIndex,
 } from './sonarmd-tokens';
