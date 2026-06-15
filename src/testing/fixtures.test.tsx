@@ -11,13 +11,27 @@
  */
 import React from 'react';
 import {cleanup} from '@testing-library/react';
-import {afterEach, describe, expect, it, vi} from 'vitest';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {axe} from 'vitest-axe';
 import * as axeMatchers from 'vitest-axe/matchers';
 import {renderFixture} from './harness';
 import type {ComponentFixtures} from './defineComponentFixtures';
 
 expect.extend(axeMatchers);
+
+// useId is the only nondeterministic value in these DOM snapshots, and React 18
+// (":r0:") and React 19 ("_r_0_") format it differently - which would break the
+// React-version CI matrix. Make it deterministic and reset it per test so the
+// snapshots are stable across React versions AND independent of test execution
+// order (raw useId is a process-global counter).
+const idState = vi.hoisted(() => ({n: 0}));
+vi.mock('react', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('react')>();
+  return {...actual, useId: () => `:r${(idState.n++).toString(36)}:`};
+});
+beforeEach(() => {
+  idState.n = 0;
+});
 
 // Centralized mocks (hoisted): charts render through ChartCanvas (mocked to a
 // stub so echarts/canvas never load), and react-window renders a few rows.

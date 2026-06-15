@@ -1192,7 +1192,7 @@ exports[`DatePicker > noValue - dom 1`] = `
   >
     <label
       class="_label_33d967"
-      for=":r2:"
+      for=":r0:"
     >
       Date
     </label>
@@ -1206,7 +1206,7 @@ exports[`DatePicker > noValue - dom 1`] = `
           aria-invalid="false"
           autocomplete="off"
           class="_input_ef7e38"
-          id=":r2:"
+          id=":r0:"
           placeholder="MM/DD/YYYY"
           type="text"
           value=""
@@ -1253,7 +1253,7 @@ exports[`DateRangePicker > noValue - dom 1`] = `
   >
     <label
       class="_label_33d967"
-      for=":r4:"
+      for=":r0:"
     >
       Date range
     </label>
@@ -1262,7 +1262,7 @@ exports[`DateRangePicker > noValue - dom 1`] = `
       aria-haspopup="dialog"
       aria-invalid="false"
       class="_trigger_638e37"
-      id=":r4:"
+      id=":r0:"
       type="button"
     >
       <span
@@ -1309,7 +1309,7 @@ exports[`Dropdown > closed - dom 1`] = `
   >
     <label
       class="_label_33d967"
-      for=":r6:"
+      for=":r0:"
     >
       Category
     </label>
@@ -1318,7 +1318,7 @@ exports[`Dropdown > closed - dom 1`] = `
       aria-haspopup="listbox"
       aria-invalid="false"
       class="_trigger_1f39d3 _md_1f39d3"
-      id=":r6:"
+      id=":r0:"
       type="button"
     >
       <span
@@ -1365,7 +1365,7 @@ exports[`Dropdown > selected - dom 1`] = `
       aria-haspopup="listbox"
       aria-invalid="false"
       class="_trigger_1f39d3 _md_1f39d3"
-      id=":r8:"
+      id=":r0:"
       type="button"
     >
       <span
@@ -2224,7 +2224,7 @@ exports[`MultiSelect > noSelection - dom 1`] = `
   >
     <label
       class="_label_33d967"
-      for=":re:"
+      for=":r0:"
     >
       Tags
     </label>
@@ -2244,7 +2244,7 @@ exports[`MultiSelect > noSelection - dom 1`] = `
           aria-haspopup="listbox"
           aria-invalid="false"
           class="_comboToggle_e760e9"
-          id=":re:"
+          id=":r0:"
           type="button"
         >
           <svg
@@ -2320,7 +2320,7 @@ exports[`MultiSelect > selections - dom 1`] = `
           aria-invalid="false"
           aria-label="Select..."
           class="_comboToggle_e760e9"
-          id=":rg:"
+          id=":r0:"
           type="button"
         >
           <svg
@@ -2659,7 +2659,7 @@ exports[`RadioGroup > withSelection - dom 1`] = `
       Choice
     </label>
     <div
-      aria-labelledby=":ri:-label"
+      aria-labelledby=":r0:-label"
       class="_group_7fcaa1 _vertical_7fcaa1"
       role="radiogroup"
     >
@@ -3220,12 +3220,12 @@ exports[`Toggle > off - dom 1`] = `
 <DocumentFragment>
   <label
     class="_root_76a0f7"
-    for=":rq:"
+    for=":r0:"
   >
     <input
       aria-checked="false"
       class="_input_76a0f7"
-      id=":rq:"
+      id=":r0:"
       role="switch"
       type="checkbox"
     />
@@ -3249,13 +3249,13 @@ exports[`Toggle > on - dom 1`] = `
 <DocumentFragment>
   <label
     class="_root_76a0f7"
-    for=":rs:"
+    for=":r0:"
   >
     <input
       aria-checked="true"
       checked=""
       class="_input_76a0f7"
-      id=":rs:"
+      id=":r0:"
       role="switch"
       type="checkbox"
     />
@@ -3292,7 +3292,7 @@ exports[`Typeahead > empty - dom 1`] = `
   >
     <label
       class="_label_33d967"
-      for=":r10:"
+      for=":r0:"
     >
       Search
     </label>
@@ -3305,7 +3305,7 @@ exports[`Typeahead > empty - dom 1`] = `
         aria-invalid="false"
         autocomplete="off"
         class="_input_3c3d0d"
-        id=":r10:"
+        id=":r0:"
         placeholder="Type to search..."
         role="combobox"
         type="text"
