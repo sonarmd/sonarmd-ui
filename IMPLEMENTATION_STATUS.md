@@ -476,3 +476,69 @@ Branch: feat/s1-packaging
   charts imported from ./charts; 10 chart snapshots regenerated).
 - Removed: 8 orphaned chart `*.module.css` files (container is now ChartCanvas),
   `echarts-for-react` dependency.
+
+---
+
+## S8b: Cookbook and docs site
+
+**Status:** DONE
+**Date:** 2026-06-15
+
+### What shipped
+
+- Ladle installed and configured (`@ladle/react`): `.ladle/config.mjs`,
+  `.ladle/provider.tsx` (runtime token injection, dark/light theme wiring).
+- Stories written for all 42+ components (60 total). Pattern: one `.stories.tsx`
+  per component directory. Stories cover Default, variant, loading, error, and
+  interactive states per component.
+- 10 cookbook recipes in `docs/recipes/` - all type-checked in CI via
+  `tsconfig.recipes.json`. See the table in README.md.
+- Motion guide: `docs/stories/motion.stories.tsx` - all 8 canonical transition
+  patterns with do/don't guidance, live preview, reduced-motion note.
+- Theming guide: `docs/stories/theming.stories.tsx` - full semantic token catalog
+  rendered from actual CSS custom properties (never hand-maintained), setup
+  instructions, semantic usage examples.
+- README.md: install, tokens.css/style.css setup, theming, transitions-in-5-min,
+  subpath export table, cookbook table, PHI safety notes.
+- CI gate updated: `npx tsc --noEmit -p tsconfig.recipes.json` added after main
+  typecheck step, ensuring all recipes and doc stories compile on every PR.
+
+### Criteria checked
+
+- 8.4 (Reference coverage): 60 component stories with Default + variant coverage.
+  Props come from TypeScript interfaces with JSDoc visible in IDE intellisense.
+- 8.5 (Cookbook): 10 complete, type-checked recipes matching each criterion item
+  exactly. Compiled with `tsconfig.recipes.json` in every CI run.
+- 8.6 (Motion + theming guides): `motion.stories.tsx` demos all 8 patterns with
+  guidance. `theming.stories.tsx` renders semantic token catalog from real CSS vars.
+- 8.7 (README): under-5-minute read, covers install, setup, theming, transitions,
+  subpath exports, cookbook index, PHI safety.
+
+### Self-made decisions
+
+- D-S8b-1. Doc stories live in `docs/stories/` (not `src/`) to keep component
+  directories clean. Ladle config globs both paths.
+- D-S8b-2. `tsconfig.recipes.json` includes both `docs/recipes/` and
+  `docs/stories/` so one typecheck command covers all user-facing prose code.
+- D-S8b-3. Motion guide uses `TransitionContainer` directly (not via router
+  adapter) to keep the demo self-contained and router-agnostic.
+- D-S8b-4. Theming guide token catalog is hard-coded for the well-known token set
+  rather than auto-generated from tokens.ts. The VALUES render from live CSS vars,
+  so the display adapts to theme changes; only the *names* and descriptions are
+  static. This is acceptable because the completeness test in S1 already enforces
+  that all referenced tokens have definitions.
+
+### Files
+
+Added:
+- `docs/recipes/*.tsx` (10 recipe files)
+- `docs/stories/motion.stories.tsx`
+- `docs/stories/theming.stories.tsx`
+- `src/components/*/$.stories.tsx` (60 story files across all component dirs)
+- `.ladle/config.mjs`
+- `.ladle/provider.tsx`
+- `tsconfig.recipes.json`
+- `README.md`
+
+Changed:
+- `.github/workflows/ci.yml` (added recipes typecheck step)

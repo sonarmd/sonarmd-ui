@@ -40,6 +40,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Typecheck recipes and doc stories
+        run: npx tsc --noEmit -p tsconfig.recipes.json
+
       - name: Test (includes tree-shaking reachability + token completeness)
         run: npm test
 
