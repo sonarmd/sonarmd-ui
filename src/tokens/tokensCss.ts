@@ -11,6 +11,7 @@
  */
 import {
   colors,
+  colorsDark,
   spacing,
   radius,
   shadows,
@@ -40,9 +41,18 @@ const colorVars = (): string[] =>
 const groupVars = (prefix: string, group: Record<string, string | number>): string[] =>
   Object.entries(group).map(([key, value]) => `  --smd-${prefix}-${kebab(key)}: ${value};`);
 
-/** The full `:root { ... }` block shipped as tokens.css. */
+// Dark overrides are all functional color aliases, so they are emitted bare
+// (no `color-` prefix), matching how CSS modules consume them.
+const darkVars = (): string[] =>
+  Object.entries(colorsDark).map(([key, value]) => `  --smd-${key}: ${value};`);
+
+/**
+ * The shipped tokens.css: a light `:root`, a `[data-theme="dark"]` override
+ * block, and a prefers-color-scheme fallback so dark follows the OS when no
+ * theme attribute is set (an explicit data-theme="light" still wins).
+ */
 export function buildTokensCss(): string {
-  const lines = [
+  const light = [
     ...colorVars(),
     ...groupVars('space', spacing),
     ...groupVars('radius', radius),
@@ -58,5 +68,12 @@ export function buildTokensCss(): string {
     ...groupVars('sidebar', sidebar),
     ...groupVars('z', zIndex),
   ];
-  return `:root {\n${lines.join('\n')}\n}\n`;
+  const dark = darkVars();
+  const darkIndented = dark.map((l) => `  ${l}`);
+  return [
+    `:root {\n${light.join('\n')}\n}`,
+    `[data-theme="dark"] {\n${dark.join('\n')}\n}`,
+    `@media (prefers-color-scheme: dark) {\n  :root:not([data-theme="light"]) {\n${darkIndented.join('\n')}\n  }\n}`,
+    '',
+  ].join('\n\n');
 }

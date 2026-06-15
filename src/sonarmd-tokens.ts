@@ -76,7 +76,9 @@ export const colors = {
   // Functional aliases
   'text-primary':   '#171724',
   'text-secondary': '#3F3F54',
-  'text-tertiary':  '#727286',
+  // Darkened from gray-60 (#727286) so tertiary text clears WCAG AA (4.5:1) on
+  // the subtle surface too, not just on base white (see contrast.test.ts).
+  'text-tertiary':  '#6B6B7E',
   'text-inverse':   '#FFFFFF',
   'text-disabled':  '#A2A2B2',
   'text-link':      '#393AF3',
@@ -90,6 +92,33 @@ export const colors = {
   'border-strong':  '#C6C6D1',
   'border-focus':   '#393AF3',
   'border-error':   '#E9424C',
+} as const;
+
+// --- Dark Semantic Overrides -------------------------------------------------
+
+/**
+ * Dark-theme values for the functional aliases only. The primitive scale
+ * (primary-*, gray-*, etc.) is shared across themes; only these semantic
+ * surface/text/border tokens flip. Emitted under [data-theme="dark"] (and under
+ * prefers-color-scheme: dark when no theme attribute is set). text-inverse and
+ * border-error are intentionally not overridden - they read correctly on the
+ * saturated brand surfaces in both themes.
+ */
+export const colorsDark = {
+  'text-primary':   '#F5F5FA',
+  'text-secondary': '#C6C6D1',
+  'text-tertiary':  '#9A9AAB',
+  'text-disabled':  '#6B6B80',
+  'text-link':      '#A6A6FA',
+
+  'bg-base':    '#14141F',
+  'bg-subtle':  '#1E1E2C',
+  'bg-raised':  '#24243A',
+  'bg-overlay': 'rgba(0, 0, 0, 0.6)',
+
+  'border-default': '#2E2E42',
+  'border-strong':  '#3F3F54',
+  'border-focus':   '#6363EC',
 } as const;
 
 // ─── Spacing ───────────────────────────────────────────────────────────────────

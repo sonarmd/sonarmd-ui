@@ -46,6 +46,21 @@ Branch: feat/s2-performance.
   budgets, benchmark measure + budget gate, and uploads the report. publish.yml
   untouched. Full gate is green locally.
 
+### Done (theming - V1_SPEC S2, unblocked + attribute-based)
+- Dark mode: `colorsDark` semantic map; `buildTokensCss()` emits `:root` (light),
+  `[data-theme="dark"]`, and a `prefers-color-scheme: dark` fallback (dark follows
+  OS unless `data-theme="light"` is set). All CSS components get dark mode with
+  zero per-component work (Criterion 2.3, components portion).
+- Contrast gate `contrast.test.ts`: WCAG AA (4.5:1) over text/surface pairs in
+  both themes (Criterion 2.4). Caught + fixed text-tertiary at 4.33:1 on the
+  subtle surface (darkened to #6B6B7E).
+- Hardcoded hex fixed in GaugeChart + StackedBarChart -> token references
+  (Criterion 2.2 / audit M2).
+- Lean `ThemeProvider` + `useTheme()` exported (attribute toggle, negligible JS;
+  attribute-only usage works without them).
+- Deferred: chart dark re-theme via an echarts dark theme object without visible
+  re-instantiation (Criterion 2.3, charts portion) - the intricate follow-up.
+
 ### Next
 - Phase 4: runtime metrics (FCP/LCP/TBT/TTI/hydration) via Playwright, attempted
   when a browser is available and degrading cleanly; never blocks CI.

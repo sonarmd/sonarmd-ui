@@ -1,3 +1,7 @@
+// --- Theming (attribute-based; provider is optional) -------------------------
+export {ThemeProvider, useTheme} from './theme';
+export type {Theme, ThemeProviderProps} from './theme';
+
 // --- Layer 0: Action & Surface Primitives ------------------------------------
 export {Button} from './components/Button';
 export type {ButtonProps, ButtonVariant, ButtonSize, ButtonDensity} from './components/Button';
