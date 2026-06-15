@@ -45,11 +45,6 @@ vi.mock('react-window', () => ({
 // ── Imports ───────────────────────────────────────────────────────────────────
 
 import {
-  // Phase 0 - Action & Surface Primitives
-  Button,
-  Card,
-  IconButton,
-  Breadcrumbs,
   // Phase 1 - Form Primitives
   FieldWrapper,
   FormGrid,
@@ -71,8 +66,7 @@ import {
   MultiSelect,
   DatePicker,
   DateRangePicker,
-  // Phase 3 — Feedback
-  Badge,
+  // Phase 3 - Feedback
   Alert,
   ToastProvider,
   Tooltip,
@@ -126,88 +120,6 @@ const TIME_DATA = [
   {month: 'Feb', a: 140, b: 60},
   {month: 'Mar', a: 120, b: 80},
 ];
-
-// -- Phase 0: Action & Surface Primitives --------------------------------------
-
-describe('Button', () => {
-  it('renders primary md', () => {
-    const {asFragment} = render(<Button>Save</Button>);
-    expect(asFragment()).toMatchSnapshot();
-  });
-  it('renders loading state', () => {
-    const {asFragment} = render(<Button loading>Save</Button>);
-    expect(asFragment()).toMatchSnapshot();
-  });
-  it('renders ghost compact', () => {
-    const {asFragment} = render(
-      <Button variant="ghost" size="sm" density="compact">
-        Cancel
-      </Button>,
-    );
-    expect(asFragment()).toMatchSnapshot();
-  });
-});
-
-describe('Card', () => {
-  it('renders with header and body', () => {
-    const {asFragment} = render(
-      <Card title="Revenue" subtitle="Last 30 days">
-        <p>Body</p>
-      </Card>,
-    );
-    expect(asFragment()).toMatchSnapshot();
-  });
-  it('renders elevated compact', () => {
-    const {asFragment} = render(
-      <Card variant="elevated" density="compact">
-        <p>Body</p>
-      </Card>,
-    );
-    expect(asFragment()).toMatchSnapshot();
-  });
-});
-
-describe('IconButton', () => {
-  it('renders with required label as aria-label', () => {
-    const {asFragment} = render(
-      <IconButton label="Settings">
-        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" />
-      </IconButton>,
-    );
-    expect(asFragment()).toMatchSnapshot();
-  });
-});
-
-describe('Breadcrumbs', () => {
-  it('renders a trail with current page', () => {
-    const {asFragment} = render(
-      <Breadcrumbs
-        items={[
-          {label: 'Home', href: '/'},
-          {label: 'Patients', href: '/patients'},
-          {label: 'Detail'},
-        ]}
-      />,
-    );
-    expect(asFragment()).toMatchSnapshot();
-  });
-  it('collapses the middle past maxItems', () => {
-    const {asFragment} = render(
-      <Breadcrumbs
-        maxItems={4}
-        items={[
-          {label: 'A', href: '/a'},
-          {label: 'B', href: '/b'},
-          {label: 'C', href: '/c'},
-          {label: 'D', href: '/d'},
-          {label: 'E', href: '/e'},
-          {label: 'Now'},
-        ]}
-      />,
-    );
-    expect(asFragment()).toMatchSnapshot();
-  });
-});
 
 // -- Phase 1: Form Primitives --------------------------------------------------
 
@@ -398,18 +310,6 @@ describe('DateRangePicker', () => {
 });
 
 // ── Phase 3: Feedback ─────────────────────────────────────────────────────────
-
-describe('Badge', () => {
-  it('renders primary variant', () => {
-    const {asFragment} = render(<Badge variant="primary">New</Badge>);
-    expect(asFragment()).toMatchSnapshot();
-  });
-
-  it('renders danger variant', () => {
-    const {asFragment} = render(<Badge variant="danger">Error</Badge>);
-    expect(asFragment()).toMatchSnapshot();
-  });
-});
 
 describe('Alert', () => {
   it('renders info variant', () => {

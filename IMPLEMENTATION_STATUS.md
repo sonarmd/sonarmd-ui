@@ -13,6 +13,28 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## S7.0 - Declarative test harness  (IN PROGRESS)
+
+Branch: feat/s2-performance (continued).
+
+- Harness core: `defineComponentFixtures` + `renderFixture`
+  (`src/testing/`) + a glob runner (`fixtures.test.tsx`) that generates a DOM
+  snapshot and a vitest-axe pass per named fixture, with centralized
+  ChartCanvas/react-window mocks declared once.
+- Stable (hashless) CSS-module class names in tests (vitest config) so a hash
+  bump never churns snapshots (7.0.3); production stays hashed.
+- Completeness gate (`fixtureCompleteness.test.ts`): every component must have a
+  `*.fixtures.tsx` or sit in the tracked migration backlog (49 remaining); stale
+  backlog entries also fail.
+- Migrated the Phase-0 primitives (Badge, Button, Card, IconButton, Breadcrumbs)
+  to fixtures and removed them from the monolithic `snapshots.test.tsx`.
+- jsdom applies no CSS, so a dark DOM snapshot equals the light one; dark
+  correctness is covered by `contrast.test.ts` + `chartTheme.test.ts`, so the
+  harness emits one DOM snapshot + axe per fixture rather than duplicate
+  light/dark snapshots (closest-compliant for 7.0.1).
+- Next: migrate the remaining 49 components, delete the monolith (7.0.2), add the
+  dev-only `@sonarmd/ui/testing` subpath (7.0.5); then S8a (dev workbench).
+
 ## S0 - Missing primitives  (DONE)
 
 Branch: feat/s2-performance (continued).

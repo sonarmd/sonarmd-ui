@@ -1,0 +1,299 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Badge > danger - dom 1`] = `
+<DocumentFragment>
+  <span
+    class="_badge_424c99 _danger_424c99 _md_424c99"
+  >
+    Overdue
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Badge > default - dom 1`] = `
+<DocumentFragment>
+  <span
+    class="_badge_424c99 _primary_424c99 _md_424c99"
+  >
+    Active
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Badge > success - dom 1`] = `
+<DocumentFragment>
+  <span
+    class="_badge_424c99 _success_424c99 _md_424c99"
+  >
+    Synced
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs > collapsed - dom 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Breadcrumb"
+    class="_nav_325516"
+  >
+    <ol
+      class="_list_325516"
+    >
+      <li
+        class="_item_325516"
+      >
+        <a
+          class="_link_325516"
+          href="/a"
+        >
+          A
+        </a>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_separator_325516"
+      >
+        /
+      </li>
+      <li
+        class="_item_325516"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="Show collapsed breadcrumbs"
+          class="_ellipsis_325516"
+          type="button"
+        >
+          ...
+        </button>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_separator_325516"
+      >
+        /
+      </li>
+      <li
+        class="_item_325516"
+      >
+        <span
+          aria-current="page"
+          class="_current_325516"
+        >
+          Now
+        </span>
+      </li>
+    </ol>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs > default - dom 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Breadcrumb"
+    class="_nav_325516"
+  >
+    <ol
+      class="_list_325516"
+    >
+      <li
+        class="_item_325516"
+      >
+        <a
+          class="_link_325516"
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_separator_325516"
+      >
+        /
+      </li>
+      <li
+        class="_item_325516"
+      >
+        <a
+          class="_link_325516"
+          href="/patients"
+        >
+          Patients
+        </a>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_separator_325516"
+      >
+        /
+      </li>
+      <li
+        class="_item_325516"
+      >
+        <span
+          aria-current="page"
+          class="_current_325516"
+        >
+          Detail
+        </span>
+      </li>
+    </ol>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`Button > ghostCompact - dom 1`] = `
+<DocumentFragment>
+  <button
+    class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _compact_0829c1"
+    type="button"
+  >
+    <span
+      class="_label_0829c1"
+    >
+      Cancel
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button > loading - dom 1`] = `
+<DocumentFragment>
+  <button
+    aria-busy="true"
+    class="_button_0829c1 _primary_0829c1 _md_0829c1"
+    disabled=""
+    type="button"
+  >
+    <span
+      aria-hidden="true"
+      class="_spinner_0829c1"
+    />
+    <span
+      class="_label_0829c1 _loadingLabel_0829c1"
+    >
+      Save
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button > primary - dom 1`] = `
+<DocumentFragment>
+  <button
+    class="_button_0829c1 _primary_0829c1 _md_0829c1"
+    type="button"
+  >
+    <span
+      class="_label_0829c1"
+    >
+      Save
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Card > elevated - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_card_f66b11 _elevated_f66b11 _compact_f66b11"
+  >
+    <p>
+      Body
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Card > withHeader - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_card_f66b11 _default_f66b11 _comfortable_f66b11"
+  >
+    <div
+      class="_header_f66b11"
+    >
+      <div
+        class="_titles_f66b11"
+      >
+        <p
+          class="_title_f66b11"
+        >
+          Revenue
+        </p>
+        <p
+          class="_subtitle_f66b11"
+        >
+          Last 30 days
+        </p>
+      </div>
+    </div>
+    <p>
+      Body
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`IconButton > default - dom 1`] = `
+<DocumentFragment>
+  <button
+    aria-label="Settings"
+    class="_button_0829c1 _ghost_0829c1 _md_0829c1 _square_0829c1"
+    type="button"
+  >
+    <span
+      class="_label_0829c1"
+    >
+      <svg
+        aria-hidden="true"
+        height="16"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <circle
+          cx="8"
+          cy="8"
+          fill="none"
+          r="2.4"
+          stroke="currentColor"
+          stroke-width="1.3"
+        />
+      </svg>
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`IconButton > primary - dom 1`] = `
+<DocumentFragment>
+  <button
+    aria-label="Add"
+    class="_button_0829c1 _primary_0829c1 _md_0829c1 _square_0829c1"
+    type="button"
+  >
+    <span
+      class="_label_0829c1"
+    >
+      <svg
+        aria-hidden="true"
+        height="16"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <circle
+          cx="8"
+          cy="8"
+          fill="none"
+          r="2.4"
+          stroke="currentColor"
+          stroke-width="1.3"
+        />
+      </svg>
+    </span>
+  </button>
+</DocumentFragment>
+`;

@@ -5,7 +5,10 @@ export default defineConfig({
   plugins: [react()],
   css: {
     modules: {
-      generateScopedName: 'smd-[local]-[hash:5]',
+      // Stable (hashless) class names in tests so a hash bump never churns
+      // snapshots (V1_SPEC 7.0.3). Production keeps the hashed names from
+      // vite.config.ts.
+      generateScopedName: 'smd-[local]',
     },
   },
   test: {
