@@ -24,7 +24,7 @@
   gap: var(--smd-space-2);
   white-space: nowrap;
   transition: color var(--smd-duration-base);
-  margin-bottom: -1px;
+  margin-bottom: calc(-1 * var(--smd-space-px));
 }
 
 .underline .tab:hover {
@@ -101,7 +101,7 @@
   border-radius: var(--smd-radius-full);
   font-size: var(--smd-font-size-xs);
   font-weight: var(--smd-font-weight-bold);
-  padding: 1px var(--smd-space-1);
+  padding: var(--smd-space-px) var(--smd-space-1);
   min-width: 18px;
   text-align: center;
 }

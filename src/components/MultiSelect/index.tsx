@@ -51,7 +51,7 @@ export const MultiSelect = React.memo(function MultiSelect({
   options,
   value,
   onChange,
-  placeholder = 'Select…',
+  placeholder = 'Select...',
   searchable = false,
   disabled = false,
   maxSelections,
@@ -60,12 +60,14 @@ export const MultiSelect = React.memo(function MultiSelect({
   name,
 }: MultiSelectProps): JSX.Element {
   const wrapperId = useId();
+  const listboxId = `${wrapperId}-listbox`;
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(-1);
   const [menuStyle, setMenuStyle] = useState<React.CSSProperties>({});
 
   const triggerRef = useRef<HTMLDivElement>(null);
+  const triggerButtonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -76,6 +78,10 @@ export const MultiSelect = React.memo(function MultiSelect({
   // Rule 6: value ref for stable handlers
   const valueRef = useRef(value);
   valueRef.current = value;
+
+  // Stable per-row id so the combobox can point aria-activedescendant at the
+  // active option. Index-based because activeIndex tracks the filtered list.
+  const optionId = useCallback((index: number) => `${listboxId}-opt-${index}`, [listboxId]);
 
   // Rule 8: portal container
   const portalEl = usePortal();
@@ -192,12 +198,23 @@ export const MultiSelect = React.memo(function MultiSelect({
     return () => document.removeEventListener('mousedown', handleMouseDown);
   }, [isOpen, closeMenu]);
 
-  // Focus search when menu opens
+  // Focus the combobox control when the menu opens so keyboard nav works even
+  // when opened by clicking the non-interactive trigger area.
   useEffect(() => {
-    if (isOpen && searchable) {
-      setTimeout(() => searchInputRef.current?.focus(), 0);
-    }
+    if (!isOpen) return;
+    const target = searchable ? searchInputRef.current : triggerButtonRef.current;
+    setTimeout(() => target?.focus(), 0);
   }, [isOpen, searchable]);
+
+  // Keep the active option in view as the user arrows through. No-op when the
+  // option is not in the DOM (e.g. an off-screen virtualized row), so it never
+  // throws and the virtual list keeps its own scrolling.
+  useEffect(() => {
+    if (!isOpen || activeIndex < 0) return;
+    menuRef.current
+      ?.querySelector(`#${CSS.escape(optionId(activeIndex))}`)
+      ?.scrollIntoView({ block: 'nearest' });
+  }, [isOpen, activeIndex, optionId]);
 
   // Rule 9: stable keyboard handler reading from activeIndexRef
   const handleKeyDown = useCallback(
@@ -256,6 +273,20 @@ export const MultiSelect = React.memo(function MultiSelect({
     [isOpen, error, disabled],
   );
 
+  // Combobox semantics shared by the searchable input and the non-searchable
+  // button trigger. The control is named by the FieldWrapper label when present,
+  // otherwise by the placeholder. aria-controls and aria-activedescendant are
+  // only set while the listbox exists, so neither dangles.
+  const triggerAria = {
+    id: wrapperId,
+    'aria-haspopup': 'listbox' as const,
+    'aria-expanded': isOpen,
+    'aria-controls': isOpen ? listboxId : undefined,
+    'aria-activedescendant': isOpen && activeIndex >= 0 ? optionId(activeIndex) : undefined,
+    'aria-invalid': !!error,
+    'aria-label': label ? undefined : placeholder,
+  };
+
   // Rule 12: react-window for large option lists
   const useVirtualList = filteredOptions.length > 100;
 
@@ -306,6 +337,7 @@ export const MultiSelect = React.memo(function MultiSelect({
       return (
         <div
           style={style}
+          id={optionId(index)}
           className={optClasses}
           role="option"
           aria-selected={isSelected}
@@ -328,12 +360,13 @@ export const MultiSelect = React.memo(function MultiSelect({
         </div>
       );
     },
-    [],
+    [optionId],
   );
 
   const menu = (
     <div
       ref={menuRef}
+      id={listboxId}
       className={styles.menu}
       style={menuStyle}
       role="listbox"
@@ -368,6 +401,7 @@ export const MultiSelect = React.memo(function MultiSelect({
             return (
               <div
                 key={opt.value}
+                id={optionId(idx)}
                 className={optClasses}
                 role="option"
                 aria-selected={isSelected}
@@ -406,19 +440,7 @@ export const MultiSelect = React.memo(function MultiSelect({
     >
       {name &&
         value.map((v) => <input key={v} type="hidden" name={`${name}[]`} value={v} />)}
-      <div
-        ref={triggerRef}
-        id={wrapperId}
-        className={triggerAreaClasses}
-        onClick={handleTriggerClick}
-        onKeyDown={handleKeyDown}
-        tabIndex={disabled ? -1 : 0}
-        role="button"
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        aria-required={required}
-        aria-invalid={!!error}
-      >
+      <div ref={triggerRef} className={triggerAreaClasses} onClick={handleTriggerClick}>
         {value.length === 0 && !searchable && (
           <span className={styles.placeholder}>{placeholder}</span>
         )}
@@ -437,14 +459,19 @@ export const MultiSelect = React.memo(function MultiSelect({
         ))}
         {searchable && (
           <input
+            {...triggerAria}
             ref={searchInputRef}
             className={styles.searchInput}
             type="text"
+            role="combobox"
+            aria-autocomplete="list"
+            aria-required={required}
             placeholder={value.length === 0 ? placeholder : ''}
             value={searchQuery}
             onChange={handleSearchChange}
             onClick={handleSearchClick}
             onKeyDown={handleKeyDown}
+            disabled={disabled}
           />
         )}
         <span className={styles.triggerRight}>
@@ -458,9 +485,24 @@ export const MultiSelect = React.memo(function MultiSelect({
               Clear
             </button>
           )}
-          <ChevronDown
-            className={`${styles.chevron}${isOpen ? ` ${styles.chevronOpen}` : ''}`}
-          />
+          {searchable ? (
+            <ChevronDown
+              className={`${styles.chevron}${isOpen ? ` ${styles.chevronOpen}` : ''}`}
+            />
+          ) : (
+            <button
+              {...triggerAria}
+              ref={triggerButtonRef}
+              type="button"
+              className={styles.comboToggle}
+              onKeyDown={handleKeyDown}
+              disabled={disabled}
+            >
+              <ChevronDown
+                className={`${styles.chevron}${isOpen ? ` ${styles.chevronOpen}` : ''}`}
+              />
+            </button>
+          )}
         </span>
       </div>
       {isOpen && ReactDOM.createPortal(menu, portalEl)}

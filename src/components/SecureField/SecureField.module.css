@@ -13,8 +13,8 @@
   background: var(--smd-bg-base);
   outline: none;
   transition:
-    border-color var(--smd-duration-base) var(--smd-ease-default),
-    box-shadow var(--smd-duration-base) var(--smd-ease-default);
+    border-color var(--smd-duration-base) var(--smd-ease-standard),
+    box-shadow var(--smd-duration-base) var(--smd-ease-standard);
 }
 
 .input:focus {
@@ -38,7 +38,7 @@
 
 /* reserve room for the reveal toggle */
 .hasToggle .input {
-  padding-right: 40px;
+  padding-right: var(--smd-input-icon-lg);
 }
 
 .toggle {
@@ -58,8 +58,8 @@
   color: var(--smd-text-tertiary);
   cursor: pointer;
   transition:
-    color var(--smd-duration-fast) var(--smd-ease-default),
-    background var(--smd-duration-fast) var(--smd-ease-default);
+    color var(--smd-duration-fast) var(--smd-ease-standard),
+    background var(--smd-duration-fast) var(--smd-ease-standard);
 }
 
 .toggle:hover {

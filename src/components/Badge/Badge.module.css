@@ -9,7 +9,7 @@
 
 .sm {
   font-size: var(--smd-font-size-xs);
-  padding: 1px var(--smd-space-2);
+  padding: var(--smd-space-px) var(--smd-space-2);
 }
 
 .md {

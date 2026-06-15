@@ -13,8 +13,8 @@
   background: var(--smd-bg-base);
   outline: none;
   transition:
-    border-color var(--smd-duration-base) var(--smd-ease-default),
-    box-shadow var(--smd-duration-base) var(--smd-ease-default);
+    border-color var(--smd-duration-base) var(--smd-ease-standard),
+    box-shadow var(--smd-duration-base) var(--smd-ease-standard);
 }
 
 .input:focus {
@@ -55,11 +55,11 @@
 
 /* icon slots */
 .hasIconLeft .input {
-  padding-left: 32px;
+  padding-left: var(--smd-input-icon-sm);
 }
 
 .hasIconRight .input {
-  padding-right: 32px;
+  padding-right: var(--smd-input-icon-sm);
 }
 
 .iconLeft,

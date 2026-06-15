@@ -72,7 +72,7 @@
   box-shadow: var(--smd-shadow-lg);
   z-index: var(--smd-z-dropdown);
   padding: var(--smd-space-4);
-  animation: calOpen var(--smd-duration-base) var(--smd-ease-out);
+  animation: calOpen var(--smd-duration-base) var(--smd-ease-decelerate);
   display: flex;
   gap: var(--smd-space-4);
 }

@@ -1,0 +1,5 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  gap: var(--cluster-gap, var(--smd-space-3));
+}

@@ -1,4 +1,18 @@
-// ─── Layer 1: Form Primitives ────────────────────────────────────────────────
+// --- Theming (attribute-based; provider is optional) -------------------------
+export {ThemeProvider, useTheme} from './theme';
+export type {Theme, ThemeProviderProps} from './theme';
+
+// --- Layer 0: Action & Surface Primitives ------------------------------------
+export {Button} from './components/Button';
+export type {ButtonProps, ButtonVariant, ButtonSize, ButtonDensity} from './components/Button';
+export {Card} from './components/Card';
+export type {CardProps, CardVariant, CardDensity} from './components/Card';
+export {IconButton} from './components/IconButton';
+export type {IconButtonProps} from './components/IconButton';
+export {Breadcrumbs} from './components/Breadcrumbs';
+export type {BreadcrumbsProps, BreadcrumbItem} from './components/Breadcrumbs';
+
+// --- Layer 1: Form Primitives ------------------------------------------------
 export {FieldWrapper} from './components/FieldWrapper';
 export type {FieldWrapperProps} from './components/FieldWrapper';
 
@@ -101,12 +115,30 @@ export type {DataTableProps, Column} from './components/DataTable';
 // Chart components, ChartCard, and chart tokens live in the ./charts subpath
 // entry so the core surface ships zero echarts bytes.
 
+// --- Layer 5: Layout Primitives -----------------------------------------------
+export {Stack} from './components/Stack';
+export type {StackProps} from './components/Stack';
+export {Cluster} from './components/Cluster';
+export type {ClusterProps} from './components/Cluster';
+export {Spacer} from './components/Spacer';
+export type {SpacerProps} from './components/Spacer';
+export {Columns} from './components/Columns';
+export type {ColumnsProps} from './components/Columns';
+export {AppShell} from './components/AppShell';
+export type {AppShellProps} from './components/AppShell';
+export {AppErrorBoundary} from './components/AppErrorBoundary';
+export type {AppErrorBoundaryProps} from './components/AppErrorBoundary';
+export {WidgetErrorBoundary} from './components/WidgetErrorBoundary';
+export type {WidgetErrorBoundaryProps} from './components/WidgetErrorBoundary';
+export {QueryBoundary} from './components/QueryBoundary';
+export type {QueryBoundaryProps} from './components/QueryBoundary';
+
 // --- Layer 6: Composition & Layout -------------------------------------------
 export {FilterBar} from './components/FilterBar';
 export type {FilterBarProps} from './components/FilterBar';
 
 export {PageHeader} from './components/PageHeader';
-export type {PageHeaderProps, BreadcrumbItem} from './components/PageHeader';
+export type {PageHeaderProps} from './components/PageHeader';
 
 export {PageSection} from './components/PageSection';
 export type {PageSectionProps} from './components/PageSection';
@@ -134,6 +166,7 @@ export {
   inputHeight,
   inputPaddingX,
   inputFontSize,
+  inputIconInset,
   sidebar,
   zIndex,
 } from './sonarmd-tokens';

@@ -5,7 +5,7 @@
   padding: var(--smd-space-4);
   margin-bottom: var(--smd-space-5);
   outline: none;
-  animation: smd-summary-in var(--smd-duration-slow) var(--smd-ease-out) both;
+  animation: smd-summary-in var(--smd-duration-slow) var(--smd-ease-decelerate) both;
 }
 
 .summary:focus-visible {

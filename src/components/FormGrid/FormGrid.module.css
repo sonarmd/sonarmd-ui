@@ -33,7 +33,7 @@
 }
 
 .reveal {
-  animation: smd-grid-reveal var(--smd-duration-slow) var(--smd-ease-out) both;
+  animation: smd-grid-reveal var(--smd-duration-slow) var(--smd-ease-decelerate) both;
 }
 
 @keyframes smd-grid-reveal {

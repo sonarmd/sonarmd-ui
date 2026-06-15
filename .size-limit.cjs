@@ -20,6 +20,27 @@ module.exports = [
     ignore: [...externals, 'echarts'],
   },
   {
+    // V1_SPEC: motion + transitions + data combined <= 6 kB gz. Motion alone <= 2.5 kB.
+    name: 'motion entry',
+    path: 'dist/motion/index.js',
+    limit: '2.5 kB',
+    ignore: [...externals, 'echarts'],
+  },
+  {
+    // V1_SPEC: transitions entry <= 2.5 kB brotli (part of the 6 kB combined budget).
+    name: 'transitions entry',
+    path: 'dist/transitions/index.js',
+    limit: '2.5 kB',
+    ignore: [...externals, 'echarts'],
+  },
+  {
+    // V1_SPEC: data entry ~4 kB gz total; using 4 kB brotli limit here.
+    name: 'data entry',
+    path: 'dist/data/index.js',
+    limit: '4 kB',
+    ignore: [...externals, 'echarts'],
+  },
+  {
     name: 'charts entry (incl echarts core)',
     path: 'dist/charts/index.js',
     limit: '120 kB',

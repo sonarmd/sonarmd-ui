@@ -1,4 +1,5 @@
 import React, {useCallback} from 'react';
+import {Button} from '../Button';
 import styles from './EmptyState.module.css';
 
 const DefaultIcon = (): JSX.Element => (
@@ -45,9 +46,9 @@ export const EmptyState = React.memo(function EmptyState({
       <p className={styles.title}>{title}</p>
       {description && <p className={styles.description}>{description}</p>}
       {action && (
-        <button type="button" className={styles.actionBtn} onClick={handleActionClick}>
+        <Button variant="primary" onClick={handleActionClick}>
           {action.label}
-        </button>
+        </Button>
       )}
     </div>
   );

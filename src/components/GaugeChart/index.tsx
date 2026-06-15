@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {echartsDefaults} from '../../sonarmd-tokens';
+import {colors, echartsDefaults} from '../../sonarmd-tokens';
 import {ChartCanvas} from '../../charts/ChartCanvas';
 import type {ECOption} from '../../charts/echartsCore';
 
@@ -21,9 +21,9 @@ export interface GaugeChartProps {
 }
 
 const DEFAULT_THRESHOLDS: GaugeThreshold[] = [
-  {at: 0.3, color: '#E9424C'},
-  {at: 0.6, color: '#FFCA2D'},
-  {at: 1.0, color: '#2BA854'},
+  {at: 0.3, color: colors['negative-30']},
+  {at: 0.6, color: colors['warning-30']},
+  {at: 1.0, color: colors['positive-30']},
 ];
 
 export const GaugeChart = React.memo(function GaugeChart({
@@ -60,7 +60,7 @@ export const GaugeChart = React.memo(function GaugeChart({
           axisTick: {show: false},
           splitLine: {show: false},
           axisLabel: {
-            color: '#727286',
+            color: colors['text-tertiary'],
             fontSize: 11,
             distance: 20,
           },
@@ -70,7 +70,7 @@ export const GaugeChart = React.memo(function GaugeChart({
           detail: {
             fontSize: 24,
             fontWeight: 600,
-            color: '#171724',
+            color: colors['text-primary'],
             formatter: showPercent
               ? (v: number) => `${((v / max) * 100).toFixed(1)}%`
               : (v: number) => String(v),
@@ -79,7 +79,7 @@ export const GaugeChart = React.memo(function GaugeChart({
           title: {
             show: !!label,
             fontSize: 13,
-            color: '#3F3F54',
+            color: colors['text-secondary'],
             offsetCenter: [0, '80%'],
           },
         },

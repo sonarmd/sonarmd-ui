@@ -36,7 +36,7 @@
   display: flex;
   flex-direction: column;
   min-width: 300px;
-  animation: toastIn var(--smd-duration-slow) var(--smd-ease-out);
+  animation: toastIn var(--smd-duration-slow) var(--smd-ease-decelerate);
 }
 
 @keyframes toastIn {
@@ -51,7 +51,7 @@
 }
 
 .toastLeft {
-  animation: toastInLeft var(--smd-duration-slow) var(--smd-ease-out);
+  animation: toastInLeft var(--smd-duration-slow) var(--smd-ease-decelerate);
 }
 
 @keyframes toastInLeft {
@@ -73,7 +73,7 @@
 
 .toastIcon {
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: var(--smd-space-px);
 }
 
 .toastContent {

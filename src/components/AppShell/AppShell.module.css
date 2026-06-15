@@ -1,0 +1,83 @@
+.root {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+  height: 100%;
+  overflow: hidden;
+}
+
+.root.hasRail {
+  grid-template-columns: auto 1fr auto;
+}
+
+/* Sidebar collapsed: pin the sidebar column to the collapsed width so the nav
+   narrows instead of squeezing the content (the Sidebar also renders its own
+   collapsed/icon mode, driven by AppShell). */
+.root.sidebarCollapsed {
+  grid-template-columns: var(--smd-sidebar-width-collapsed) 1fr;
+}
+
+.root.sidebarCollapsed.hasRail {
+  grid-template-columns: var(--smd-sidebar-width-collapsed) 1fr auto;
+}
+
+/* Rail collapsed: hide the rail column. */
+.root.railCollapsed.hasRail {
+  grid-template-columns: auto 1fr;
+}
+
+.sidebar {
+  grid-column: 1;
+  grid-row: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.content {
+  grid-column: 2;
+  grid-row: 1;
+  overflow-y: auto;
+  min-width: 0;
+}
+
+.rail {
+  grid-column: 3;
+  grid-row: 1;
+  overflow-y: auto;
+  border-left: 1px solid var(--smd-border-default);
+}
+
+/* Collapsed rail: overlay drawer trigger */
+.railToggle {
+  position: fixed;
+  bottom: var(--smd-space-4);
+  right: var(--smd-space-4);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--smd-radius-full);
+  background: var(--smd-bg-raised);
+  border: 1px solid var(--smd-border-default);
+  box-shadow: var(--smd-shadow-md);
+  cursor: pointer;
+  z-index: var(--smd-z-dropdown);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--smd-bg-overlay);
+  z-index: calc(var(--smd-z-dropdown) + 1);
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 85vw);
+  background: var(--smd-bg-raised);
+  border-left: 1px solid var(--smd-border-default);
+  box-shadow: var(--smd-shadow-lg);
+  overflow-y: auto;
+  z-index: calc(var(--smd-z-dropdown) + 2);
+}

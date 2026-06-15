@@ -1,0 +1,26 @@
+{
+  "name": "@sonarmd/ui-benchmarks",
+  "private": true,
+  "type": "module",
+  "description": "Benchmark apps comparing @sonarmd/ui against Material UI, Ant Design, and React Bootstrap on bundle/CSS size and runtime metrics. Isolated from the library dependency graph.",
+  "scripts": {
+    "measure": "node measure.mjs",
+    "check": "node check-budgets.mjs"
+  },
+  "dependencies": {
+    "@sonarmd/ui": "file:..",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "antd": "^5.21.0",
+    "bootstrap": "^5.3.3",
+    "react-bootstrap": "^2.10.5",
+    "vite": "^6.0.0"
+  }
+}

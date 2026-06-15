@@ -1,4 +1,5 @@
 import React, {useCallback, useMemo} from 'react';
+import {Button} from '../Button';
 import styles from './FilterBar.module.css';
 
 export interface FilterBarProps {
@@ -27,12 +28,12 @@ export const FilterBar = React.memo(function FilterBar({
     <div className={barClassName}>
       <div className={styles.filters}>{children}</div>
       {onClear && (
-        <button type="button" className={styles.clearBtn} onClick={handleClear}>
+        <Button variant="ghost" size="sm" onClick={handleClear}>
           {activeFilterCount != null && activeFilterCount > 0 && (
             <span className={styles.badge}>{activeFilterCount}</span>
           )}
           Clear filters
-        </button>
+        </Button>
       )}
     </div>
   );

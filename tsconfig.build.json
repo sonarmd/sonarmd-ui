@@ -16,6 +16,7 @@
     "src/test-setup.ts",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
-    "src/testing/static"
+    "src/**/*.fixtures.tsx",
+    "src/testing"
   ]
 }

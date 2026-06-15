@@ -13,8 +13,8 @@
   cursor: pointer;
   gap: var(--smd-space-2);
   outline: none;
-  transition: border-color var(--smd-duration-base) var(--smd-ease-default),
-    box-shadow var(--smd-duration-base) var(--smd-ease-default);
+  transition: border-color var(--smd-duration-base) var(--smd-ease-standard),
+    box-shadow var(--smd-duration-base) var(--smd-ease-standard);
 }
 
 .trigger:focus {
@@ -81,7 +81,7 @@
 }
 
 .chevron {
-  transition: transform var(--smd-duration-base) var(--smd-ease-default);
+  transition: transform var(--smd-duration-base) var(--smd-ease-standard);
 }
 
 .chevronOpen {
@@ -98,7 +98,7 @@
   z-index: var(--smd-z-dropdown);
   min-width: 160px;
   overflow: hidden;
-  animation: dropdownOpen var(--smd-duration-base) var(--smd-ease-out);
+  animation: dropdownOpen var(--smd-duration-base) var(--smd-ease-decelerate);
 }
 
 @keyframes dropdownOpen {
@@ -138,7 +138,7 @@
   cursor: pointer;
   font-size: var(--smd-font-size-base);
   color: var(--smd-text-primary);
-  transition: background var(--smd-duration-fast) var(--smd-ease-default);
+  transition: background var(--smd-duration-fast) var(--smd-ease-standard);
 }
 
 .option:hover,

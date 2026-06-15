@@ -11,7 +11,7 @@
 .input {
   width: 100%;
   height: var(--smd-input-height-md);
-  padding: 0 40px 0 var(--smd-input-px-md);
+  padding: 0 var(--smd-input-icon-lg) 0 var(--smd-input-px-md);
   border: 1px solid var(--smd-border-default);
   border-radius: var(--smd-radius-md);
   font-size: var(--smd-input-font-md);
@@ -88,7 +88,7 @@
   z-index: var(--smd-z-dropdown);
   padding: var(--smd-space-4);
   width: 280px;
-  animation: calOpen var(--smd-duration-base) var(--smd-ease-out);
+  animation: calOpen var(--smd-duration-base) var(--smd-ease-decelerate);
 }
 
 @keyframes calOpen {

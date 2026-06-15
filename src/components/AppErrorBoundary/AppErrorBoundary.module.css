@@ -1,0 +1,52 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--smd-space-8);
+  background: var(--smd-bg-base);
+}
+
+.inner {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+}
+
+.icon {
+  color: var(--smd-text-tertiary);
+  margin-bottom: var(--smd-space-6);
+}
+
+.title {
+  font-size: var(--smd-font-size-xl);
+  font-weight: var(--smd-font-weight-semibold);
+  color: var(--smd-text-primary);
+  margin: 0 0 var(--smd-space-3);
+}
+
+.message {
+  font-size: var(--smd-font-size-base);
+  color: var(--smd-text-secondary);
+  margin: 0 0 var(--smd-space-6);
+}
+
+.detail {
+  font-family: monospace;
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-text-secondary);
+  background: var(--smd-bg-subtle);
+  border-radius: var(--smd-radius-md);
+  padding: var(--smd-space-3);
+  text-align: left;
+  white-space: pre-wrap;
+  overflow: auto;
+  max-height: 200px;
+  margin-bottom: var(--smd-space-6);
+}
+
+.actions {
+  display: flex;
+  gap: var(--smd-space-3);
+  justify-content: center;
+}

@@ -1,0 +1,77 @@
+{
+  "stamp": "2026-06-15T02:45:31.309Z",
+  "results": [
+    {
+      "app": "antd",
+      "label": "Ant Design",
+      "js": {
+        "raw": 956337,
+        "gz": 302583,
+        "br": 247752
+      },
+      "css": {
+        "raw": 0,
+        "gz": 0,
+        "br": 0
+      },
+      "totalRaw": 956337,
+      "totalGz": 302583,
+      "totalBr": 247752,
+      "runtime": null
+    },
+    {
+      "app": "bootstrap",
+      "label": "React Bootstrap",
+      "js": {
+        "raw": 193412,
+        "gz": 62710,
+        "br": 54811
+      },
+      "css": {
+        "raw": 231141,
+        "gz": 30692,
+        "br": 22653
+      },
+      "totalRaw": 424553,
+      "totalGz": 93402,
+      "totalBr": 77464,
+      "runtime": null
+    },
+    {
+      "app": "mui",
+      "label": "Material UI",
+      "js": {
+        "raw": 376966,
+        "gz": 116973,
+        "br": 100865
+      },
+      "css": {
+        "raw": 0,
+        "gz": 0,
+        "br": 0
+      },
+      "totalRaw": 376966,
+      "totalGz": 116973,
+      "totalBr": 100865,
+      "runtime": null
+    },
+    {
+      "app": "sonarmd",
+      "label": "@sonarmd/ui",
+      "js": {
+        "raw": 184579,
+        "gz": 60729,
+        "br": 53308
+      },
+      "css": {
+        "raw": 64260,
+        "gz": 10300,
+        "br": 8741
+      },
+      "totalRaw": 248839,
+      "totalGz": 71029,
+      "totalBr": 62049,
+      "runtime": null
+    }
+  ]
+}
