@@ -13,6 +13,37 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## S7.1 - CI pipeline  (DONE)
+
+Branch: feat/s2-performance (continued).
+
+### What shipped
+
+- `.github/workflows/ci.yml`: added `test-react-matrix` job alongside the existing
+  `gate` job. Matrix: react-version in [18, 19]. Each leg does `npm ci` then
+  `npm install --no-save react@X react-dom@X @types/react@X @types/react-dom@X`
+  (no lock-file mutation) then `npm test`. fail-fast: false so both legs report.
+- The main `gate` job is unchanged: typecheck, test (default React), build, size,
+  benchmarks. Typecheck and size budgets are React-version-independent so they
+  stay in the gate, not the matrix.
+
+### S7.1 criteria
+
+- typecheck: gate job.
+- Tests (harness matrix, axe, completeness, interaction, transition patterns,
+  data hooks, chart option builders): gate job + matrix legs.
+- Build: gate job.
+- Size budgets: gate job.
+- React 18 + React 19 matrix: test-react-matrix job, both legs must pass.
+- Merge blocked on failure: all jobs are required checks (no bypass).
+
+### Decision note
+
+The repo uses a self-contained ci.yml (not the sonarmd/workflows orchestrator)
+because it is a published npm package, not a deployable service - the same
+precedent as agora and smeta packages in this org. The cicd.md directive
+explicitly carves out this pattern for package repos.
+
 ## S6 - Architectural components  (DONE)
 
 Branch: feat/s2-performance (continued).
