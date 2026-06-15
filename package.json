@@ -77,7 +77,7 @@
   ],
   "scripts": {
     "build": "vite build && tsc -p tsconfig.build.json --emitDeclarationOnly",
-    "dev": "vite build --watch",
+    "dev": "vite --config dev.vite.config.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",

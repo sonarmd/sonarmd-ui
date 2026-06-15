@@ -5,6 +5,32 @@ pattern. Newest on top.
 
 ---
 
+## ADR-0003: The dev workbench is driven by *.fixtures.tsx, not separate zone files
+
+Date: 2026-06-15
+Status: Accepted
+
+### Context
+
+V1_SPEC S8a describes one `dev/zones/<Component>.tsx` per component. After S7.0,
+every component already has a `*.fixtures.tsx` encoding its states.
+
+### Decision
+
+The dev workbench (`dev/Workbench.tsx`) auto-discovers and renders the existing
+fixtures via `import.meta.glob`, instead of duplicating render code in ~55 zone
+files. A new component appears in the workbench with zero registration, and there
+is a single source of render states (DRY; CLAUDE.md anti-duplication).
+
+### Consequences
+
+- No `dev/zones/*.tsx`. The zone-completeness intent is satisfied by the
+  fixture-completeness gate (every component has a fixtures file).
+- The workbench and the test harness render components from the same definitions,
+  so they can never drift.
+
+---
+
 ## ADR-0002: CI-enforce benchmark + boundary gates before any Sass migration
 
 Date: 2026-06-14

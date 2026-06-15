@@ -13,6 +13,23 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## S8a - Dev workbench  (DONE)
+
+Branch: feat/s2-performance (continued).
+
+- `npm run dev` is now a Vite dev server (`dev.vite.config.ts`) with HMR straight
+  against `src/` - no build, no dist (8.1). Tokens are served as a `<style>` from
+  the single `buildTokensCss()` source via a dev plugin; the old playground
+  runtime-injection hack is gone and `playground/` (a gitignored scratch dir) is
+  superseded by `dev/`.
+- `dev/Workbench.tsx`: zones are auto-discovered from the `*.fixtures.tsx` via
+  `import.meta.glob` (ADR-0003 - no duplicate zone files). Chrome is built from
+  library components - Sidebar nav, Toggle (theme + density), Tabs (viewport
+  presets sm/md/3-col-desktop) - dogfooding the system (8.2/8.3). AppShell
+  adoption deferred to S3 (not built yet).
+- Verified: the workbench compiles end-to-end (vite build of the dev app, 743
+  modules); typecheck now includes `dev/`; tests, build, size budgets green.
+
 ## S7.0 - Declarative test harness  (DONE)
 
 Branch: feat/s2-performance (continued).
