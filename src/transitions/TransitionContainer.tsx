@@ -76,6 +76,10 @@ export const TransitionContainer = forwardRef<HTMLDivElement, TransitionContaine
     // animation effect reads stable values and needs only [outgoing] in its deps.
     const pendingRef = useRef<PendingTransition | null>(null);
 
+    // Bumped per exit so a stale exit completion (rapid back/forward before the
+    // previous exit finishes) cannot clear the newer outgoing slot.
+    const exitGenRef = useRef(0);
+
     const resolvePattern = useCallback(
       (name: string | undefined, dir: TransitionDirection): typeof patterns[PatternName] => {
         if (!name) {
@@ -114,10 +118,15 @@ export const TransitionContainer = forwardRef<HTMLDivElement, TransitionContaine
       let p = resolvePattern(pending.patternName, pending.direction);
       if (prefersReduced?.matches) p = reducedPattern(p);
 
-      // Remove outgoing after exit completes; enter runs concurrently.
+      // Remove outgoing after exit completes; enter runs concurrently. Guard the
+      // completion by generation so a stale exit cannot clear a newer outgoing
+      // slot during rapid navigation.
+      const gen = (exitGenRef.current += 1);
       if (outEl) {
         animate(outEl, p.exitKeyframes, p.exitDuration, p.exitEasing)
-          .then(() => setOutgoing(null));
+          .then(() => {
+            if (exitGenRef.current === gen) setOutgoing(null);
+          });
       } else {
         setOutgoing(null);
       }

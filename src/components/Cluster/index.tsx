@@ -15,13 +15,13 @@ export interface ClusterProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Cluster = forwardRef<HTMLDivElement, ClusterProps>(function Cluster(
-  {gap = '3', align = 'center', justify = 'start', wrap = true, style, children, ...rest},
+  {gap = '3', align = 'center', justify = 'start', wrap = true, className, style, children, ...rest},
   ref,
 ) {
   return (
     <div
       ref={ref}
-      className={styles.root}
+      className={[styles.root, className].filter(Boolean).join(' ')}
       style={{
         '--cluster-gap': `var(--smd-space-${gap})`,
         alignItems: align,

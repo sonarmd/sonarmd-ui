@@ -81,7 +81,7 @@ export const StackedBarChart = React.memo(function StackedBarChart({
           });
           if (stacked && series.length > 1) {
             const totalFormatted = formatTooltip ? formatTooltip(total) : String(total);
-            html += `<div style="margin-top:4px;padding-top:4px;border-top:1px solid ${colors['border-default']};font-weight:600">Total: ${totalFormatted}</div>`;
+            html += `<div style="margin-top:4px;padding-top:4px;border-top:1px solid var(--smd-border-default);font-weight:600">Total: ${totalFormatted}</div>`;
           }
           return html;
         },

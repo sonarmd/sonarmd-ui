@@ -11,7 +11,7 @@ export interface SpacerProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Spacer = forwardRef<HTMLDivElement, SpacerProps>(function Spacer(
-  {size, axis = 'vertical', style, ...rest},
+  {size, axis = 'vertical', className, style, ...rest},
   ref,
 ) {
   const isHorizontal = axis === 'horizontal';
@@ -19,7 +19,7 @@ export const Spacer = forwardRef<HTMLDivElement, SpacerProps>(function Spacer(
   return (
     <div
       ref={ref}
-      className={styles.root}
+      className={[styles.root, className].filter(Boolean).join(' ')}
       aria-hidden="true"
       style={{
         width:  isHorizontal ? sizeValue : undefined,

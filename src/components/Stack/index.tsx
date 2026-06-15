@@ -13,13 +13,13 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Stack = forwardRef<HTMLDivElement, StackProps>(function Stack(
-  {gap = '4', align = 'stretch', justify = 'start', style, children, ...rest},
+  {gap = '4', align = 'stretch', justify = 'start', className, style, children, ...rest},
   ref,
 ) {
   return (
     <div
       ref={ref}
-      className={styles.root}
+      className={[styles.root, className].filter(Boolean).join(' ')}
       style={{
         '--stack-gap': `var(--smd-space-${gap})`,
         alignItems: align,

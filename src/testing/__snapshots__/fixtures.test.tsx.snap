@@ -101,6 +101,18 @@ exports[`Alert > info - dom 1`] = `
 </DocumentFragment>
 `;
 
+exports[`AppErrorBoundary > default - dom 1`] = `
+<DocumentFragment>
+  App content
+</DocumentFragment>
+`;
+
+exports[`AppErrorBoundary > withResetKeys - dom 1`] = `
+<DocumentFragment>
+  App content
+</DocumentFragment>
+`;
+
 exports[`AppShell > threeColumn - dom 1`] = `
 <DocumentFragment>
   <div
@@ -2458,6 +2470,160 @@ exports[`PieChart > pie - dom 1`] = `
 </DocumentFragment>
 `;
 
+exports[`QueryBoundary > empty - dom 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="_root_40e66c"
+    >
+      <span
+        class="_icon_40e66c"
+      >
+        <svg
+          aria-hidden="true"
+          fill="none"
+          height="48"
+          viewBox="0 0 48 48"
+          width="48"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            height="36"
+            rx="3"
+            stroke="currentColor"
+            stroke-width="2"
+            width="32"
+            x="8"
+            y="6"
+          />
+          <line
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+            x1="15"
+            x2="33"
+            y1="16"
+            y2="16"
+          />
+          <line
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+            x1="15"
+            x2="33"
+            y1="22"
+            y2="22"
+          />
+          <line
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+            x1="15"
+            x2="25"
+            y1="28"
+            y2="28"
+          />
+        </svg>
+      </span>
+      <p
+        class="_title_40e66c"
+      >
+        No data
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`QueryBoundary > error - dom 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="_errorCard_27a406"
+      role="alert"
+    >
+      <div
+        class="_errorInner_27a406"
+      >
+        <div
+          class="_errorIcon_27a406"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          >
+            <path
+              d="M12 3L22 20H2L12 3Z"
+              stroke="currentColor"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+            <line
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="1.5"
+              x1="12"
+              x2="12"
+              y1="10"
+              y2="15"
+            />
+            <circle
+              cx="12"
+              cy="17.5"
+              fill="currentColor"
+              r="0.75"
+            />
+          </svg>
+        </div>
+        <p
+          class="_errorTitle_27a406"
+        >
+          Could not load
+        </p>
+        <p
+          class="_errorMessage_27a406"
+        >
+          An error occurred.
+        </p>
+        <button
+          class="_button_0829c1 _secondary_0829c1 _sm_0829c1"
+          type="button"
+        >
+          <span
+            class="_label_0829c1"
+          >
+            Retry
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`QueryBoundary > loading - dom 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      aria-label="Loading..."
+      class="_skeleton_27a406"
+      role="status"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`QueryBoundary > success - dom 1`] = `
+<DocumentFragment>
+  <div>
+    item-a, item-b
+  </div>
+</DocumentFragment>
+`;
+
 exports[`Radio > unchecked - dom 1`] = `
 <DocumentFragment>
   <label
@@ -3150,5 +3316,11 @@ exports[`Typeahead > empty - dom 1`] = `
       />
     </div>
   </div>
+</DocumentFragment>
+`;
+
+exports[`WidgetErrorBoundary > default - dom 1`] = `
+<DocumentFragment>
+  Widget content
 </DocumentFragment>
 `;

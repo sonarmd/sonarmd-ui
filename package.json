@@ -98,6 +98,8 @@
     "test:watch": "vitest",
     "test:update": "vitest run -u",
     "size": "size-limit",
+    "ladle": "ladle serve",
+    "ladle:build": "ladle build",
     "prepublishOnly": "npm run build",
     "prepare": "npm run build"
   },
@@ -116,6 +118,7 @@
     "react-window": "^2.2.7"
   },
   "devDependencies": {
+    "@ladle/react": "^5.1.1",
     "@size-limit/preset-small-lib": "^11.1.6",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",

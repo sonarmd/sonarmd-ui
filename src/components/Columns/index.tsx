@@ -15,7 +15,7 @@ export interface ColumnsProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const Columns = forwardRef<HTMLDivElement, ColumnsProps>(function Columns(
-  {cols = 2, template, gap = '4', minWidth, style, children, ...rest},
+  {cols = 2, template, gap = '4', minWidth, className, style, children, ...rest},
   ref,
 ) {
   const gridTemplate = template
@@ -26,7 +26,7 @@ export const Columns = forwardRef<HTMLDivElement, ColumnsProps>(function Columns
   return (
     <div
       ref={ref}
-      className={styles.root}
+      className={[styles.root, className].filter(Boolean).join(' ')}
       style={{
         gridTemplateColumns: gridTemplate,
         gap: `var(--smd-space-${gap})`,
