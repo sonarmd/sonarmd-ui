@@ -51,7 +51,9 @@ export const AppShell = forwardRef<HTMLDivElement, AppShellProps>(function AppSh
     return () => obs.disconnect();
   }, [measure]);
 
-  const hasRail = contextRail !== undefined;
+  // Nullish check: React callers commonly pass `null` to omit an optional node,
+  // and a null rail must not trigger the rail layout or the collapsed toggle.
+  const hasRail = contextRail != null;
 
   // Drive the sidebar's own collapse from the responsive breakpoint. Below the
   // breakpoint we force collapsed; above it we defer to whatever the consumer

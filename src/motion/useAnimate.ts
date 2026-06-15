@@ -43,28 +43,27 @@ export function useAnimate(
   options: AnimateOptions = {},
 ): AnimateControls {
   const animRef = useRef<Animation | null>(null);
-  const resolveRef = useRef<(() => void) | null>(null);
-  const rejectRef = useRef<((reason?: unknown) => void) | null>(null);
 
   const finished = useRef<Promise<void>>(Promise.resolve());
-
-  const makePromise = useCallback(() => {
-    finished.current = new Promise<void>((res, rej) => {
-      resolveRef.current = res;
-      rejectRef.current = rej;
-    });
-  }, []);
 
   const play = useCallback(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Interrupt any running animation.
-    if (animRef.current) {
-      animRef.current.cancel();
-    }
+    // Interrupt any running animation. Its finished promise rejects
+    // asynchronously and is settled by the resolver captured for THAT animation
+    // below, never this new one.
+    animRef.current?.cancel();
 
-    makePromise();
+    // Capture this play's resolver/rejecter locally. Reading them off a shared
+    // ref in the settle handler would let a cancelled prior animation reject the
+    // new play's promise.
+    let resolve!: () => void;
+    let reject!: (reason?: unknown) => void;
+    finished.current = new Promise<void>((res, rej) => {
+      resolve = res;
+      reject = rej;
+    });
 
     const reduced = prefersReducedMotion();
     const frames = reduced
@@ -82,24 +81,19 @@ export function useAnimate(
     animRef.current = anim;
 
     anim.finished.then(
-      () => { resolveRef.current?.(); },
-      (err) => { rejectRef.current?.(err); },
+      () => resolve(),
+      (err) => reject(err),
     );
-  }, [ref, keyframes, options, makePromise]);
+  }, [ref, keyframes, options]);
 
   const reverse = useCallback(() => {
-    const anim = animRef.current;
-    if (anim) {
-      anim.reverse();
-    }
+    animRef.current?.reverse();
   }, []);
 
+  // Cancelling rejects the animation's finished promise (AbortError), which the
+  // settle handler routes to the matching reject() captured in play().
   const cancel = useCallback(() => {
-    const anim = animRef.current;
-    if (anim) {
-      anim.cancel();
-      rejectRef.current?.(new DOMException('Animation cancelled', 'AbortError'));
-    }
+    animRef.current?.cancel();
   }, []);
 
   // `finished` is exposed as a getter over the ref, not a snapshot: play()

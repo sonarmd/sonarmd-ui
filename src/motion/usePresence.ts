@@ -31,6 +31,9 @@ export function usePresence(
 ): PresenceControls {
   const [mounted, setMounted] = useState(initial);
   const elRef = useRef<Element | null>(null);
+  // Bumped on every show()/hide() so a pending exit callback can tell whether it
+  // is still the latest intent before it unmounts.
+  const exitGen = useRef(0);
 
   const enter = useAnimate(elRef, enterKeyframes, {duration: 200, ...enterOptions});
   const exit = useAnimate(elRef, exitKeyframes, {duration: 200, ...exitOptions});
@@ -44,12 +47,21 @@ export function usePresence(
   }, [mounted]);
 
   const show = useCallback(() => {
+    // Invalidate and stop any in-flight exit so a quick reopen does not unmount
+    // after we have shown the element again.
+    exitGen.current += 1;
+    exit.cancel();
     setMounted(true);
-  }, []);
+  }, [exit]);
 
   const hide = useCallback(() => {
+    const gen = (exitGen.current += 1);
     exit.play();
-    exit.finished.then(() => setMounted(false)).catch(() => {/* cancelled */});
+    exit.finished
+      .then(() => {
+        if (exitGen.current === gen) setMounted(false);
+      })
+      .catch(() => {/* cancelled */});
   }, [exit]);
 
   return {mounted, ref: elRef, show, hide};
