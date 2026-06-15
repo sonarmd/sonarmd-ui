@@ -49,7 +49,9 @@ const RETRYABLE_STATUSES = new Set([408, 429, 500, 502, 503, 504]);
  */
 export function sanitizeUrl(url: string): string {
   try {
-    const u = new URL(url);
+    // Dummy base lets relative URLs (e.g. baseUrl '/api') parse; only the
+    // pathname is used, so the base host is irrelevant for absolute URLs too.
+    const u = new URL(url, 'http://localhost');
     const sanitized = u.pathname
       .split('/')
       .map((seg) =>

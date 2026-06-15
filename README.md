@@ -32,11 +32,11 @@ import '@sonarmd/ui/style.css';
 Then import components from the relevant subpath:
 
 ```tsx
-import {Button, Card, Badge} from '@sonarmd/ui';
+import {Button, Card, Badge, Fade} from '@sonarmd/ui';
 import {LineChart, BarChart} from '@sonarmd/ui/charts';
 import {TransitionContainer} from '@sonarmd/ui/transitions';
 import {createApiClient, useQuery} from '@sonarmd/ui/data';
-import {useAnimate, Fade} from '@sonarmd/ui/motion';
+import {useAnimate} from '@sonarmd/ui/motion';
 ```
 
 ---

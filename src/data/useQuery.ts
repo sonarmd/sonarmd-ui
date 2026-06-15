@@ -40,8 +40,46 @@ function reducer<T>(state: QueryState<T>, action: Action<T>): QueryState<T> {
   }
 }
 
-// Shared in-flight dedup map: key (serialized) -> Promise.
-const inflight = new Map<string, Promise<unknown>>();
+// Shared in-flight dedup: serialized key -> one request shared by all current
+// subscribers. The request owns its own AbortController and is aborted only when
+// the LAST subscriber detaches (refcount), so one component unmounting never
+// cancels the fetch a still-mounted sibling depends on.
+interface InflightEntry {
+  promise: Promise<unknown>;
+  controller: AbortController;
+  refs: number;
+}
+const inflight = new Map<string, InflightEntry>();
+
+function acquire<T>(
+  key: string,
+  fetcher: (signal: AbortSignal) => Promise<T>,
+): InflightEntry {
+  let entry = inflight.get(key);
+  if (!entry) {
+    const controller = new AbortController();
+    const created: InflightEntry = {
+      promise: fetcher(controller.signal),
+      controller,
+      refs: 0,
+    };
+    created.promise.finally(() => {
+      if (inflight.get(key) === created) inflight.delete(key);
+    });
+    inflight.set(key, created);
+    entry = created;
+  }
+  entry.refs += 1;
+  return entry;
+}
+
+function release(key: string, entry: InflightEntry): void {
+  entry.refs -= 1;
+  if (entry.refs <= 0) {
+    entry.controller.abort();
+    if (inflight.get(key) === entry) inflight.delete(key);
+  }
+}
 
 /** Stable serialization for primitive/array/object keys. */
 function serializeKey(key: unknown[]): string {
@@ -61,67 +99,57 @@ export function useQuery<T>(
     error: undefined,
   });
 
-  // Track the serial number of the most-recently started fetch so stale
-  // responses from aborted or superseded fetches are silently dropped.
+  // Track the serial of the most-recently started fetch so stale responses from
+  // aborted or superseded fetches are silently dropped.
   const fetchSerial = useRef(0);
   const cachedAt = useRef<number | null>(null);
 
   const serializedKey = serializeKey(key);
 
-  const run = useCallback(
-    (signal: AbortSignal) => {
-      const serial = ++fetchSerial.current;
-
-      // Stale-while-revalidate: skip if data is fresh.
-      if (
-        cachedAt.current != null &&
-        staleTime > 0 &&
-        Date.now() - cachedAt.current < staleTime
-      ) {
-        return;
-      }
-
-      dispatch({type: 'loading'});
-
-      // Deduplication: reuse an in-flight promise for the same key.
-      let promise = inflight.get(serializedKey) as Promise<T> | undefined;
-      if (!promise) {
-        promise = fetcher(signal);
-        inflight.set(serializedKey, promise);
-        promise.finally(() => inflight.delete(serializedKey));
-      }
-
-      promise.then(
-        (data) => {
-          if (fetchSerial.current !== serial) return;
-          cachedAt.current = Date.now();
-          dispatch({type: 'success', data});
-        },
-        (err: unknown) => {
-          if (fetchSerial.current !== serial) return;
-          if ((err as {name?: string}).name === 'AbortError') return;
-          dispatch({type: 'error', error: err instanceof Error ? err : new Error(String(err))});
-        },
-      );
-    },
-    // fetcher identity is the caller's responsibility (useCallback or stable ref).
-    // serializedKey is stable as long as the key array contents are stable.
-    [serializedKey, staleTime, fetcher],
-  );
+  // Route a settled promise to dispatch, dropping superseded/aborted results.
+  const settle = useCallback((serial: number, promise: Promise<T>) => {
+    promise.then(
+      (data) => {
+        if (fetchSerial.current !== serial) return;
+        cachedAt.current = Date.now();
+        dispatch({type: 'success', data});
+      },
+      (err: unknown) => {
+        if (fetchSerial.current !== serial) return;
+        if ((err as {name?: string}).name === 'AbortError') return;
+        dispatch({type: 'error', error: err instanceof Error ? err : new Error(String(err))});
+      },
+    );
+  }, []);
 
   const refetch = useCallback(() => {
+    // Explicit refresh: a standalone request with its own signal, not shared
+    // through the dedup map (and not subject to staleTime).
+    const serial = ++fetchSerial.current;
+    dispatch({type: 'loading'});
     const controller = new AbortController();
-    run(controller.signal);
-  }, [run]);
+    settle(serial, fetcher(controller.signal));
+  }, [fetcher, settle]);
 
   useEffect(() => {
     if (!enabled) return;
-    const controller = new AbortController();
-    run(controller.signal);
-    return () => {
-      controller.abort();
-    };
-  }, [enabled, run]);
+
+    // Stale-while-revalidate: skip if cached data is still fresh.
+    if (
+      cachedAt.current != null &&
+      staleTime > 0 &&
+      Date.now() - cachedAt.current < staleTime
+    ) {
+      return;
+    }
+
+    const serial = ++fetchSerial.current;
+    dispatch({type: 'loading'});
+    const entry = acquire<T>(serializedKey, fetcher);
+    settle(serial, entry.promise as Promise<T>);
+
+    return () => release(serializedKey, entry);
+  }, [enabled, serializedKey, staleTime, fetcher, settle]);
 
   return {...state, refetch};
 }
