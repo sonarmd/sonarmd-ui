@@ -66,7 +66,7 @@ export const ChartCanvas = React.memo(function ChartCanvas({
     if (!chart) return;
     const opt = optionRef.current as Record<string, unknown>;
     const hasAxes = !!opt && ('xAxis' in opt || 'yAxis' in opt);
-    chart.setOption(chartChrome(currentTheme(), hasAxes));
+    chart.setOption(chartChrome(currentTheme(), hasAxes, opt?.series));
   }, []);
 
   const attach = useCallback(

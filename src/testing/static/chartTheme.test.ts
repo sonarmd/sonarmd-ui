@@ -30,3 +30,19 @@ test('axisless charts (pie/gauge/funnel) get no phantom axes', () => {
   expect('yAxis' in noAxes).toBe(false);
   expect(one(noAxes.tooltip)?.backgroundColor).toBe(colorsDark['bg-raised']);
 });
+
+test('gauge series labels re-color from the theme token map', () => {
+  const dark = chartChrome('dark', false, [{type: 'gauge'}]);
+  const gauge = one(dark.series) as
+    | {detail?: {color?: string}; title?: {color?: string}; axisLabel?: {color?: string}}
+    | undefined;
+  expect(gauge?.detail?.color).toBe(colorsDark['text-primary']);
+  expect(gauge?.title?.color).toBe(colorsDark['text-secondary']);
+  expect(gauge?.axisLabel?.color).toBe(colorsDark['text-tertiary']);
+});
+
+test('non-gauge series get an index-aligned no-op, never phantom overrides', () => {
+  const dark = chartChrome('dark', true, [{type: 'bar'}]);
+  // No gauge present -> no series chrome at all, so a bar chart is untouched.
+  expect('series' in dark).toBe(false);
+});
