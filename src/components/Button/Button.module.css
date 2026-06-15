@@ -50,6 +50,20 @@
   padding: 0 var(--smd-space-4);
 }
 
+/* square (icon-only) shape: width tracks height; used by IconButton */
+.button.square {
+  padding: 0;
+}
+.square.sm {
+  width: var(--smd-input-height-sm);
+}
+.square.md {
+  width: var(--smd-input-height-md);
+}
+.square.lg {
+  width: var(--smd-input-height-lg);
+}
+
 /* variants */
 .primary {
   background: var(--smd-color-primary-50);

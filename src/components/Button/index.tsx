@@ -18,6 +18,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   iconLeft?: React.ReactNode;
   /** Icon rendered after the label. */
   iconRight?: React.ReactNode;
+  /** Square (icon-only) shape: width tracks height. Used by IconButton. */
+  square?: boolean;
 }
 
 /**
@@ -35,6 +37,7 @@ export const Button = React.memo(
       disabled,
       iconLeft,
       iconRight,
+      square = false,
       type = 'button',
       className,
       children,
@@ -49,11 +52,12 @@ export const Button = React.memo(
           styles[variant],
           styles[size],
           density === 'compact' ? styles.compact : '',
+          square ? styles.square : '',
           className,
         ]
           .filter(Boolean)
           .join(' '),
-      [variant, size, density, className],
+      [variant, size, density, square, className],
     );
 
     return (

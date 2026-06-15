@@ -33,6 +33,16 @@
       "import": "./dist/components/Card/index.js",
       "require": "./dist/components/Card/index.cjs"
     },
+    "./icon-button": {
+      "types": "./dist/components/IconButton/index.d.ts",
+      "import": "./dist/components/IconButton/index.js",
+      "require": "./dist/components/IconButton/index.cjs"
+    },
+    "./breadcrumbs": {
+      "types": "./dist/components/Breadcrumbs/index.d.ts",
+      "import": "./dist/components/Breadcrumbs/index.js",
+      "require": "./dist/components/Breadcrumbs/index.cjs"
+    },
     "./badge": {
       "types": "./dist/components/Badge/index.d.ts",
       "import": "./dist/components/Badge/index.js",

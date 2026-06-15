@@ -48,6 +48,8 @@ import {
   // Phase 0 - Action & Surface Primitives
   Button,
   Card,
+  IconButton,
+  Breadcrumbs,
   // Phase 1 - Form Primitives
   FieldWrapper,
   FormGrid,
@@ -160,6 +162,48 @@ describe('Card', () => {
       <Card variant="elevated" density="compact">
         <p>Body</p>
       </Card>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
+
+describe('IconButton', () => {
+  it('renders with required label as aria-label', () => {
+    const {asFragment} = render(
+      <IconButton label="Settings">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" />
+      </IconButton>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
+
+describe('Breadcrumbs', () => {
+  it('renders a trail with current page', () => {
+    const {asFragment} = render(
+      <Breadcrumbs
+        items={[
+          {label: 'Home', href: '/'},
+          {label: 'Patients', href: '/patients'},
+          {label: 'Detail'},
+        ]}
+      />,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+  it('collapses the middle past maxItems', () => {
+    const {asFragment} = render(
+      <Breadcrumbs
+        maxItems={4}
+        items={[
+          {label: 'A', href: '/a'},
+          {label: 'B', href: '/b'},
+          {label: 'C', href: '/c'},
+          {label: 'D', href: '/d'},
+          {label: 'E', href: '/e'},
+          {label: 'Now'},
+        ]}
+      />,
     );
     expect(asFragment()).toMatchSnapshot();
   });

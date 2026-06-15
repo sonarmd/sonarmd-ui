@@ -7,6 +7,10 @@ export {Button} from './components/Button';
 export type {ButtonProps, ButtonVariant, ButtonSize, ButtonDensity} from './components/Button';
 export {Card} from './components/Card';
 export type {CardProps, CardVariant, CardDensity} from './components/Card';
+export {IconButton} from './components/IconButton';
+export type {IconButtonProps} from './components/IconButton';
+export {Breadcrumbs} from './components/Breadcrumbs';
+export type {BreadcrumbsProps, BreadcrumbItem} from './components/Breadcrumbs';
 
 // --- Layer 1: Form Primitives ------------------------------------------------
 export {FieldWrapper} from './components/FieldWrapper';
@@ -116,7 +120,7 @@ export {FilterBar} from './components/FilterBar';
 export type {FilterBarProps} from './components/FilterBar';
 
 export {PageHeader} from './components/PageHeader';
-export type {PageHeaderProps, BreadcrumbItem} from './components/PageHeader';
+export type {PageHeaderProps} from './components/PageHeader';
 
 export {PageSection} from './components/PageSection';
 export type {PageSectionProps} from './components/PageSection';

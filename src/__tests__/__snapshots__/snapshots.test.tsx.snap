@@ -137,6 +137,121 @@ exports[`BarChart > renders with data 1`] = `
 </DocumentFragment>
 `;
 
+exports[`Breadcrumbs > collapses the middle past maxItems 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Breadcrumb"
+    class="_nav_325516"
+  >
+    <ol
+      class="_list_325516"
+    >
+      <li
+        class="_item_325516"
+      >
+        <a
+          class="_link_325516"
+          href="/a"
+        >
+          A
+        </a>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_separator_325516"
+      >
+        /
+      </li>
+      <li
+        class="_item_325516"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-label="Show collapsed breadcrumbs"
+          class="_ellipsis_325516"
+          type="button"
+        >
+          ...
+        </button>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_separator_325516"
+      >
+        /
+      </li>
+      <li
+        class="_item_325516"
+      >
+        <span
+          aria-current="page"
+          class="_current_325516"
+        >
+          Now
+        </span>
+      </li>
+    </ol>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`Breadcrumbs > renders a trail with current page 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Breadcrumb"
+    class="_nav_325516"
+  >
+    <ol
+      class="_list_325516"
+    >
+      <li
+        class="_item_325516"
+      >
+        <a
+          class="_link_325516"
+          href="/"
+        >
+          Home
+        </a>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_separator_325516"
+      >
+        /
+      </li>
+      <li
+        class="_item_325516"
+      >
+        <a
+          class="_link_325516"
+          href="/patients"
+        >
+          Patients
+        </a>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_separator_325516"
+      >
+        /
+      </li>
+      <li
+        class="_item_325516"
+      >
+        <span
+          aria-current="page"
+          class="_current_325516"
+        >
+          Detail
+        </span>
+      </li>
+    </ol>
+  </nav>
+</DocumentFragment>
+`;
+
 exports[`BubbleChart > renders data points 1`] = `
 <DocumentFragment>
   <div
@@ -377,12 +492,12 @@ exports[`CheckboxGroup > renders with one option selected 1`] = `
   >
     <label
       class="_label_33d967"
-      for=":r0:"
+      for=":r1:"
     >
       Sizes
     </label>
     <div
-      aria-labelledby=":r0:-label"
+      aria-labelledby=":r1:-label"
       class="_group_5958cf _vertical_5958cf"
       role="group"
     >
@@ -836,7 +951,7 @@ exports[`DatePicker > renders with no value 1`] = `
   >
     <label
       class="_label_33d967"
-      for=":r9:"
+      for=":ra:"
     >
       Date
     </label>
@@ -850,7 +965,7 @@ exports[`DatePicker > renders with no value 1`] = `
           aria-invalid="false"
           autocomplete="off"
           class="_input_ef7e38"
-          id=":r9:"
+          id=":ra:"
           placeholder="MM/DD/YYYY"
           type="text"
           value=""
@@ -897,7 +1012,7 @@ exports[`DateRangePicker > renders with no value 1`] = `
   >
     <label
       class="_label_33d967"
-      for=":ra:"
+      for=":rb:"
     >
       Date range
     </label>
@@ -906,7 +1021,7 @@ exports[`DateRangePicker > renders with no value 1`] = `
       aria-haspopup="dialog"
       aria-invalid="false"
       class="_trigger_638e37"
-      id=":ra:"
+      id=":rb:"
       type="button"
     >
       <span
@@ -953,7 +1068,7 @@ exports[`Dropdown > renders closed with placeholder 1`] = `
   >
     <label
       class="_label_33d967"
-      for=":r4:"
+      for=":r5:"
     >
       Category
     </label>
@@ -962,7 +1077,7 @@ exports[`Dropdown > renders closed with placeholder 1`] = `
       aria-haspopup="listbox"
       aria-invalid="false"
       class="_trigger_1f39d3 _md_1f39d3"
-      id=":r4:"
+      id=":r5:"
       type="button"
     >
       <span
@@ -1009,7 +1124,7 @@ exports[`Dropdown > renders with selected value 1`] = `
       aria-haspopup="listbox"
       aria-invalid="false"
       class="_trigger_1f39d3 _md_1f39d3"
-      id=":r5:"
+      id=":r6:"
       type="button"
     >
       <span
@@ -1511,6 +1626,27 @@ exports[`GaugeChart > renders at 75% 1`] = `
 </DocumentFragment>
 `;
 
+exports[`IconButton > renders with required label as aria-label 1`] = `
+<DocumentFragment>
+  <button
+    aria-label="Settings"
+    class="_button_0829c1 _ghost_0829c1 _md_0829c1 _square_0829c1"
+    type="button"
+  >
+    <span
+      class="_label_0829c1"
+    >
+      <svg
+        aria-hidden="true"
+        height="16"
+        viewBox="0 0 16 16"
+        width="16"
+      />
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
 exports[`KpiCard > renders basic metric 1`] = `
 <DocumentFragment>
   <div
@@ -1765,7 +1901,7 @@ exports[`MultiSelect > renders with no selection 1`] = `
   >
     <label
       class="_label_33d967"
-      for=":r7:"
+      for=":r8:"
     >
       Tags
     </label>
@@ -1774,7 +1910,7 @@ exports[`MultiSelect > renders with no selection 1`] = `
       aria-haspopup="listbox"
       aria-invalid="false"
       class="_triggerArea_e760e9"
-      id=":r7:"
+      id=":r8:"
       role="button"
       tabindex="0"
     >
@@ -1818,7 +1954,7 @@ exports[`MultiSelect > renders with selections 1`] = `
       aria-haspopup="listbox"
       aria-invalid="false"
       class="_triggerArea_e760e9"
-      id=":r8:"
+      id=":r9:"
       role="button"
       tabindex="0"
     >
@@ -2039,7 +2175,7 @@ exports[`RadioGroup > renders with selection 1`] = `
       Choice
     </label>
     <div
-      aria-labelledby=":r1:-label"
+      aria-labelledby=":r2:-label"
       class="_group_7fcaa1 _vertical_7fcaa1"
       role="radiogroup"
     >
@@ -2508,12 +2644,12 @@ exports[`Toggle > renders off 1`] = `
 <DocumentFragment>
   <label
     class="_root_76a0f7"
-    for=":r2:"
+    for=":r3:"
   >
     <input
       aria-checked="false"
       class="_input_76a0f7"
-      id=":r2:"
+      id=":r3:"
       role="switch"
       type="checkbox"
     />
@@ -2537,13 +2673,13 @@ exports[`Toggle > renders on 1`] = `
 <DocumentFragment>
   <label
     class="_root_76a0f7"
-    for=":r3:"
+    for=":r4:"
   >
     <input
       aria-checked="true"
       checked=""
       class="_input_76a0f7"
-      id=":r3:"
+      id=":r4:"
       role="switch"
       type="checkbox"
     />
@@ -2580,7 +2716,7 @@ exports[`Typeahead > renders empty state 1`] = `
   >
     <label
       class="_label_33d967"
-      for=":r6:"
+      for=":r7:"
     >
       Search
     </label>
@@ -2593,7 +2729,7 @@ exports[`Typeahead > renders empty state 1`] = `
         aria-invalid="false"
         autocomplete="off"
         class="_input_3c3d0d"
-        id=":r6:"
+        id=":r7:"
         placeholder="Type to search…"
         role="combobox"
         type="text"
