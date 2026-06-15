@@ -102,5 +102,17 @@ export function useAnimate(
     }
   }, []);
 
-  return {play, reverse, cancel, finished: finished.current};
+  // `finished` is exposed as a getter over the ref, not a snapshot: play()
+  // swaps finished.current to a fresh promise, and callers (e.g. usePresence's
+  // hide) read it AFTER calling play(). Returning finished.current directly
+  // would hand back the previous, already-resolved promise and unmount before
+  // the exit animation paints.
+  return {
+    play,
+    reverse,
+    cancel,
+    get finished(): Promise<void> {
+      return finished.current;
+    },
+  };
 }

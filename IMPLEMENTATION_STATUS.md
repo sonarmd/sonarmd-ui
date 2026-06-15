@@ -95,6 +95,29 @@ Branch: feat/s2-performance (continued).
   snapshots regenerated - structural); all 84 axe fixtures pass with the rule
   enforced; build green.
 
+### Follow-up: active-descendant (completes the combobox)
+
+- `src/components/MultiSelect/index.tsx`: the refactor made the trigger a real
+  combobox/button, but the listbox was still not programmatically linked to the
+  highlighted option - arrow-key nav only toggled a visual class, so a screen
+  reader announced nothing. Added the missing piece of the WAI-ARIA combobox
+  pattern: every `role="option"` now carries a stable `id`
+  (`${listboxId}-opt-${index}`, both the virtual and non-virtual paths) and the
+  focusable control exposes `aria-activedescendant` pointing at the active
+  option (set only while open + `activeIndex >= 0`, so it never dangles). The
+  active option is scrolled into view on keyboard nav (`block: 'nearest'`),
+  guarded so an off-screen virtualized row is a safe no-op.
+- `src/components/MultiSelect/MultiSelect.test.tsx` (new): behavioral coverage
+  the declarative harness cannot reach (it renders the menu closed). Drives real
+  key events to assert activedescendant tracks ArrowDown, Enter selects, and the
+  searchable trigger is a `role="combobox"`. Follows the `useForm.test.tsx`
+  precedent (plain matchers - jest-dom matcher types are not wired into tsc).
+- `src/test-setup.ts`: polyfilled `Element.prototype.scrollIntoView` as a jsdom
+  no-op, matching the existing ResizeObserver/IntersectionObserver polyfills.
+- Verify: typecheck clean; full `vitest run` 227 passed (+3 new, no snapshot
+  churn - options only render when open); size-limit green (core surface
+  26.09 kB / 80 kB); build green.
+
 ## S8a - Dev workbench  (DONE)
 
 Branch: feat/s2-performance (continued).

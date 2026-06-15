@@ -53,6 +53,16 @@ export const AppShell = forwardRef<HTMLDivElement, AppShellProps>(function AppSh
 
   const hasRail = contextRail !== undefined;
 
+  // Drive the sidebar's own collapse from the responsive breakpoint. Below the
+  // breakpoint we force collapsed; above it we defer to whatever the consumer
+  // passed, so a manual collapse toggle still works. Non-element children (rare)
+  // pass through untouched.
+  const sidebarEl = React.isValidElement<{collapsed?: boolean}>(sidebar)
+    ? React.cloneElement(sidebar, {
+        collapsed: sidebarCollapsed || sidebar.props.collapsed,
+      })
+    : sidebar;
+
   return (
     <div
       ref={(node) => {
@@ -70,7 +80,7 @@ export const AppShell = forwardRef<HTMLDivElement, AppShellProps>(function AppSh
       data-sidebar-collapsed={sidebarCollapsed || undefined}
       {...rest}
     >
-      <div className={styles.sidebar}>{sidebar}</div>
+      <div className={styles.sidebar}>{sidebarEl}</div>
 
       <main className={styles.content}>
         {children}

@@ -79,6 +79,10 @@ export const MultiSelect = React.memo(function MultiSelect({
   const valueRef = useRef(value);
   valueRef.current = value;
 
+  // Stable per-row id so the combobox can point aria-activedescendant at the
+  // active option. Index-based because activeIndex tracks the filtered list.
+  const optionId = useCallback((index: number) => `${listboxId}-opt-${index}`, [listboxId]);
+
   // Rule 8: portal container
   const portalEl = usePortal();
 
@@ -202,6 +206,16 @@ export const MultiSelect = React.memo(function MultiSelect({
     setTimeout(() => target?.focus(), 0);
   }, [isOpen, searchable]);
 
+  // Keep the active option in view as the user arrows through. No-op when the
+  // option is not in the DOM (e.g. an off-screen virtualized row), so it never
+  // throws and the virtual list keeps its own scrolling.
+  useEffect(() => {
+    if (!isOpen || activeIndex < 0) return;
+    menuRef.current
+      ?.querySelector(`#${CSS.escape(optionId(activeIndex))}`)
+      ?.scrollIntoView({ block: 'nearest' });
+  }, [isOpen, activeIndex, optionId]);
+
   // Rule 9: stable keyboard handler reading from activeIndexRef
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -261,13 +275,14 @@ export const MultiSelect = React.memo(function MultiSelect({
 
   // Combobox semantics shared by the searchable input and the non-searchable
   // button trigger. The control is named by the FieldWrapper label when present,
-  // otherwise by the placeholder. aria-controls is only set while the listbox
-  // exists, so it never dangles.
+  // otherwise by the placeholder. aria-controls and aria-activedescendant are
+  // only set while the listbox exists, so neither dangles.
   const triggerAria = {
     id: wrapperId,
     'aria-haspopup': 'listbox' as const,
     'aria-expanded': isOpen,
     'aria-controls': isOpen ? listboxId : undefined,
+    'aria-activedescendant': isOpen && activeIndex >= 0 ? optionId(activeIndex) : undefined,
     'aria-invalid': !!error,
     'aria-label': label ? undefined : placeholder,
   };
@@ -322,6 +337,7 @@ export const MultiSelect = React.memo(function MultiSelect({
       return (
         <div
           style={style}
+          id={optionId(index)}
           className={optClasses}
           role="option"
           aria-selected={isSelected}
@@ -344,7 +360,7 @@ export const MultiSelect = React.memo(function MultiSelect({
         </div>
       );
     },
-    [],
+    [optionId],
   );
 
   const menu = (
@@ -385,6 +401,7 @@ export const MultiSelect = React.memo(function MultiSelect({
             return (
               <div
                 key={opt.value}
+                id={optionId(idx)}
                 className={optClasses}
                 role="option"
                 aria-selected={isSelected}

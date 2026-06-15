@@ -1,5 +1,10 @@
 import '@testing-library/jest-dom';
 
+// scrollIntoView is not implemented in jsdom
+if (!Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = function scrollIntoView(): void {};
+}
+
 // ResizeObserver is not available in jsdom
 global.ResizeObserver = class ResizeObserver {
   observe() {}
