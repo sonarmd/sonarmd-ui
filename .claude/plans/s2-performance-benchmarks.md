@@ -33,15 +33,28 @@ shell in Material UI, Ant Design, and React Bootstrap. Then drive architecture
   (importing Button must not reach Table/Modal/Charts/DataGrid).
 - Reachability test: root must never reach echarts.
 
-### Phase 3 - CSS architecture (Sass), driven by results
-- `src/styles/` (tokens/reset/core/mixins/utilities) authored in Sass.
-- Per-component `*.scss` -> per-component CSS output + shared `core.css` once.
-- Reconcile with the S1 `buildTokensCss()` single source of truth.
-- Migrate existing components CSS Modules -> Sass incrementally.
+### Phase 3 - CI-enforce the proof (NOW; blocks Sass, per ADR-0002)
+- `benchmarks/check-budgets.mjs` fails on @sonarmd/ui regression or not-smallest.
+- `.github/workflows/ci.yml` (standalone, package-repo precedent - agora/smeta,
+  NOT the service orchestrator): typecheck, tests (incl. tree-shaking
+  reachability + token completeness), build, size budgets, benchmarks measure +
+  budget check; upload report.md + JSON artifact. `publish.yml` untouched.
+- Do NOT start Sass until this is committed and green.
 
-### Phase 4 - CI gates
-- size budgets, CSS budgets, benchmark budgets, a11y tests, root-reachability,
-  React 18/19 matrix.
+### Phase 4 - Runtime metrics (after CI reliably runs browsers)
+- FCP/LCP/TBT/TTI + hydration via Playwright; attempt-when-available, degrade
+  cleanly; never block CI on a missing browser.
+
+### Phase 5 - CSS architecture (Sass), driven by results (gated on Phase 3 green)
+- `src/styles/` (tokens/reset/core/mixins/utilities) in Sass; per-component
+  `*.scss` -> per-component CSS + shared `core.css` once; reconcile with
+  `buildTokensCss()`; migrate existing components CSS Modules -> Sass
+  incrementally. CSS budgets + a11y + React 18/19 matrix join the gate as
+  components migrate.
+
+Note: this performance track is INJECTED into V1_SPEC, not a replacement
+(owner clarification). V1_SPEC S0 and S3-S8 and the theming workstream remain
+in effect; see DECISIONS.md ADR-0001.
 
 ## Environment notes
 - npm installs use `--cache "$TMPDIR/npm-cache"` (root-owned ~/.npm EPERM).

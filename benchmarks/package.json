@@ -4,7 +4,8 @@
   "type": "module",
   "description": "Benchmark apps comparing @sonarmd/ui against Material UI, Ant Design, and React Bootstrap on bundle/CSS size and runtime metrics. Isolated from the library dependency graph.",
   "scripts": {
-    "measure": "node measure.mjs"
+    "measure": "node measure.mjs",
+    "check": "node check-budgets.mjs"
   },
   "dependencies": {
     "@sonarmd/ui": "file:..",

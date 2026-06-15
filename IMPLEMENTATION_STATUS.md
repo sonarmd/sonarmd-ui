@@ -36,13 +36,25 @@ Branch: feat/s2-performance.
   root never reaches echarts; importing Button never reaches Modal/Table/charts;
   the charts entry does reach echarts (detector is non-vacuous).
 
-### Next (Phase 3-4)
-- Runtime metrics (FCP/LCP/TBT/TTI/hydration) via a headless browser in the
-  harness; wire `budgets.json` into CI as a release gate.
-- CSS authoring -> Sass per ADR-0001 (shared `core.css` once + per-component
-  CSS), migrating existing components incrementally, driven by the numbers.
-- Full per-component subpath coverage + API convergence across components.
-- Heavy-feature subpaths: `./data-grid`, `./icons`, `./advanced-table`.
+### Done (Phase 3) - proof made non-regressable (ADR-0002)
+- `benchmarks/check-budgets.mjs` (npm run check) fails CI if @sonarmd/ui exceeds
+  its JS/CSS/total brotli budget or stops being the smallest total. Verified:
+  passes on current results, fails when budgets are tightened.
+- `.github/workflows/ci.yml` - standalone package-repo CI gate (not the service
+  orchestrator; precedent: agora/smeta). On PR + merge_group it runs typecheck,
+  tests (incl. tree-shaking reachability + token completeness), build, size
+  budgets, benchmark measure + budget gate, and uploads the report. publish.yml
+  untouched. Full gate is green locally.
+
+### Next
+- Phase 4: runtime metrics (FCP/LCP/TBT/TTI/hydration) via Playwright, attempted
+  when a browser is available and degrading cleanly; never blocks CI.
+- Phase 5 (gated on Phase 3 green in CI): CSS authoring -> Sass per ADR-0001
+  (shared `core.css` once + per-component CSS), migrating components incrementally.
+  Do NOT begin until CI benchmark enforcement is committed and green.
+- Full per-component subpath coverage + API convergence; heavy-feature subpaths
+  (`./data-grid`, `./icons`, `./advanced-table`).
+- V1_SPEC remains in effect: S0 primitives, the theming workstream, S3-S8.
 
 ## S1 - Packaging, minimization, tree-shaking  (DONE)
 

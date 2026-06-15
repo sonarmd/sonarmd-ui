@@ -1,0 +1,72 @@
+name: CI
+
+# Self-contained quality gate for the @sonarmd/ui package (the precedented shape
+# for published-package repos in this org - see agora, smeta - rather than the
+# sonarmd/workflows service orchestrator, which is for deployable services).
+# Release-blocking: typecheck, tests (incl. tree-shaking reachability + token
+# completeness), build, size budgets, and the benchmark budget gate. publish.yml
+# owns npm publishing and is untouched.
+
+on:
+  pull_request:
+    branches: [main, 'release/**']
+  merge_group:
+    branches: [main, 'release/**']
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: Typecheck, test, build, size, benchmarks
+    # arm64 native, matching the org runner standard used by publish.yml.
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Pinned to .node-version; update both together.
+          node-version: '22.18.0'
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test (includes tree-shaking reachability + token completeness)
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Size budgets
+        run: npm run size
+
+      - name: Benchmarks - install
+        working-directory: benchmarks
+        run: npm ci
+
+      - name: Benchmarks - measure
+        working-directory: benchmarks
+        run: npm run measure
+
+      - name: Benchmarks - budget gate
+        working-directory: benchmarks
+        run: npm run check
+
+      - name: Upload benchmark report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results
+          path: |
+            benchmarks/results/report.md
+            benchmarks/results/results.json
+          if-no-files-found: warn
