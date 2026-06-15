@@ -1,0 +1,36 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--smd-space-6);
+  border-radius: var(--smd-radius-lg);
+  background: var(--smd-bg-subtle);
+  border: 1px solid var(--smd-border-default);
+  min-height: 120px;
+}
+
+.inner {
+  text-align: center;
+}
+
+.icon {
+  color: var(--smd-text-tertiary);
+  margin-bottom: var(--smd-space-3);
+}
+
+.title {
+  font-size: var(--smd-font-size-sm);
+  font-weight: var(--smd-font-weight-semibold);
+  color: var(--smd-text-primary);
+  margin: 0 0 var(--smd-space-2);
+}
+
+.message {
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-text-secondary);
+  margin: 0 0 var(--smd-space-4);
+}
+
+.retry {
+  display: inline-flex;
+}

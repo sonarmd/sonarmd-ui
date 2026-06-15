@@ -126,6 +126,12 @@ export {Columns} from './components/Columns';
 export type {ColumnsProps} from './components/Columns';
 export {AppShell} from './components/AppShell';
 export type {AppShellProps} from './components/AppShell';
+export {AppErrorBoundary} from './components/AppErrorBoundary';
+export type {AppErrorBoundaryProps} from './components/AppErrorBoundary';
+export {WidgetErrorBoundary} from './components/WidgetErrorBoundary';
+export type {WidgetErrorBoundaryProps} from './components/WidgetErrorBoundary';
+export {QueryBoundary} from './components/QueryBoundary';
+export type {QueryBoundaryProps} from './components/QueryBoundary';
 
 // --- Layer 6: Composition & Layout -------------------------------------------
 export {FilterBar} from './components/FilterBar';

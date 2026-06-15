@@ -13,6 +13,81 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## S6 - Architectural components  (DONE)
+
+Branch: feat/s2-performance (continued).
+
+### What shipped
+
+- `src/data/client.ts`: `createApiClient({ baseUrl, getHeaders, onUnauthorized, retry, fetch })`.
+  Returns typed `ApiClient` with get/post/put/patch/delete. PHI-safe: `sanitizeUrl()`
+  replaces numeric and UUID-shaped path segments with `:param`; never logs headers
+  or bodies. Retry policy: exponential backoff + full jitter, honors `Retry-After`
+  header, never retries non-idempotent methods unless `retryMutation: true`.
+  401 triggers `onUnauthorized` and throws immediately (no retry). fetch is
+  injectable for tests.
+- `src/data/useQuery.ts`: idle->loading->success/error state machine. In-flight
+  dedup via shared `inflight` map keyed on JSON-serialized key array.
+  AbortController per fetch; abort on unmount or key change. staleTime skips
+  refetch on remount when data is fresh. Per-render serial number drops stale
+  responses from superseded fetches.
+- `src/data/useMutation.ts`: mutate(vars) -> Promise; exposes status/data/error/reset.
+  No dedup (mutations are side-effectful). onSuccess/onError callbacks.
+- `src/data/usePaginatedQuery.ts`: cursor or page/limit semantics via typed
+  PaginationConfig discriminated union. fetchNext() appends pages with stable
+  identity. hasNext derived from configurable extractor. Abort on unmount.
+- `src/components/AppErrorBoundary/index.tsx`: class component, catches render
+  errors at app scope. onError (Sentry-compatible: error, info), resetKeys (auto-
+  resets on any key change, e.g. route change), showDetail (default false, PHI-safe:
+  raw error message is never shown to the user unless explicitly opted in), custom
+  fallback prop. Built-in full-page centered card.
+- `src/components/WidgetErrorBoundary/index.tsx`: same class base, compact widget-
+  sized fallback with retry button. Isolated catch so only the errored widget
+  degrades.
+- `src/components/QueryBoundary/index.tsx`: generic wrapper for useQuery results.
+  Props: query (Pick of useQuery result), children (typed render prop), skeleton,
+  emptyState, isEmpty. Renders: loading/idle -> skeleton (pulsing block), error ->
+  compact error card with retry wired to refetch, empty -> EmptyState, success ->
+  children(data). All without consumer conditionals (Criterion 6.6).
+- `src/components/AppErrorBoundary/AppErrorBoundary.test.tsx`: 7 behavioral tests
+  covering render, catch, onError once, PHI-safe default (no raw message), showDetail,
+  retry click, auto-reset on resetKey change, custom fallback.
+- `./data` subpath wired (package.json, vite.config.ts, .size-limit.cjs).
+- AppErrorBoundary, WidgetErrorBoundary, QueryBoundary exported from core entry.
+
+### Self-made decisions
+
+- QueryBoundary renders a QueryErrorCard directly in the error state rather than
+  re-throwing into a WidgetErrorBoundary. Re-throwing creates an infinite retry
+  loop (WidgetRetry always throws -> boundary resets -> WidgetRetry throws again).
+  Direct render achieves the same visual output and fulfills Criterion 6.6.
+- Data layer uses a module-level `inflight` map for dedup (not a React context)
+  because the spec says zero new runtime deps and no provider hierarchy. Drawback:
+  dedup is process-wide, not per-hook. For a library that targets one active
+  session this is correct.
+
+### Criteria status
+
+- 6.1 (layered boundaries): AppErrorBoundary + WidgetErrorBoundary both present.
+- 6.2 (reporting + recovery): onError called once with component stack; PHI-safe
+  default (showDetail=false); auto-resets on resetKeys change.
+- 6.3 (query lifecycle): idle->loading->success/error; dedup; abort on unmount; staleTime.
+- 6.4 (retry with backoff): exponential + full jitter; Retry-After honored; no
+  non-idempotent retry by default.
+- 6.5 (pagination): fetchNext() appends pages; hasNext; cursor + page/limit modes.
+- 6.6 (boundary integration): QueryBoundary renders skeleton/error/empty/success
+  from props.
+- 6.7 (PHI-safe defaults): sanitizeUrl() strips path values; no headers or bodies
+  in errors.
+
+### Gates (all green after this commit)
+
+- typecheck: clean.
+- Tests: 263/263 passed (1 snapshot updated for role="status" on skeleton; 7 new
+  AppErrorBoundary behavioral tests; fixture snapshots for all 3 new components).
+- Build: clean.
+- Size budgets: core 27.41 kB (80 kB), data 1.82 kB (4 kB), all others unchanged.
+
 ## S5 - Page transitions  (DONE)
 
 Branch: feat/s2-performance (continued).

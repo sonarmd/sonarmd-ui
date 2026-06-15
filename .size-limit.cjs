@@ -34,6 +34,13 @@ module.exports = [
     ignore: [...externals, 'echarts'],
   },
   {
+    // V1_SPEC: data entry ~4 kB gz total; using 4 kB brotli limit here.
+    name: 'data entry',
+    path: 'dist/data/index.js',
+    limit: '4 kB',
+    ignore: [...externals, 'echarts'],
+  },
+  {
     name: 'charts entry (incl echarts core)',
     path: 'dist/charts/index.js',
     limit: '120 kB',

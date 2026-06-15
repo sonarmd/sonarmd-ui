@@ -78,6 +78,11 @@
       "import": "./dist/transitions/index.js",
       "require": "./dist/transitions/index.cjs"
     },
+    "./data": {
+      "types": "./dist/data/index.d.ts",
+      "import": "./dist/data/index.js",
+      "require": "./dist/data/index.cjs"
+    },
     "./tokens.css": "./dist/tokens.css",
     "./style.css": "./dist/style.css",
     "./package.json": "./package.json"

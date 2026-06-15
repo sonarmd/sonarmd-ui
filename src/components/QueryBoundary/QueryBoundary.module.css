@@ -1,0 +1,51 @@
+.errorCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--smd-space-6);
+  border-radius: var(--smd-radius-lg);
+  background: var(--smd-bg-subtle);
+  border: 1px solid var(--smd-border-default);
+  min-height: 120px;
+}
+
+.errorInner {
+  text-align: center;
+}
+
+.errorIcon {
+  color: var(--smd-text-tertiary);
+  margin-bottom: var(--smd-space-3);
+}
+
+.errorTitle {
+  font-size: var(--smd-font-size-sm);
+  font-weight: var(--smd-font-weight-semibold);
+  color: var(--smd-text-primary);
+  margin: 0 0 var(--smd-space-2);
+}
+
+.errorMessage {
+  font-size: var(--smd-font-size-sm);
+  color: var(--smd-text-secondary);
+  margin: 0 0 var(--smd-space-4);
+}
+
+.skeleton {
+  border-radius: var(--smd-radius-md);
+  background: var(--smd-bg-subtle);
+  animation: smd-skeleton-pulse 1.5s ease-in-out infinite;
+  min-height: 80px;
+}
+
+@keyframes smd-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    opacity: 0.7;
+  }
+}
