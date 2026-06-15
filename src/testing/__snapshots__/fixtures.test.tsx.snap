@@ -1,5 +1,114 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Alert > errorWithTitle - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_alert_be9a30 _error_be9a30"
+    role="alert"
+  >
+    <span
+      class="_icon_be9a30"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        height="16"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <circle
+          cx="8"
+          cy="8"
+          fill="none"
+          r="7"
+          stroke="var(--smd-color-negative-30)"
+          stroke-width="1.5"
+        />
+        <path
+          d="M5.5 5.5l5 5M10.5 5.5l-5 5"
+          stroke="var(--smd-color-negative-30)"
+          stroke-linecap="round"
+          stroke-width="1.5"
+        />
+      </svg>
+    </span>
+    <div
+      class="_body_be9a30"
+    >
+      <div
+        class="_title_be9a30"
+      >
+        Something went wrong
+      </div>
+      <div
+        class="_message_be9a30"
+      >
+        Please try again later.
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Alert > info - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_alert_be9a30 _info_be9a30"
+    role="alert"
+  >
+    <span
+      class="_icon_be9a30"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        height="16"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <circle
+          cx="8"
+          cy="8"
+          fill="none"
+          r="7"
+          stroke="var(--smd-color-primary-50)"
+          stroke-width="1.5"
+        />
+        <path
+          d="M8 7v5"
+          stroke="var(--smd-color-primary-50)"
+          stroke-linecap="round"
+          stroke-width="1.5"
+        />
+        <circle
+          cx="8"
+          cy="4.5"
+          fill="var(--smd-color-primary-50)"
+          r="0.75"
+        />
+      </svg>
+    </span>
+    <div
+      class="_body_be9a30"
+    >
+      <div
+        class="_message_be9a30"
+      >
+        This is an informational message.
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`AreaChart > withData - dom 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="echarts-chart"
+  />
+</DocumentFragment>
+`;
+
 exports[`Badge > danger - dom 1`] = `
 <DocumentFragment>
   <span
@@ -27,6 +136,14 @@ exports[`Badge > success - dom 1`] = `
   >
     Synced
   </span>
+</DocumentFragment>
+`;
+
+exports[`BarChart > withData - dom 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="echarts-chart"
+  />
 </DocumentFragment>
 `;
 
@@ -145,6 +262,14 @@ exports[`Breadcrumbs > default - dom 1`] = `
 </DocumentFragment>
 `;
 
+exports[`BubbleChart > points - dom 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="echarts-chart"
+  />
+</DocumentFragment>
+`;
+
 exports[`Button > ghostCompact - dom 1`] = `
 <DocumentFragment>
   <button
@@ -238,6 +363,1331 @@ exports[`Card > withHeader - dom 1`] = `
 </DocumentFragment>
 `;
 
+exports[`ChartCard > content - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_card_47e537"
+  >
+    <div
+      class="_header_47e537"
+    >
+      <div
+        class="_titles_47e537"
+      >
+        <p
+          class="_title_47e537"
+        >
+          Revenue Over Time
+        </p>
+        <p
+          class="_subtitle_47e537"
+        >
+          Last 30 days
+        </p>
+      </div>
+    </div>
+    <div
+      class="_body_47e537"
+    >
+      <div
+        data-testid="chart-stub"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ChartCard > empty - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_card_47e537"
+  >
+    <div
+      class="_header_47e537"
+    >
+      <div
+        class="_titles_47e537"
+      >
+        <p
+          class="_title_47e537"
+        >
+          Revenue
+        </p>
+      </div>
+    </div>
+    <p
+      class="_empty_47e537"
+      style="height: 192px;"
+    >
+      No data for this period
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ChartCard > loading - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_card_47e537"
+  >
+    <div
+      class="_header_47e537"
+    >
+      <div
+        class="_titles_47e537"
+      >
+        <p
+          class="_title_47e537"
+        >
+          Revenue
+        </p>
+      </div>
+    </div>
+    <div
+      aria-hidden="true"
+      class="_skeleton_47e537"
+      style="height: 192px;"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Checkbox > checked - dom 1`] = `
+<DocumentFragment>
+  <label
+    class="_root_2d475f"
+  >
+    <input
+      checked=""
+      class="_input_2d475f"
+      type="checkbox"
+    />
+    <span
+      class="_box_2d475f"
+    />
+    <span
+      class="_label_2d475f"
+    >
+      I agree to the terms
+    </span>
+  </label>
+</DocumentFragment>
+`;
+
+exports[`Checkbox > unchecked - dom 1`] = `
+<DocumentFragment>
+  <label
+    class="_root_2d475f"
+  >
+    <input
+      class="_input_2d475f"
+      type="checkbox"
+    />
+    <span
+      class="_box_2d475f"
+    />
+    <span
+      class="_label_2d475f"
+    >
+      I agree to the terms
+    </span>
+  </label>
+</DocumentFragment>
+`;
+
+exports[`CheckboxGroup > oneSelected - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for=":r0:"
+    >
+      Sizes
+    </label>
+    <div
+      aria-labelledby=":r0:-label"
+      class="_group_5958cf _vertical_5958cf"
+      role="group"
+    >
+      <div
+        data-option-value="a"
+      >
+        <label
+          class="_root_2d475f"
+        >
+          <input
+            checked=""
+            class="_input_2d475f"
+            type="checkbox"
+            value="a"
+          />
+          <span
+            class="_box_2d475f"
+          />
+          <span
+            class="_label_2d475f"
+          >
+            Option A
+          </span>
+        </label>
+      </div>
+      <div
+        data-option-value="b"
+      >
+        <label
+          class="_root_2d475f"
+        >
+          <input
+            class="_input_2d475f"
+            type="checkbox"
+            value="b"
+          />
+          <span
+            class="_box_2d475f"
+          />
+          <span
+            class="_label_2d475f"
+          >
+            Option B
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ConfirmDialog > danger - dom 1`] = `
+<body
+  style="overflow: hidden;"
+>
+  <div />
+  <div
+    data-smd-portal=""
+  >
+    <div
+      aria-labelledby="modal-title"
+      aria-modal="true"
+      class="_overlay_7cc3ba"
+      role="dialog"
+    >
+      <div
+        class="_modal_7cc3ba _sm_7cc3ba"
+      >
+        <div
+          class="_header_7cc3ba"
+        >
+          <h2
+            class="_title_7cc3ba"
+            id="modal-title"
+          >
+            Delete account?
+          </h2>
+          <button
+            aria-label="Close dialog"
+            class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _square_0829c1"
+            type="button"
+          >
+            <span
+              class="_label_0829c1"
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M2 2l12 12M14 2L2 14"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <div
+          class="_body_7cc3ba"
+        >
+          <div
+            class="_message_3e03c7"
+          >
+            All data will be permanently removed.
+          </div>
+        </div>
+        <div
+          class="_footer_7cc3ba"
+        >
+          <button
+            class="_button_0829c1 _ghost_0829c1 _md_0829c1"
+            type="button"
+          >
+            <span
+              class="_label_0829c1"
+            >
+              Cancel
+            </span>
+          </button>
+          <button
+            class="_button_0829c1 _danger_0829c1 _md_0829c1"
+            type="button"
+          >
+            <span
+              class="_label_0829c1"
+            >
+              Delete
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`ConfirmDialog > open - dom 1`] = `
+<body
+  style="overflow: hidden;"
+>
+  <div />
+  <div
+    data-smd-portal=""
+  >
+    <div
+      aria-labelledby="modal-title"
+      aria-modal="true"
+      class="_overlay_7cc3ba"
+      role="dialog"
+    >
+      <div
+        class="_modal_7cc3ba _sm_7cc3ba"
+      >
+        <div
+          class="_header_7cc3ba"
+        >
+          <h2
+            class="_title_7cc3ba"
+            id="modal-title"
+          >
+            Delete item?
+          </h2>
+          <button
+            aria-label="Close dialog"
+            class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _square_0829c1"
+            type="button"
+          >
+            <span
+              class="_label_0829c1"
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M2 2l12 12M14 2L2 14"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <div
+          class="_body_7cc3ba"
+        >
+          <div
+            class="_message_3e03c7"
+          >
+            This action cannot be undone.
+          </div>
+        </div>
+        <div
+          class="_footer_7cc3ba"
+        >
+          <button
+            class="_button_0829c1 _ghost_0829c1 _md_0829c1"
+            type="button"
+          >
+            <span
+              class="_label_0829c1"
+            >
+              Cancel
+            </span>
+          </button>
+          <button
+            class="_button_0829c1 _danger_0829c1 _md_0829c1"
+            type="button"
+          >
+            <span
+              class="_label_0829c1"
+            >
+              Confirm
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`DataTable > empty - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_a06dc5"
+  >
+    <table
+      class="_table_a06dc5"
+    >
+      <thead
+        class="_thead_a06dc5"
+      >
+        <tr>
+          <th
+            class="_th_a06dc5"
+          >
+            Name
+          </th>
+          <th
+            class="_th_a06dc5"
+          >
+            Score
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="_emptyRow_a06dc5"
+        >
+          <td
+            colspan="2"
+          >
+            No records found
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`DataTable > loading - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_a06dc5"
+  >
+    <table
+      class="_table_a06dc5"
+    >
+      <thead
+        class="_thead_a06dc5"
+      >
+        <tr>
+          <th
+            class="_th_a06dc5"
+          >
+            Name
+          </th>
+          <th
+            class="_th_a06dc5"
+          >
+            Score
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="_tr_a06dc5"
+        >
+          <td
+            class="_td_a06dc5"
+          >
+            <div
+              class="_skeleton_8ca799 _text_8ca799"
+            />
+          </td>
+          <td
+            class="_td_a06dc5"
+          >
+            <div
+              class="_skeleton_8ca799 _text_8ca799"
+            />
+          </td>
+        </tr>
+        <tr
+          class="_tr_a06dc5"
+        >
+          <td
+            class="_td_a06dc5"
+          >
+            <div
+              class="_skeleton_8ca799 _text_8ca799"
+            />
+          </td>
+          <td
+            class="_td_a06dc5"
+          >
+            <div
+              class="_skeleton_8ca799 _text_8ca799"
+            />
+          </td>
+        </tr>
+        <tr
+          class="_tr_a06dc5"
+        >
+          <td
+            class="_td_a06dc5"
+          >
+            <div
+              class="_skeleton_8ca799 _text_8ca799"
+            />
+          </td>
+          <td
+            class="_td_a06dc5"
+          >
+            <div
+              class="_skeleton_8ca799 _text_8ca799"
+            />
+          </td>
+        </tr>
+        <tr
+          class="_tr_a06dc5"
+        >
+          <td
+            class="_td_a06dc5"
+          >
+            <div
+              class="_skeleton_8ca799 _text_8ca799"
+            />
+          </td>
+          <td
+            class="_td_a06dc5"
+          >
+            <div
+              class="_skeleton_8ca799 _text_8ca799"
+            />
+          </td>
+        </tr>
+        <tr
+          class="_tr_a06dc5"
+        >
+          <td
+            class="_td_a06dc5"
+          >
+            <div
+              class="_skeleton_8ca799 _text_8ca799"
+            />
+          </td>
+          <td
+            class="_td_a06dc5"
+          >
+            <div
+              class="_skeleton_8ca799 _text_8ca799"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`DataTable > withData - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_a06dc5"
+  >
+    <table
+      class="_table_a06dc5"
+    >
+      <thead
+        class="_thead_a06dc5"
+      >
+        <tr>
+          <th
+            class="_th_a06dc5"
+          >
+            Name
+          </th>
+          <th
+            class="_th_a06dc5"
+          >
+            Score
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="_tr_a06dc5"
+          data-row-key="Alpha"
+        >
+          <td
+            class="_td_a06dc5"
+          >
+            Alpha
+          </td>
+          <td
+            class="_td_a06dc5"
+          >
+            95
+          </td>
+        </tr>
+        <tr
+          class="_tr_a06dc5"
+          data-row-key="Beta"
+        >
+          <td
+            class="_td_a06dc5"
+          >
+            Beta
+          </td>
+          <td
+            class="_td_a06dc5"
+          >
+            87
+          </td>
+        </tr>
+        <tr
+          class="_tr_a06dc5"
+          data-row-key="Gamma"
+        >
+          <td
+            class="_td_a06dc5"
+          >
+            Gamma
+          </td>
+          <td
+            class="_td_a06dc5"
+          >
+            72
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`DatePicker > noValue - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for=":r2:"
+    >
+      Date
+    </label>
+    <div
+      class="_wrapper_ef7e38"
+    >
+      <div
+        class="_inputWrapper_ef7e38"
+      >
+        <input
+          aria-invalid="false"
+          autocomplete="off"
+          class="_input_ef7e38"
+          id=":r2:"
+          placeholder="MM/DD/YYYY"
+          type="text"
+          value=""
+        />
+        <button
+          aria-label="Open calendar"
+          class="_iconBtn_ef7e38"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <rect
+              height="11"
+              rx="1.5"
+              stroke="currentColor"
+              stroke-width="1.25"
+              width="12"
+              x="2"
+              y="3"
+            />
+            <path
+              d="M5 2v2M11 2v2M2 7h12"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="1.25"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`DateRangePicker > noValue - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for=":r4:"
+    >
+      Date range
+    </label>
+    <button
+      aria-expanded="false"
+      aria-haspopup="dialog"
+      aria-invalid="false"
+      class="_trigger_638e37"
+      id=":r4:"
+      type="button"
+    >
+      <span
+        class="_triggerPlaceholder_638e37"
+      >
+        MM/DD/YYYY – MM/DD/YYYY
+      </span>
+      <span
+        class="_triggerRight_638e37"
+      >
+        <svg
+          aria-hidden="true"
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <rect
+            height="11"
+            rx="1.5"
+            stroke="currentColor"
+            stroke-width="1.25"
+            width="12"
+            x="2"
+            y="3"
+          />
+          <path
+            d="M5 2v2M11 2v2M2 7h12"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.25"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown > closed - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for=":r6:"
+    >
+      Category
+    </label>
+    <button
+      aria-expanded="false"
+      aria-haspopup="listbox"
+      aria-invalid="false"
+      class="_trigger_1f39d3 _md_1f39d3"
+      id=":r6:"
+      type="button"
+    >
+      <span
+        class="_triggerLeft_1f39d3"
+      >
+        <span
+          class="_placeholder_1f39d3"
+        >
+          Select...
+        </span>
+      </span>
+      <span
+        class="_triggerRight_1f39d3"
+      >
+        <svg
+          aria-hidden="true"
+          class="_chevron_1f39d3"
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M4 6l4 4 4-4"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Dropdown > selected - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <button
+      aria-expanded="false"
+      aria-haspopup="listbox"
+      aria-invalid="false"
+      class="_trigger_1f39d3 _md_1f39d3"
+      id=":r8:"
+      type="button"
+    >
+      <span
+        class="_triggerLeft_1f39d3"
+      >
+        <span
+          class="_triggerLabel_1f39d3"
+        >
+          Option A
+        </span>
+      </span>
+      <span
+        class="_triggerRight_1f39d3"
+      >
+        <svg
+          aria-hidden="true"
+          class="_chevron_1f39d3"
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M4 6l4 4 4-4"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`EmptyState > titleDesc - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_40e66c"
+  >
+    <span
+      class="_icon_40e66c"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        height="48"
+        viewBox="0 0 48 48"
+        width="48"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect
+          height="36"
+          rx="3"
+          stroke="currentColor"
+          stroke-width="2"
+          width="32"
+          x="8"
+          y="6"
+        />
+        <line
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-width="2"
+          x1="15"
+          x2="33"
+          y1="16"
+          y2="16"
+        />
+        <line
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-width="2"
+          x1="15"
+          x2="33"
+          y1="22"
+          y2="22"
+        />
+        <line
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-width="2"
+          x1="15"
+          x2="25"
+          y1="28"
+          y2="28"
+        />
+      </svg>
+    </span>
+    <p
+      class="_title_40e66c"
+    >
+      No results found
+    </p>
+    <p
+      class="_description_40e66c"
+    >
+      Try adjusting your search filters.
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`EmptyState > withAction - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_40e66c"
+  >
+    <span
+      class="_icon_40e66c"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        height="48"
+        viewBox="0 0 48 48"
+        width="48"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect
+          height="36"
+          rx="3"
+          stroke="currentColor"
+          stroke-width="2"
+          width="32"
+          x="8"
+          y="6"
+        />
+        <line
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-width="2"
+          x1="15"
+          x2="33"
+          y1="16"
+          y2="16"
+        />
+        <line
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-width="2"
+          x1="15"
+          x2="33"
+          y1="22"
+          y2="22"
+        />
+        <line
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-width="2"
+          x1="15"
+          x2="25"
+          y1="28"
+          y2="28"
+        />
+      </svg>
+    </span>
+    <p
+      class="_title_40e66c"
+    >
+      No data yet
+    </p>
+    <button
+      class="_button_0829c1 _primary_0829c1 _md_0829c1"
+      type="button"
+    >
+      <span
+        class="_label_0829c1"
+      >
+        Add your first item
+      </span>
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Fade > children - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_fade_9a2ddc"
+    style="animation-delay: 60ms;"
+  >
+    <p>
+      Loaded
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FieldWrapper > withLabel - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for="email"
+    >
+      Email
+    </label>
+    <input
+      id="email"
+      type="text"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FilterBar > activeFilters - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_bar_7388b4"
+  >
+    <div
+      class="_filters_7388b4"
+    >
+      <span>
+        Status: Active
+      </span>
+    </div>
+    <button
+      class="_button_0829c1 _ghost_0829c1 _sm_0829c1"
+      type="button"
+    >
+      <span
+        class="_label_0829c1"
+      >
+        <span
+          class="_badge_7388b4"
+        >
+          3
+        </span>
+        Clear filters
+      </span>
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Form > default - dom 1`] = `
+<DocumentFragment>
+  <form
+    novalidate=""
+  >
+    <button
+      class="_button_0829c1 _primary_0829c1 _md_0829c1"
+      type="submit"
+    >
+      <span
+        class="_label_0829c1"
+      >
+        Submit
+      </span>
+    </button>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`FormActions > endAligned - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_actions_a43f51 _end_a43f51"
+  >
+    <button
+      class="_button_0829c1 _ghost_0829c1 _md_0829c1"
+      type="button"
+    >
+      <span
+        class="_label_0829c1"
+      >
+        Cancel
+      </span>
+    </button>
+    <button
+      class="_button_0829c1 _primary_0829c1 _md_0829c1"
+      type="submit"
+    >
+      <span
+        class="_label_0829c1"
+      >
+        Save
+      </span>
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FormErrorSummary > empty - dom 1`] = `<DocumentFragment />`;
+
+exports[`FormGrid > staggered - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_grid_18c66e _cols2_18c66e _gapmd_18c66e"
+  >
+    <div
+      class="_cell_18c66e _reveal_18c66e"
+      style="animation-delay: 0ms;"
+    >
+      <div
+        class="_wrapper_33d967"
+      >
+        <label
+          class="_label_33d967"
+          for="input-a"
+        >
+          A
+        </label>
+        <div
+          class="_wrapper_f9081f"
+        >
+          <input
+            class="_input_f9081f"
+            id="input-a"
+            name="a"
+          />
+        </div>
+      </div>
+      <div
+        class="_wrapper_33d967"
+      >
+        <label
+          class="_label_33d967"
+          for="input-b"
+        >
+          B
+        </label>
+        <div
+          class="_wrapper_f9081f"
+        >
+          <input
+            class="_input_f9081f"
+            id="input-b"
+            name="b"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FormGrid > twoCol - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_grid_18c66e _cols2_18c66e _gapmd_18c66e"
+  >
+    <div
+      class="_cell_18c66e"
+    >
+      <div
+        class="_wrapper_33d967"
+      >
+        <label
+          class="_label_33d967"
+          for="input-first"
+        >
+          First name
+        </label>
+        <div
+          class="_wrapper_f9081f"
+        >
+          <input
+            class="_input_f9081f"
+            id="input-first"
+            name="first"
+          />
+        </div>
+      </div>
+      <div
+        class="_wrapper_33d967"
+      >
+        <label
+          class="_label_33d967"
+          for="input-last"
+        >
+          Last name
+        </label>
+        <div
+          class="_wrapper_f9081f"
+        >
+          <input
+            class="_input_f9081f"
+            id="input-last"
+            name="last"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FormSection > fieldset - dom 1`] = `
+<DocumentFragment>
+  <fieldset
+    class="_section_c8ef73"
+  >
+    <legend
+      class="_legend_c8ef73"
+    >
+      Demographics
+    </legend>
+    <p
+      class="_description_c8ef73"
+    >
+      Used to personalize care.
+    </p>
+    <div
+      class="_body_c8ef73"
+    >
+      <div
+        class="_wrapper_33d967"
+      >
+        <label
+          class="_label_33d967"
+          for="input-dob"
+        >
+          Date of birth
+        </label>
+        <div
+          class="_wrapper_f9081f"
+        >
+          <input
+            class="_input_f9081f"
+            id="input-dob"
+            name="dob"
+          />
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</DocumentFragment>
+`;
+
+exports[`FunnelChart > stages - dom 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="echarts-chart"
+  />
+</DocumentFragment>
+`;
+
+exports[`GapsBanner > info - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-live="polite"
+    class="_banner_0a6e6e _info_0a6e6e"
+    role="status"
+  >
+    <div
+      class="_content_0a6e6e"
+    >
+      <p
+        class="_title_0a6e6e"
+      >
+        Update available
+      </p>
+      <p
+        class="_description_0a6e6e"
+      >
+        A new version is ready to install.
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`GapsBanner > warningAction - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-live="polite"
+    class="_banner_0a6e6e _warning_0a6e6e"
+    role="status"
+  >
+    <div
+      class="_content_0a6e6e"
+    >
+      <p
+        class="_title_0a6e6e"
+      >
+        Maintenance scheduled
+      </p>
+      <p
+        class="_description_0a6e6e"
+      >
+        Downtime expected at 2 AM UTC.
+      </p>
+    </div>
+    <div
+      class="_right_0a6e6e"
+    >
+      <button
+        class="_actionBtn_0a6e6e"
+        type="button"
+      >
+        View details
+      </button>
+      <button
+        aria-label="Dismiss"
+        class="_dismissBtn_0a6e6e"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M4 4l8 8M12 4l-8 8"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.5"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`GaugeChart > atValue - dom 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="echarts-chart"
+  />
+</DocumentFragment>
+`;
+
 exports[`IconButton > default - dom 1`] = `
 <DocumentFragment>
   <button
@@ -295,5 +1745,1125 @@ exports[`IconButton > primary - dom 1`] = `
       </svg>
     </span>
   </button>
+</DocumentFragment>
+`;
+
+exports[`KpiCard > basic - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_card_965819"
+  >
+    <div
+      class="_header_965819"
+    >
+      <span
+        class="_title_965819"
+      >
+        Revenue
+      </span>
+    </div>
+    <span
+      class="_value_965819"
+    >
+      $42,000
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`KpiCard > loading - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_card_965819"
+  >
+    <div
+      class="_header_965819"
+    >
+      <div
+        class="_skeletonTitle_965819"
+      />
+    </div>
+    <div
+      class="_skeletonValue_965819"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`KpiCard > trendUp - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_card_965819"
+  >
+    <div
+      class="_header_965819"
+    >
+      <span
+        class="_title_965819"
+      >
+        Active users
+      </span>
+    </div>
+    <span
+      class="_value_965819"
+    >
+      1234
+    </span>
+    <span
+      class="_trend_965819 _positive_965819"
+    >
+      ↑ +12%
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`KpiGrid > fourCol - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_grid_9ac535 _cols4_9ac535"
+  >
+    <div
+      class="_card_965819"
+    >
+      <div
+        class="_header_965819"
+      >
+        <span
+          class="_title_965819"
+        >
+          Revenue
+        </span>
+      </div>
+      <span
+        class="_value_965819"
+      >
+        $42K
+      </span>
+    </div>
+    <div
+      class="_card_965819"
+    >
+      <div
+        class="_header_965819"
+      >
+        <span
+          class="_title_965819"
+        >
+          Users
+        </span>
+      </div>
+      <span
+        class="_value_965819"
+      >
+        1,234
+      </span>
+    </div>
+    <div
+      class="_card_965819"
+    >
+      <div
+        class="_header_965819"
+      >
+        <span
+          class="_title_965819"
+        >
+          Conversion
+        </span>
+      </div>
+      <span
+        class="_value_965819"
+      >
+        3.4%
+      </span>
+    </div>
+    <div
+      class="_card_965819"
+    >
+      <div
+        class="_header_965819"
+      >
+        <span
+          class="_title_965819"
+        >
+          Churn
+        </span>
+      </div>
+      <span
+        class="_value_965819"
+      >
+        0.8%
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`LineChart > withSeries - dom 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="echarts-chart"
+  />
+</DocumentFragment>
+`;
+
+exports[`LoadingSpinner > md - dom 1`] = `
+<DocumentFragment>
+  <svg
+    class="_spinner_14d3fe _md_14d3fe"
+    fill="none"
+    style="color: var(--smd-color-primary-50);"
+    viewBox="0 0 24 24"
+  >
+    <circle
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      stroke-opacity="0.2"
+      stroke-width="2.5"
+    />
+    <path
+      d="M12 2a10 10 0 0 1 10 10"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-width="2.5"
+    />
+  </svg>
+</DocumentFragment>
+`;
+
+exports[`Modal > closed - dom 1`] = `
+<body
+  style=""
+>
+  <div />
+  <div
+    data-smd-portal=""
+  />
+</body>
+`;
+
+exports[`Modal > open - dom 1`] = `
+<body
+  style="overflow: hidden;"
+>
+  <div />
+  <div
+    data-smd-portal=""
+  >
+    <div
+      aria-labelledby="modal-title"
+      aria-modal="true"
+      class="_overlay_7cc3ba"
+      role="dialog"
+    >
+      <div
+        class="_modal_7cc3ba _md_7cc3ba"
+      >
+        <div
+          class="_header_7cc3ba"
+        >
+          <h2
+            class="_title_7cc3ba"
+            id="modal-title"
+          >
+            Confirmation
+          </h2>
+          <button
+            aria-label="Close dialog"
+            class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _square_0829c1"
+            type="button"
+          >
+            <span
+              class="_label_0829c1"
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M2 2l12 12M14 2L2 14"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <div
+          class="_body_7cc3ba"
+        >
+          <p>
+            Are you sure you want to proceed?
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`MultiSelect > noSelection - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for=":re:"
+    >
+      Tags
+    </label>
+    <div
+      aria-expanded="false"
+      aria-haspopup="listbox"
+      aria-invalid="false"
+      class="_triggerArea_e760e9"
+      id=":re:"
+      role="button"
+      tabindex="0"
+    >
+      <span
+        class="_placeholder_e760e9"
+      >
+        Select tags...
+      </span>
+      <span
+        class="_triggerRight_e760e9"
+      >
+        <svg
+          aria-hidden="true"
+          class="_chevron_e760e9"
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M4 6l4 4 4-4"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          />
+        </svg>
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`MultiSelect > selections - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <div
+      aria-expanded="false"
+      aria-haspopup="listbox"
+      aria-invalid="false"
+      class="_triggerArea_e760e9"
+      id=":rg:"
+      role="button"
+      tabindex="0"
+    >
+      <span
+        class="_pill_e760e9"
+        data-pill-value="a"
+      >
+        Option A
+        <button
+          aria-label="Remove Option A"
+          class="_pillRemove_e760e9"
+          type="button"
+        >
+          ×
+        </button>
+      </span>
+      <span
+        class="_pill_e760e9"
+        data-pill-value="b"
+      >
+        Option B
+        <button
+          aria-label="Remove Option B"
+          class="_pillRemove_e760e9"
+          type="button"
+        >
+          ×
+        </button>
+      </span>
+      <span
+        class="_triggerRight_e760e9"
+      >
+        <button
+          aria-label="Clear all"
+          class="_clearAll_e760e9"
+          type="button"
+        >
+          Clear
+        </button>
+        <svg
+          aria-hidden="true"
+          class="_chevron_e760e9"
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M4 6l4 4 4-4"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          />
+        </svg>
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PageHeader > backLink - dom 1`] = `
+<DocumentFragment>
+  <header
+    class="_header_eb25c9"
+  >
+    <a
+      class="_back_eb25c9"
+      href="/reports"
+    >
+      <svg
+        aria-hidden="true"
+        fill="none"
+        height="16"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          d="M10 12L6 8l4-4"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+        />
+      </svg>
+      Reports
+    </a>
+    <div
+      class="_row_eb25c9"
+    >
+      <div
+        class="_titles_eb25c9"
+      >
+        <h1
+          class="_title_eb25c9"
+        >
+          Report Detail
+        </h1>
+      </div>
+    </div>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`PageHeader > titleSubtitle - dom 1`] = `
+<DocumentFragment>
+  <header
+    class="_header_eb25c9"
+  >
+    <div
+      class="_row_eb25c9"
+    >
+      <div
+        class="_titles_eb25c9"
+      >
+        <h1
+          class="_title_eb25c9"
+        >
+          Analytics Dashboard
+        </h1>
+        <p
+          class="_subtitle_eb25c9"
+        >
+          Monitor your key metrics
+        </p>
+      </div>
+    </div>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`PageSection > titleChildren - dom 1`] = `
+<DocumentFragment>
+  <section
+    class="_section_78b1d5"
+  >
+    <div
+      class="_header_78b1d5"
+    >
+      <div
+        class="_titles_78b1d5"
+      >
+        <h2
+          class="_title_78b1d5"
+        >
+          Overview
+        </h2>
+        <p
+          class="_subtitle_78b1d5"
+        >
+          Key performance indicators
+        </p>
+      </div>
+    </div>
+    <p>
+      Section content here.
+    </p>
+  </section>
+</DocumentFragment>
+`;
+
+exports[`PieChart > donut - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_f14d8d"
+  >
+    <div
+      data-testid="echarts-chart"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`PieChart > pie - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_f14d8d"
+  >
+    <div
+      data-testid="echarts-chart"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Radio > unchecked - dom 1`] = `
+<DocumentFragment>
+  <label
+    class="_root_4c3e9c"
+  >
+    <input
+      class="_input_4c3e9c"
+      name="choice"
+      type="radio"
+      value="a"
+    />
+    <span
+      class="_circle_4c3e9c"
+    />
+    <span
+      class="_label_4c3e9c"
+    >
+      Option A
+    </span>
+  </label>
+</DocumentFragment>
+`;
+
+exports[`RadioGroup > withSelection - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for="choice"
+    >
+      Choice
+    </label>
+    <div
+      aria-labelledby=":ri:-label"
+      class="_group_7fcaa1 _vertical_7fcaa1"
+      role="radiogroup"
+    >
+      <label
+        class="_root_4c3e9c"
+      >
+        <input
+          checked=""
+          class="_input_4c3e9c"
+          name="choice"
+          tabindex="0"
+          type="radio"
+          value="a"
+        />
+        <span
+          class="_circle_4c3e9c"
+        />
+        <span
+          class="_label_4c3e9c"
+        >
+          Option A
+        </span>
+      </label>
+      <label
+        class="_root_4c3e9c"
+      >
+        <input
+          class="_input_4c3e9c"
+          name="choice"
+          tabindex="-1"
+          type="radio"
+          value="b"
+        />
+        <span
+          class="_circle_4c3e9c"
+        />
+        <span
+          class="_label_4c3e9c"
+        >
+          Option B
+        </span>
+      </label>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SecureField > error - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for="secure-mrn"
+    >
+      MRN
+    </label>
+    <div
+      class="_wrapper_1b37da"
+    >
+      <input
+        aria-describedby="secure-mrn-error"
+        aria-invalid="true"
+        autocapitalize="off"
+        autocomplete="off"
+        autocorrect="off"
+        class="_input_1b37da"
+        data-sensitive=""
+        id="secure-mrn"
+        name="mrn"
+        spellcheck="false"
+        type="password"
+      />
+    </div>
+    <span
+      class="_error_33d967"
+      id="secure-mrn-error"
+      role="alert"
+    >
+      Required
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SecureField > masked - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for="secure-ssn"
+    >
+      Social Security Number
+    </label>
+    <div
+      class="_wrapper_1b37da _hasToggle_1b37da"
+    >
+      <input
+        autocapitalize="off"
+        autocomplete="off"
+        autocorrect="off"
+        class="_input_1b37da"
+        data-sensitive=""
+        id="secure-ssn"
+        name="ssn"
+        placeholder="000-00-0000"
+        spellcheck="false"
+        type="password"
+      />
+      <button
+        aria-label="Show value"
+        aria-pressed="false"
+        class="_toggle_1b37da"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          fill="none"
+          height="16"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M1 8s2.6-5 7-5 7 5 7 5-2.6 5-7 5-7-5-7-5Z"
+            stroke="currentColor"
+            stroke-width="1.3"
+          />
+          <circle
+            cx="8"
+            cy="8"
+            r="2.1"
+            stroke="currentColor"
+            stroke-width="1.3"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Select > withOptions - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for="select-size"
+    >
+      Size
+    </label>
+    <select
+      class="_select_d4facd"
+      id="select-size"
+      name="size"
+    >
+      <option
+        disabled=""
+        value=""
+      >
+        Choose...
+      </option>
+      <option
+        value="a"
+      >
+        Option A
+      </option>
+      <option
+        value="b"
+      >
+        Option B
+      </option>
+    </select>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Sidebar > collapsed - dom 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Main navigation"
+    class="_sidebar_db19ec _collapsed_db19ec"
+  >
+    <div
+      class="_nav_db19ec"
+    >
+      <a
+        aria-label="Dashboard"
+        class="_item_db19ec"
+        data-nav-key="dashboard"
+        href="/"
+      />
+      <a
+        aria-current="page"
+        aria-label="Analytics"
+        class="_item_db19ec _itemActive_db19ec"
+        data-nav-key="analytics"
+        href="/analytics"
+      />
+      <a
+        aria-label="Settings"
+        class="_item_db19ec"
+        data-nav-key="settings"
+        href="/settings"
+      />
+    </div>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`Sidebar > navItems - dom 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Main navigation"
+    class="_sidebar_db19ec"
+  >
+    <div
+      class="_nav_db19ec"
+    >
+      <a
+        aria-current="page"
+        aria-label="Dashboard"
+        class="_item_db19ec _itemActive_db19ec"
+        data-nav-key="dashboard"
+        href="/"
+      >
+        <span
+          class="_itemLabel_db19ec"
+        >
+          Dashboard
+        </span>
+      </a>
+      <a
+        aria-label="Analytics"
+        class="_item_db19ec"
+        data-nav-key="analytics"
+        href="/analytics"
+      >
+        <span
+          class="_itemLabel_db19ec"
+        >
+          Analytics
+        </span>
+      </a>
+      <a
+        aria-label="Settings"
+        class="_item_db19ec"
+        data-nav-key="settings"
+        href="/settings"
+      >
+        <span
+          class="_itemLabel_db19ec"
+        >
+          Settings
+        </span>
+      </a>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`Skeleton > circle - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_skeleton_8ca799 _circle_8ca799"
+    style="width: 40px; height: 40px;"
+  />
+</DocumentFragment>
+`;
+
+exports[`Skeleton > multiLine - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_textGroup_8ca799"
+  >
+    <div
+      class="_skeleton_8ca799 _text_8ca799"
+    />
+    <div
+      class="_skeleton_8ca799 _text_8ca799"
+    />
+    <div
+      class="_skeleton_8ca799 _text_8ca799 _textLast_8ca799"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Skeleton > text - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_skeleton_8ca799 _text_8ca799"
+    style="width: 200px; height: 16px;"
+  />
+</DocumentFragment>
+`;
+
+exports[`StackedAreaChart > withSeries - dom 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="echarts-chart"
+  />
+</DocumentFragment>
+`;
+
+exports[`StackedBarChart > withSeries - dom 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="echarts-chart"
+  />
+</DocumentFragment>
+`;
+
+exports[`Tabs > pills - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_tablist_d3f7cd _pills_d3f7cd"
+    role="tablist"
+  >
+    <button
+      aria-selected="false"
+      class="_tab_d3f7cd"
+      data-tab-key="week"
+      role="tab"
+      tabindex="-1"
+      type="button"
+    >
+      Week
+    </button>
+    <button
+      aria-selected="true"
+      class="_tab_d3f7cd"
+      data-tab-key="month"
+      role="tab"
+      tabindex="0"
+      type="button"
+    >
+      Month
+    </button>
+    <button
+      aria-selected="false"
+      class="_tab_d3f7cd"
+      data-tab-key="year"
+      role="tab"
+      tabindex="-1"
+      type="button"
+    >
+      Year
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Tabs > underline - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_tablist_d3f7cd _underline_d3f7cd"
+    role="tablist"
+  >
+    <button
+      aria-selected="true"
+      class="_tab_d3f7cd"
+      data-tab-key="overview"
+      role="tab"
+      tabindex="0"
+      type="button"
+    >
+      Overview
+    </button>
+    <button
+      aria-selected="false"
+      class="_tab_d3f7cd"
+      data-tab-key="details"
+      role="tab"
+      tabindex="-1"
+      type="button"
+    >
+      Details
+    </button>
+    <button
+      aria-selected="false"
+      class="_tab_d3f7cd"
+      data-tab-key="history"
+      role="tab"
+      tabindex="-1"
+      type="button"
+    >
+      History
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`TextArea > default - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <textarea
+      class="_textarea_a77a9a"
+      id="textarea-notes"
+      name="notes"
+      placeholder="Enter notes"
+      rows="3"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`TextInput > default - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <div
+      class="_wrapper_f9081f"
+    >
+      <input
+        class="_input_f9081f"
+        id="input-email"
+        name="email"
+        placeholder="Enter email"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`TextInput > error - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for="input-email"
+    >
+      Email
+    </label>
+    <div
+      class="_wrapper_f9081f"
+    >
+      <input
+        aria-describedby="input-email-error"
+        aria-invalid="true"
+        class="_input_f9081f"
+        id="input-email"
+        name="email"
+      />
+    </div>
+    <span
+      class="_error_33d967"
+      id="input-email-error"
+      role="alert"
+    >
+      Required
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Toast > withChildren - dom 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="app"
+  >
+    Application content
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Toggle > off - dom 1`] = `
+<DocumentFragment>
+  <label
+    class="_root_76a0f7"
+    for=":rq:"
+  >
+    <input
+      aria-checked="false"
+      class="_input_76a0f7"
+      id=":rq:"
+      role="switch"
+      type="checkbox"
+    />
+    <span
+      class="_track_76a0f7"
+    >
+      <span
+        class="_thumb_76a0f7"
+      />
+    </span>
+    <span
+      class="_label_76a0f7"
+    >
+      Dark mode
+    </span>
+  </label>
+</DocumentFragment>
+`;
+
+exports[`Toggle > on - dom 1`] = `
+<DocumentFragment>
+  <label
+    class="_root_76a0f7"
+    for=":rs:"
+  >
+    <input
+      aria-checked="true"
+      checked=""
+      class="_input_76a0f7"
+      id=":rs:"
+      role="switch"
+      type="checkbox"
+    />
+    <span
+      class="_track_76a0f7"
+    >
+      <span
+        class="_thumb_76a0f7"
+      />
+    </span>
+    <span
+      class="_label_76a0f7"
+    >
+      Dark mode
+    </span>
+  </label>
+</DocumentFragment>
+`;
+
+exports[`Tooltip > trigger - dom 1`] = `
+<DocumentFragment>
+  <button
+    type="button"
+  >
+    Hover me
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Typeahead > empty - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_33d967"
+  >
+    <label
+      class="_label_33d967"
+      for=":r10:"
+    >
+      Search
+    </label>
+    <div
+      class="_inputWrapper_3c3d0d"
+    >
+      <input
+        aria-autocomplete="list"
+        aria-expanded="false"
+        aria-invalid="false"
+        autocomplete="off"
+        class="_input_3c3d0d"
+        id=":r10:"
+        placeholder="Type to search..."
+        role="combobox"
+        type="text"
+        value=""
+      />
+      <span
+        class="_adornmentRight_3c3d0d"
+      />
+    </div>
+  </div>
 </DocumentFragment>
 `;

@@ -61,13 +61,15 @@ for (const [path, mod] of Object.entries(fixtureModules)) {
 
   describe(name, () => {
     for (const fixtureName of Object.keys(entry.config.fixtures)) {
+      // Portal components (Modal, etc.) render into document.body, so snapshot
+      // and audit the baseElement rather than the (empty) container fragment.
       it(`${fixtureName} - dom`, () => {
-        const {asFragment} = renderFixture(entry, fixtureName);
-        expect(asFragment()).toMatchSnapshot();
+        const result = renderFixture(entry, fixtureName);
+        expect(entry.config.portal ? result.baseElement : result.asFragment()).toMatchSnapshot();
       });
 
       it(`${fixtureName} - axe`, async () => {
-        const {container} = renderFixture(entry, fixtureName);
+        const result = renderFixture(entry, fixtureName);
         const rules = (entry.config.skipAxe ?? []).reduce<Record<string, {enabled: boolean}>>(
           (acc, id) => {
             acc[id] = {enabled: false};
@@ -75,7 +77,8 @@ for (const [path, mod] of Object.entries(fixtureModules)) {
           },
           {},
         );
-        expect(await axe(container, {rules})).toHaveNoViolations();
+        const target = entry.config.portal ? result.baseElement : result.container;
+        expect(await axe(target, {rules})).toHaveNoViolations();
       });
     }
   });

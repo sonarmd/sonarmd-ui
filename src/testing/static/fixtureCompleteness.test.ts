@@ -13,25 +13,19 @@ import {test, expect} from 'vitest';
 
 const COMPONENTS_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'components');
 
-const PENDING_MIGRATION = new Set<string>([
-  'Alert', 'AreaChart', 'BarChart', 'BubbleChart', 'ChartCard', 'Checkbox',
-  'CheckboxGroup', 'ConfirmDialog', 'DataTable', 'DatePicker', 'DateRangePicker',
-  'Dropdown', 'EmptyState', 'Fade', 'FieldWrapper', 'FilterBar', 'Form',
-  'FormActions', 'FormErrorSummary', 'FormGrid', 'FormSection', 'FunnelChart',
-  'GapsBanner', 'GaugeChart', 'KpiCard', 'KpiGrid', 'LineChart', 'LoadingSpinner',
-  'Modal', 'MultiSelect', 'PageHeader', 'PageSection', 'PieChart', 'Radio',
-  'RadioGroup', 'SecureField', 'Select', 'Sidebar', 'Skeleton', 'StackedAreaChart',
-  'StackedBarChart', 'Stagger', 'Tabs', 'TextArea', 'TextInput', 'Toast', 'Toggle',
-  'Tooltip', 'Typeahead',
-]);
+// All components now have fixtures; the monolith is deleted. Empty backlog.
+const PENDING_MIGRATION = new Set<string>([]);
 
-const hasFixture = (dir: string): boolean =>
-  readdirSync(join(COMPONENTS_DIR, dir)).some((f) => f.endsWith('.fixtures.tsx'));
+const dirFiles = (dir: string): string[] => readdirSync(join(COMPONENTS_DIR, dir));
 
+const hasFixture = (dir: string): boolean => dirFiles(dir).some((f) => f.endsWith('.fixtures.tsx'));
+
+// A real component is a directory that ships an index.tsx (ignores empty/leftover dirs).
 const componentDirs = (): string[] =>
   readdirSync(COMPONENTS_DIR, {withFileTypes: true})
     .filter((e) => e.isDirectory())
-    .map((e) => e.name);
+    .map((e) => e.name)
+    .filter((d) => dirFiles(d).includes('index.tsx'));
 
 test('every component has a fixtures file (or is tracked in the migration backlog)', () => {
   const missing = componentDirs().filter((d) => !hasFixture(d));

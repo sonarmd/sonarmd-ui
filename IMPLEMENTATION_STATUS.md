@@ -13,7 +13,7 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
-## S7.0 - Declarative test harness  (IN PROGRESS)
+## S7.0 - Declarative test harness  (DONE)
 
 Branch: feat/s2-performance (continued).
 
@@ -26,14 +26,20 @@ Branch: feat/s2-performance (continued).
 - Completeness gate (`fixtureCompleteness.test.ts`): every component must have a
   `*.fixtures.tsx` or sit in the tracked migration backlog (49 remaining); stale
   backlog entries also fail.
-- Migrated the Phase-0 primitives (Badge, Button, Card, IconButton, Breadcrumbs)
-  to fixtures and removed them from the monolithic `snapshots.test.tsx`.
+- All 53 components migrated to `*.fixtures.tsx`; the monolithic
+  `snapshots.test.tsx` is deleted; completeness backlog is empty (7.0.2).
+- The axe pass caught two real defects: collapsed Sidebar nav items had no
+  accessible name (fixed: aria-label on the nav link/button) and MultiSelect
+  nests the chip remove-buttons inside its role="button" trigger
+  (nested-interactive) - a pre-existing defect needing a combobox refactor,
+  tracked separately and skipped via the fixture's `skipAxe` until then.
 - jsdom applies no CSS, so a dark DOM snapshot equals the light one; dark
   correctness is covered by `contrast.test.ts` + `chartTheme.test.ts`, so the
   harness emits one DOM snapshot + axe per fixture rather than duplicate
   light/dark snapshots (closest-compliant for 7.0.1).
-- Next: migrate the remaining 49 components, delete the monolith (7.0.2), add the
-  dev-only `@sonarmd/ui/testing` subpath (7.0.5); then S8a (dev workbench).
+- Remaining S7.0 polish: the dev-only `@sonarmd/ui/testing` subpath export
+  (7.0.5) - deferred (needs test-dep externalization in the build). Next per
+  V1_SPEC: S8a (dev workbench).
 
 ## S0 - Missing primitives  (DONE)
 
