@@ -58,8 +58,14 @@ Branch: feat/s2-performance.
   (Criterion 2.2 / audit M2).
 - Lean `ThemeProvider` + `useTheme()` exported (attribute toggle, negligible JS;
   attribute-only usage works without them).
-- Deferred: chart dark re-theme via an echarts dark theme object without visible
-  re-instantiation (Criterion 2.3, charts portion) - the intricate follow-up.
+- Chart dark re-theme (Criterion 2.3, charts portion): `chartChrome(theme)`
+  builds axis/legend/tooltip colors from the same token map; ChartCanvas applies
+  it via setOption (no re-instantiation) and re-applies on data-theme /
+  prefers-color-scheme changes. Minor remaining: gauge detail + funnel inner
+  labels are series-internal and not yet theme-swapped.
+
+V1_SPEC S2 theming criteria (2.1-2.4) are met. The injected performance phases
+(4 runtime metrics, 5 Sass) remain gated per ADR-0002.
 
 ### Next
 - Phase 4: runtime metrics (FCP/LCP/TBT/TTI/hydration) via Playwright, attempted
