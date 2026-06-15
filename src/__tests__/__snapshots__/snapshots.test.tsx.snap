@@ -577,23 +577,27 @@ exports[`ConfirmDialog > renders danger variant 1`] = `
           </h2>
           <button
             aria-label="Close dialog"
-            class="_closeBtn_7cc3ba"
+            class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _square_0829c1"
             type="button"
           >
-            <svg
-              aria-hidden="true"
-              fill="none"
-              height="16"
-              viewBox="0 0 16 16"
-              width="16"
+            <span
+              class="_label_0829c1"
             >
-              <path
-                d="M2 2l12 12M14 2L2 14"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-width="1.5"
-              />
-            </svg>
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M2 2l12 12M14 2L2 14"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </span>
           </button>
         </div>
         <div
@@ -609,17 +613,24 @@ exports[`ConfirmDialog > renders danger variant 1`] = `
           class="_footer_7cc3ba"
         >
           <button
-            class="_cancelBtn_3e03c7"
+            class="_button_0829c1 _ghost_0829c1 _md_0829c1"
             type="button"
           >
-            Cancel
+            <span
+              class="_label_0829c1"
+            >
+              Cancel
+            </span>
           </button>
           <button
-            aria-busy="false"
-            class="_confirmBtn_3e03c7 _danger_3e03c7"
+            class="_button_0829c1 _danger_0829c1 _md_0829c1"
             type="button"
           >
-            Delete
+            <span
+              class="_label_0829c1"
+            >
+              Delete
+            </span>
           </button>
         </div>
       </div>
@@ -656,23 +667,27 @@ exports[`ConfirmDialog > renders open state 1`] = `
           </h2>
           <button
             aria-label="Close dialog"
-            class="_closeBtn_7cc3ba"
+            class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _square_0829c1"
             type="button"
           >
-            <svg
-              aria-hidden="true"
-              fill="none"
-              height="16"
-              viewBox="0 0 16 16"
-              width="16"
+            <span
+              class="_label_0829c1"
             >
-              <path
-                d="M2 2l12 12M14 2L2 14"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-width="1.5"
-              />
-            </svg>
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M2 2l12 12M14 2L2 14"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </span>
           </button>
         </div>
         <div
@@ -688,17 +703,24 @@ exports[`ConfirmDialog > renders open state 1`] = `
           class="_footer_7cc3ba"
         >
           <button
-            class="_cancelBtn_3e03c7"
+            class="_button_0829c1 _ghost_0829c1 _md_0829c1"
             type="button"
           >
-            Cancel
+            <span
+              class="_label_0829c1"
+            >
+              Cancel
+            </span>
           </button>
           <button
-            aria-busy="false"
-            class="_confirmBtn_3e03c7 _danger_3e03c7"
+            class="_button_0829c1 _danger_0829c1 _md_0829c1"
             type="button"
           >
-            Confirm
+            <span
+              class="_label_0829c1"
+            >
+              Confirm
+            </span>
           </button>
         </div>
       </div>
@@ -1221,10 +1243,14 @@ exports[`EmptyState > renders with action button 1`] = `
       No data yet
     </p>
     <button
-      class="_actionBtn_40e66c"
+      class="_button_0829c1 _primary_0829c1 _md_0829c1"
       type="button"
     >
-      Add your first item
+      <span
+        class="_label_0829c1"
+      >
+        Add your first item
+      </span>
     </button>
   </div>
 </DocumentFragment>
@@ -1343,15 +1369,19 @@ exports[`FilterBar > renders with active filters 1`] = `
       </span>
     </div>
     <button
-      class="_clearBtn_7388b4"
+      class="_button_0829c1 _ghost_0829c1 _sm_0829c1"
       type="button"
     >
       <span
-        class="_badge_7388b4"
+        class="_label_0829c1"
       >
-        3
+        <span
+          class="_badge_7388b4"
+        >
+          3
+        </span>
+        Clear filters
       </span>
-      Clear filters
     </button>
   </div>
 </DocumentFragment>
@@ -1862,23 +1892,27 @@ exports[`Modal > renders open state 1`] = `
           </h2>
           <button
             aria-label="Close dialog"
-            class="_closeBtn_7cc3ba"
+            class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _square_0829c1"
             type="button"
           >
-            <svg
-              aria-hidden="true"
-              fill="none"
-              height="16"
-              viewBox="0 0 16 16"
-              width="16"
+            <span
+              class="_label_0829c1"
             >
-              <path
-                d="M2 2l12 12M14 2L2 14"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-width="1.5"
-              />
-            </svg>
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M2 2l12 12M14 2L2 14"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </span>
           </button>
         </div>
         <div

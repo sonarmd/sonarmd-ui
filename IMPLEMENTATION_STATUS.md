@@ -13,6 +13,27 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## S0 - Missing primitives  (DONE)
+
+Branch: feat/s2-performance (continued).
+
+- 0.1 Button: DONE (variant/size/density/loading/icons, semantic tokens,
+  forwardRef, visible focus, reduced motion) + a typed `square` shape.
+- 0.2 IconButton: DONE. Required `label` -> aria-label + Tooltip on
+  hover/focus-visible (no default; will not compile without it). Reuses Button
+  for all styling.
+- 0.3 Breadcrumbs: DONE. nav landmark + ordered list; last item plain text with
+  aria-current; router-agnostic `renderLink`; middle collapses into an
+  accessible ellipsis menu (Escape + outside-click) past `maxItems`. Canonical
+  `BreadcrumbItem` now lives here (PageHeader's {label,to} dropped from the
+  barrel to avoid a name collision).
+- 0.4 Adoption: DONE. ConfirmDialog, EmptyState, FilterBar, and Modal's close
+  button now render Button internally (one source of button styling); the dead
+  per-button CSS was removed (leaner style.css). FormActions is a layout
+  container (consumer supplies Buttons) - no change needed. Public props
+  unchanged; only the 5 affected components' snapshots moved.
+- Per-component subpath exports: ./button, ./card, ./icon-button, ./breadcrumbs.
+
 ## S2 - Performance-first + benchmarks  (IN PROGRESS)
 
 Owner directive (DECISIONS.md ADR-0001) supersedes V1_SPEC's theming-only S2.

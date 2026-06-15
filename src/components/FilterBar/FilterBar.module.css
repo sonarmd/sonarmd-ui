@@ -13,28 +13,6 @@
   flex: 1;
 }
 
-.clearBtn {
-  display: flex;
-  align-items: center;
-  gap: var(--smd-space-2);
-  background: none;
-  border: 1px solid var(--smd-border-default);
-  border-radius: var(--smd-radius-md);
-  padding: var(--smd-space-2) var(--smd-space-3);
-  font-size: var(--smd-font-size-sm);
-  color: var(--smd-text-secondary);
-  cursor: pointer;
-  white-space: nowrap;
-  transition:
-    background var(--smd-duration-base),
-    border-color var(--smd-duration-base);
-}
-
-.clearBtn:hover {
-  background: var(--smd-bg-subtle);
-  border-color: var(--smd-border-strong);
-}
-
 .badge {
   background: var(--smd-color-primary-50);
   color: white;

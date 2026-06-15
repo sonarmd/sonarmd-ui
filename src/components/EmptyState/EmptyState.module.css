@@ -24,20 +24,3 @@
   max-width: 360px;
   line-height: var(--smd-line-height-relaxed);
 }
-
-.actionBtn {
-  margin-top: var(--smd-space-2);
-  padding: var(--smd-space-2) var(--smd-space-5);
-  background: var(--smd-color-primary-50);
-  color: white;
-  border: none;
-  border-radius: var(--smd-radius-md);
-  font-size: var(--smd-font-size-base);
-  font-weight: var(--smd-font-weight-medium);
-  cursor: pointer;
-  transition: background var(--smd-duration-base);
-}
-
-.actionBtn:hover {
-  background: var(--smd-color-primary-60);
-}

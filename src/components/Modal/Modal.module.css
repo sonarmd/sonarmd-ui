@@ -72,20 +72,6 @@
   color: var(--smd-text-primary);
 }
 
-.closeBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: var(--smd-space-1);
-  border-radius: var(--smd-radius-md);
-  color: var(--smd-text-tertiary);
-  display: flex;
-}
-.closeBtn:hover {
-  background: var(--smd-bg-subtle);
-  color: var(--smd-text-primary);
-}
-
 .body {
   flex: 1;
   overflow-y: auto;

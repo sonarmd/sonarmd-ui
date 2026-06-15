@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { usePortal } from '../../hooks/usePortal';
+import { Button } from '../Button';
 import styles from './Modal.module.css';
 
 export interface ModalProps {
@@ -146,14 +147,15 @@ export const Modal = React.memo(function Modal({
             <h2 id="modal-title" className={styles.title}>
               {title}
             </h2>
-            <button
-              type="button"
-              className={styles.closeBtn}
+            <Button
+              square
+              variant="ghost"
+              size="sm"
               onClick={handleCloseClick}
               aria-label="Close dialog"
             >
               <CloseIcon />
-            </button>
+            </Button>
           </div>
         )}
         <div className={styles.body}>{children}</div>

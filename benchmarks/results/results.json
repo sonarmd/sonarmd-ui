@@ -1,5 +1,5 @@
 {
-  "stamp": "2026-06-15T01:16:48.707Z",
+  "stamp": "2026-06-15T02:45:31.309Z",
   "results": [
     {
       "app": "antd",
@@ -59,18 +59,18 @@
       "app": "sonarmd",
       "label": "@sonarmd/ui",
       "js": {
-        "raw": 184557,
-        "gz": 60716,
-        "br": 53174
+        "raw": 184579,
+        "gz": 60729,
+        "br": 53308
       },
       "css": {
-        "raw": 64847,
-        "gz": 10303,
-        "br": 8734
+        "raw": 64260,
+        "gz": 10300,
+        "br": 8741
       },
-      "totalRaw": 249404,
-      "totalGz": 71019,
-      "totalBr": 61908,
+      "totalRaw": 248839,
+      "totalGz": 71029,
+      "totalBr": 62049,
       "runtime": null
     }
   ]
