@@ -46,6 +46,7 @@ export default defineConfig({
         resolve(__dirname, 'src/index.ts'),
         resolve(__dirname, 'src/charts/index.ts'),
         resolve(__dirname, 'src/sonarmd-tokens.ts'),
+        resolve(__dirname, 'src/motion/index.ts'),
       ],
       external: isExternal,
       preserveEntrySignatures: 'strict',

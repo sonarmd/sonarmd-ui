@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--smd-space-4);
-  animation: overlayIn var(--smd-duration-base) var(--smd-ease-out);
+  animation: overlayIn var(--smd-duration-base) var(--smd-ease-decelerate);
 }
 
 @keyframes overlayIn {
@@ -28,7 +28,7 @@
   flex-direction: column;
   max-height: calc(100vh - 64px);
   overflow: hidden;
-  animation: modalIn var(--smd-duration-base) var(--smd-ease-out);
+  animation: modalIn var(--smd-duration-base) var(--smd-ease-decelerate);
 }
 
 @keyframes modalIn {

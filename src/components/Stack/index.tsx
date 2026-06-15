@@ -1,0 +1,34 @@
+import {forwardRef, HTMLAttributes} from 'react';
+import styles from './Stack.module.css';
+
+type SpaceKey = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '8' | '10' | '12' | '16';
+
+export interface StackProps extends HTMLAttributes<HTMLDivElement> {
+  /** Gap between children, from the spacing scale. */
+  gap?: SpaceKey;
+  /** Cross-axis alignment. Defaults to stretch. */
+  align?: 'start' | 'center' | 'end' | 'stretch';
+  /** Main-axis distribution. */
+  justify?: 'start' | 'center' | 'end' | 'space-between';
+}
+
+export const Stack = forwardRef<HTMLDivElement, StackProps>(function Stack(
+  {gap = '4', align = 'stretch', justify = 'start', style, children, ...rest},
+  ref,
+) {
+  return (
+    <div
+      ref={ref}
+      className={styles.root}
+      style={{
+        '--stack-gap': `var(--smd-space-${gap})`,
+        alignItems: align,
+        justifyContent: justify,
+        ...style,
+      } as React.CSSProperties}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
+});

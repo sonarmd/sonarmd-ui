@@ -23,6 +23,7 @@ import {
   inputHeight,
   inputPaddingX,
   inputFontSize,
+  inputIconInset,
   sidebar,
   zIndex,
 } from '../sonarmd-tokens';
@@ -65,6 +66,7 @@ export function buildTokensCss(): string {
     ...groupVars('input-height', inputHeight),
     ...groupVars('input-px', inputPaddingX),
     ...groupVars('input-font', inputFontSize),
+    ...groupVars('input-icon', inputIconInset),
     ...groupVars('sidebar', sidebar),
     ...groupVars('z', zIndex),
   ];

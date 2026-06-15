@@ -10,8 +10,8 @@
   outline: none;
   resize: vertical;
   transition:
-    border-color var(--smd-duration-base) var(--smd-ease-default),
-    box-shadow var(--smd-duration-base) var(--smd-ease-default);
+    border-color var(--smd-duration-base) var(--smd-ease-standard),
+    box-shadow var(--smd-duration-base) var(--smd-ease-standard);
 }
 
 .textarea:focus {

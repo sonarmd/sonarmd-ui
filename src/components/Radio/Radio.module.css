@@ -21,8 +21,8 @@
   background: var(--smd-bg-base);
   flex-shrink: 0;
   transition:
-    background var(--smd-duration-base) var(--smd-ease-default),
-    border-color var(--smd-duration-base) var(--smd-ease-default);
+    background var(--smd-duration-base) var(--smd-ease-standard),
+    border-color var(--smd-duration-base) var(--smd-ease-standard);
   display: flex;
   align-items: center;
   justify-content: center;

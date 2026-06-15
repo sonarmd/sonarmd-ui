@@ -20,6 +20,13 @@ module.exports = [
     ignore: [...externals, 'echarts'],
   },
   {
+    // V1_SPEC: motion + transitions + data combined <= 6 kB gz. Motion alone <= 2.5 kB.
+    name: 'motion entry',
+    path: 'dist/motion/index.js',
+    limit: '2.5 kB',
+    ignore: [...externals, 'echarts'],
+  },
+  {
     name: 'charts entry (incl echarts core)',
     path: 'dist/charts/index.js',
     limit: '120 kB',

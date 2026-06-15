@@ -101,6 +101,68 @@ exports[`Alert > info - dom 1`] = `
 </DocumentFragment>
 `;
 
+exports[`AppShell > threeColumn - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_2085bb _sidebarCollapsed_2085bb _railCollapsed_2085bb _hasRail_2085bb"
+    data-sidebar-collapsed="true"
+  >
+    <div
+      class="_sidebar_2085bb"
+    >
+      <nav
+        style="width: 200px; padding: 16px; background: rgb(245, 245, 250);"
+      >
+        Nav
+      </nav>
+    </div>
+    <main
+      class="_content_2085bb"
+    >
+      <div
+        style="padding: 16px;"
+      >
+        Main content area
+      </div>
+    </main>
+    <button
+      aria-expanded="false"
+      aria-label="Open context panel"
+      class="_railToggle_2085bb"
+      type="button"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`AppShell > twoColumn - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_2085bb _sidebarCollapsed_2085bb _railCollapsed_2085bb"
+    data-sidebar-collapsed="true"
+  >
+    <div
+      class="_sidebar_2085bb"
+    >
+      <nav
+        style="width: 200px; padding: 16px; background: rgb(245, 245, 250);"
+      >
+        Nav
+      </nav>
+    </div>
+    <main
+      class="_content_2085bb"
+    >
+      <div
+        style="padding: 16px;"
+      >
+        Main content area
+      </div>
+    </main>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`AreaChart > withData - dom 1`] = `
 <DocumentFragment>
   <div
@@ -554,6 +616,141 @@ exports[`CheckboxGroup > oneSelected - dom 1`] = `
           </span>
         </label>
       </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Cluster > centered - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_e4edf8"
+    style="--cluster-gap: var(--smd-space-3); align-items: center; justify-content: center; flex-wrap: wrap;"
+  >
+    <span>
+      Left
+    </span>
+    <span>
+      Right
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Cluster > default - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_e4edf8"
+    style="--cluster-gap: var(--smd-space-3); align-items: center; justify-content: start; flex-wrap: wrap;"
+  >
+    <span>
+      Tag A
+    </span>
+    <span>
+      Tag B
+    </span>
+    <span>
+      Tag C
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Cluster > nowrap - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_e4edf8"
+    style="--cluster-gap: var(--smd-space-3); align-items: center; justify-content: start; flex-wrap: nowrap;"
+  >
+    <span>
+      No
+    </span>
+    <span>
+      Wrap
+    </span>
+    <span>
+      Here
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Cluster > spaced - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_e4edf8"
+    style="--cluster-gap: var(--smd-space-4); align-items: center; justify-content: start; flex-wrap: wrap;"
+  >
+    <span>
+      Action 1
+    </span>
+    <span>
+      Action 2
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Columns > template - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_3335f6"
+    style="grid-template-columns: 2fr 1fr; gap: var(--smd-space-4);"
+  >
+    <div
+      style="padding: 8px; background: rgb(238, 238, 238);"
+    >
+      Wide
+    </div>
+    <div
+      style="padding: 8px; background: rgb(238, 238, 238);"
+    >
+      Narrow
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Columns > threeEqual - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_3335f6"
+    style="grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--smd-space-6);"
+  >
+    <div
+      style="padding: 8px; background: rgb(238, 238, 238);"
+    >
+      A
+    </div>
+    <div
+      style="padding: 8px; background: rgb(238, 238, 238);"
+    >
+      B
+    </div>
+    <div
+      style="padding: 8px; background: rgb(238, 238, 238);"
+    >
+      C
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Columns > twoEqual - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_3335f6"
+    style="grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--smd-space-4);"
+  >
+    <div
+      style="padding: 8px; background: rgb(238, 238, 238);"
+    >
+      Col 1
+    </div>
+    <div
+      style="padding: 8px; background: rgb(238, 238, 238);"
+    >
+      Col 2
     </div>
   </div>
 </DocumentFragment>
@@ -2020,13 +2217,7 @@ exports[`MultiSelect > noSelection - dom 1`] = `
       Tags
     </label>
     <div
-      aria-expanded="false"
-      aria-haspopup="listbox"
-      aria-invalid="false"
       class="_triggerArea_e760e9"
-      id=":re:"
-      role="button"
-      tabindex="0"
     >
       <span
         class="_placeholder_e760e9"
@@ -2036,22 +2227,31 @@ exports[`MultiSelect > noSelection - dom 1`] = `
       <span
         class="_triggerRight_e760e9"
       >
-        <svg
-          aria-hidden="true"
-          class="_chevron_e760e9"
-          fill="none"
-          height="16"
-          viewBox="0 0 16 16"
-          width="16"
+        <button
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-invalid="false"
+          class="_comboToggle_e760e9"
+          id=":re:"
+          type="button"
         >
-          <path
-            d="M4 6l4 4 4-4"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-          />
-        </svg>
+          <svg
+            aria-hidden="true"
+            class="_chevron_e760e9"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
       </span>
     </div>
   </div>
@@ -2064,13 +2264,7 @@ exports[`MultiSelect > selections - dom 1`] = `
     class="_wrapper_33d967"
   >
     <div
-      aria-expanded="false"
-      aria-haspopup="listbox"
-      aria-invalid="false"
       class="_triggerArea_e760e9"
-      id=":rg:"
-      role="button"
-      tabindex="0"
     >
       <span
         class="_pill_e760e9"
@@ -2108,22 +2302,32 @@ exports[`MultiSelect > selections - dom 1`] = `
         >
           Clear
         </button>
-        <svg
-          aria-hidden="true"
-          class="_chevron_e760e9"
-          fill="none"
-          height="16"
-          viewBox="0 0 16 16"
-          width="16"
+        <button
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-invalid="false"
+          aria-label="Select..."
+          class="_comboToggle_e760e9"
+          id=":rg:"
+          type="button"
         >
-          <path
-            d="M4 6l4 4 4-4"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-          />
-        </svg>
+          <svg
+            aria-hidden="true"
+            class="_chevron_e760e9"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
       </span>
     </div>
   </div>
@@ -2588,6 +2792,87 @@ exports[`Skeleton > text - dom 1`] = `
     class="_skeleton_8ca799 _text_8ca799"
     style="width: 200px; height: 16px;"
   />
+</DocumentFragment>
+`;
+
+exports[`Spacer > fixed - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="_root_c3fa39"
+    style="height: var(--smd-space-4); flex-shrink: 0;"
+  />
+</DocumentFragment>
+`;
+
+exports[`Spacer > flexGrow - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="_root_c3fa39"
+    style="flex-grow: 1;"
+  />
+</DocumentFragment>
+`;
+
+exports[`Spacer > horizontal - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="_root_c3fa39"
+    style="width: var(--smd-space-6); flex-shrink: 0;"
+  />
+</DocumentFragment>
+`;
+
+exports[`Stack > centered - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_8f54d1"
+    style="--stack-gap: var(--smd-space-4); align-items: center; justify-content: start;"
+  >
+    <div>
+      Centered
+    </div>
+    <div>
+      Children
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Stack > default - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_8f54d1"
+    style="--stack-gap: var(--smd-space-4); align-items: stretch; justify-content: start;"
+  >
+    <div>
+      Item A
+    </div>
+    <div>
+      Item B
+    </div>
+    <div>
+      Item C
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Stack > gapSm - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_root_8f54d1"
+    style="--stack-gap: var(--smd-space-2); align-items: stretch; justify-content: start;"
+  >
+    <div>
+      Tight A
+    </div>
+    <div>
+      Tight B
+    </div>
+  </div>
 </DocumentFragment>
 `;
 

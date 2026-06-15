@@ -10,7 +10,7 @@
 
 .interactive {
   cursor: pointer;
-  transition: box-shadow var(--smd-duration-base) var(--smd-ease-default),
+  transition: box-shadow var(--smd-duration-base) var(--smd-ease-standard),
     border-color var(--smd-duration-base);
 }
 

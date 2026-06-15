@@ -1,6 +1,6 @@
 import {useMemo, useState} from 'react';
 import {MemoryRouter} from 'react-router-dom';
-import {Sidebar, Tabs, Toggle, useTheme} from '../src/index';
+import {AppShell, Sidebar, Tabs, Toggle, useTheme} from '../src/index';
 import type {ComponentFixtures} from '../src/testing/defineComponentFixtures';
 
 // Zone auto-discovery: the workbench is driven by the same *.fixtures.tsx the
@@ -26,6 +26,15 @@ const VIEWPORTS = [
   {key: 'desktop', label: '3-col desktop', width: 0},
 ];
 
+const WorkbenchSidebar = ({active, onNavigate}: {active: string; onNavigate: (key: string) => void}) => (
+  <Sidebar
+    items={ZONES.map((z) => ({key: z.name, label: z.name}))}
+    activeKey={active}
+    onNavigate={onNavigate}
+    header={<strong>@sonarmd/ui</strong>}
+  />
+);
+
 export function Workbench(): JSX.Element {
   const {theme, toggle} = useTheme();
   const [active, setActive] = useState(ZONES[0]?.name ?? '');
@@ -36,14 +45,11 @@ export function Workbench(): JSX.Element {
   const width = VIEWPORTS.find((v) => v.key === viewport)?.width ?? 0;
 
   return (
-    <div style={{display: 'flex', minHeight: '100vh', background: 'var(--smd-bg-subtle)'}}>
-      <Sidebar
-        items={ZONES.map((z) => ({key: z.name, label: z.name}))}
-        activeKey={active}
-        onNavigate={setActive}
-        header={<strong>@sonarmd/ui</strong>}
-      />
-      <main style={{flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0}}>
+    <AppShell
+      sidebar={<WorkbenchSidebar active={active} onNavigate={setActive} />}
+      style={{minHeight: '100vh', background: 'var(--smd-bg-subtle)'}}
+    >
+      <div style={{display: 'flex', flexDirection: 'column', height: '100%'}}>
         <header
           style={{
             display: 'flex',
@@ -93,7 +99,7 @@ export function Workbench(): JSX.Element {
               );
             })}
         </div>
-      </main>
-    </div>
+      </div>
+    </AppShell>
   );
 }

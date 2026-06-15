@@ -24,7 +24,7 @@
   height: 20px;
   border-radius: var(--smd-radius-full);
   background: var(--smd-border-strong);
-  transition: background var(--smd-duration-base) var(--smd-ease-default);
+  transition: background var(--smd-duration-base) var(--smd-ease-standard);
   flex-shrink: 0;
 }
 
@@ -46,7 +46,7 @@
   border-radius: var(--smd-radius-full);
   background: white;
   box-shadow: var(--smd-shadow-sm);
-  transition: transform var(--smd-duration-base) var(--smd-ease-default);
+  transition: transform var(--smd-duration-base) var(--smd-ease-standard);
 }
 
 .input:checked ~ .track .thumb {

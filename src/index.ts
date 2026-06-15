@@ -115,6 +115,18 @@ export type {DataTableProps, Column} from './components/DataTable';
 // Chart components, ChartCard, and chart tokens live in the ./charts subpath
 // entry so the core surface ships zero echarts bytes.
 
+// --- Layer 5: Layout Primitives -----------------------------------------------
+export {Stack} from './components/Stack';
+export type {StackProps} from './components/Stack';
+export {Cluster} from './components/Cluster';
+export type {ClusterProps} from './components/Cluster';
+export {Spacer} from './components/Spacer';
+export type {SpacerProps} from './components/Spacer';
+export {Columns} from './components/Columns';
+export type {ColumnsProps} from './components/Columns';
+export {AppShell} from './components/AppShell';
+export type {AppShellProps} from './components/AppShell';
+
 // --- Layer 6: Composition & Layout -------------------------------------------
 export {FilterBar} from './components/FilterBar';
 export type {FilterBarProps} from './components/FilterBar';
@@ -148,6 +160,7 @@ export {
   inputHeight,
   inputPaddingX,
   inputFontSize,
+  inputIconInset,
   sidebar,
   zIndex,
 } from './sonarmd-tokens';

@@ -9,7 +9,7 @@
   line-height: var(--smd-line-height-base);
   max-width: 240px;
   pointer-events: none;
-  animation: tooltipIn var(--smd-duration-fast) var(--smd-ease-out);
+  animation: tooltipIn var(--smd-duration-fast) var(--smd-ease-decelerate);
 }
 
 @keyframes tooltipIn {

@@ -68,6 +68,11 @@
       "import": "./dist/sonarmd-tokens.js",
       "require": "./dist/sonarmd-tokens.cjs"
     },
+    "./motion": {
+      "types": "./dist/motion/index.d.ts",
+      "import": "./dist/motion/index.js",
+      "require": "./dist/motion/index.cjs"
+    },
     "./tokens.css": "./dist/tokens.css",
     "./style.css": "./dist/style.css",
     "./package.json": "./package.json"

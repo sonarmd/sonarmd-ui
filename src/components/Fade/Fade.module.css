@@ -1,5 +1,5 @@
 .fade {
-  animation: smd-fade-in var(--smd-duration-slow) var(--smd-ease-out) both;
+  animation: smd-fade-in var(--smd-duration-slow) var(--smd-ease-decelerate) both;
 }
 
 @keyframes smd-fade-in {

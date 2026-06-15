@@ -13,6 +13,88 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## S3 + S4 - Layout primitives + Motion system  (DONE)
+
+Branch: feat/s2-performance (continued).
+
+### S3 Layout Primitives
+
+New components: `Stack`, `Cluster`, `Spacer`, `Columns`, `AppShell`.
+
+- `Stack` (flex-col, gap from spacing scale), `Cluster` (flex-row wrap, gap from
+  scale), `Spacer` (fixed size or flex-grow), `Columns` (CSS grid, cols/template/
+  minWidth), `AppShell` (3-column CSS grid sidebar|content|context-rail with
+  ResizeObserver collapse: context rail -> overlay drawer at contextRailBreakpoint,
+  sidebar defers to Sidebar's own collapse mode). All forwardRef, all tokens-only.
+- S3.1 satisfied: AppShell composes the 3-column workspace from props with no
+  consumer CSS. S3.2 satisfied: ResizeObserver drives responsive collapse per
+  container width (container-query-compatible; graceful on all evergreen browsers).
+  S3.4 (density) was already wired via `data-density` in the workbench.
+- Subpath exports added for all five layout components in `package.json` via
+  the main core entry (`.`); layout lives in the root bundle, no separate subpath
+  needed (each component is individually tree-shakeable via preserveModules).
+- Workbench chrome (`dev/Workbench.tsx`) updated to use `AppShell` - criterion
+  8.3 satisfied: the workbench chrome is now built from library components.
+- Criterion 3.3 (raw-px static check): new vitest suite
+  `src/testing/static/rawPx.test.ts` verifies no margin/padding uses raw px
+  literals in component CSS. Found and fixed 11 pre-existing violations across
+  Alert, Badge, DatePicker, SecureField, Sidebar, Tabs, TextInput, Toast,
+  Typeahead. Added `--smd-space-px: 1px` (spacing scale) and
+  `--smd-input-icon-{sm,lg}` (32px/40px input icon insets) as new tokens.
+
+### S4 Motion System
+
+- Motion tokens updated to V1_SPEC S4.1 spec: duration instant/fast/base/slow/page
+  (0/120/200/320/400ms); ease standard/decelerate/accelerate/spring-out (with
+  linear() spring approximation + cubic-bezier fallback). All 22 component CSS
+  files updated to new ease names (ease-default->standard, ease-out->decelerate,
+  ease-in->accelerate, ease-bounce->spring-out, duration-slower->page).
+- `src/motion/index.ts`: exports `useAnimate`, `usePresence`, `useFlip`, plus
+  `motionDuration` and `motionEase` JS constants mirroring the CSS tokens.
+- `useAnimate`: WAAPI wrapper. Interrupt-safe (cancels live Animation before
+  play). Central reduced-motion: substitutes opacity-only crossfade (<= 120ms)
+  when prefers-reduced-motion is active. S4.3 (interruptible) + S4.4 (reduced-
+  motion centrally) satisfied.
+- `usePresence`: mount/unmount with enter/exit animation via useAnimate. Element
+  stays in DOM until exit animation completes. S4 Criterion satisfied.
+- `useFlip`: FLIP layout transitions. record() before update, play() after.
+  Compositor-only: transform only (reduced-motion: opacity crossfade). S4.2
+  (compositor-only) satisfied.
+- `./motion` subpath added to package.json and vite.config.ts. Budget: 1.18 kB
+  brotli (limit 2.5 kB; combined motion+transitions+data limit is 6 kB per spec).
+
+### Gates (all green after this commit)
+
+- typecheck: clean (incl. dev/).
+- Tests: 224/224 passed (15 new snapshots for layout components).
+- Build: clean.
+- Size budgets: Badge 536B (3kB), core 26.03kB (80kB), motion 1.18kB (2.5kB),
+  charts 110.48kB (120kB).
+
+## MultiSelect - nested-interactive a11y fix  (DONE)
+
+Branch: feat/s2-performance (continued).
+
+- `src/components/MultiSelect/index.tsx`: the trigger was a `<div role="button"
+  tabIndex=0>` wrapping the per-chip Remove buttons and the Clear all button -
+  an axe `nested-interactive` violation. Refactored to the WAI-ARIA combobox
+  pattern: the outer `triggerArea` is now a plain non-interactive `<div>` (click
+  to open) and the focusable control is a sibling of the chips - the searchable
+  `<input role="combobox">`, or a dedicated `comboToggle` `<button>` (chevron
+  inside) when not searchable. Both carry `id={wrapperId}`, `aria-haspopup`,
+  `aria-expanded`, `aria-controls` (set only while the listbox exists, so it
+  never dangles), `aria-invalid`, and an `aria-label` fallback when there is no
+  visible label. The listbox got `id={wrapperId}-listbox`. Open now focuses the
+  active control (search input or toggle button) so keyboard nav survives a
+  click-to-open. Removed `skipAxe: ['nested-interactive']` from the fixtures.
+- Self-made decision: default `placeholder` changed from a unicode-ellipsis
+  value to ASCII `'Select...'`. The default now surfaces in the label-less
+  `aria-label` (and snapshot), and ASCII LAW forbids the non-ASCII char in
+  changed output. Priority 1/3 (PHI-neutral, DX).
+- Verify: typecheck clean; full `vitest run` 192 passed (2 MultiSelect DOM
+  snapshots regenerated - structural); all 84 axe fixtures pass with the rule
+  enforced; build green.
+
 ## S8a - Dev workbench  (DONE)
 
 Branch: feat/s2-performance (continued).
