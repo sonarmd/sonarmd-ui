@@ -13,6 +13,65 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## S5 - Page transitions  (DONE)
+
+Branch: feat/s2-performance (continued).
+
+### What shipped
+
+- `src/transitions/patterns.ts`: 8 canonical transition patterns (nav-forward,
+  nav-back, resolve, drill-in, overlay, swap, settle, dismiss) each defined as
+  exitKeyframes/enterKeyframes/duration/easing tuples. `reducedPattern()` returns
+  an opacity-only crossfade at 120ms for prefers-reduced-motion. `DEFAULT_PATTERN`
+  is 'swap'; unknown names fall back to it with a dev-mode console.warn.
+- `src/transitions/TransitionContainer.tsx`: router-agnostic dual-slot host.
+  On locationKey change, plays exit+enter simultaneously (overlap, not sequence);
+  removes outgoing slot after exit completes. Exposes `aria-live="polite"` and
+  focuses the first h1/h2/[data-autofocus] after mount for a11y (criterion 5.6).
+  No eslint-disable: dep capture uses a pendingRef set in the layoutEffect so the
+  animation effect's dep array is [outgoing, resolvePattern, pattern, direction]
+  without stale-closure risk.
+- `src/transitions/createTransitionOutlet.tsx`: factory that closes over react-router
+  hooks (useLocation, useNavigationType, Outlet, useMatches) and returns a
+  TransitionOutlet component. Route-level pattern overrides via handle.transition
+  (criterion 5.3). Direction: POP->back, REPLACE->replace, PUSH->forward.
+  The core module never imports react-router directly.
+- `src/transitions/index.ts`: barrel export.
+- `src/transitions/TransitionContainer.test.tsx`: criterion 5.5 satisfied - drives
+  TransitionContainer with a fake locationKey sequence (zero react-router imports
+  in the test). Covers initial render, key-change transition, all 8 named patterns,
+  unknown-pattern fallback (no throw), and back-direction. WAAPI stubbed via
+  Element.prototype.animate.
+- `./transitions` subpath wired in package.json, vite.config.ts, and .size-limit.cjs.
+- `window.matchMedia` polyfill added to src/test-setup.ts (needed by the module-level
+  prefersReduced singleton).
+
+### Self-made decisions
+
+- The `pendingRef` pattern (capture pattern+direction at key-change time, read from
+  ref in the animation effect) eliminates the eslint-disable suppression from the
+  earlier draft without changing animation semantics.
+- createTransitionOutlet uses createElement instead of JSX to avoid requiring
+  react-router-dom in the core tsx transform scope. The factory pattern keeps
+  react-router-dom a peerDependency; consumers provide the hooks.
+
+### Criteria status
+
+- 5.1 (8 patterns): all 8 patterns implemented and tested.
+- 5.2 (router-agnostic core): TransitionContainer has zero router imports.
+- 5.3 (per-route override): handle.transition read by createTransitionOutlet.
+- 5.4 (reduced-motion crossfade): reducedPattern() applied centrally.
+- 5.5 (testable without router): TransitionContainer.test.tsx passes with 12 tests.
+- 5.6 (focus management): h1/h2/[data-autofocus] focused after incoming mounts.
+
+### Gates (all green after this commit)
+
+- typecheck: clean.
+- Tests: 241/241 passed (+12 new TransitionContainer behavioral tests).
+- Build: clean.
+- Size budgets: transitions 1.35 kB brotli (limit 2.5 kB); all other budgets
+  unchanged. Combined motion+transitions = 1.15+1.35 = 2.5 kB (limit 6 kB).
+
 ## S3 + S4 - Layout primitives + Motion system  (DONE)
 
 Branch: feat/s2-performance (continued).

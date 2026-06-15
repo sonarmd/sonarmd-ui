@@ -27,6 +27,13 @@ module.exports = [
     ignore: [...externals, 'echarts'],
   },
   {
+    // V1_SPEC: transitions entry <= 2.5 kB brotli (part of the 6 kB combined budget).
+    name: 'transitions entry',
+    path: 'dist/transitions/index.js',
+    limit: '2.5 kB',
+    ignore: [...externals, 'echarts'],
+  },
+  {
     name: 'charts entry (incl echarts core)',
     path: 'dist/charts/index.js',
     limit: '120 kB',
