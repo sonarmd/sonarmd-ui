@@ -2022,9 +2022,10 @@ exports[`KpiCard > trendUp - dom 1`] = `
       class="_trend_965819 _positive_965819"
     >
       <svg
-        aria-hidden="true"
+        aria-label="Trending up"
         fill="currentColor"
         height="10"
+        role="img"
         viewBox="0 0 10 10"
         width="10"
       >

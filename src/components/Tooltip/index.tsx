@@ -108,7 +108,10 @@ export const Tooltip = React.memo(function Tooltip({
     'aria-describedby': visible ? tooltipId : undefined,
     ref: (node: Element | null) => {
       triggerRef.current = node;
-      const existingRef = child.props.ref;
+      // React 19 passes ref as a prop; React 18 (still an allowed peer) stores
+      // it on the element. Read both so a consumer ref on the child is preserved.
+      const existingRef =
+        child.props.ref ?? (child as { ref?: React.Ref<Element> }).ref;
       if (typeof existingRef === 'function') {
         existingRef(node);
       } else if (existingRef && typeof existingRef === 'object') {

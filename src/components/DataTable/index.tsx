@@ -236,6 +236,15 @@ export const DataTable = React.memo(function DataTable<T = Record<string, unknow
                 style={col.width !== undefined ? {width: col.width} : undefined}
                 data-col-key={col.sortable ? col.key : undefined}
                 onClick={col.sortable ? handleSortClick : undefined}
+                aria-sort={
+                  col.sortable
+                    ? sortColumn === col.key
+                      ? sortDirection === 'asc'
+                        ? 'ascending'
+                        : 'descending'
+                      : 'none'
+                    : undefined
+                }
               >
                 {col.header}
                 {col.sortable && (
