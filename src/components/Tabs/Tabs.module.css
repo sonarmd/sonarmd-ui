@@ -5,7 +5,7 @@
   position: relative;
 }
 
-/* ── underline variant ── */
+/* -- underline variant -- */
 .underline {
   border-bottom: 1px solid var(--smd-border-default);
 }
@@ -46,7 +46,7 @@
   border-radius: var(--smd-radius-full) var(--smd-radius-full) 0 0;
 }
 
-/* ── pills variant ── */
+/* -- pills variant -- */
 .pills {
   gap: var(--smd-space-1);
   background: var(--smd-bg-subtle);
@@ -82,7 +82,7 @@
   box-shadow: var(--smd-shadow-sm);
 }
 
-/* ── shared ── */
+/* -- shared -- */
 .tab:disabled,
 .tab[aria-disabled='true'] {
   opacity: 0.5;
@@ -111,7 +111,7 @@
   color: var(--smd-color-primary-50);
 }
 
-/* ── size sm ── */
+/* -- size sm -- */
 .sm .tab {
   padding: var(--smd-space-2) var(--smd-space-3);
   font-size: var(--smd-font-size-sm);

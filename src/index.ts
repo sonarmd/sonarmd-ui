@@ -58,7 +58,7 @@ export type {RadioGroupProps, RadioGroupOption} from './components/RadioGroup';
 export {Toggle} from './components/Toggle';
 export type {ToggleProps} from './components/Toggle';
 
-// ─── Layer 2: Complex Inputs ─────────────────────────────────────────────────
+// --- Layer 2: Complex Inputs -------------------------------------------------
 export {Dropdown} from './components/Dropdown';
 export type {DropdownProps, DropdownOption} from './components/Dropdown';
 
@@ -74,7 +74,7 @@ export type {DatePickerProps} from './components/DatePicker';
 export {DateRangePicker} from './components/DateRangePicker';
 export type {DateRangePickerProps, DateRange} from './components/DateRangePicker';
 
-// ─── Layer 3: Feedback & Display ─────────────────────────────────────────────
+// --- Layer 3: Feedback & Display ---------------------------------------------
 export {Badge} from './components/Badge';
 export type {BadgeProps, BadgeVariant} from './components/Badge';
 
@@ -93,7 +93,7 @@ export type {ModalProps} from './components/Modal';
 export {ConfirmDialog} from './components/ConfirmDialog';
 export type {ConfirmDialogProps} from './components/ConfirmDialog';
 
-// ─── Layer 4: Data Display ───────────────────────────────────────────────────
+// --- Layer 4: Data Display ---------------------------------------------------
 export {Skeleton} from './components/Skeleton';
 export type {SkeletonProps} from './components/Skeleton';
 
@@ -152,7 +152,7 @@ export type {SidebarProps, NavItem} from './components/Sidebar';
 export {GapsBanner} from './components/GapsBanner';
 export type {GapsBannerProps} from './components/GapsBanner';
 
-// ─── Design Tokens (re-exported for consumers) ────────────────────────────────
+// --- Design Tokens (re-exported for consumers) --------------------------------
 export {
   colors,
   spacing,
