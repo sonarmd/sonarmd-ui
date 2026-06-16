@@ -1,8 +1,8 @@
 # T-003: align benchmarks/ to React 19
 
 Lane: platform-engineer (build/tooling) or app-engineer
-Branch: (unassigned - follow-up)
-Status: OPEN (follow-up, not this session)
+Branch: chore/benchmarks-react19 (merged, deleted)
+Status: CLOSED (merged PR #11, f999c522)
 Opened: 2026-06-16
 
 ## Problem
@@ -25,3 +25,14 @@ this does NOT affect shipped artifacts - but it contradicts the cohesion goal.
 
 Human chose "spin a follow-up" (2026-06-16) over doing it inline. No shipped impact;
 low priority. See team/DECISIONS.md D-20260616-benchmarks-react18-finding.
+
+## Outcome (merged PR #11, f999c522)
+
+react/react-dom bumped ^18.3.1 -> ^19; lockfile refreshed; results regenerated.
+All 4 comparison apps build under React 19 with no lib bumps needed (no blocking
+peer constraints from MUI/antd/react-bootstrap). Budgets still pass; @sonarmd/ui
+keeps the smallest-total crown (73.05 kB br vs bootstrap 87.40, MUI 110.19, antd
+253.68). React 19's larger runtime added ~12 kB uniformly across all libraries, so
+the relative ranking held. Codex: clean pass, no findings. CI green. The cohesion
+goal (one React version across the whole project) is now met. No shipped-artifact
+impact (benchmarks is an isolated dev sub-package).
