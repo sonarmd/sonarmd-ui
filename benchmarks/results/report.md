@@ -1,22 +1,22 @@
 # Benchmark results
 
-Generated: 2026-06-15T02:45:31.309Z
+Generated: 2026-06-16T05:28:57.245Z
 
 Same dashboard shell (sidebar, header, KPI cards, tabs, table, form, modal),
 built per library, production build. Sizes are summed JS/CSS assets.
 
 | Library | JS (br) | JS (gz) | CSS (br) | CSS (gz) | Total (br) | Total (raw) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| ** @sonarmd/ui** | 52.06 kB | 59.31 kB | 8.54 kB | 10.06 kB | 60.59 kB | 243.01 kB |
-| React Bootstrap | 53.53 kB | 61.24 kB | 22.12 kB | 29.97 kB | 75.65 kB | 414.60 kB |
-| Material UI | 98.50 kB | 114.23 kB | 0.00 kB | 0.00 kB | 98.50 kB | 368.13 kB |
-| Ant Design | 241.95 kB | 295.49 kB | 0.00 kB | 0.00 kB | 241.95 kB | 933.92 kB |
+| ** @sonarmd/ui** | 63.79 kB | 73.79 kB | 9.25 kB | 10.93 kB | 73.05 kB | 298.51 kB |
+| React Bootstrap | 65.27 kB | 75.51 kB | 22.12 kB | 29.97 kB | 87.40 kB | 464.34 kB |
+| Material UI | 110.19 kB | 128.71 kB | 0.00 kB | 0.00 kB | 110.19 kB | 417.92 kB |
+| Ant Design | 253.68 kB | 309.90 kB | 0.00 kB | 0.00 kB | 253.68 kB | 983.85 kB |
 
 ## SonarMD vs each competitor (total brotli)
 
-- vs React Bootstrap: 1.25x larger (19.9% smaller with @sonarmd/ui)
-- vs Material UI: 1.63x larger (38.5% smaller with @sonarmd/ui)
-- vs Ant Design: 3.99x larger (75.0% smaller with @sonarmd/ui)
+- vs React Bootstrap: 1.20x larger (16.4% smaller with @sonarmd/ui)
+- vs Material UI: 1.51x larger (33.7% smaller with @sonarmd/ui)
+- vs Ant Design: 3.47x larger (71.2% smaller with @sonarmd/ui)
 
 Runtime metrics (FCP/LCP/TBT/TTI/hydration): not yet collected in this run
 (headless browser pending). Size metrics above are authoritative.
