@@ -27,7 +27,7 @@ export const StackedAreaChart = React.memo(function StackedAreaChart({
   isEmpty = false,
   onClick,
   className,
-}: StackedAreaChartProps): JSX.Element {
+}: StackedAreaChartProps): React.JSX.Element {
   const option = useMemo((): ECOption => {
     const labels = data.map((d) => String(d[xKey] ?? ''));
 

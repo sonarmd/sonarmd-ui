@@ -79,7 +79,7 @@ const TOKEN_GROUPS: TokenGroup[] = [
   },
 ];
 
-function Swatch({tokenName}: {tokenName: string}): JSX.Element {
+function Swatch({tokenName}: {tokenName: string}): React.JSX.Element {
   const isText = tokenName.includes('text');
   const isSpace = tokenName.includes('space');
   const isRadius = tokenName.includes('radius');
@@ -121,7 +121,7 @@ function Swatch({tokenName}: {tokenName: string}): JSX.Element {
   );
 }
 
-function TokenRow({token}: {token: {name: string; description: string}}): JSX.Element {
+function TokenRow({token}: {token: {name: string; description: string}}): React.JSX.Element {
   return (
     <div style={{
       display: 'grid',
@@ -142,7 +142,7 @@ function TokenRow({token}: {token: {name: string; description: string}}): JSX.El
   );
 }
 
-function TokenGroupSection({group}: {group: TokenGroup}): JSX.Element {
+function TokenGroupSection({group}: {group: TokenGroup}): React.JSX.Element {
   return (
     <section style={{marginBottom: 32}}>
       <h3 style={{margin: '0 0 8px', color: 'var(--smd-text-primary)'}}>{group.name}</h3>

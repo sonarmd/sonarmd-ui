@@ -23,7 +23,7 @@ export const ChartCard = React.memo(function ChartCard({
   placeholderHeight = 192,
   children,
   className,
-}: ChartCardProps): JSX.Element {
+}: ChartCardProps): React.JSX.Element {
   const cardClassName = useMemo(
     () => `${styles.card}${className ? ` ${className}` : ''}`,
     [className],

@@ -20,7 +20,7 @@ interface PatientCardProps {
   status: 'active' | 'review' | 'inactive';
 }
 
-export function PatientCard({name, hcc, status}: PatientCardProps): JSX.Element {
+export function PatientCard({name, hcc, status}: PatientCardProps): React.JSX.Element {
   const variant = status === 'active' ? 'success' : status === 'review' ? 'warning' : 'neutral';
   return (
     <Card>

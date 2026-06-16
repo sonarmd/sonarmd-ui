@@ -34,7 +34,7 @@ export const BarChart = React.memo(function BarChart({
   formatTooltip,
   formatYAxis,
   className,
-}: BarChartProps): JSX.Element {
+}: BarChartProps): React.JSX.Element {
   const option = useMemo((): ECOption => {
     const labels = data.map((d) => String(d[xKey] ?? ''));
     const values = data.map((d) => (d[yKey] as number) ?? 0);

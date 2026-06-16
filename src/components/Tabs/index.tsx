@@ -25,7 +25,7 @@ export const Tabs = React.memo(function Tabs({
   variant = 'underline',
   size = 'md',
   className,
-}: TabsProps): JSX.Element {
+}: TabsProps): React.JSX.Element {
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
   const activeTabRef = useRef(activeTab);
   activeTabRef.current = activeTab;

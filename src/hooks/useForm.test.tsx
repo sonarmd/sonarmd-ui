@@ -1,3 +1,4 @@
+import React from "react";
 /**
  * Behavioral tests for useForm. These guard the register() binding contract:
  * a registered field is uncontrolled, so typing persists without the host
@@ -13,12 +14,12 @@ import {FormErrorSummary} from '../components/FormErrorSummary';
 /** Subscribes to one field. Lives in a separate component so the input host
  *  does NOT subscribe -- which is exactly the freeze scenario register must
  *  survive. */
-function Probe({form}: {form: UseFormReturn<{email: string}>}): JSX.Element {
+function Probe({form}: {form: UseFormReturn<{email: string}>}): React.JSX.Element {
   const {value} = form.useField('email');
   return <output data-testid="probe">{String(value ?? '')}</output>;
 }
 
-function TypeHarness(): JSX.Element {
+function TypeHarness(): React.JSX.Element {
   const form = useForm<{email: string}>();
   const [, setTick] = useState(0);
   return (
@@ -32,7 +33,7 @@ function TypeHarness(): JSX.Element {
   );
 }
 
-function SubmitHarness({onValid}: {onValid: (v: Record<string, unknown>) => void}): JSX.Element {
+function SubmitHarness({onValid}: {onValid: (v: Record<string, unknown>) => void}): React.JSX.Element {
   const form = useForm<Record<string, unknown>>();
   return (
     <form onSubmit={form.handleSubmit(onValid)}>

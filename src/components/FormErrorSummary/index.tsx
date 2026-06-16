@@ -19,7 +19,7 @@ export const FormErrorSummary = React.memo(function FormErrorSummary({
   form,
   labels,
   title = 'Please fix the following before continuing:',
-}: FormErrorSummaryProps): JSX.Element | null {
+}: FormErrorSummaryProps): React.JSX.Element | null {
   const ref = useRef<HTMLDivElement>(null);
   const {store} = form;
 

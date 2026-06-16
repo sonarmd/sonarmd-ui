@@ -3,7 +3,7 @@ import type {Story} from '@ladle/react';
 import {ToastProvider, useToast} from './index';
 import {Button} from '../Button';
 
-function ToastDemo(): JSX.Element {
+function ToastDemo(): React.JSX.Element {
   const {addToast} = useToast();
 
   return (

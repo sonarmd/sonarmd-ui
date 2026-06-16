@@ -33,7 +33,7 @@ export const CheckboxGroup = React.memo(function CheckboxGroup({
   orientation = 'vertical',
   disabled,
   name,
-}: CheckboxGroupProps): JSX.Element {
+}: CheckboxGroupProps): React.JSX.Element {
   const groupId = useId();
   const labelId = `${groupId}-label`;
   const fieldId = name ?? groupId;
@@ -51,7 +51,7 @@ export const CheckboxGroup = React.memo(function CheckboxGroup({
     [orientation],
   );
 
-  // Single stable handler — reads opt value from data attribute, current array from ref
+  // Single stable handler - reads opt value from data attribute, current array from ref
   const handleGroupChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const optValue =

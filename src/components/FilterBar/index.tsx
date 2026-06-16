@@ -14,7 +14,7 @@ export const FilterBar = React.memo(function FilterBar({
   onClear,
   activeFilterCount,
   className,
-}: FilterBarProps): JSX.Element {
+}: FilterBarProps): React.JSX.Element {
   const barClassName = useMemo(
     () => `${styles.bar}${className ? ` ${className}` : ''}`,
     [className],

@@ -23,7 +23,7 @@ export const PageHeader = React.memo(function PageHeader({
   backLabel = 'Back',
   actions,
   breadcrumbs,
-}: PageHeaderProps): JSX.Element {
+}: PageHeaderProps): React.JSX.Element {
   const renderedBreadcrumbs = useMemo(() => {
     if (!breadcrumbs || breadcrumbs.length === 0) return null;
     return breadcrumbs.map((crumb, i) => (

@@ -39,7 +39,7 @@ export const LineChart = React.memo(function LineChart({
   formatTooltip,
   formatYAxis,
   className,
-}: LineChartProps): JSX.Element {
+}: LineChartProps): React.JSX.Element {
   const option = useMemo((): ECOption => {
     const labels = data.map((d) => String(d[xKey] ?? ''));
 

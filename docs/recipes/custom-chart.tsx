@@ -19,7 +19,7 @@ interface CustomChartProps {
 }
 
 /** Horizontal bar chart built on ChartCanvas. */
-export function RiskDistributionChart({data, height = 300}: CustomChartProps): JSX.Element {
+export function RiskDistributionChart({data, height = 300}: CustomChartProps): React.JSX.Element {
   const option = useMemo(
     (): ECOption => ({
       tooltip: {trigger: 'axis' as const},
@@ -46,7 +46,7 @@ export function RiskDistributionChart({data, height = 300}: CustomChartProps): J
 }
 
 /** Usage demo. */
-export function CustomChartDemo(): JSX.Element {
+export function CustomChartDemo(): React.JSX.Element {
   const data: RiskDistribution[] = [
     {band: 'Low (<0.5)', count: 412},
     {band: 'Medium (0.5-1.5)', count: 738},

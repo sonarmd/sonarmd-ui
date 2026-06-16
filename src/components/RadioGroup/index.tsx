@@ -34,7 +34,7 @@ export const RadioGroup = React.memo(function RadioGroup({
   orientation = 'vertical',
   disabled,
   name,
-}: RadioGroupProps): JSX.Element {
+}: RadioGroupProps): React.JSX.Element {
   const groupId = useId();
   const labelId = `${groupId}-label`;
   const fieldId = name ?? groupId;

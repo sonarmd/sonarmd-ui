@@ -1,3 +1,4 @@
+import React from "react";
 import type {Story} from '@ladle/react';
 import {AppShell} from './index';
 
@@ -5,7 +6,7 @@ export default {
   title: 'Layout/AppShell',
 };
 
-const Nav = (): JSX.Element => (
+const Nav = (): React.JSX.Element => (
   <div style={{padding: '16px 12px', height: '100%', background: 'var(--smd-bg-subtle, #f5f5fa)'}}>
     <strong>Nav</strong>
     <p style={{fontSize: 12}}>Sidebar content</p>

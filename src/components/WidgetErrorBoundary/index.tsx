@@ -2,7 +2,7 @@ import React from 'react';
 import {Button} from '../Button';
 import styles from './WidgetErrorBoundary.module.css';
 
-const SmallAlertIcon = (): JSX.Element => (
+const SmallAlertIcon = (): React.JSX.Element => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M12 3L22 20H2L12 3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
     <line x1="12" y1="10" x2="12" y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />

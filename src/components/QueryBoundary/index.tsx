@@ -36,11 +36,11 @@ function defaultIsEmpty<T>(data: T): boolean {
   return false;
 }
 
-const DefaultSkeleton = (): JSX.Element => (
+const DefaultSkeleton = (): React.JSX.Element => (
   <div className={styles.skeleton} role="status" aria-label="Loading..." />
 );
 
-const SmallAlertIcon = (): JSX.Element => (
+const SmallAlertIcon = (): React.JSX.Element => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <path d="M12 3L22 20H2L12 3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
     <line x1="12" y1="10" x2="12" y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -48,7 +48,7 @@ const SmallAlertIcon = (): JSX.Element => (
   </svg>
 );
 
-function QueryErrorCard({onRetry}: {onRetry: () => void}): JSX.Element {
+function QueryErrorCard({onRetry}: {onRetry: () => void}): React.JSX.Element {
   return (
     <div className={styles.errorCard} role="alert">
       <div className={styles.errorInner}>
@@ -66,7 +66,7 @@ function QueryErrorCard({onRetry}: {onRetry: () => void}): JSX.Element {
 function QueryBoundaryInner<T>(
   {query, children, skeleton, emptyState, isEmpty, className, style}: QueryBoundaryProps<T>,
   ref: React.ForwardedRef<HTMLDivElement>,
-): JSX.Element {
+): React.JSX.Element {
   const {status, data, refetch} = query;
   const isEmptyFn = isEmpty ?? defaultIsEmpty;
 
@@ -112,4 +112,4 @@ function QueryBoundaryInner<T>(
 // cast pattern to preserve T.
 export const QueryBoundary = forwardRef(QueryBoundaryInner) as <T>(
   props: QueryBoundaryProps<T> & {ref?: React.ForwardedRef<HTMLDivElement>},
-) => JSX.Element;
+) => React.JSX.Element;

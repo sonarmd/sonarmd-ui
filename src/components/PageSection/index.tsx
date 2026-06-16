@@ -15,7 +15,7 @@ export const PageSection = React.memo(function PageSection({
   action,
   children,
   className,
-}: PageSectionProps): JSX.Element {
+}: PageSectionProps): React.JSX.Element {
   const sectionClassName = useMemo(
     () => `${styles.section}${className ? ` ${className}` : ''}`,
     [className],

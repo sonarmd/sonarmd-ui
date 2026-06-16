@@ -1268,7 +1268,7 @@ exports[`DateRangePicker > noValue - dom 1`] = `
       <span
         class="_triggerPlaceholder_638e37"
       >
-        MM/DD/YYYY – MM/DD/YYYY
+        MM/DD/YYYY - MM/DD/YYYY
       </span>
       <span
         class="_triggerRight_638e37"
@@ -2021,7 +2021,19 @@ exports[`KpiCard > trendUp - dom 1`] = `
     <span
       class="_trend_965819 _positive_965819"
     >
-      ↑ +12%
+      <svg
+        aria-label="Trending up"
+        fill="currentColor"
+        height="10"
+        role="img"
+        viewBox="0 0 10 10"
+        width="10"
+      >
+        <path
+          d="M5 1l4 6H1z"
+        />
+      </svg>
+       +12%
     </span>
   </div>
 </DocumentFragment>
@@ -2288,7 +2300,20 @@ exports[`MultiSelect > selections - dom 1`] = `
           class="_pillRemove_e760e9"
           type="button"
         >
-          ×
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="10"
+            viewBox="0 0 10 10"
+            width="10"
+          >
+            <path
+              d="M1 1l8 8M9 1l-8 8"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="1.5"
+            />
+          </svg>
         </button>
       </span>
       <span
@@ -2301,7 +2326,20 @@ exports[`MultiSelect > selections - dom 1`] = `
           class="_pillRemove_e760e9"
           type="button"
         >
-          ×
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="10"
+            viewBox="0 0 10 10"
+            width="10"
+          >
+            <path
+              d="M1 1l8 8M9 1l-8 8"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-width="1.5"
+            />
+          </svg>
         </button>
       </span>
       <span

@@ -197,7 +197,7 @@ export const Sidebar = React.memo(function Sidebar({
   onToggleCollapse,
   header,
   footer,
-}: SidebarProps): JSX.Element {
+}: SidebarProps): React.JSX.Element {
   const sidebarClassName = useMemo(
     () => `${styles.sidebar}${collapsed ? ` ${styles.collapsed}` : ''}`,
     [collapsed],

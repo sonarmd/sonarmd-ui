@@ -31,7 +31,7 @@ function usePatients() {
   });
 }
 
-export function PaginatedDataView(): JSX.Element {
+export function PaginatedDataView(): React.JSX.Element {
   const query = usePatients();
   const allRows = query.pages.flat();
 

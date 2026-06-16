@@ -28,7 +28,7 @@ export const FunnelChart = React.memo(function FunnelChart({
   isEmpty = false,
   onClick,
   className,
-}: FunnelChartProps): JSX.Element {
+}: FunnelChartProps): React.JSX.Element {
   const option = useMemo((): ECOption => {
     const seriesData = stages.map((stage, i) => ({
       name: stage.name,

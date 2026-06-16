@@ -32,11 +32,18 @@ function SortIcon({column, sortColumn, sortDirection}: {
   column: Column;
   sortColumn?: string;
   sortDirection?: 'asc' | 'desc';
-}): JSX.Element {
-  if (sortColumn === column.key) {
-    return <span className={styles.sortIcon}>{sortDirection === 'asc' ? '▲' : '▼'}</span>;
-  }
-  return <span className={styles.sortIcon} style={{opacity: 0.3}}>▲▼</span>;
+}): React.JSX.Element {
+  const active = sortColumn === column.key;
+  const upOpacity = active && sortDirection === 'asc' ? 1 : 0.3;
+  const downOpacity = active && sortDirection === 'desc' ? 1 : 0.3;
+  return (
+    <span className={styles.sortIcon} aria-hidden="true">
+      <svg width="8" height="11" viewBox="0 0 8 11" fill="currentColor">
+        <path d="M4 0l3 4H1z" opacity={upOpacity} />
+        <path d="M4 11l3-4H1z" opacity={downOpacity} />
+      </svg>
+    </span>
+  );
 }
 
 // Props passed from List to each virtual row via rowProps
@@ -55,7 +62,7 @@ interface VirtualRowProps<T> {
 // Must be defined outside the main component to avoid becoming a new type every render.
 function VirtualRowInner<T>(
   props: RowComponentProps<VirtualRowProps<T>>,
-): JSX.Element {
+): React.JSX.Element {
   const {index, style, data, columns, keyExtractor, selectedSet, isClickable, handleRowClick, handleRowKeyDown} = props;
   const row = data[index];
   const key = keyExtractor(row);
@@ -125,7 +132,7 @@ export const DataTable = React.memo(function DataTable<T = Record<string, unknow
   compact,
   stickyHeader,
   className,
-}: DataTableProps<T>): JSX.Element {
+}: DataTableProps<T>): React.JSX.Element {
   // Rule 6: non-render value for skeleton count
   const skeletonRowCount = useRef(0);
   skeletonRowCount.current = data.length > 0 ? data.length : 5;
@@ -156,7 +163,7 @@ export const DataTable = React.memo(function DataTable<T = Record<string, unknow
   const isClickable = Boolean(onRowClick);
 
   // --- Rule 7: data attribute handlers ---
-  // Row click — reads data-row-key from the element (works for both tr and div)
+  // Row click - reads data-row-key from the element (works for both tr and div)
   const handleRowClick = useCallback(
     (e: React.MouseEvent<HTMLElement>) => {
       if (!onRowClick) return;
@@ -168,7 +175,7 @@ export const DataTable = React.memo(function DataTable<T = Record<string, unknow
     [onRowClick, rowsByKey],
   );
 
-  // Row keyboard handler — reads data-row-key from the element
+  // Row keyboard handler - reads data-row-key from the element
   const handleRowKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLElement>) => {
       if (!onRowClick) return;
@@ -182,7 +189,7 @@ export const DataTable = React.memo(function DataTable<T = Record<string, unknow
     [onRowClick, rowsByKey],
   );
 
-  // Sort click — reads data-col-key from the header cell (Rule 7)
+  // Sort click - reads data-col-key from the header cell (Rule 7)
   const handleSortClick = useCallback(
     (e: React.MouseEvent<HTMLTableCellElement>) => {
       if (!onSort) return;
@@ -195,7 +202,7 @@ export const DataTable = React.memo(function DataTable<T = Record<string, unknow
     [onSort, sortColumn, sortDirection],
   );
 
-  // Rule 2: stable rowProps object for react-window v2 — only recreated when deps change
+  // Rule 2: stable rowProps object for react-window v2 - only recreated when deps change
   const virtualRowProps = useMemo<VirtualRowProps<T>>(
     () => ({
       data,
@@ -229,6 +236,15 @@ export const DataTable = React.memo(function DataTable<T = Record<string, unknow
                 style={col.width !== undefined ? {width: col.width} : undefined}
                 data-col-key={col.sortable ? col.key : undefined}
                 onClick={col.sortable ? handleSortClick : undefined}
+                aria-sort={
+                  col.sortable
+                    ? sortColumn === col.key
+                      ? sortDirection === 'asc'
+                        ? 'ascending'
+                        : 'descending'
+                      : 'none'
+                    : undefined
+                }
               >
                 {col.header}
                 {col.sortable && (
@@ -330,7 +346,7 @@ export const DataTable = React.memo(function DataTable<T = Record<string, unknow
             <List
               rowHeight={itemHeight}
               rowCount={data.length}
-              rowComponent={VirtualRowInner as (props: RowComponentProps<VirtualRowProps<T>>) => JSX.Element}
+              rowComponent={VirtualRowInner as (props: RowComponentProps<VirtualRowProps<T>>) => React.JSX.Element}
               rowProps={virtualRowProps}
               style={{height: VIRTUAL_LIST_HEIGHT, overflowY: 'auto'}}
             />
@@ -339,4 +355,4 @@ export const DataTable = React.memo(function DataTable<T = Record<string, unknow
       )}
     </div>
   );
-}) as <T = Record<string, unknown>>(props: DataTableProps<T>) => JSX.Element;
+}) as <T = Record<string, unknown>>(props: DataTableProps<T>) => React.JSX.Element;

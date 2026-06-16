@@ -15,7 +15,7 @@ export interface ModalProps {
   closeOnEscape?: boolean;
 }
 
-function CloseIcon(): JSX.Element {
+function CloseIcon(): React.JSX.Element {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path
@@ -45,7 +45,7 @@ export const Modal = React.memo(function Modal({
   footer,
   closeOnOverlayClick = true,
   closeOnEscape = true,
-}: ModalProps): JSX.Element | null {
+}: ModalProps): React.JSX.Element | null {
   const modalRef = useRef<HTMLDivElement | null>(null);
   // Rule 6: previously focused element stored in ref, not state
   const prevFocusRef = useRef<HTMLElement | null>(null);

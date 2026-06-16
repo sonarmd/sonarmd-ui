@@ -17,7 +17,7 @@ export const Badge = React.memo(function Badge({
   dot = false,
   size = 'md',
   className,
-}: BadgeProps): JSX.Element {
+}: BadgeProps): React.JSX.Element {
   const classes = useMemo(
     () => [styles.badge, styles[variant], styles[size], className].filter(Boolean).join(' '),
     [variant, size, className],

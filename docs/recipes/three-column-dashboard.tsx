@@ -10,7 +10,7 @@ import {KpiGrid} from '../../src/components/KpiGrid';
 import {DataTable, Column} from '../../src/components/DataTable';
 import type {KpiCardProps} from '../../src/components/KpiCard';
 
-const Nav = (): JSX.Element => (
+const Nav = (): React.JSX.Element => (
   <nav aria-label="Main navigation" style={{padding: 16}}>
     <strong>SonarMD</strong>
   </nav>
@@ -40,7 +40,7 @@ const kpis: KpiCardProps[] = [
   {title: 'Reviews Due', value: '23', trend: {direction: 'up', value: '5', sentiment: 'negative'}},
 ];
 
-export function ThreeColumnDashboard(): JSX.Element {
+export function ThreeColumnDashboard(): React.JSX.Element {
   return (
     <div data-density="compact">
       <AppShell sidebar={<Nav />}>

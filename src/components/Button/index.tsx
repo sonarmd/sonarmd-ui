@@ -44,7 +44,7 @@ export const Button = React.memo(
       ...rest
     },
     ref,
-  ): JSX.Element {
+  ): React.JSX.Element {
     const classes = useMemo(
       () =>
         [

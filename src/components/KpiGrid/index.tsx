@@ -19,7 +19,7 @@ export const KpiGrid = React.memo(function KpiGrid({
   items,
   columns = 4,
   isLoading,
-}: KpiGridProps): JSX.Element {
+}: KpiGridProps): React.JSX.Element {
   const gridClassName = useMemo(
     () => [styles.grid, COLS_CLASS[columns]].join(' '),
     [columns],

@@ -21,7 +21,7 @@ interface PatientForm extends Record<string, unknown> {
   mrn: string;
 }
 
-export function PatientForm(): JSX.Element {
+export function PatientForm(): React.JSX.Element {
   const form = useForm<PatientForm>({
     defaultValues: {firstName: '', lastName: '', dob: '', mrn: ''},
   });

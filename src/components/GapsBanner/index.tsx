@@ -35,7 +35,7 @@ export const GapsBanner = React.memo(function GapsBanner({
   dismissible,
   onDismiss,
   className,
-}: GapsBannerProps): JSX.Element {
+}: GapsBannerProps): React.JSX.Element {
   const bannerClassName = useMemo(
     () => [styles.banner, styles[variant], className].filter(Boolean).join(' '),
     [variant, className],

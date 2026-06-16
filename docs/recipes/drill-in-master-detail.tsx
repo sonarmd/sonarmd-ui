@@ -26,7 +26,7 @@ const columns: Column<Patient>[] = [
   {key: 'hcc', header: 'HCC Score'},
 ];
 
-function PatientDetail({patient, onBack}: {patient: Patient; onBack: () => void}): JSX.Element {
+function PatientDetail({patient, onBack}: {patient: Patient; onBack: () => void}): React.JSX.Element {
   return (
     <div style={{padding: 24}}>
       <h2 data-autofocus tabIndex={-1}>{patient.name}</h2>
@@ -36,7 +36,7 @@ function PatientDetail({patient, onBack}: {patient: Patient; onBack: () => void}
   );
 }
 
-export function DrillInMasterDetail(): JSX.Element {
+export function DrillInMasterDetail(): React.JSX.Element {
   const [selected, setSelected] = useState<Patient | null>(null);
 
   const locationKey = selected ? `patient-${selected.id}` : 'list';

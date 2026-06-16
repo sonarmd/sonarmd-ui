@@ -6,7 +6,7 @@ export default {
   title: 'Architecture/AppErrorBoundary',
 };
 
-function BombButton(): JSX.Element {
+function BombButton(): React.JSX.Element {
   const [boom, setBoom] = useState(false);
   if (boom) throw new Error('User triggered error');
   return (

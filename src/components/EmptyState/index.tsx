@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import {Button} from '../Button';
 import styles from './EmptyState.module.css';
 
-const DefaultIcon = (): JSX.Element => (
+const DefaultIcon = (): React.JSX.Element => (
   <svg
     width="48"
     height="48"
@@ -35,7 +35,7 @@ export const EmptyState = React.memo(function EmptyState({
   description,
   action,
   className,
-}: EmptyStateProps): JSX.Element {
+}: EmptyStateProps): React.JSX.Element {
   const handleActionClick = useCallback(() => {
     action?.onClick();
   }, [action]);

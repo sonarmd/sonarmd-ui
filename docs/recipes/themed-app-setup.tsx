@@ -30,7 +30,7 @@ export function applyTheme(theme: 'light' | 'dark' | 'auto', el: HTMLElement = d
 }
 
 /** Runtime theme toggle widget. */
-export function ThemeToggle(): JSX.Element {
+export function ThemeToggle(): React.JSX.Element {
   const [dark, setDark] = useState(false);
 
   function toggle(): void {
@@ -48,7 +48,7 @@ export function ThemeToggle(): JSX.Element {
 }
 
 /** Demo: compose themed components. */
-export function ThemedApp(): JSX.Element {
+export function ThemedApp(): React.JSX.Element {
   return (
     <div
       style={{

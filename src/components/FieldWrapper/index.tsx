@@ -19,7 +19,7 @@ export const FieldWrapper = React.memo(function FieldWrapper({
   hint,
   children,
   className,
-}: FieldWrapperProps): JSX.Element {
+}: FieldWrapperProps): React.JSX.Element {
   const errorId = htmlFor ? `${htmlFor}-error` : undefined;
   const hintId = htmlFor ? `${htmlFor}-hint` : undefined;
 

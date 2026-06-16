@@ -40,7 +40,7 @@ interface CollapsedMenuProps {
   renderLink: (item: BreadcrumbItem, content: React.ReactNode) => React.ReactNode;
 }
 
-function CollapsedMenu({items, renderLink}: CollapsedMenuProps): JSX.Element {
+function CollapsedMenu({items, renderLink}: CollapsedMenuProps): React.JSX.Element {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLLIElement>(null);
 
@@ -96,7 +96,7 @@ export const Breadcrumbs = React.memo(function Breadcrumbs({
   renderLink = defaultRenderLink,
   maxItems = 4,
   className,
-}: BreadcrumbsProps): JSX.Element {
+}: BreadcrumbsProps): React.JSX.Element {
   const renderCrumb = (item: BreadcrumbItem, isLast: boolean): React.ReactNode =>
     isLast ? (
       <span className={styles.current} aria-current="page">

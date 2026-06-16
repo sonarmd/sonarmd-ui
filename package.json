@@ -1,7 +1,7 @@
 {
   "name": "@sonarmd/ui",
   "version": "0.1.0",
-  "description": "SonarMD design system — reusable React component library",
+  "description": "SonarMD design system - reusable React component library",
   "type": "module",
   "engines": {
     "node": "^22.18.0"
@@ -124,15 +124,15 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^22.19.21",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "@types/react-window": "^1.8.8",
     "@vitejs/plugin-react": "^4.3.0",
     "axe-core": "^4.12.1",
     "echarts": "^5.5.0",
     "jsdom": "^29.0.1",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19",
+    "react-dom": "^19",
     "react-router-dom": "^6",
     "size-limit": "^11.1.6",
     "typescript": "^5.6.0",
