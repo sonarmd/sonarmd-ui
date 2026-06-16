@@ -11,7 +11,7 @@ export const LoadingSpinner = React.memo(function LoadingSpinner({
   size = 'md',
   color,
   className,
-}: LoadingSpinnerProps): JSX.Element {
+}: LoadingSpinnerProps): React.JSX.Element {
   const spinnerStyle = useMemo<React.CSSProperties>(
     () => ({color: color ?? 'var(--smd-color-primary-50)'}),
     [color],

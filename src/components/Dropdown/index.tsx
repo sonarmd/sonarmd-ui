@@ -67,14 +67,14 @@ export const Dropdown = React.memo(function Dropdown({
   options,
   value,
   onChange,
-  placeholder = 'Select…',
+  placeholder = 'Select...',
   searchable = false,
   clearable = false,
   disabled = false,
   renderOption,
   className,
   name,
-}: DropdownProps): JSX.Element {
+}: DropdownProps): React.JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -336,7 +336,7 @@ export const Dropdown = React.memo(function Dropdown({
           ref={searchRef}
           className={styles.searchInput}
           type="text"
-          placeholder="Search…"
+          placeholder="Search..."
           value={searchQuery}
           onChange={handleSearchChange}
           onKeyDown={handleMenuKeyDown}

@@ -31,7 +31,7 @@ function useAlerts() {
   );
 }
 
-function AlertRow({alert, onDismiss}: {alert: ClinicalAlert; onDismiss: (id: string) => void}): JSX.Element {
+function AlertRow({alert, onDismiss}: {alert: ClinicalAlert; onDismiss: (id: string) => void}): React.JSX.Element {
   const mutation = useMutation((_id: string) =>
     api.delete<void>(`/alerts/${_id}`).then(() => _id),
   );
@@ -65,7 +65,7 @@ function AlertRow({alert, onDismiss}: {alert: ClinicalAlert; onDismiss: (id: str
   );
 }
 
-export function AsyncContentStates(): JSX.Element {
+export function AsyncContentStates(): React.JSX.Element {
   const query = useAlerts();
   const [dismissed, setDismissed] = useState<Set<string>>(new Set());
 

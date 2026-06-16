@@ -38,7 +38,7 @@ export const BubbleChart = React.memo(function BubbleChart({
   formatX,
   formatY,
   className,
-}: BubbleChartProps): JSX.Element {
+}: BubbleChartProps): React.JSX.Element {
   const option = useMemo((): ECOption => {
     // Group points by color into separate series for distinct rendering
     const colorMap = new Map<string, BubbleDataPoint[]>();

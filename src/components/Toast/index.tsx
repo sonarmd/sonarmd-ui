@@ -11,7 +11,7 @@ import ReactDOM from 'react-dom';
 import { usePortal } from '../../hooks/usePortal';
 import styles from './Toast.module.css';
 
-// ── Types ────────────────────────────────────────────────────────────────────
+// -- Types --------------------------------------------------------------------
 
 export interface ToastItem {
   id: string;
@@ -36,7 +36,7 @@ export interface ToastContextValue {
   removeToast: (id: string) => void;
 }
 
-// ── Reducer ───────────────────────────────────────────────────────────────────
+// -- Reducer -------------------------------------------------------------------
 
 type ToastAction =
   | { type: 'ADD'; toast: ToastItem; maxToasts: number }
@@ -53,12 +53,12 @@ function toastReducer(state: ToastItem[], action: ToastAction): ToastItem[] {
   }
 }
 
-// ── Contexts ──────────────────────────────────────────────────────────────────
+// -- Contexts ------------------------------------------------------------------
 
 // State context: consumers re-render when the toast list changes
 const ToastStateContext = createContext<ToastItem[]>([]);
 
-// Dispatch context: stable — consumers NEVER re-render due to toast list changes
+// Dispatch context: stable - consumers NEVER re-render due to toast list changes
 const ToastDispatchContext = createContext<{
   addToast: (toast: Omit<ToastItem, 'id'>) => string;
   removeToast: (id: string) => void;
@@ -74,9 +74,9 @@ export function useToastState(): ToastItem[] {
   return useContext(ToastStateContext);
 }
 
-// ── Icons ─────────────────────────────────────────────────────────────────────
+// -- Icons ---------------------------------------------------------------------
 
-function ToastIcon({ variant }: { variant: ToastItem['variant'] }): JSX.Element {
+function ToastIcon({ variant }: { variant: ToastItem['variant'] }): React.JSX.Element {
   switch (variant) {
     case 'info':
       return (
@@ -111,7 +111,7 @@ function ToastIcon({ variant }: { variant: ToastItem['variant'] }): JSX.Element 
   }
 }
 
-function CloseIcon(): JSX.Element {
+function CloseIcon(): React.JSX.Element {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
       <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -119,7 +119,7 @@ function CloseIcon(): JSX.Element {
   );
 }
 
-// ── ToastItemComponent ────────────────────────────────────────────────────────
+// -- ToastItemComponent --------------------------------------------------------
 
 interface ToastItemComponentProps {
   toast: ToastItem;
@@ -131,14 +131,14 @@ const ToastItemComponent = React.memo(function ToastItemComponent({
   toast,
   onRemove,
   isLeft,
-}: ToastItemComponentProps): JSX.Element {
+}: ToastItemComponentProps): React.JSX.Element {
   const duration = toast.duration !== undefined ? toast.duration : 5000;
 
-  // Rule 6: timer state lives in refs, not React state — avoids re-renders
+  // Rule 6: timer state lives in refs, not React state - avoids re-renders
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const remainingRef = useRef(duration);
   const startTimeRef = useRef<number>(Date.now());
-  // paused drives the CSS class — kept as state since it affects rendering
+  // paused drives the CSS class - kept as state since it affects rendering
   const [paused, setPaused] = React.useState(false);
 
   const handleDismiss = useCallback(() => {
@@ -236,7 +236,7 @@ const ToastItemComponent = React.memo(function ToastItemComponent({
   );
 });
 
-// ── ToastContainer ────────────────────────────────────────────────────────────
+// -- ToastContainer ------------------------------------------------------------
 
 const positionClassMap: Record<NonNullable<ToastProviderProps['position']>, string> = {
   'top-right': styles.topRight,
@@ -249,10 +249,10 @@ interface ToastContainerProps {
   position: NonNullable<ToastProviderProps['position']>;
 }
 
-// Reads from ToastStateContext — re-renders only when toast list changes
+// Reads from ToastStateContext - re-renders only when toast list changes
 const ToastContainer = React.memo(function ToastContainer({
   position,
-}: ToastContainerProps): JSX.Element {
+}: ToastContainerProps): React.JSX.Element {
   const toasts = useToastState();
   const { removeToast } = useToast();
   const isLeft = position === 'top-left' || position === 'bottom-left';
@@ -272,13 +272,13 @@ const ToastContainer = React.memo(function ToastContainer({
   );
 });
 
-// ── ToastProvider ─────────────────────────────────────────────────────────────
+// -- ToastProvider -------------------------------------------------------------
 
 export function ToastProvider({
   children,
   position = 'top-right',
   maxToasts = 5,
-}: ToastProviderProps): JSX.Element {
+}: ToastProviderProps): React.JSX.Element {
   const [toasts, dispatch] = useReducer(toastReducer, []);
 
   // Rule 6: maxToasts stored in ref so addToast callback never needs to change

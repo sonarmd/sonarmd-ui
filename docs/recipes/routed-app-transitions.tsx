@@ -38,7 +38,7 @@ const PatientDetail = lazy(() =>
   import('./page-stubs').then((m) => ({default: m.PatientDetail})),
 );
 
-function Layout(): JSX.Element {
+function Layout(): React.JSX.Element {
   return (
     <div>
       <nav aria-label="App navigation" style={{padding: '8px 16px', borderBottom: '1px solid var(--smd-border-default)'}}>
@@ -77,6 +77,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-export function RoutedApp(): JSX.Element {
+export function RoutedApp(): React.JSX.Element {
   return <RouterProvider router={router} />;
 }

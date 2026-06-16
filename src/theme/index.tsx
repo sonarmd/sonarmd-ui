@@ -28,7 +28,7 @@ export interface ThemeProviderProps {
  * negligible JS and is entirely optional - apps can set `data-theme` in their
  * own HTML and never import this.
  */
-export function ThemeProvider({defaultTheme = 'light', children}: ThemeProviderProps): JSX.Element {
+export function ThemeProvider({defaultTheme = 'light', children}: ThemeProviderProps): React.JSX.Element {
   const [theme, setThemeState] = useState<Theme>(defaultTheme);
   useEffect(() => {
     applyAttribute(theme);

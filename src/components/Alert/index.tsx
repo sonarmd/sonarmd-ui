@@ -13,7 +13,7 @@ export interface AlertProps {
   className?: string;
 }
 
-function IconInfo(): JSX.Element {
+function IconInfo(): React.JSX.Element {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <circle cx="8" cy="8" r="7" stroke="var(--smd-color-primary-50)" strokeWidth="1.5" fill="none" />
@@ -23,7 +23,7 @@ function IconInfo(): JSX.Element {
   );
 }
 
-function IconSuccess(): JSX.Element {
+function IconSuccess(): React.JSX.Element {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <circle cx="8" cy="8" r="7" stroke="var(--smd-color-positive-30)" strokeWidth="1.5" fill="none" />
@@ -32,7 +32,7 @@ function IconSuccess(): JSX.Element {
   );
 }
 
-function IconWarning(): JSX.Element {
+function IconWarning(): React.JSX.Element {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path d="M8 2L14.5 13.5H1.5L8 2Z" stroke="var(--smd-color-warning-30)" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
@@ -42,7 +42,7 @@ function IconWarning(): JSX.Element {
   );
 }
 
-function IconError(): JSX.Element {
+function IconError(): React.JSX.Element {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <circle cx="8" cy="8" r="7" stroke="var(--smd-color-negative-30)" strokeWidth="1.5" fill="none" />
@@ -51,7 +51,7 @@ function IconError(): JSX.Element {
   );
 }
 
-function DismissIcon(): JSX.Element {
+function DismissIcon(): React.JSX.Element {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
       <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -59,7 +59,7 @@ function DismissIcon(): JSX.Element {
   );
 }
 
-const defaultIcons: Record<AlertVariant, JSX.Element> = {
+const defaultIcons: Record<AlertVariant, React.JSX.Element> = {
   info: <IconInfo />,
   success: <IconSuccess />,
   warning: <IconWarning />,
@@ -74,7 +74,7 @@ export const Alert = React.memo(function Alert({
   onDismiss,
   icon,
   className,
-}: AlertProps): JSX.Element {
+}: AlertProps): React.JSX.Element {
   const classes = useMemo(
     () => [styles.alert, styles[variant], className].filter(Boolean).join(' '),
     [variant, className],

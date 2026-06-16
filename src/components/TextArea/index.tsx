@@ -84,7 +84,7 @@ export const TextArea = React.memo(
     }, [resize, textareaProps.value, textareaProps.defaultValue]);
 
     const handleInput = useCallback(
-      (e: React.FormEvent<HTMLTextAreaElement>) => {
+      (e: React.InputEvent<HTMLTextAreaElement>) => {
         resize();
         onInput?.(e);
       },

@@ -1,3 +1,4 @@
+import React from "react";
 /**
  * Behavioral coverage for the combobox keyboard contract that the declarative
  * fixtures harness cannot reach - it renders the menu closed, so the option ids
@@ -16,7 +17,7 @@ const OPTIONS = [
   {label: 'Option C', value: 'c'},
 ];
 
-function Harness({searchable = false}: {searchable?: boolean}): JSX.Element {
+function Harness({searchable = false}: {searchable?: boolean}): React.JSX.Element {
   const [value, setValue] = useState<string[]>([]);
   return (
     <MultiSelect

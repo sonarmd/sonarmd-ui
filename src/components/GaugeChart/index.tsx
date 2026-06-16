@@ -36,7 +36,7 @@ export const GaugeChart = React.memo(function GaugeChart({
   height = 300,
   isLoading = false,
   className,
-}: GaugeChartProps): JSX.Element {
+}: GaugeChartProps): React.JSX.Element {
   const option = useMemo((): ECOption => {
     const axisLineColors = thresholds.map((t) => [t.at, t.color] as [number, string]);
 

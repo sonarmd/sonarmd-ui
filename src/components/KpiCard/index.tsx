@@ -18,10 +18,22 @@ export interface KpiCardProps {
   className?: string;
 }
 
-const TREND_SYMBOL: Record<KpiCardTrend['direction'], string> = {
-  up: '↑',
-  down: '↓',
-  flat: '→',
+const TREND_SYMBOL: Record<KpiCardTrend['direction'], React.ReactNode> = {
+  up: (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">
+      <path d="M5 1l4 6H1z" />
+    </svg>
+  ),
+  down: (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor" aria-hidden="true">
+      <path d="M5 9L1 3h8z" />
+    </svg>
+  ),
+  flat: (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M1 5h6M6 3l2 2-2 2" />
+    </svg>
+  ),
 };
 
 function trendSentimentClass(trend: KpiCardTrend): string {
@@ -40,7 +52,7 @@ export const KpiCard = React.memo(function KpiCard({
   isLoading,
   onClick,
   className,
-}: KpiCardProps): JSX.Element {
+}: KpiCardProps): React.JSX.Element {
   const isInteractive = Boolean(onClick);
 
   const cardClasses = useMemo(

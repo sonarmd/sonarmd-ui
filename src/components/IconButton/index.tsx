@@ -23,7 +23,7 @@ export const IconButton = React.memo(
   React.forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
     {label, children, tooltipPlacement = 'top', variant = 'ghost', ...rest},
     ref,
-  ): JSX.Element {
+  ): React.JSX.Element {
     return (
       <Tooltip content={label} placement={tooltipPlacement}>
         <Button ref={ref} square variant={variant} aria-label={label} {...rest}>

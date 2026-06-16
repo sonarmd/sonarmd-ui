@@ -37,7 +37,7 @@ export const PieChart = React.memo(function PieChart({
   onClick,
   centerContent,
   className,
-}: PieChartProps): JSX.Element {
+}: PieChartProps): React.JSX.Element {
   const option = useMemo((): ECOption => {
     const seriesData = data.map((item, i) => ({
       name: item.name,

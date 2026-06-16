@@ -48,7 +48,7 @@ export const ChartCanvas = React.memo(function ChartCanvas({
   emptyMessage,
   onClick,
   className,
-}: ChartCanvasProps): JSX.Element {
+}: ChartCanvasProps): React.JSX.Element {
   const instanceRef = useRef<ReturnType<typeof echarts.init> | null>(null);
   const resizeObsRef = useRef<ResizeObserver | null>(null);
   const themeObsRef = useRef<MutationObserver | null>(null);

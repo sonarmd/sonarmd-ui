@@ -36,7 +36,7 @@ export const StackedBarChart = React.memo(function StackedBarChart({
   onClick,
   formatTooltip,
   className,
-}: StackedBarChartProps): JSX.Element {
+}: StackedBarChartProps): React.JSX.Element {
   const option = useMemo((): ECOption => {
     const labels = data.map((d) => String(d[xKey] ?? ''));
 

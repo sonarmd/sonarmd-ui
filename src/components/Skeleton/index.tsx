@@ -15,7 +15,7 @@ export const Skeleton = React.memo(function Skeleton({
   height,
   lines = 1,
   className,
-}: SkeletonProps): JSX.Element {
+}: SkeletonProps): React.JSX.Element {
   const sizeStyle = useMemo<React.CSSProperties>(
     () => ({
       ...(width !== undefined ? {width} : {}),

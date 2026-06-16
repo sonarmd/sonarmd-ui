@@ -41,7 +41,7 @@ export const AreaChart = React.memo(function AreaChart({
   onClick,
   formatTooltip,
   className,
-}: AreaChartProps): JSX.Element {
+}: AreaChartProps): React.JSX.Element {
   const option = useMemo((): ECOption => {
     const labels = data.map((d) => String(d[xKey] ?? ''));
     const values = data.map((d) => (d[yKey] as number) ?? 0);

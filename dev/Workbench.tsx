@@ -1,3 +1,4 @@
+import React from "react";
 import {useMemo, useState} from 'react';
 import {MemoryRouter} from 'react-router-dom';
 import {AppShell, Sidebar, Tabs, Toggle, useTheme} from '../src/index';
@@ -35,7 +36,7 @@ const WorkbenchSidebar = ({active, onNavigate}: {active: string; onNavigate: (ke
   />
 );
 
-export function Workbench(): JSX.Element {
+export function Workbench(): React.JSX.Element {
   const {theme, toggle} = useTheme();
   const [active, setActive] = useState(ZONES[0]?.name ?? '');
   const [compact, setCompact] = useState(false);

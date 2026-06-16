@@ -5,7 +5,7 @@ import {useForm} from '../../hooks/useForm';
 import {Button} from '../Button';
 import {TextInput} from '../TextInput';
 
-function DemoForm(): JSX.Element {
+function DemoForm(): React.JSX.Element {
   const form = useForm<Record<string, unknown>>({
     defaultValues: {firstName: '', lastName: '', dob: ''},
   });

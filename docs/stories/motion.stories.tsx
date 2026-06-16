@@ -51,7 +51,7 @@ const PATTERN_NOTES: Record<PatternName, {do: string; dont: string}> = {
   },
 };
 
-function PatternDemo({pattern}: {pattern: PatternName}): JSX.Element {
+function PatternDemo({pattern}: {pattern: PatternName}): React.JSX.Element {
   const [key, setKey] = useState(0);
   const note = PATTERN_NOTES[pattern];
 

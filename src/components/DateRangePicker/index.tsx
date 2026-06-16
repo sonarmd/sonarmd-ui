@@ -226,14 +226,14 @@ export const DateRangePicker = React.memo(function DateRangePicker({
   required,
   value,
   onChange,
-  placeholder = 'MM/DD/YYYY \u2013 MM/DD/YYYY',
+  placeholder = 'MM/DD/YYYY - MM/DD/YYYY',
   minDate,
   maxDate,
   disabled = false,
   clearable = false,
   presets,
   name,
-}: DateRangePickerProps): JSX.Element {
+}: DateRangePickerProps): React.JSX.Element {
   const triggerId = useId();
   const today = useRef(new Date()).current;
 

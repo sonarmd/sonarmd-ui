@@ -25,7 +25,7 @@ export const ConfirmDialog = React.memo(function ConfirmDialog({
   cancelLabel = 'Cancel',
   variant = 'danger',
   loading = false,
-}: ConfirmDialogProps): JSX.Element {
+}: ConfirmDialogProps): React.JSX.Element {
   const handleConfirm = useCallback(() => {
     onConfirm();
   }, [onConfirm]);

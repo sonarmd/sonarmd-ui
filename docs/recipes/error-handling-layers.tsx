@@ -9,16 +9,16 @@ import React, {useState} from 'react';
 import {AppErrorBoundary} from '../../src/components/AppErrorBoundary';
 import {WidgetErrorBoundary} from '../../src/components/WidgetErrorBoundary';
 
-function BrokenChart(): JSX.Element {
+function BrokenChart(): React.JSX.Element {
   throw new Error('chart render failed');
 }
 
-function PatientChart({broken}: {broken: boolean}): JSX.Element {
+function PatientChart({broken}: {broken: boolean}): React.JSX.Element {
   if (broken) return <BrokenChart />;
   return <div style={{height: 80, background: 'var(--smd-bg-subtle)', borderRadius: 4}} />;
 }
 
-export function ErrorHandlingDemo(): JSX.Element {
+export function ErrorHandlingDemo(): React.JSX.Element {
   const [chartBroken, setChartBroken] = useState(false);
 
   return (

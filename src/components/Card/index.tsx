@@ -26,7 +26,7 @@ export const Card = React.memo(
   React.forwardRef<HTMLDivElement, CardProps>(function Card(
     {variant = 'default', density = 'comfortable', title, subtitle, action, className, children, ...rest},
     ref,
-  ): JSX.Element {
+  ): React.JSX.Element {
     const classes = useMemo(
       () =>
         [styles.card, styles[variant], styles[density], className].filter(Boolean).join(' '),

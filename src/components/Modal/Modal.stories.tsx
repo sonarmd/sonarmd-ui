@@ -3,7 +3,7 @@ import type {Story} from '@ladle/react';
 import {Modal} from './index';
 import {Button} from '../Button';
 
-function ModalDemo({size, title}: {size?: 'sm' | 'md' | 'lg' | 'xl'; title: string}): JSX.Element {
+function ModalDemo({size, title}: {size?: 'sm' | 'md' | 'lg' | 'xl'; title: string}): React.JSX.Element {
   const [open, setOpen] = useState(false);
   return (
     <>

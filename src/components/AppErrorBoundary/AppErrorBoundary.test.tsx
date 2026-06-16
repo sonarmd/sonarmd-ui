@@ -3,12 +3,12 @@ import {test, expect, vi} from 'vitest';
 import React from 'react';
 import {AppErrorBoundary} from './index';
 
-function ThrowOnce({shouldThrow}: {shouldThrow: boolean}): JSX.Element {
+function ThrowOnce({shouldThrow}: {shouldThrow: boolean}): React.JSX.Element {
   if (shouldThrow) throw new Error('test render error');
   return <p>OK</p>;
 }
 
-function ThrowAlways(): JSX.Element {
+function ThrowAlways(): React.JSX.Element {
   throw new Error('always throws');
 }
 

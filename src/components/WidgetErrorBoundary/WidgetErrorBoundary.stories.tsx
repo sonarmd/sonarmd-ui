@@ -2,7 +2,7 @@ import React from 'react';
 import type {Story} from '@ladle/react';
 import {WidgetErrorBoundary} from './index';
 
-function ThrowingComponent(): JSX.Element {
+function ThrowingComponent(): React.JSX.Element {
   throw new Error('Widget failed to load');
 }
 
