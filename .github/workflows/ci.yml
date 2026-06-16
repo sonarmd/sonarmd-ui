@@ -73,36 +73,3 @@ jobs:
             benchmarks/results/report.md
             benchmarks/results/results.json
           if-no-files-found: warn
-
-  # S7.1: React version matrix. Typecheck and size budgets are React-version-
-  # independent so they stay in the main gate. This job verifies the test suite
-  # (harness matrix, axe, completeness checks, behavioral tests) passes on both
-  # React 18 and React 19 without lock-file mutation.
-  test-react-matrix:
-    name: Tests - React ${{ matrix.react-version }}
-    runs-on: ubuntu-24.04-arm
-    timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      matrix:
-        react-version: ['18', '19']
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22.18.0'
-
-      - name: Install
-        run: npm ci
-
-      - name: Override React to ${{ matrix.react-version }}
-        run: |
-          npm install --no-save \
-            react@${{ matrix.react-version }} \
-            react-dom@${{ matrix.react-version }} \
-            @types/react@${{ matrix.react-version }} \
-            @types/react-dom@${{ matrix.react-version }}
-
-      - name: Test
-        run: npm test

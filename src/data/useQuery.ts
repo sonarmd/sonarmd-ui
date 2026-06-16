@@ -102,25 +102,35 @@ export function useQuery<T>(
   // Track the serial of the most-recently started fetch so stale responses from
   // aborted or superseded fetches are silently dropped.
   const fetchSerial = useRef(0);
-  const cachedAt = useRef<number | null>(null);
+  // Cache timestamp scoped to the key it was recorded for, so staleTime never
+  // suppresses a fetch after the key changes (e.g. patient A -> patient B).
+  const cached = useRef<{key: string; at: number} | null>(null);
+
+  // Keep the latest fetcher in a ref so an inline (non-memoized) fetcher does not
+  // change the effect dependencies every render and spin the query forever.
+  const fetcherRef = useRef(fetcher);
+  fetcherRef.current = fetcher;
 
   const serializedKey = serializeKey(key);
 
   // Route a settled promise to dispatch, dropping superseded/aborted results.
-  const settle = useCallback((serial: number, promise: Promise<T>) => {
-    promise.then(
-      (data) => {
-        if (fetchSerial.current !== serial) return;
-        cachedAt.current = Date.now();
-        dispatch({type: 'success', data});
-      },
-      (err: unknown) => {
-        if (fetchSerial.current !== serial) return;
-        if ((err as {name?: string}).name === 'AbortError') return;
-        dispatch({type: 'error', error: err instanceof Error ? err : new Error(String(err))});
-      },
-    );
-  }, []);
+  const settle = useCallback(
+    (serial: number, promise: Promise<T>) => {
+      promise.then(
+        (data) => {
+          if (fetchSerial.current !== serial) return;
+          cached.current = {key: serializedKey, at: Date.now()};
+          dispatch({type: 'success', data});
+        },
+        (err: unknown) => {
+          if (fetchSerial.current !== serial) return;
+          if ((err as {name?: string}).name === 'AbortError') return;
+          dispatch({type: 'error', error: err instanceof Error ? err : new Error(String(err))});
+        },
+      );
+    },
+    [serializedKey],
+  );
 
   const refetch = useCallback(() => {
     // Explicit refresh: a standalone request with its own signal, not shared
@@ -128,28 +138,28 @@ export function useQuery<T>(
     const serial = ++fetchSerial.current;
     dispatch({type: 'loading'});
     const controller = new AbortController();
-    settle(serial, fetcher(controller.signal));
-  }, [fetcher, settle]);
+    settle(serial, fetcherRef.current(controller.signal));
+  }, [settle]);
 
   useEffect(() => {
     if (!enabled) return;
 
-    // Stale-while-revalidate: skip if cached data is still fresh.
+    // Stale-while-revalidate: skip only if THIS key's cached data is still fresh.
     if (
-      cachedAt.current != null &&
+      cached.current?.key === serializedKey &&
       staleTime > 0 &&
-      Date.now() - cachedAt.current < staleTime
+      Date.now() - cached.current.at < staleTime
     ) {
       return;
     }
 
     const serial = ++fetchSerial.current;
     dispatch({type: 'loading'});
-    const entry = acquire<T>(serializedKey, fetcher);
+    const entry = acquire<T>(serializedKey, fetcherRef.current);
     settle(serial, entry.promise as Promise<T>);
 
     return () => release(serializedKey, entry);
-  }, [enabled, serializedKey, staleTime, fetcher, settle]);
+  }, [enabled, serializedKey, staleTime, settle]);
 
   return {...state, refetch};
 }
