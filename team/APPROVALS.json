@@ -1,0 +1,23 @@
+{
+  "pending": [],
+  "cleared": [
+    {
+      "item": "Delete 4 PR-merged remote branches",
+      "recommendation": "delete all 4",
+      "decision": "keep",
+      "date": "2026-06-16"
+    },
+    {
+      "item": "Bump benchmarks/ to React 19 for cohesion",
+      "recommendation": "spin a follow-up",
+      "decision": "follow-up (T-003)",
+      "date": "2026-06-16"
+    },
+    {
+      "item": "Commit team/ governance dir + plan to repo",
+      "recommendation": "keep local",
+      "decision": "commit to repo",
+      "date": "2026-06-16"
+    }
+  ]
+}
