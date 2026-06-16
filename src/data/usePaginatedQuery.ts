@@ -16,6 +16,12 @@ export interface PaginatedResult<T> extends PaginatedState<T> {
 
 export interface PaginationCursorConfig<T, C = unknown> {
   kind: 'cursor';
+  /**
+   * Identity of the logical query (e.g. [routeId, filter]). When its serialized
+   * value changes the hook resets to page 0; an inline config with an unchanged
+   * key does not restart. Omit for a query whose inputs never change.
+   */
+  key?: unknown[];
   /** Extract the cursor for the next page from the last page response. */
   getNextCursor: (lastPage: T) => C | null | undefined;
   /** Build the fetcher for a given cursor (undefined = first page). */
@@ -24,6 +30,12 @@ export interface PaginationCursorConfig<T, C = unknown> {
 
 export interface PaginationPageConfig<T> {
   kind: 'page';
+  /**
+   * Identity of the logical query (e.g. [routeId, filter]). When its serialized
+   * value changes the hook resets to page 0; an inline config with an unchanged
+   * key does not restart. Omit for a query whose inputs never change.
+   */
+  key?: unknown[];
   /** Determine whether there is a next page from the last page response. */
   hasNextPage: (lastPage: T, pageIndex: number) => boolean;
   /** Build the fetcher for a given page index (0-based). */
@@ -90,10 +102,14 @@ export function usePaginatedQuery<T, C = unknown>(
   stateRef.current = state;
 
   // Keep the latest config in a ref so an inline (non-memoized) config object
-  // does not change fetchPage's dependencies every render and restart page 0
-  // in a loop. The config is treated as stable for the lifetime of the hook.
+  // does not change fetchPage's dependencies every render and restart page 0 in
+  // a loop. fetchPage stays stable; the mount effect reruns (resetting to page
+  // 0) only when the serialized config.key changes, so a real query change (new
+  // filter/route) resets while an unchanged inline object does not.
   const configRef = useRef(config);
   configRef.current = config;
+
+  const serializedKey = JSON.stringify(config.key ?? []);
 
   const fetchPage = useCallback((isFirst: boolean, signal: AbortSignal) => {
     const cfg = configRef.current;
@@ -164,7 +180,9 @@ export function usePaginatedQuery<T, C = unknown>(
     controllerRef.current = controller;
     fetchPage(true, controller.signal);
     return () => controller.abort();
-  }, [fetchPage]);
+    // Reruns (and resets to page 0) when the logical query key changes;
+    // fetchPage is stable, so an unchanged key never restarts.
+  }, [serializedKey, fetchPage]);
 
   return {
     status: state.status,
