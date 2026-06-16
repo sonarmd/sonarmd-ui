@@ -1,83 +1,15 @@
 /**
  * Theming guide: semantic token catalog with light/dark swatches.
  *
- * All swatches render from the actual CSS custom properties. Never
- * hand-maintained. Switching the story theme addon updates swatches live.
+ * All swatches render from the actual CSS custom properties. The catalog data
+ * lives in ./tokenCatalog; its token NAMES are gate-enforced against the token
+ * source by src/testing/static/tokenCatalog.test.ts, so a renamed or removed
+ * token fails CI. The descriptions are curated by hand. Switching the story
+ * theme addon updates swatches live.
  */
 import React from 'react';
 import type {Story} from '@ladle/react';
-
-interface TokenGroup {
-  name: string;
-  tokens: Array<{name: string; description: string}>;
-}
-
-const TOKEN_GROUPS: TokenGroup[] = [
-  {
-    name: 'Text',
-    tokens: [
-      {name: '--smd-text-primary', description: 'Primary body text, headings, labels'},
-      {name: '--smd-text-secondary', description: 'Supporting text, subtitles, helper text'},
-      {name: '--smd-text-tertiary', description: 'Placeholder text, disabled states, fine print'},
-      {name: '--smd-text-inverse', description: 'Text on dark/colored surfaces (e.g. filled badges)'},
-      {name: '--smd-text-link', description: 'Hyperlinks and interactive text labels'},
-    ],
-  },
-  {
-    name: 'Background',
-    tokens: [
-      {name: '--smd-bg-base', description: 'Page background, default surface'},
-      {name: '--smd-bg-subtle', description: 'Slightly elevated surfaces, table row hover'},
-      {name: '--smd-bg-muted', description: 'Disabled field backgrounds, code blocks'},
-      {name: '--smd-bg-overlay', description: 'Modal backdrop, tooltip container'},
-      {name: '--smd-bg-inverse', description: 'High-contrast inverse surface'},
-    ],
-  },
-  {
-    name: 'Border',
-    tokens: [
-      {name: '--smd-border-default', description: 'Standard dividers, card outlines, form field borders'},
-      {name: '--smd-border-subtle', description: 'Low-contrast dividers inside surfaces'},
-      {name: '--smd-border-strong', description: 'Focused inputs, active selection rings'},
-    ],
-  },
-  {
-    name: 'Semantic Status',
-    tokens: [
-      {name: '--smd-color-success-500', description: 'Positive outcomes, completed states'},
-      {name: '--smd-color-warning-500', description: 'Caution, items needing attention'},
-      {name: '--smd-color-danger-500', description: 'Errors, destructive actions, high risk'},
-      {name: '--smd-color-info-500', description: 'Informational alerts and badges'},
-    ],
-  },
-  {
-    name: 'Brand / Interactive',
-    tokens: [
-      {name: '--smd-color-brand-500', description: 'Primary brand color, CTA buttons, focus rings'},
-      {name: '--smd-color-brand-600', description: 'Hover/pressed state for primary actions'},
-      {name: '--smd-color-brand-100', description: 'Subtle brand tint, selected row background'},
-    ],
-  },
-  {
-    name: 'Spacing',
-    tokens: [
-      {name: '--smd-space-1', description: '4px - fine-grain padding, icon gaps'},
-      {name: '--smd-space-2', description: '8px - tight component padding'},
-      {name: '--smd-space-3', description: '12px - standard gap between fields'},
-      {name: '--smd-space-4', description: '16px - card padding, section gap'},
-      {name: '--smd-space-6', description: '24px - panel spacing'},
-      {name: '--smd-space-8', description: '32px - page section spacing'},
-    ],
-  },
-  {
-    name: 'Radius',
-    tokens: [
-      {name: '--smd-radius-sm', description: 'Subtle rounding for badges, chips'},
-      {name: '--smd-radius-md', description: 'Standard rounding for cards, inputs'},
-      {name: '--smd-radius-lg', description: 'Prominent rounding for modals, panels'},
-    ],
-  },
-];
+import {TOKEN_GROUPS, type TokenGroup} from './tokenCatalog';
 
 function Swatch({tokenName}: {tokenName: string}): React.JSX.Element {
   const isText = tokenName.includes('text');
