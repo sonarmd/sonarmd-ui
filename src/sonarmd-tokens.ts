@@ -4,10 +4,10 @@
  * CSS counterparts are defined as --smd-* custom properties in index.css.
  */
 
-// ─── Color Primitives ──────────────────────────────────────────────────────────
+// --- Color Primitives ----------------------------------------------------------
 
 export const colors = {
-  // Ocean Blue — primary brand
+  // Ocean Blue - primary brand
   'primary-10': '#E8E8FF',
   'primary-20': '#C7C7FD',
   'primary-30': '#A6A6FA',
@@ -15,7 +15,7 @@ export const colors = {
   'primary-50': '#393AF3',
   'primary-60': '#0A0AC6',
 
-  // Cyan — secondary
+  // Cyan - secondary
   'cyan-10': '#EEFFFF',
   'cyan-20': '#BAF6F6',
   'cyan-30': '#75DADA',
@@ -23,7 +23,7 @@ export const colors = {
   'cyan-50': '#067676',
   'cyan-60': '#004242',
 
-  // Beacon Orange — accent
+  // Beacon Orange - accent
   'accent-10': '#FFF3EE',
   'accent-20': '#FFBFA9',
   'accent-30': '#FF8B63',
@@ -49,7 +49,7 @@ export const colors = {
   'gray-70': '#3F3F54',
   'gray-80': '#171724',
 
-  // Semantic — positive
+  // Semantic - positive
   'positive-10': '#D5EEDD',
   'positive-20': '#80CB98',
   'positive-30': '#2BA854',
@@ -57,7 +57,7 @@ export const colors = {
   'positive-50': '#185A2E',
   'positive-60': '#003311',
 
-  // Semantic — negative
+  // Semantic - negative
   'negative-10': '#FBE2E3',
   'negative-20': '#FFB2B7',
   'negative-30': '#E9424C',
@@ -65,7 +65,7 @@ export const colors = {
   'negative-50': '#7A1D22',
   'negative-60': '#470004',
 
-  // Semantic — warning
+  // Semantic - warning
   'warning-10': '#FFF9E6',
   'warning-20': '#FFEA8F',
   'warning-30': '#FFCA2D',
@@ -121,7 +121,7 @@ export const colorsDark = {
   'border-focus':   '#6363EC',
 } as const;
 
-// ─── Spacing ───────────────────────────────────────────────────────────────────
+// --- Spacing -------------------------------------------------------------------
 
 export const spacing = {
   '0':  '0px',
@@ -138,7 +138,7 @@ export const spacing = {
   '16': '64px',
 } as const;
 
-// ─── Border Radius ─────────────────────────────────────────────────────────────
+// --- Border Radius -------------------------------------------------------------
 
 export const radius = {
   'none': '0px',
@@ -149,7 +149,7 @@ export const radius = {
   'full': '9999px',
 } as const;
 
-// ─── Shadows ───────────────────────────────────────────────────────────────────
+// --- Shadows -------------------------------------------------------------------
 
 export const shadows = {
   'sm':    '0 1px 2px 0 rgba(23,23,36,0.08)',
@@ -159,7 +159,7 @@ export const shadows = {
   'focus-error': '0 0 0 3px rgba(233,66,76,0.25)',
 } as const;
 
-// ─── Typography ────────────────────────────────────────────────────────────────
+// --- Typography ----------------------------------------------------------------
 
 export const fontSize = {
   'xs':   '11px',
@@ -204,7 +204,7 @@ export const ease = {
   'spring-out':  'linear(0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.721 25.3%, 0.849 31.5%, 0.937 38.1%, 0.987 44.7%, 1.014 50.8%, 1.021 53.5%, 1.021 55.2%, 1.017 57.6%, 1 65.5%, 0.996 70.3%, 1.001 86.3%, 1)',
 } as const;
 
-// ─── Component Sizing ──────────────────────────────────────────────────────────
+// --- Component Sizing ----------------------------------------------------------
 
 export const inputHeight = {
   'sm': '28px',
@@ -245,7 +245,7 @@ export const zIndex = {
   'tooltip':  '1300',
 } as const;
 
-// ─── Chart Tokens ──────────────────────────────────────────────────────────────
+// --- Chart Tokens --------------------------------------------------------------
 
 /** Ordered for maximum visual distinction in multi-series charts */
 export const chartColors = [
@@ -261,7 +261,7 @@ export const chartColors = [
   colors['gray-60'],     // #727286
 ] as const;
 
-/** Shared ECharts option fragments — spread these instead of copying inline */
+/** Shared ECharts option fragments - spread these instead of copying inline */
 export const echartsDefaults = {
   tooltip: {
     backgroundColor: 'rgba(255, 255, 255, 0.96)',
