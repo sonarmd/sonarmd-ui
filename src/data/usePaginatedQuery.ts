@@ -89,55 +89,59 @@ export function usePaginatedQuery<T, C = unknown>(
   const stateRef = useRef(state);
   stateRef.current = state;
 
-  function resolvePagination(page: T, pageIndex: number): {hasNext: boolean; next: unknown} {
-    if (config.kind === 'cursor') {
-      const cursor = config.getNextCursor(page);
-      return {hasNext: cursor != null, next: cursor};
+  // Keep the latest config in a ref so an inline (non-memoized) config object
+  // does not change fetchPage's dependencies every render and restart page 0
+  // in a loop. The config is treated as stable for the lifetime of the hook.
+  const configRef = useRef(config);
+  configRef.current = config;
+
+  const fetchPage = useCallback((isFirst: boolean, signal: AbortSignal) => {
+    const cfg = configRef.current;
+    const serial = ++fetchSerial.current;
+    const currentState = stateRef.current;
+
+    if (isFirst) {
+      dispatch({type: 'loading'});
+    } else {
+      dispatch({type: 'fetching-next'});
     }
-    return {hasNext: config.hasNextPage(page, pageIndex), next: pageIndex + 1};
-  }
 
-  const fetchPage = useCallback(
-    (isFirst: boolean, signal: AbortSignal) => {
-      const serial = ++fetchSerial.current;
-      const currentState = stateRef.current;
+    let promise: Promise<T>;
+    if (cfg.kind === 'cursor') {
+      const cursor = isFirst ? undefined : (currentState.next as C | undefined);
+      promise = cfg.fetcher(cursor, signal);
+    } else {
+      const page = isFirst ? 0 : (currentState.next as number ?? 0);
+      promise = cfg.fetcher(page, signal);
+    }
 
-      if (isFirst) {
-        dispatch({type: 'loading'});
-      } else {
-        dispatch({type: 'fetching-next'});
-      }
+    const pageIndex = isFirst ? 0 : currentState.pages.length;
 
-      let promise: Promise<T>;
-      if (config.kind === 'cursor') {
-        const cursor = isFirst ? undefined : (currentState.next as C | undefined);
-        promise = config.fetcher(cursor, signal);
-      } else {
-        const page = isFirst ? 0 : (currentState.next as number ?? 0);
-        promise = config.fetcher(page, signal);
-      }
-
-      const pageIndex = isFirst ? 0 : (currentState.pages.length);
-
-      promise.then(
-        (page) => {
-          if (fetchSerial.current !== serial) return;
-          const {hasNext, next} = resolvePagination(page, pageIndex);
-          dispatch(isFirst
-            ? {type: 'first-success', page, hasNext, next}
-            : {type: 'next-success', page, hasNext, next},
-          );
-        },
-        (err: unknown) => {
-          if (fetchSerial.current !== serial) return;
-          if ((err as {name?: string}).name === 'AbortError') return;
-          dispatch({type: 'error', error: err instanceof Error ? err : new Error(String(err))});
-        },
-      );
-    },
-    // config is expected to be stable (created outside render or memoized).
-    [config],
-  );
+    promise.then(
+      (page) => {
+        if (fetchSerial.current !== serial) return;
+        let hasNext: boolean;
+        let next: unknown;
+        if (cfg.kind === 'cursor') {
+          const cursor = cfg.getNextCursor(page);
+          hasNext = cursor != null;
+          next = cursor;
+        } else {
+          hasNext = cfg.hasNextPage(page, pageIndex);
+          next = pageIndex + 1;
+        }
+        dispatch(isFirst
+          ? {type: 'first-success', page, hasNext, next}
+          : {type: 'next-success', page, hasNext, next},
+        );
+      },
+      (err: unknown) => {
+        if (fetchSerial.current !== serial) return;
+        if ((err as {name?: string}).name === 'AbortError') return;
+        dispatch({type: 'error', error: err instanceof Error ? err : new Error(String(err))});
+      },
+    );
+  }, []);
 
   const controllerRef = useRef<AbortController | null>(null);
 

@@ -122,11 +122,15 @@ export function createApiClient(config: ApiClientConfig): ApiClient {
     const extraHeaders = getHeaders ? await getHeaders() : {};
     const canRetry = IDEMPOTENT.has(method) || retryMutation;
 
-    const headers: Record<string, string> = {
-      'Content-Type': 'application/json',
-      ...extraHeaders,
-      ...(init?.headers as Record<string, string> | undefined),
-    };
+    // Normalize through the Headers API so a caller-supplied Headers instance or
+    // array of [name, value] tuples in init.headers is preserved rather than
+    // dropped by a plain-object spread (which would silently omit auth/tenant
+    // headers). Precedence: Content-Type < getHeaders() < per-call init.headers.
+    const headers = new Headers({'Content-Type': 'application/json'});
+    for (const [name, value] of Object.entries(extraHeaders)) headers.set(name, value);
+    if (init?.headers) {
+      new Headers(init.headers).forEach((value, name) => headers.set(name, value));
+    }
 
     let lastErr: ApiError | null = null;
 
