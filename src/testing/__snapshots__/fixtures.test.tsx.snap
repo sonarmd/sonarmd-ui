@@ -2672,6 +2672,114 @@ exports[`IconButton > primary - dom 1`] = `
 </DocumentFragment>
 `;
 
+exports[`InfiniteList > default - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="Results"
+    class="_wrapper_113cb8"
+    role="group"
+  >
+    <div
+      data-testid="virtual-list"
+    >
+      <div
+        class="_row_113cb8"
+      >
+        Row 1
+      </div>
+      <div
+        class="_row_113cb8"
+      >
+        Row 2
+      </div>
+      <div
+        class="_row_113cb8"
+      >
+        Row 3
+      </div>
+    </div>
+    <span
+      aria-live="polite"
+      class="_srOnly_113cb8"
+      role="status"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`InfiniteList > end - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="Results"
+    class="_wrapper_113cb8"
+    role="group"
+  >
+    <div
+      data-testid="virtual-list"
+    >
+      <div
+        class="_row_113cb8"
+      >
+        Row 1
+      </div>
+      <div
+        class="_row_113cb8"
+      >
+        Row 2
+      </div>
+      <div
+        class="_row_113cb8"
+      >
+        Row 3
+      </div>
+    </div>
+    <span
+      aria-live="polite"
+      class="_srOnly_113cb8"
+      role="status"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`InfiniteList > loadingMore - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-busy="true"
+    aria-label="Results"
+    class="_wrapper_113cb8"
+    role="group"
+  >
+    <div
+      data-testid="virtual-list"
+    >
+      <div
+        class="_row_113cb8"
+      >
+        Row 1
+      </div>
+      <div
+        class="_row_113cb8"
+      >
+        Row 2
+      </div>
+      <div
+        class="_row_113cb8"
+      >
+        Row 3
+      </div>
+    </div>
+    <span
+      aria-live="polite"
+      class="_srOnly_113cb8"
+      role="status"
+    >
+      Loading more items
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`KpiCard > basic - dom 1`] = `
 <DocumentFragment>
   <div

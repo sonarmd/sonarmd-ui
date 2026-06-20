@@ -124,6 +124,9 @@ export type {KpiGridProps} from './components/KpiGrid';
 export {DataTable} from './components/DataTable';
 export type {DataTableProps, Column} from './components/DataTable';
 
+export {InfiniteList} from './components/InfiniteList';
+export type {InfiniteListProps} from './components/InfiniteList';
+
 // Chart components, ChartCard, and chart tokens live in the ./charts subpath
 // entry so the core surface ships zero echarts bytes.
 

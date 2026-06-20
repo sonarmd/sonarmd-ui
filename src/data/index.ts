@@ -16,3 +16,9 @@ export type {
   PaginationCursorConfig,
   PaginationPageConfig,
 } from './usePaginatedQuery';
+
+export {useVirtualInfinite} from './useVirtualInfinite';
+export type {UseVirtualInfiniteOptions, VirtualInfinite} from './useVirtualInfinite';
+
+export {useInfiniteScroll} from './useInfiniteScroll';
+export type {UseInfiniteScrollOptions, InfiniteScroll} from './useInfiniteScroll';
