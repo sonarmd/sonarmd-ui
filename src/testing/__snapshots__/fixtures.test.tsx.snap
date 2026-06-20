@@ -1306,6 +1306,149 @@ exports[`DateRangePicker > noValue - dom 1`] = `
 </DocumentFragment>
 `;
 
+exports[`Drawer > closed - dom 1`] = `
+<body
+  style=""
+>
+  <div />
+  <div
+    data-smd-portal=""
+  />
+</body>
+`;
+
+exports[`Drawer > left - dom 1`] = `
+<body
+  style="overflow: hidden;"
+>
+  <div
+    aria-hidden="true"
+  />
+  <div
+    data-smd-portal=""
+  >
+    <div
+      class="_overlay_173cca"
+    >
+      <div
+        aria-labelledby=":r0:"
+        aria-modal="true"
+        class="_panel_173cca _left_173cca _md_173cca"
+        role="dialog"
+      >
+        <div
+          class="_header_173cca"
+        >
+          <h2
+            class="_title_173cca"
+            id=":r0:"
+          >
+            Navigation
+          </h2>
+          <button
+            aria-label="Close"
+            class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _square_0829c1"
+            type="button"
+          >
+            <span
+              class="_label_0829c1"
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M2 2l12 12M14 2L2 14"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <div
+          class="_body_173cca"
+        >
+          <p>
+            Menu
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Drawer > right - dom 1`] = `
+<body
+  style="overflow: hidden;"
+>
+  <div
+    aria-hidden="true"
+  />
+  <div
+    data-smd-portal=""
+  >
+    <div
+      class="_overlay_173cca"
+    >
+      <div
+        aria-labelledby=":r0:"
+        aria-modal="true"
+        class="_panel_173cca _right_173cca _md_173cca"
+        role="dialog"
+      >
+        <div
+          class="_header_173cca"
+        >
+          <h2
+            class="_title_173cca"
+            id=":r0:"
+          >
+            Filters
+          </h2>
+          <button
+            aria-label="Close"
+            class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _square_0829c1"
+            type="button"
+          >
+            <span
+              class="_label_0829c1"
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M2 2l12 12M14 2L2 14"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <div
+          class="_body_173cca"
+        >
+          <p>
+            Filter controls
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
 exports[`Dropdown > closed - dom 1`] = `
 <DocumentFragment>
   <div
@@ -2512,6 +2655,65 @@ exports[`PieChart > pie - dom 1`] = `
     />
   </div>
 </DocumentFragment>
+`;
+
+exports[`Popover > closed - dom 1`] = `
+<body
+  style=""
+>
+  <div>
+    <span
+      class="_anchor_6d9b5a"
+    >
+      <button
+        aria-expanded="false"
+        aria-haspopup="dialog"
+        type="button"
+      >
+        Actions
+      </button>
+    </span>
+  </div>
+  <div
+    data-smd-portal=""
+  />
+</body>
+`;
+
+exports[`Popover > open - dom 1`] = `
+<body
+  style=""
+>
+  <div>
+    <span
+      class="_anchor_6d9b5a"
+    >
+      <button
+        aria-controls=":r1:"
+        aria-expanded="true"
+        aria-haspopup="dialog"
+        type="button"
+      >
+        Actions
+      </button>
+    </span>
+  </div>
+  <div
+    data-smd-portal=""
+  >
+    <div
+      aria-label="Quick actions"
+      class="_popover_6d9b5a"
+      id=":r1:"
+      role="dialog"
+      style="top: 8px; left: 8px;"
+    >
+      <p>
+        Popover content
+      </p>
+    </div>
+  </div>
+</body>
 `;
 
 exports[`QueryBoundary > empty - dom 1`] = `

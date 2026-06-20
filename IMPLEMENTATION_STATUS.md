@@ -13,6 +13,45 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## Floating UI - Drawer + Popover (shared dialog hook)  (DONE)
+
+Branch: feat/floating-ui (off feat/a11y-hardening, to build on the inert-aware
+Modal). Plan: `.claude/plans/2026-06-19-premium-a11y-finish.md` (Phase 3).
+
+### What shipped
+
+- `src/hooks/useDialogA11y.ts`: extracted the shared modal-overlay accessibility
+  behavior into one hook - body scroll lock, Escape-to-close, focus restoration,
+  initial focus, background `inert` containment, and a Tab focus trap. Returns
+  `{containerRef, onKeyDown}`. This is the single implementation; Modal and Drawer
+  both consume it, so the trap/inert logic is never copy-pasted (One Workflow
+  Rule / Copy-Paste Polymorphism Is Forbidden).
+- `src/components/Modal/index.tsx`: refactored onto `useDialogA11y`. ~90 lines of
+  inline effects/handlers removed; DOM output and behavior unchanged (Modal tests
+  and snapshots green, no churn).
+- `src/components/Drawer/index.tsx`: slide-in side panel (left/right/top/bottom,
+  sm/md/lg) for filters, detail views, settings on compact layouts. Full dialog
+  a11y via the shared hook; `role="dialog"` + `aria-modal`, title or `ariaLabel`
+  name, slide animation per edge (reduced motion handled centrally).
+- `src/components/Popover/index.tsx`: anchored, interactive floating content
+  (unlike the read-only Tooltip). Clones the `trigger` with
+  `aria-haspopup="dialog"` + `aria-expanded` + `aria-controls` (preserving its own
+  onClick); the panel is a labelled non-modal `role="dialog"` that positions
+  against the trigger (placement: bottom/top x start/end/center, viewport-clamped,
+  repositions on scroll/resize), moves focus into itself on open, and dismisses on
+  outside pointer-down or Escape (Escape returns focus to the trigger).
+
+### New behavioral tests
+
+Drawer (2), Popover (4) - naming, Escape + focus restoration + inert lift,
+trigger aria wiring + toggle, focus-into-panel, outside-click and Escape dismiss.
+
+### Gates (all green)
+
+- typecheck clean. Tests: 293 passed (+16: Drawer/Popover fixtures auto-generate
+  snapshot + axe; +6 behavioral). Both new components axe-clean. Modal refactor
+  caused no snapshot churn. Build clean. Core surface 28.72 kB (80 kB). ASCII clean.
+
 ## A11y hardening - premium-tier accessibility pass  (DONE)
 
 Branch: feat/a11y-hardening. Post-v1 push toward "fully accessible, premium-tier."

@@ -1,0 +1,108 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--smd-bg-overlay);
+  z-index: var(--smd-z-modal);
+  display: flex;
+  animation: overlayIn var(--smd-duration-base) var(--smd-ease-decelerate);
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.panel {
+  position: fixed;
+  background: var(--smd-bg-base);
+  box-shadow: var(--smd-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Edge anchoring + slide-in axis */
+.left {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  animation: slideFromLeft var(--smd-duration-slow) var(--smd-ease-decelerate);
+}
+
+.right {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  animation: slideFromRight var(--smd-duration-slow) var(--smd-ease-decelerate);
+}
+
+.top {
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  animation: slideFromTop var(--smd-duration-slow) var(--smd-ease-decelerate);
+}
+
+.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  animation: slideFromBottom var(--smd-duration-slow) var(--smd-ease-decelerate);
+}
+
+/* Size along the slide axis */
+.left.sm, .right.sm { width: 320px; max-width: 90vw; }
+.left.md, .right.md { width: 420px; max-width: 90vw; }
+.left.lg, .right.lg { width: 560px; max-width: 95vw; }
+.top.sm, .bottom.sm { height: 240px; max-height: 90vh; }
+.top.md, .bottom.md { height: 360px; max-height: 90vh; }
+.top.lg, .bottom.lg { height: 70vh; max-height: 95vh; }
+
+@keyframes slideFromLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+@keyframes slideFromRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes slideFromTop {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+@keyframes slideFromBottom {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--smd-space-5) var(--smd-space-6);
+  border-bottom: 1px solid var(--smd-border-default);
+}
+
+.title {
+  font-size: var(--smd-font-size-lg);
+  font-weight: var(--smd-font-weight-semibold);
+  color: var(--smd-text-primary);
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--smd-space-6);
+}
+
+.footer {
+  padding: var(--smd-space-4) var(--smd-space-6);
+  border-top: 1px solid var(--smd-border-default);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--smd-space-3);
+}

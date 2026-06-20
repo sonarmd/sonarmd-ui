@@ -1,0 +1,29 @@
+.anchor {
+  display: inline-flex;
+}
+
+.popover {
+  position: fixed;
+  z-index: var(--smd-z-dropdown);
+  min-width: var(--smd-space-16);
+  max-width: 360px;
+  padding: var(--smd-space-4);
+  background: var(--smd-bg-base);
+  border: 1px solid var(--smd-border-default);
+  border-radius: var(--smd-radius-lg);
+  box-shadow: var(--smd-shadow-lg);
+  color: var(--smd-text-primary);
+  font-size: var(--smd-font-size-sm);
+  animation: popoverIn var(--smd-duration-fast) var(--smd-ease-decelerate);
+}
+
+@keyframes popoverIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
