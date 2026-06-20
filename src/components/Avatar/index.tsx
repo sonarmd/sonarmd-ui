@@ -1,4 +1,4 @@
-import React, {forwardRef, useMemo, useState} from 'react';
+import React, {forwardRef, useEffect, useMemo, useState} from 'react';
 import styles from './Avatar.module.css';
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -44,16 +44,25 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
   const initials = useMemo(() => (name ? initialsOf(name) : ''), [name]);
   const showImage = src != null && !failed;
 
+  // A new src (e.g. profile data refresh, retry after a broken URL) must clear a
+  // prior load failure so the image is attempted again.
+  useEffect(() => setFailed(false), [src]);
+
   const classes = [styles.avatar, styles[size], styles[shape], className]
     .filter(Boolean)
     .join(' ');
 
+  // In the fallback state the person's name is not on an <img alt>, so carry it
+  // on the container as the accessible name; the visible initials become
+  // decorative (the glyph already is).
+  const labelProps = !showImage && name ? {role: 'img', 'aria-label': name} : {};
+
   return (
-    <span ref={ref} className={classes}>
+    <span ref={ref} className={classes} {...labelProps}>
       {showImage ? (
         <img className={styles.image} src={src} alt={name ?? ''} onError={() => setFailed(true)} />
       ) : initials ? (
-        <span className={styles.initials} aria-hidden={name ? undefined : true}>
+        <span className={styles.initials} aria-hidden="true">
           {initials}
         </span>
       ) : (

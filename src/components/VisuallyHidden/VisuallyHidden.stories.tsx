@@ -16,9 +16,9 @@ export const Default: Story = () => (
   </button>
 );
 
-/** A skip link: hidden until focused (Tab to reveal). */
+/** A skip link: the focusable element itself, hidden until focused (Tab to reveal). */
 export const SkipLink: Story = () => (
-  <a href="#main">
-    <VisuallyHidden focusable>Skip to main content</VisuallyHidden>
-  </a>
+  <VisuallyHidden as="a" href="#main" focusable>
+    Skip to main content
+  </VisuallyHidden>
 );

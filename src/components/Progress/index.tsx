@@ -41,6 +41,10 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progr
     .filter(Boolean)
     .join(' ');
 
+  // Expose the same clamped value the bar paints, so assistive tech never
+  // receives a number outside the advertised [0, max] range.
+  const valueNow = value == null ? undefined : Math.max(0, Math.min(max, value));
+
   return (
     <div className={styles.wrapper}>
       <div
@@ -50,7 +54,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progr
         aria-label={label}
         aria-valuemin={indeterminate ? undefined : 0}
         aria-valuemax={indeterminate ? undefined : max}
-        aria-valuenow={indeterminate ? undefined : value}
+        aria-valuenow={valueNow}
       >
         <div className={fillClasses} style={indeterminate ? undefined : {width: `${pct}%`}} />
       </div>

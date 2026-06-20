@@ -701,9 +701,12 @@ exports[`Avatar > empty - dom 1`] = `
 exports[`Avatar > initials - dom 1`] = `
 <DocumentFragment>
   <span
+    aria-label="Ada Lovelace"
     class="_avatar_814665 _md_814665 _circle_814665"
+    role="img"
   >
     <span
+      aria-hidden="true"
       class="_initials_814665"
     >
       AL
@@ -715,9 +718,12 @@ exports[`Avatar > initials - dom 1`] = `
 exports[`Avatar > square - dom 1`] = `
 <DocumentFragment>
   <span
+    aria-label="Katherine Johnson"
     class="_avatar_814665 _lg_814665 _square_814665"
+    role="img"
   >
     <span
+      aria-hidden="true"
       class="_initials_814665"
     >
       KJ
@@ -729,9 +735,12 @@ exports[`Avatar > square - dom 1`] = `
 exports[`Avatar > withStatus - dom 1`] = `
 <DocumentFragment>
   <span
+    aria-label="Grace Hopper"
     class="_avatar_814665 _md_814665 _circle_814665"
+    role="img"
   >
     <span
+      aria-hidden="true"
       class="_initials_814665"
     >
       GH
