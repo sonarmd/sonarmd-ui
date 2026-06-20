@@ -1,0 +1,119 @@
+.stepper {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.vertical {
+  flex-direction: column;
+  gap: var(--smd-space-1);
+}
+
+.step {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+.vertical .step {
+  flex: none;
+}
+
+/* Connector line */
+.horizontal .step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: var(--smd-space-3);
+  left: calc(50% + var(--smd-space-4));
+  right: calc(-50% + var(--smd-space-4));
+  height: var(--smd-space-px);
+  background: var(--smd-border-default);
+}
+
+.horizontal .step.complete:not(:last-child)::after {
+  background: var(--smd-color-primary-50);
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--smd-space-2);
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
+.horizontal .content {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+button.content {
+  cursor: pointer;
+}
+
+button.content:focus-visible {
+  outline: 2px solid var(--smd-border-focus);
+  outline-offset: 2px;
+  border-radius: var(--smd-radius-sm);
+}
+
+.indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--smd-space-6);
+  height: var(--smd-space-6);
+  border-radius: var(--smd-radius-full);
+  border: var(--smd-space-px) solid var(--smd-border-strong);
+  background: var(--smd-bg-base);
+  color: var(--smd-text-tertiary);
+  font-size: var(--smd-font-size-xs);
+  font-weight: var(--smd-font-weight-semibold);
+  z-index: 1;
+}
+
+.complete .indicator {
+  background: var(--smd-color-primary-50);
+  border-color: var(--smd-color-primary-50);
+  color: var(--smd-text-inverse);
+}
+
+.current .indicator {
+  border-color: var(--smd-color-primary-50);
+  color: var(--smd-color-primary-60);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--smd-space-px);
+}
+
+.label {
+  font-size: var(--smd-font-size-sm);
+  font-weight: var(--smd-font-weight-medium);
+  color: var(--smd-text-secondary);
+}
+
+.current .label {
+  color: var(--smd-text-primary);
+}
+
+.description {
+  font-size: var(--smd-font-size-xs);
+  color: var(--smd-text-tertiary);
+}

@@ -168,6 +168,12 @@ export type {AccordionProps, AccordionItem} from './components/Accordion';
 export {Pagination} from './components/Pagination';
 export type {PaginationProps} from './components/Pagination';
 
+export {SegmentedControl} from './components/SegmentedControl';
+export type {SegmentedControlProps, SegmentedOption} from './components/SegmentedControl';
+
+export {Stepper} from './components/Stepper';
+export type {StepperProps, Step} from './components/Stepper';
+
 export {Sidebar} from './components/Sidebar';
 export type {SidebarProps, NavItem} from './components/Sidebar';
 
