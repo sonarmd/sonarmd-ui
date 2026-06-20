@@ -78,6 +78,12 @@ export type {DateRangePickerProps, DateRange} from './components/DateRangePicker
 export {Badge} from './components/Badge';
 export type {BadgeProps, BadgeVariant} from './components/Badge';
 
+export {Avatar} from './components/Avatar';
+export type {AvatarProps, AvatarSize, AvatarStatus} from './components/Avatar';
+
+export {Progress} from './components/Progress';
+export type {ProgressProps, ProgressTone} from './components/Progress';
+
 export {Alert} from './components/Alert';
 export type {AlertProps, AlertVariant} from './components/Alert';
 
@@ -130,6 +136,10 @@ export {Spacer} from './components/Spacer';
 export type {SpacerProps} from './components/Spacer';
 export {Columns} from './components/Columns';
 export type {ColumnsProps} from './components/Columns';
+export {Separator} from './components/Separator';
+export type {SeparatorProps} from './components/Separator';
+export {VisuallyHidden} from './components/VisuallyHidden';
+export type {VisuallyHiddenProps} from './components/VisuallyHidden';
 export {AppShell} from './components/AppShell';
 export type {AppShellProps} from './components/AppShell';
 export {AppErrorBoundary} from './components/AppErrorBoundary';
@@ -151,6 +161,12 @@ export type {PageSectionProps} from './components/PageSection';
 
 export {Tabs} from './components/Tabs';
 export type {TabsProps, Tab} from './components/Tabs';
+
+export {Accordion} from './components/Accordion';
+export type {AccordionProps, AccordionItem} from './components/Accordion';
+
+export {Pagination} from './components/Pagination';
+export type {PaginationProps} from './components/Pagination';
 
 export {Sidebar} from './components/Sidebar';
 export type {SidebarProps, NavItem} from './components/Sidebar';
