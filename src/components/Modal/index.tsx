@@ -1,13 +1,21 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useId, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { usePortal } from '../../hooks/usePortal';
 import { Button } from '../Button';
 import styles from './Modal.module.css';
 
 export interface ModalProps {
+  /** Controls visibility. When false the modal renders nothing. */
   open: boolean;
+  /** Called when the user dismisses the dialog (overlay click, Escape, close button). */
   onClose: () => void;
+  /** Visible heading; also becomes the dialog's accessible name via aria-labelledby. */
   title?: string;
+  /**
+   * Accessible name when no visible `title` is rendered. Required for an
+   * accessible dialog if `title` is omitted (a dialog must have a name).
+   */
+  ariaLabel?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   children: React.ReactNode;
   footer?: React.ReactNode;
@@ -40,12 +48,14 @@ export const Modal = React.memo(function Modal({
   open,
   onClose,
   title,
+  ariaLabel,
   size = 'md',
   children,
   footer,
   closeOnOverlayClick = true,
   closeOnEscape = true,
 }: ModalProps): React.JSX.Element | null {
+  const titleId = useId();
   const modalRef = useRef<HTMLDivElement | null>(null);
   // Rule 6: previously focused element stored in ref, not state
   const prevFocusRef = useRef<HTMLElement | null>(null);
@@ -92,6 +102,28 @@ export const Modal = React.memo(function Modal({
     }
   }, [open]);
 
+  // Contain assistive-tech navigation to the dialog: mark every sibling of the
+  // dialog's portal as inert while open, so the virtual cursor cannot leak into
+  // background content. Restored exactly to its prior state on close. Only nodes
+  // this effect changed are reverted, so nested dialogs compose correctly.
+  useEffect(() => {
+    if (!open) return;
+    const changed: HTMLElement[] = [];
+    for (const node of Array.from(document.body.children)) {
+      if (!(node instanceof HTMLElement) || node.contains(portalEl) || node === portalEl) continue;
+      if (node.inert) continue;
+      node.inert = true;
+      node.setAttribute('aria-hidden', 'true');
+      changed.push(node);
+    }
+    return () => {
+      for (const node of changed) {
+        node.inert = false;
+        node.removeAttribute('aria-hidden');
+      }
+    };
+  }, [open, portalEl]);
+
   // Focus trap
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'Tab' || !modalRef.current) return;
@@ -135,7 +167,8 @@ export const Modal = React.memo(function Modal({
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
-      aria-labelledby={title ? 'modal-title' : undefined}
+      aria-labelledby={title != null ? titleId : undefined}
+      aria-label={title == null ? ariaLabel : undefined}
     >
       <div
         ref={modalRef}
@@ -144,7 +177,7 @@ export const Modal = React.memo(function Modal({
       >
         {(title != null) && (
           <div className={styles.header}>
-            <h2 id="modal-title" className={styles.title}>
+            <h2 id={titleId} className={styles.title}>
               {title}
             </h2>
             <Button

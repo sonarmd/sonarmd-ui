@@ -81,6 +81,10 @@ export const Dropdown = React.memo(function Dropdown({
   const [menuStyle, setMenuStyle] = useState<React.CSSProperties>({});
 
   const triggerId = useId();
+  const listboxId = `${triggerId}-listbox`;
+  // Stable per-row id so the trigger can point aria-activedescendant at the
+  // highlighted option (WAI-ARIA listbox pattern). Mirrors MultiSelect.
+  const optionId = useCallback((index: number) => `${listboxId}-opt-${index}`, [listboxId]);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -199,12 +203,30 @@ export const Dropdown = React.memo(function Dropdown({
     }
   }, [isOpen, searchable]);
 
+  // Keep the active option in view as keyboard nav moves it. Safe no-op for an
+  // off-screen virtualized row that is not mounted.
+  useEffect(() => {
+    if (!isOpen || activeIndex < 0) return;
+    menuRef.current
+      ?.querySelector(`#${CSS.escape(optionId(activeIndex))}`)
+      ?.scrollIntoView({ block: 'nearest' });
+  }, [isOpen, activeIndex, optionId]);
+
   // Rule 9: stable keyboard handlers reading from refs
   const handleTriggerKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        isOpen ? closeMenu() : openMenu();
+        // When open with a highlighted option, commit it (focus stays on the
+        // trigger for a non-searchable listbox, so the menu's own Enter handler
+        // never fires). Otherwise toggle the menu.
+        const idx = activeIndexRef.current;
+        if (isOpen && idx >= 0 && filteredOptions[idx] && !filteredOptions[idx].disabled) {
+          onChange(filteredOptions[idx].value);
+          closeMenu();
+        } else {
+          isOpen ? closeMenu() : openMenu();
+        }
       } else if (e.key === 'Escape') {
         closeMenu();
       } else if (e.key === 'ArrowDown') {
@@ -216,7 +238,7 @@ export const Dropdown = React.memo(function Dropdown({
         setActiveIndex((i) => Math.max(i - 1, 0));
       }
     },
-    [isOpen, closeMenu, openMenu, filteredOptions.length],
+    [isOpen, closeMenu, openMenu, filteredOptions, onChange],
   );
 
   const handleMenuKeyDown = useCallback(
@@ -296,6 +318,7 @@ export const Dropdown = React.memo(function Dropdown({
       return (
         <div
           style={style}
+          id={optionId(index)}
           className={optClasses}
           role="option"
           aria-selected={isSelected}
@@ -319,12 +342,13 @@ export const Dropdown = React.memo(function Dropdown({
         </div>
       );
     },
-    [],
+    [optionId],
   );
 
   const menu = (
     <div
       ref={menuRef}
+      id={listboxId}
       className={styles.menu}
       style={menuStyle}
       role="listbox"
@@ -369,6 +393,7 @@ export const Dropdown = React.memo(function Dropdown({
             return (
               <div
                 key={opt.value}
+                id={optionId(idx)}
                 className={optClasses}
                 role="option"
                 aria-selected={isSelected}
@@ -419,6 +444,8 @@ export const Dropdown = React.memo(function Dropdown({
         disabled={disabled}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
+        aria-controls={isOpen ? listboxId : undefined}
+        aria-activedescendant={isOpen && activeIndex >= 0 ? optionId(activeIndex) : undefined}
         aria-required={required}
         aria-invalid={!!error}
       >

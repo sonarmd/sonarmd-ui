@@ -74,6 +74,10 @@ export const Typeahead = React.memo(
       ref,
     ) {
       const inputId = useId();
+      const menuId = `${inputId}-listbox`;
+      // Stable per-row id so the combobox can point aria-activedescendant at the
+      // highlighted option (WAI-ARIA combobox/listbox pattern).
+      const optionId = useCallback((index: number) => `${menuId}-opt-${index}`, [menuId]);
       const [inputValue, setInputValue] = useState(value?.label ?? '');
       const [options, setOptions] = useState<TypeaheadOption[]>([]);
       const [isLoading, setIsLoading] = useState(false);
@@ -112,6 +116,14 @@ export const Typeahead = React.memo(
       useEffect(() => {
         setInputValue(value?.label ?? '');
       }, [value]);
+
+      // Keep the active option in view as keyboard nav moves it.
+      useEffect(() => {
+        if (!isOpen || activeIndex < 0) return;
+        menuRef.current
+          ?.querySelector(`#${CSS.escape(optionId(activeIndex))}`)
+          ?.scrollIntoView({ block: 'nearest' });
+      }, [isOpen, activeIndex, optionId]);
 
       const positionMenu = useCallback(() => {
         if (!inputRef.current) return;
@@ -306,6 +318,7 @@ export const Typeahead = React.memo(
           return (
             <div
               style={style}
+              id={optionId(index)}
               className={`${styles.option}${isHighlighted ? ` ${styles.optionHighlighted}` : ''}`}
               role="option"
               aria-selected={opt.value === val?.value}
@@ -316,11 +329,11 @@ export const Typeahead = React.memo(
             </div>
           );
         },
-        [],
+        [optionId],
       );
 
       const menu = (
-        <div ref={menuRef} className={styles.menu} style={menuStyle} role="listbox">
+        <div ref={menuRef} id={menuId} className={styles.menu} style={menuStyle} role="listbox">
           {isLoading ? (
             <div className={styles.loading}>
               <div className={styles.spinner} aria-label={loadingMessage} />
@@ -343,6 +356,7 @@ export const Typeahead = React.memo(
                   return (
                     <div
                       key={opt.value}
+                      id={optionId(idx)}
                       className={`${styles.option}${isHighlighted ? ` ${styles.optionHighlighted}` : ''}`}
                       role="option"
                       aria-selected={opt.value === value?.value}
@@ -388,6 +402,8 @@ export const Typeahead = React.memo(
               autoComplete="off"
               role="combobox"
               aria-expanded={isOpen}
+              aria-controls={isOpen ? menuId : undefined}
+              aria-activedescendant={isOpen && activeIndex >= 0 ? optionId(activeIndex) : undefined}
               aria-autocomplete="list"
               aria-required={required}
               aria-invalid={!!error}

@@ -13,6 +13,65 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## A11y hardening - premium-tier accessibility pass  (DONE)
+
+Branch: feat/a11y-hardening. Post-v1 push toward "fully accessible, premium-tier."
+Plan: `.claude/plans/2026-06-19-premium-a11y-finish.md`. Each defect was verified
+against real code before fixing; each fix has behavioral test coverage the
+declarative harness cannot reach (menus render closed).
+
+### What shipped
+
+- Dropdown (`src/components/Dropdown/index.tsx`): completed the WAI-ARIA listbox
+  pattern. The listbox now has an `id`, every option a stable `id`
+  (`${listboxId}-opt-${i}`), and the trigger exposes `aria-controls` +
+  `aria-activedescendant` while open, so arrow-key navigation is announced to
+  screen readers (previously a silent visual highlight only). The active option
+  scrolls into view on keyboard nav. Fixed a real keyboard defect surfaced by the
+  new test: Enter on the trigger (non-searchable, focus stays on the trigger)
+  toggled the menu instead of committing the highlighted option - it now selects.
+- Typeahead (`src/components/Typeahead/index.tsx`): same combobox completion -
+  listbox `id`, option ids, `aria-controls` + `aria-activedescendant` on the
+  `role="combobox"` input once results load.
+- Modal (`src/components/Modal/index.tsx`): replaced the hard-coded
+  `id="modal-title"` (collision risk across simultaneous dialogs) with `useId()`.
+  Added an `ariaLabel` prop so a title-less dialog still has an accessible name
+  (a dialog must be named). Background containment: every sibling of the dialog's
+  portal is marked `inert` + `aria-hidden` while open and restored exactly on
+  close, so the AT virtual cursor cannot leak into background content.
+- Tabs (`src/components/Tabs/index.tsx`): each tab now has a predictable `id`
+  (`${id}-tab-${key}`, via a new optional `id` base prop) and an optional
+  per-tab `panelId` -> `aria-controls`, completing the tabs/tabpanel wiring
+  without forcing the component to own panels. Backward compatible.
+- DatePicker + DateRangePicker: month/year title is now a live `role="heading"`
+  (`aria-live="polite"`) so month navigation is announced. (Day cells were
+  already real labeled buttons with roving tabindex; a full role=grid restructure
+  needs CSS surgery not verifiable in jsdom and was deferred, not faked.)
+- Reduced motion, centrally (S4.4): `buildTokensCss()` now emits a
+  `@media (prefers-reduced-motion: reduce)` reset scoped to library classes
+  (`[class*="smd-"]`), neutralizing CSS-keyframe and transition animations
+  (spinners, slide-ins) in the 10 component modules that did not handle it
+  individually. WAAPI primitives already handled it; this closes the CSS gap in
+  one place rather than 10 files. Scoped so a consumer app's own animations are
+  untouched. The token completeness/catalog tests match `--smd-` (double dash)
+  and are unaffected by the `[class*="smd-"]` selector.
+
+### New behavioral tests
+
+- `Dropdown.test.tsx` (5), `Typeahead.test.tsx` (2), `Modal.test.tsx` (4):
+  cover aria-controls/activedescendant wiring, Enter-selects, Escape + focus
+  restoration, deterministic title wiring, ariaLabel fallback, and background
+  inert/restore. Plain matchers (jest-dom types are not wired into tsc), matching
+  the MultiSelect.test.tsx precedent.
+
+### Gates (all green)
+
+- typecheck: clean. Tests: 277 passed (+11 new behavioral; 5 fixture snapshots
+  updated - Modal title id now deterministic `useId`, background sibling
+  aria-hidden while open, Tabs tab ids). Build: clean. Size: core 27.74 kB
+  (80 kB), charts 110.71 kB (120 kB), all others within budget. tokens.css 5.48 kB
+  (includes the reduced-motion reset). ASCII sweep of changed files: clean.
+
 ## S7.1 - CI pipeline  (DONE)
 
 Branch: feat/s2-performance (continued).
