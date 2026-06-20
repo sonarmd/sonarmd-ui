@@ -50,6 +50,15 @@
   transition: background var(--smd-duration-fast);
 }
 
+/* Virtualized rows are absolutely-positioned divs (react-window), not table
+   rows, so they must lay their cells out with flex - the cells set width +
+   flex-shrink expecting a flex parent. Mirrors the inline style on the other
+   virtual row path. Without this the class was undefined and cells stacked. */
+.trVirtual {
+  display: flex;
+  align-items: center;
+}
+
 .tr:last-child {
   border-bottom: none;
 }
