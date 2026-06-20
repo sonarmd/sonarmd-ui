@@ -61,6 +61,10 @@
   transform: rotate(180deg);
 }
 
+.panel {
+  overflow: hidden;
+}
+
 .panelInner {
   padding: 0 var(--smd-space-4) var(--smd-space-4);
   color: var(--smd-text-secondary);
