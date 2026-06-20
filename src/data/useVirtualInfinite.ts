@@ -52,9 +52,22 @@ export function useVirtualInfinite({
   const stateRef = useRef({itemCount, hasNext, isLoadingNext, onLoadMore, thresholdRows});
   stateRef.current = {itemCount, hasNext, isLoadingNext, onLoadMore, thresholdRows};
 
+  // Latch: at most one onLoadMore per item-count value. react-window can report
+  // several near-end ranges before the parent re-renders with isLoadingNext, and
+  // an async onLoadMore may not flip loading synchronously - without this, a fast
+  // scroll would request the same page repeatedly and append duplicate rows. The
+  // latch releases once the page arrives (itemCount changes).
+  const triggeredAtCountRef = useRef(-1);
+
   const onRowsRendered = useCallback((visible: {startIndex: number; stopIndex: number}) => {
     const s = stateRef.current;
-    if (s.hasNext && !s.isLoadingNext && visible.stopIndex >= s.itemCount - s.thresholdRows) {
+    if (
+      s.hasNext &&
+      !s.isLoadingNext &&
+      triggeredAtCountRef.current !== s.itemCount &&
+      visible.stopIndex >= s.itemCount - s.thresholdRows
+    ) {
+      triggeredAtCountRef.current = s.itemCount;
       s.onLoadMore();
     }
   }, []);

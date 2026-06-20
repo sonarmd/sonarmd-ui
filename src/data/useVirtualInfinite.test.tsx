@@ -35,6 +35,25 @@ test('loads the next page when the last visible row is within the threshold', ()
   expect(onLoadMore).toHaveBeenCalledTimes(1);
 });
 
+test('latches: repeated near-end ranges at the same itemCount load only once', () => {
+  const onLoadMore = vi.fn();
+  const {result, rerender} = renderHook(
+    ({itemCount}) =>
+      useVirtualInfinite({itemCount, hasNext: true, isLoadingNext: false, onLoadMore, thresholdRows: 8}),
+    {initialProps: {itemCount: 100}},
+  );
+  // Several near-end notifications before the parent flips isLoadingNext - still one load.
+  result.current.onRowsRendered({startIndex: 80, stopIndex: 95});
+  result.current.onRowsRendered({startIndex: 81, stopIndex: 96});
+  result.current.onRowsRendered({startIndex: 82, stopIndex: 99});
+  expect(onLoadMore).toHaveBeenCalledTimes(1);
+
+  // Once the next page actually arrives (itemCount grows), the latch releases.
+  rerender({itemCount: 125});
+  result.current.onRowsRendered({startIndex: 110, stopIndex: 124});
+  expect(onLoadMore).toHaveBeenCalledTimes(2);
+});
+
 test('does not load while a page is already loading or when none remains', () => {
   const onLoadMore = vi.fn();
   const {result, rerender} = renderHook(
