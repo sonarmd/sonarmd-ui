@@ -772,12 +772,14 @@ exports[`ConfirmDialog > danger - dom 1`] = `
 <body
   style="overflow: hidden;"
 >
-  <div />
+  <div
+    aria-hidden="true"
+  />
   <div
     data-smd-portal=""
   >
     <div
-      aria-labelledby="modal-title"
+      aria-labelledby=":r0:"
       aria-modal="true"
       class="_overlay_7cc3ba"
       role="dialog"
@@ -790,7 +792,7 @@ exports[`ConfirmDialog > danger - dom 1`] = `
         >
           <h2
             class="_title_7cc3ba"
-            id="modal-title"
+            id=":r0:"
           >
             Delete account?
           </h2>
@@ -862,12 +864,14 @@ exports[`ConfirmDialog > open - dom 1`] = `
 <body
   style="overflow: hidden;"
 >
-  <div />
+  <div
+    aria-hidden="true"
+  />
   <div
     data-smd-portal=""
   >
     <div
-      aria-labelledby="modal-title"
+      aria-labelledby=":r0:"
       aria-modal="true"
       class="_overlay_7cc3ba"
       role="dialog"
@@ -880,7 +884,7 @@ exports[`ConfirmDialog > open - dom 1`] = `
         >
           <h2
             class="_title_7cc3ba"
-            id="modal-title"
+            id=":r0:"
           >
             Delete item?
           </h2>
@@ -2169,12 +2173,14 @@ exports[`Modal > open - dom 1`] = `
 <body
   style="overflow: hidden;"
 >
-  <div />
+  <div
+    aria-hidden="true"
+  />
   <div
     data-smd-portal=""
   >
     <div
-      aria-labelledby="modal-title"
+      aria-labelledby=":r0:"
       aria-modal="true"
       class="_overlay_7cc3ba"
       role="dialog"
@@ -2187,7 +2193,7 @@ exports[`Modal > open - dom 1`] = `
         >
           <h2
             class="_title_7cc3ba"
-            id="modal-title"
+            id=":r0:"
           >
             Confirmation
           </h2>
@@ -3106,6 +3112,7 @@ exports[`Tabs > pills - dom 1`] = `
       aria-selected="false"
       class="_tab_d3f7cd"
       data-tab-key="week"
+      id=":r0:-tab-week"
       role="tab"
       tabindex="-1"
       type="button"
@@ -3116,6 +3123,7 @@ exports[`Tabs > pills - dom 1`] = `
       aria-selected="true"
       class="_tab_d3f7cd"
       data-tab-key="month"
+      id=":r0:-tab-month"
       role="tab"
       tabindex="0"
       type="button"
@@ -3126,6 +3134,7 @@ exports[`Tabs > pills - dom 1`] = `
       aria-selected="false"
       class="_tab_d3f7cd"
       data-tab-key="year"
+      id=":r0:-tab-year"
       role="tab"
       tabindex="-1"
       type="button"
@@ -3146,6 +3155,7 @@ exports[`Tabs > underline - dom 1`] = `
       aria-selected="true"
       class="_tab_d3f7cd"
       data-tab-key="overview"
+      id=":r0:-tab-overview"
       role="tab"
       tabindex="0"
       type="button"
@@ -3156,6 +3166,7 @@ exports[`Tabs > underline - dom 1`] = `
       aria-selected="false"
       class="_tab_d3f7cd"
       data-tab-key="details"
+      id=":r0:-tab-details"
       role="tab"
       tabindex="-1"
       type="button"
@@ -3166,6 +3177,7 @@ exports[`Tabs > underline - dom 1`] = `
       aria-selected="false"
       class="_tab_d3f7cd"
       data-tab-key="history"
+      id=":r0:-tab-history"
       role="tab"
       tabindex="-1"
       type="button"

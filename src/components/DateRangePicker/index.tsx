@@ -158,7 +158,7 @@ const CalPanel = React.memo(function CalPanel({
         >
           <ChevronLeft />
         </button>
-        <span className={styles.calTitle}>
+        <span className={styles.calTitle} role="heading" aria-level={2} aria-live="polite">
           {MONTH_NAMES[month]} {year}
         </span>
         <button
