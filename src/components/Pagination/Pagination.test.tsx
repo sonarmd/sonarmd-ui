@@ -32,6 +32,13 @@ test('previous is disabled on the first page, next on the last', () => {
   expect((screen.getByRole('button', {name: 'Next page'}) as HTMLButtonElement).disabled).toBe(true);
 });
 
+test('boundaryCount=0 still renders the current page (no NaN window collapse)', () => {
+  const noop = (): void => {};
+  render(<Pagination page={5} pageCount={10} boundaryCount={0} onPageChange={noop} />);
+  const current = screen.getByRole('button', {name: 'Page 5'});
+  expect(current.getAttribute('aria-current')).toBe('page');
+});
+
 test('clicking a page and Next moves the current page', () => {
   render(<Harness initial={1} pageCount={10} />);
   fireEvent.click(screen.getByRole('button', {name: 'Page 2'}));

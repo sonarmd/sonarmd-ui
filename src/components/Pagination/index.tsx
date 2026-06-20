@@ -32,14 +32,17 @@ function buildItems(page: number, pageCount: number, sibling: number, boundary: 
 
   const startPages = range(1, boundary);
   const endPages = range(pageCount - boundary + 1, pageCount);
+  // The page just before the trailing boundary block. Computed directly (not via
+  // endPages[0]) so boundaryCount={0}, where endPages is empty, stays finite.
+  const lastBeforeEnd = pageCount - boundary - 1;
   const left = Math.max(Math.min(page - sibling, pageCount - boundary - sibling * 2 - 1), boundary + 2);
-  const right = Math.min(Math.max(page + sibling, boundary + sibling * 2 + 2), endPages[0] - 2);
+  const right = Math.min(Math.max(page + sibling, boundary + sibling * 2 + 2), lastBeforeEnd);
 
   return [
     ...startPages,
     left > boundary + 2 ? 'start-ellipsis' : boundary + 1,
     ...range(left, right),
-    right < pageCount - boundary - 1 ? 'end-ellipsis' : pageCount - boundary,
+    right < lastBeforeEnd ? 'end-ellipsis' : pageCount - boundary,
     ...endPages,
   ];
 }

@@ -52,17 +52,15 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
     .filter(Boolean)
     .join(' ');
 
-  // In the fallback state the person's name is not on an <img alt>, so carry it
-  // on the container as the accessible name; the visible initials become
-  // decorative (the glyph already is).
-  const labelProps = !showImage && name ? {role: 'img', 'aria-label': name} : {};
-
   return (
-    <span ref={ref} className={classes} {...labelProps}>
+    <span ref={ref} className={classes}>
       {showImage ? (
         <img className={styles.image} src={src} alt={name ?? ''} onError={() => setFailed(true)} />
       ) : initials ? (
-        <span className={styles.initials} aria-hidden="true">
+        // Carry the name on the initials element (its text becomes presentational)
+        // so the fallback keeps the accessible name without wrapping the whole
+        // avatar in role="img", which would flatten the status indicator.
+        <span className={styles.initials} role="img" aria-label={name}>
           {initials}
         </span>
       ) : (

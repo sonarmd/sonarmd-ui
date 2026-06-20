@@ -32,3 +32,11 @@ test('presence status is exposed with an accessible label', () => {
   render(<Avatar name="Grace Hopper" status="online" />);
   expect(screen.getByRole('img', {name: 'Online'})).toBeTruthy();
 });
+
+test('fallback exposes both the name and the status (status not flattened)', () => {
+  // No src: fallback path. The name lives on the initials element, not a wrapper
+  // role=img, so the sibling status indicator keeps its own announced label.
+  render(<Avatar name="Grace Hopper" status="busy" />);
+  expect(screen.getByRole('img', {name: 'Grace Hopper'})).toBeTruthy();
+  expect(screen.getByRole('img', {name: 'Busy'})).toBeTruthy();
+});
