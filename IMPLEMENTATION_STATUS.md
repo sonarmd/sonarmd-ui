@@ -13,6 +13,43 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## Infinite scroll - virtualized + basic (2 hooks + list)  (DONE)
+
+Branch: feat/infinite-virtualized. Lazy-load paginated data on scroll, with
+windowing so the DOM stays small. Separable, composable, generic over the data
+source (via hasNext/isLoadingNext/onLoadMore; pairs with usePaginatedQuery).
+
+### What shipped
+
+- `src/data/useVirtualInfinite.ts` (primary): the windowed trigger. Returns
+  rowCount (+1 loader row while hasNext), a stable onRowsRendered for react-window
+  v2's List (fires onLoadMore when stopIndex reaches itemCount - thresholdRows,
+  guarded by hasNext && !isLoadingNext), and isLoaderRow. Latest values via a
+  state ref - no stale closures, no handler churn.
+- `src/data/useInfiniteScroll.ts` (basic): non-virtualized sentinel via an
+  IntersectionObserver callback ref; calls onLoadMore when the sentinel nears
+  view (rootMargin prefetch), disconnects on unmount. Documented tradeoff: fine
+  for small lists, the DOM grows - prefer useVirtualInfinite for large sets.
+- `src/components/InfiniteList/`: composes useVirtualInfinite + react-window List.
+  Only visible rows (+ overscanCount) in the DOM, mounted/unmounted on scroll;
+  next page loads near the end; trailing loader row; role="group" + aria-label +
+  aria-busy with a polite live region announcing "Loading more". react-window is
+  the existing externalized dep (same as DataTable) - zero new runtime deps.
+
+### a11y note
+
+The virtualized list uses role="group" (named), not list/listitem: react-window
+inserts a sizing div between container and rows, which cannot satisfy listitem's
+required `list` parent (aria-required-parent). group conveys named grouping with
+no required-children constraint; rows read in order; loading via the live region.
+
+### Gates (all green)
+
+- typecheck clean. Tests: 384 passed (useVirtualInfinite 3, useInfiniteScroll 3
+  with a mocked IntersectionObserver, InfiniteList fixtures snapshot + axe x3).
+  Build clean. Size: core 32.41 kB (80 kB), data 2.35 kB (4 kB), Badge 532 B
+  (tree-shaking intact). ASCII clean.
+
 ## Dashboard primitives - SegmentedControl + Stepper  (DONE)
 
 Branch: feat/dashboard-primitives (off main). Two more high-value primitives for

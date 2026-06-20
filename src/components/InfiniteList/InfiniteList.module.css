@@ -1,0 +1,50 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 var(--smd-space-4);
+  border-bottom: var(--smd-space-px) solid var(--smd-border-default);
+  color: var(--smd-text-primary);
+  font-size: var(--smd-font-size-sm);
+}
+
+.loaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  color: var(--smd-text-tertiary);
+}
+
+.spinner {
+  width: var(--smd-space-5);
+  height: var(--smd-space-5);
+  border: 2px solid var(--smd-border-default);
+  border-top-color: var(--smd-color-primary-50);
+  border-radius: var(--smd-radius-full);
+  animation: smd-infinite-spin 0.7s linear infinite;
+}
+
+@keyframes smd-infinite-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: calc(-1 * var(--smd-space-px));
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
