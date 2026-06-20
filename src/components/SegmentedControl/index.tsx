@@ -15,8 +15,13 @@ export interface SegmentedControlProps<V extends string = string> {
   size?: 'sm' | 'md';
   /** Stretch segments to fill the container width. */
   fullWidth?: boolean;
-  /** Accessible name for the group (e.g. "View mode"). */
+  /**
+   * Accessible name for the group (e.g. "View mode"). Provide this or
+   * `ariaLabelledBy`: a radiogroup must be named for screen-reader users.
+   */
   ariaLabel?: string;
+  /** id of a visible label element, as an alternative to `ariaLabel`. */
+  ariaLabelledBy?: string;
   className?: string;
 }
 
@@ -33,10 +38,17 @@ export function SegmentedControl<V extends string = string>({
   size = 'md',
   fullWidth = false,
   ariaLabel,
+  ariaLabelledBy,
   className,
 }: SegmentedControlProps<V>): React.JSX.Element {
   const baseId = useId();
   const refs = useRef<Map<string, HTMLButtonElement>>(new Map());
+
+  // The single tab stop is the checked option when it is enabled; otherwise the
+  // first enabled option, so the radiogroup always has a keyboard entry point
+  // even when the selected value is disabled or not among the enabled options.
+  const checkedEnabled = options.some((o) => o.value === value && !o.disabled);
+  const rovingValue = checkedEnabled ? value : options.find((o) => !o.disabled)?.value;
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -61,7 +73,13 @@ export function SegmentedControl<V extends string = string>({
     .join(' ');
 
   return (
-    <div role="radiogroup" aria-label={ariaLabel} className={classes} onKeyDown={handleKeyDown}>
+    <div
+      role="radiogroup"
+      aria-label={ariaLabel}
+      aria-labelledby={ariaLabelledBy}
+      className={classes}
+      onKeyDown={handleKeyDown}
+    >
       {options.map((opt) => {
         const checked = opt.value === value;
         return (
@@ -76,7 +94,7 @@ export function SegmentedControl<V extends string = string>({
             role="radio"
             aria-checked={checked}
             disabled={opt.disabled}
-            tabIndex={checked ? 0 : -1}
+            tabIndex={opt.value === rovingValue ? 0 : -1}
             className={styles.segment}
             onClick={() => onChange(opt.value)}
           >

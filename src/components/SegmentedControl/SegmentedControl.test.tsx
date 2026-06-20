@@ -29,6 +29,26 @@ test('renders a radiogroup with one tab stop on the checked segment', () => {
   expect((screen.getByRole('radio', {name: 'Grid'}) as HTMLButtonElement).tabIndex).toBe(-1);
 });
 
+test('when the checked option is disabled, the first enabled option holds the tab stop', () => {
+  const noop = (): void => {};
+  render(
+    <SegmentedControl
+      options={[
+        {value: 'list', label: 'List', disabled: true},
+        {value: 'grid', label: 'Grid'},
+        {value: 'board', label: 'Board'},
+      ]}
+      value="list"
+      onChange={noop}
+      ariaLabel="View"
+    />,
+  );
+  // The disabled checked segment must not be the only tab stop, or keyboard
+  // users cannot enter the radiogroup.
+  expect((screen.getByRole('radio', {name: 'List'}) as HTMLButtonElement).tabIndex).toBe(-1);
+  expect((screen.getByRole('radio', {name: 'Grid'}) as HTMLButtonElement).tabIndex).toBe(0);
+});
+
 test('clicking a segment selects it', () => {
   render(<Harness />);
   fireEvent.click(screen.getByRole('radio', {name: 'Grid'}));
