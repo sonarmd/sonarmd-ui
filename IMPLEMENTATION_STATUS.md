@@ -13,6 +13,50 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## Premium primitives - filling the component gaps  (DONE)
+
+Branch: feat/premium-primitives. Post-v1; net-new components to make the library
+a fully-equipped premium set (gap analysis vs Radix/Mantine/MUI for a healthcare
+admin/dashboard product). Plan: `.claude/plans/2026-06-19-premium-a11y-finish.md`
+(Phase 2). Each component follows the house pattern exactly: `index.tsx` +
+`.module.css` + `.fixtures.tsx`, semantic tokens only, forwardRef on DOM nodes,
+JSDoc on prop interfaces, barrel export, auto-discovered by the fixtures harness
+(snapshot + axe per fixture) and the completeness gate.
+
+### What shipped (6 components)
+
+- VisuallyHidden: the accessible-name / skip-link primitive (clip+position
+  hidden, `focusable` reveals on focus). Replaces inline clip hacks.
+- Separator: themed divider; `role="separator"` (or decorative `role="none"`),
+  horizontal/vertical orientation, optional centered label.
+- Avatar: image with initials fallback (derived from `name`) and a neutral glyph
+  when neither; `xs..xl` sizes, circle/square, labelled presence `status` dot.
+  Image `onError` degrades to initials (behavioral test).
+- Progress: linear bar; determinate `role="progressbar"` with
+  aria-valuenow/min/max, indeterminate variant, `showValue`, tones.
+- Accordion: WAI-ARIA disclosure set. Real header buttons with aria-expanded +
+  aria-controls; labelled `role="region"` panels (`hidden` when closed, so closed
+  content leaves the AT tree and tab order - matrix-safe vs an inert/animation
+  approach). single/multiple, controlled or uncontrolled, Arrow/Home/End roving
+  focus between headers, configurable heading level.
+- Pagination: `nav` landmark; labelled prev/next disabled at the bounds; current
+  page carries `aria-current="page"`; collapses long ranges with gap-safe
+  ellipses. Pairs with usePaginatedQuery / DataTable.
+
+### New behavioral tests
+
+Accordion (4), Pagination (3), Avatar (2) - cover toggling/expansion modes,
+header roving focus, page navigation + bound-disabling + aria-current, and the
+image-load fallback. The static harness covers the rest (snapshot + axe).
+
+### Gates (all green)
+
+- typecheck clean. Tests: 318 passed (+51 over main's 267: 21 fixture
+  snapshot/axe pairs auto-generated for the 6 components, +9 behavioral). All new
+  components are axe-clean. Build clean. Size: core surface 29.77 kB (80 kB) -
+  the 6 components add ~2 kB and Badge stays 537 B, so per-component tree-shaking
+  is intact. ASCII sweep clean.
+
 ## S7.1 - CI pipeline  (DONE)
 
 Branch: feat/s2-performance (continued).

@@ -1,0 +1,38 @@
+.separator {
+  background: var(--smd-border-default);
+  border: 0;
+  flex-shrink: 0;
+}
+
+.horizontal {
+  width: 100%;
+  height: var(--smd-space-px);
+}
+
+.vertical {
+  align-self: stretch;
+  width: var(--smd-space-px);
+  min-height: var(--smd-space-4);
+}
+
+.labeled {
+  display: flex;
+  align-items: center;
+  gap: var(--smd-space-3);
+  width: 100%;
+}
+
+.labeled .rule {
+  flex: 1;
+  height: var(--smd-space-px);
+  background: var(--smd-border-default);
+}
+
+.label {
+  flex-shrink: 0;
+  font-size: var(--smd-font-size-xs);
+  font-weight: var(--smd-font-weight-medium);
+  color: var(--smd-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
