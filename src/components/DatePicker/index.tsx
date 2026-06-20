@@ -344,7 +344,7 @@ export const DatePicker = React.memo(
             <button type="button" className={styles.calNavBtn} onClick={prevMonth} aria-label="Previous month">
               <ChevronLeft />
             </button>
-            <span className={styles.calTitle}>
+            <span className={styles.calTitle} role="heading" aria-level={2} aria-live="polite">
               {MONTH_NAMES[viewMonth]} {viewYear}
             </span>
             <button type="button" className={styles.calNavBtn} onClick={nextMonth} aria-label="Next month">

@@ -96,6 +96,12 @@ export type {TooltipProps} from './components/Tooltip';
 export {Modal} from './components/Modal';
 export type {ModalProps} from './components/Modal';
 
+export {Drawer} from './components/Drawer';
+export type {DrawerProps, DrawerSide} from './components/Drawer';
+
+export {Popover} from './components/Popover';
+export type {PopoverProps, PopoverPlacement} from './components/Popover';
+
 export {ConfirmDialog} from './components/ConfirmDialog';
 export type {ConfirmDialogProps} from './components/ConfirmDialog';
 

@@ -48,9 +48,30 @@ const darkVars = (): string[] =>
   Object.entries(colorsDark).map(([key, value]) => `  --smd-${key}: ${value};`);
 
 /**
+ * Central reduced-motion safety net (S4.4). WAAPI animations are neutralized in
+ * the motion primitives; this covers CSS-keyframe and transition animations in
+ * component modules so no surface translates, scales, or spins under
+ * prefers-reduced-motion. Scoped to library classes (every CSS-module class is
+ * `smd-` prefixed) so it never touches a consuming app's own animations. The
+ * !important is the canonical reduced-motion reset - it must override keyframe
+ * and inline durations - not a lint workaround.
+ */
+const REDUCED_MOTION_CSS = `@media (prefers-reduced-motion: reduce) {
+  [class*="smd-"],
+  [class*="smd-"]::before,
+  [class*="smd-"]::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}`;
+
+/**
  * The shipped tokens.css: a light `:root`, a `[data-theme="dark"]` override
- * block, and a prefers-color-scheme fallback so dark follows the OS when no
- * theme attribute is set (an explicit data-theme="light" still wins).
+ * block, a prefers-color-scheme fallback so dark follows the OS when no theme
+ * attribute is set (an explicit data-theme="light" still wins), and the central
+ * reduced-motion reset.
  */
 export function buildTokensCss(): string {
   const light = [
@@ -76,6 +97,7 @@ export function buildTokensCss(): string {
     `:root {\n${light.join('\n')}\n}`,
     `[data-theme="dark"] {\n${dark.join('\n')}\n}`,
     `@media (prefers-color-scheme: dark) {\n  :root:not([data-theme="light"]) {\n${darkIndented.join('\n')}\n  }\n}`,
+    REDUCED_MOTION_CSS,
     '',
   ].join('\n\n');
 }

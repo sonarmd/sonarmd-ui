@@ -56,6 +56,103 @@ image-load fallback. The static harness covers the rest (snapshot + axe).
   components are axe-clean. Build clean. Size: core surface 29.77 kB (80 kB) -
   the 6 components add ~2 kB and Badge stays 537 B, so per-component tree-shaking
   is intact. ASCII sweep clean.
+## Floating UI - Drawer + Popover (shared dialog hook)  (DONE)
+
+Branch: feat/floating-ui (off feat/a11y-hardening, to build on the inert-aware
+Modal). Plan: `.claude/plans/2026-06-19-premium-a11y-finish.md` (Phase 3).
+
+### What shipped
+
+- `src/hooks/useDialogA11y.ts`: extracted the shared modal-overlay accessibility
+  behavior into one hook - body scroll lock, Escape-to-close, focus restoration,
+  initial focus, background `inert` containment, and a Tab focus trap. Returns
+  `{containerRef, onKeyDown}`. This is the single implementation; Modal and Drawer
+  both consume it, so the trap/inert logic is never copy-pasted (One Workflow
+  Rule / Copy-Paste Polymorphism Is Forbidden).
+- `src/components/Modal/index.tsx`: refactored onto `useDialogA11y`. ~90 lines of
+  inline effects/handlers removed; DOM output and behavior unchanged (Modal tests
+  and snapshots green, no churn).
+- `src/components/Drawer/index.tsx`: slide-in side panel (left/right/top/bottom,
+  sm/md/lg) for filters, detail views, settings on compact layouts. Full dialog
+  a11y via the shared hook; `role="dialog"` + `aria-modal`, title or `ariaLabel`
+  name, slide animation per edge (reduced motion handled centrally).
+- `src/components/Popover/index.tsx`: anchored, interactive floating content
+  (unlike the read-only Tooltip). Clones the `trigger` with
+  `aria-haspopup="dialog"` + `aria-expanded` + `aria-controls` (preserving its own
+  onClick); the panel is a labelled non-modal `role="dialog"` that positions
+  against the trigger (placement: bottom/top x start/end/center, viewport-clamped,
+  repositions on scroll/resize), moves focus into itself on open, and dismisses on
+  outside pointer-down or Escape (Escape returns focus to the trigger).
+
+### New behavioral tests
+
+Drawer (2), Popover (4) - naming, Escape + focus restoration + inert lift,
+trigger aria wiring + toggle, focus-into-panel, outside-click and Escape dismiss.
+
+### Gates (all green)
+
+- typecheck clean. Tests: 293 passed (+16: Drawer/Popover fixtures auto-generate
+  snapshot + axe; +6 behavioral). Both new components axe-clean. Modal refactor
+  caused no snapshot churn. Build clean. Core surface 28.72 kB (80 kB). ASCII clean.
+
+## A11y hardening - premium-tier accessibility pass  (DONE)
+
+Branch: feat/a11y-hardening. Post-v1 push toward "fully accessible, premium-tier."
+Plan: `.claude/plans/2026-06-19-premium-a11y-finish.md`. Each defect was verified
+against real code before fixing; each fix has behavioral test coverage the
+declarative harness cannot reach (menus render closed).
+
+### What shipped
+
+- Dropdown (`src/components/Dropdown/index.tsx`): completed the WAI-ARIA listbox
+  pattern. The listbox now has an `id`, every option a stable `id`
+  (`${listboxId}-opt-${i}`), and the trigger exposes `aria-controls` +
+  `aria-activedescendant` while open, so arrow-key navigation is announced to
+  screen readers (previously a silent visual highlight only). The active option
+  scrolls into view on keyboard nav. Fixed a real keyboard defect surfaced by the
+  new test: Enter on the trigger (non-searchable, focus stays on the trigger)
+  toggled the menu instead of committing the highlighted option - it now selects.
+- Typeahead (`src/components/Typeahead/index.tsx`): same combobox completion -
+  listbox `id`, option ids, `aria-controls` + `aria-activedescendant` on the
+  `role="combobox"` input once results load.
+- Modal (`src/components/Modal/index.tsx`): replaced the hard-coded
+  `id="modal-title"` (collision risk across simultaneous dialogs) with `useId()`.
+  Added an `ariaLabel` prop so a title-less dialog still has an accessible name
+  (a dialog must be named). Background containment: every sibling of the dialog's
+  portal is marked `inert` + `aria-hidden` while open and restored exactly on
+  close, so the AT virtual cursor cannot leak into background content.
+- Tabs (`src/components/Tabs/index.tsx`): each tab now has a predictable `id`
+  (`${id}-tab-${key}`, via a new optional `id` base prop) and an optional
+  per-tab `panelId` -> `aria-controls`, completing the tabs/tabpanel wiring
+  without forcing the component to own panels. Backward compatible.
+- DatePicker + DateRangePicker: month/year title is now a live `role="heading"`
+  (`aria-live="polite"`) so month navigation is announced. (Day cells were
+  already real labeled buttons with roving tabindex; a full role=grid restructure
+  needs CSS surgery not verifiable in jsdom and was deferred, not faked.)
+- Reduced motion, centrally (S4.4): `buildTokensCss()` now emits a
+  `@media (prefers-reduced-motion: reduce)` reset scoped to library classes
+  (`[class*="smd-"]`), neutralizing CSS-keyframe and transition animations
+  (spinners, slide-ins) in the 10 component modules that did not handle it
+  individually. WAAPI primitives already handled it; this closes the CSS gap in
+  one place rather than 10 files. Scoped so a consumer app's own animations are
+  untouched. The token completeness/catalog tests match `--smd-` (double dash)
+  and are unaffected by the `[class*="smd-"]` selector.
+
+### New behavioral tests
+
+- `Dropdown.test.tsx` (5), `Typeahead.test.tsx` (2), `Modal.test.tsx` (4):
+  cover aria-controls/activedescendant wiring, Enter-selects, Escape + focus
+  restoration, deterministic title wiring, ariaLabel fallback, and background
+  inert/restore. Plain matchers (jest-dom types are not wired into tsc), matching
+  the MultiSelect.test.tsx precedent.
+
+### Gates (all green)
+
+- typecheck: clean. Tests: 277 passed (+11 new behavioral; 5 fixture snapshots
+  updated - Modal title id now deterministic `useId`, background sibling
+  aria-hidden while open, Tabs tab ids). Build: clean. Size: core 27.74 kB
+  (80 kB), charts 110.71 kB (120 kB), all others within budget. tokens.css 5.48 kB
+  (includes the reduced-motion reset). ASCII sweep of changed files: clean.
 
 ## S7.1 - CI pipeline  (DONE)
 
