@@ -1,5 +1,494 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Accordion > default - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_accordion_86d7df"
+  >
+    <div
+      class="_item_86d7df"
+    >
+      <h3
+        class="_heading_86d7df"
+      >
+        <button
+          aria-controls=":r0:-eligibility-panel"
+          aria-expanded="false"
+          class="_header_86d7df"
+          data-key="eligibility"
+          id=":r0:-eligibility-header"
+          type="button"
+        >
+          <span
+            class="_title_86d7df"
+          >
+            Eligibility
+          </span>
+          <svg
+            aria-hidden="true"
+            class="_chevron_86d7df"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </h3>
+      <div
+        aria-labelledby=":r0:-eligibility-header"
+        class="_panel_86d7df"
+        hidden=""
+        id=":r0:-eligibility-panel"
+        role="region"
+      >
+        <div
+          class="_panelInner_86d7df"
+        >
+          Coverage active through 2026.
+        </div>
+      </div>
+    </div>
+    <div
+      class="_item_86d7df"
+    >
+      <h3
+        class="_heading_86d7df"
+      >
+        <button
+          aria-controls=":r0:-history-panel"
+          aria-expanded="false"
+          class="_header_86d7df"
+          data-key="history"
+          id=":r0:-history-header"
+          type="button"
+        >
+          <span
+            class="_title_86d7df"
+          >
+            Care history
+          </span>
+          <svg
+            aria-hidden="true"
+            class="_chevron_86d7df"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </h3>
+      <div
+        aria-labelledby=":r0:-history-header"
+        class="_panel_86d7df"
+        hidden=""
+        id=":r0:-history-panel"
+        role="region"
+      >
+        <div
+          class="_panelInner_86d7df"
+        >
+          Last visit 2026-05-02.
+        </div>
+      </div>
+    </div>
+    <div
+      class="_item_86d7df"
+    >
+      <h3
+        class="_heading_86d7df"
+      >
+        <button
+          aria-controls=":r0:-consent-panel"
+          aria-expanded="false"
+          class="_header_86d7df"
+          data-key="consent"
+          disabled=""
+          id=":r0:-consent-header"
+          type="button"
+        >
+          <span
+            class="_title_86d7df"
+          >
+            Consent
+          </span>
+          <svg
+            aria-hidden="true"
+            class="_chevron_86d7df"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </h3>
+      <div
+        aria-labelledby=":r0:-consent-header"
+        class="_panel_86d7df"
+        hidden=""
+        id=":r0:-consent-panel"
+        role="region"
+      >
+        <div
+          class="_panelInner_86d7df"
+        >
+          Signed 2026-01-14.
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Accordion > expanded - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_accordion_86d7df"
+  >
+    <div
+      class="_item_86d7df"
+      data-open="true"
+    >
+      <h3
+        class="_heading_86d7df"
+      >
+        <button
+          aria-controls=":r0:-eligibility-panel"
+          aria-expanded="true"
+          class="_header_86d7df"
+          data-key="eligibility"
+          id=":r0:-eligibility-header"
+          type="button"
+        >
+          <span
+            class="_title_86d7df"
+          >
+            Eligibility
+          </span>
+          <svg
+            aria-hidden="true"
+            class="_chevron_86d7df"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </h3>
+      <div
+        aria-labelledby=":r0:-eligibility-header"
+        class="_panel_86d7df"
+        id=":r0:-eligibility-panel"
+        role="region"
+      >
+        <div
+          class="_panelInner_86d7df"
+        >
+          Coverage active through 2026.
+        </div>
+      </div>
+    </div>
+    <div
+      class="_item_86d7df"
+    >
+      <h3
+        class="_heading_86d7df"
+      >
+        <button
+          aria-controls=":r0:-history-panel"
+          aria-expanded="false"
+          class="_header_86d7df"
+          data-key="history"
+          id=":r0:-history-header"
+          type="button"
+        >
+          <span
+            class="_title_86d7df"
+          >
+            Care history
+          </span>
+          <svg
+            aria-hidden="true"
+            class="_chevron_86d7df"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </h3>
+      <div
+        aria-labelledby=":r0:-history-header"
+        class="_panel_86d7df"
+        hidden=""
+        id=":r0:-history-panel"
+        role="region"
+      >
+        <div
+          class="_panelInner_86d7df"
+        >
+          Last visit 2026-05-02.
+        </div>
+      </div>
+    </div>
+    <div
+      class="_item_86d7df"
+    >
+      <h3
+        class="_heading_86d7df"
+      >
+        <button
+          aria-controls=":r0:-consent-panel"
+          aria-expanded="false"
+          class="_header_86d7df"
+          data-key="consent"
+          disabled=""
+          id=":r0:-consent-header"
+          type="button"
+        >
+          <span
+            class="_title_86d7df"
+          >
+            Consent
+          </span>
+          <svg
+            aria-hidden="true"
+            class="_chevron_86d7df"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </h3>
+      <div
+        aria-labelledby=":r0:-consent-header"
+        class="_panel_86d7df"
+        hidden=""
+        id=":r0:-consent-panel"
+        role="region"
+      >
+        <div
+          class="_panelInner_86d7df"
+        >
+          Signed 2026-01-14.
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Accordion > multiple - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_accordion_86d7df"
+  >
+    <div
+      class="_item_86d7df"
+      data-open="true"
+    >
+      <h3
+        class="_heading_86d7df"
+      >
+        <button
+          aria-controls=":r0:-eligibility-panel"
+          aria-expanded="true"
+          class="_header_86d7df"
+          data-key="eligibility"
+          id=":r0:-eligibility-header"
+          type="button"
+        >
+          <span
+            class="_title_86d7df"
+          >
+            Eligibility
+          </span>
+          <svg
+            aria-hidden="true"
+            class="_chevron_86d7df"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </h3>
+      <div
+        aria-labelledby=":r0:-eligibility-header"
+        class="_panel_86d7df"
+        id=":r0:-eligibility-panel"
+        role="region"
+      >
+        <div
+          class="_panelInner_86d7df"
+        >
+          Coverage active through 2026.
+        </div>
+      </div>
+    </div>
+    <div
+      class="_item_86d7df"
+      data-open="true"
+    >
+      <h3
+        class="_heading_86d7df"
+      >
+        <button
+          aria-controls=":r0:-history-panel"
+          aria-expanded="true"
+          class="_header_86d7df"
+          data-key="history"
+          id=":r0:-history-header"
+          type="button"
+        >
+          <span
+            class="_title_86d7df"
+          >
+            Care history
+          </span>
+          <svg
+            aria-hidden="true"
+            class="_chevron_86d7df"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </h3>
+      <div
+        aria-labelledby=":r0:-history-header"
+        class="_panel_86d7df"
+        id=":r0:-history-panel"
+        role="region"
+      >
+        <div
+          class="_panelInner_86d7df"
+        >
+          Last visit 2026-05-02.
+        </div>
+      </div>
+    </div>
+    <div
+      class="_item_86d7df"
+    >
+      <h3
+        class="_heading_86d7df"
+      >
+        <button
+          aria-controls=":r0:-consent-panel"
+          aria-expanded="false"
+          class="_header_86d7df"
+          data-key="consent"
+          disabled=""
+          id=":r0:-consent-header"
+          type="button"
+        >
+          <span
+            class="_title_86d7df"
+          >
+            Consent
+          </span>
+          <svg
+            aria-hidden="true"
+            class="_chevron_86d7df"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M4 6l4 4 4-4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </h3>
+      <div
+        aria-labelledby=":r0:-consent-header"
+        class="_panel_86d7df"
+        hidden=""
+        id=":r0:-consent-panel"
+        role="region"
+      >
+        <div
+          class="_panelInner_86d7df"
+        >
+          Signed 2026-01-14.
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`Alert > errorWithTitle - dom 1`] = `
 <DocumentFragment>
   <div
@@ -180,6 +669,85 @@ exports[`AreaChart > withData - dom 1`] = `
   <div
     data-testid="echarts-chart"
   />
+</DocumentFragment>
+`;
+
+exports[`Avatar > empty - dom 1`] = `
+<DocumentFragment>
+  <span
+    class="_avatar_814665 _sm_814665 _circle_814665"
+  >
+    <svg
+      aria-hidden="true"
+      class="_glyph_814665"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <circle
+        cx="12"
+        cy="8"
+        fill="currentColor"
+        r="4"
+      />
+      <path
+        d="M4 20c0-4 3.6-6 8-6s8 2 8 6"
+        fill="currentColor"
+      />
+    </svg>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Avatar > initials - dom 1`] = `
+<DocumentFragment>
+  <span
+    class="_avatar_814665 _md_814665 _circle_814665"
+  >
+    <span
+      aria-label="Ada Lovelace"
+      class="_initials_814665"
+      role="img"
+    >
+      AL
+    </span>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Avatar > square - dom 1`] = `
+<DocumentFragment>
+  <span
+    class="_avatar_814665 _lg_814665 _square_814665"
+  >
+    <span
+      aria-label="Katherine Johnson"
+      class="_initials_814665"
+      role="img"
+    >
+      KJ
+    </span>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Avatar > withStatus - dom 1`] = `
+<DocumentFragment>
+  <span
+    class="_avatar_814665 _md_814665 _circle_814665"
+  >
+    <span
+      aria-label="Grace Hopper"
+      class="_initials_814665"
+      role="img"
+    >
+      GH
+    </span>
+    <span
+      aria-label="Online"
+      class="_status_814665 _online_814665"
+      role="img"
+    />
+  </span>
 </DocumentFragment>
 `;
 
@@ -772,12 +1340,14 @@ exports[`ConfirmDialog > danger - dom 1`] = `
 <body
   style="overflow: hidden;"
 >
-  <div />
+  <div
+    aria-hidden="true"
+  />
   <div
     data-smd-portal=""
   >
     <div
-      aria-labelledby="modal-title"
+      aria-labelledby=":r0:"
       aria-modal="true"
       class="_overlay_7cc3ba"
       role="dialog"
@@ -790,7 +1360,7 @@ exports[`ConfirmDialog > danger - dom 1`] = `
         >
           <h2
             class="_title_7cc3ba"
-            id="modal-title"
+            id=":r0:"
           >
             Delete account?
           </h2>
@@ -862,12 +1432,14 @@ exports[`ConfirmDialog > open - dom 1`] = `
 <body
   style="overflow: hidden;"
 >
-  <div />
+  <div
+    aria-hidden="true"
+  />
   <div
     data-smd-portal=""
   >
     <div
-      aria-labelledby="modal-title"
+      aria-labelledby=":r0:"
       aria-modal="true"
       class="_overlay_7cc3ba"
       role="dialog"
@@ -880,7 +1452,7 @@ exports[`ConfirmDialog > open - dom 1`] = `
         >
           <h2
             class="_title_7cc3ba"
-            id="modal-title"
+            id=":r0:"
           >
             Delete item?
           </h2>
@@ -1300,6 +1872,149 @@ exports[`DateRangePicker > noValue - dom 1`] = `
     </button>
   </div>
 </DocumentFragment>
+`;
+
+exports[`Drawer > closed - dom 1`] = `
+<body
+  style=""
+>
+  <div />
+  <div
+    data-smd-portal=""
+  />
+</body>
+`;
+
+exports[`Drawer > left - dom 1`] = `
+<body
+  style="overflow: hidden;"
+>
+  <div
+    aria-hidden="true"
+  />
+  <div
+    data-smd-portal=""
+  >
+    <div
+      class="_overlay_173cca"
+    >
+      <div
+        aria-labelledby=":r0:"
+        aria-modal="true"
+        class="_panel_173cca _left_173cca _md_173cca"
+        role="dialog"
+      >
+        <div
+          class="_header_173cca"
+        >
+          <h2
+            class="_title_173cca"
+            id=":r0:"
+          >
+            Navigation
+          </h2>
+          <button
+            aria-label="Close"
+            class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _square_0829c1"
+            type="button"
+          >
+            <span
+              class="_label_0829c1"
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M2 2l12 12M14 2L2 14"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <div
+          class="_body_173cca"
+        >
+          <p>
+            Menu
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Drawer > right - dom 1`] = `
+<body
+  style="overflow: hidden;"
+>
+  <div
+    aria-hidden="true"
+  />
+  <div
+    data-smd-portal=""
+  >
+    <div
+      class="_overlay_173cca"
+    >
+      <div
+        aria-labelledby=":r0:"
+        aria-modal="true"
+        class="_panel_173cca _right_173cca _md_173cca"
+        role="dialog"
+      >
+        <div
+          class="_header_173cca"
+        >
+          <h2
+            class="_title_173cca"
+            id=":r0:"
+          >
+            Filters
+          </h2>
+          <button
+            aria-label="Close"
+            class="_button_0829c1 _ghost_0829c1 _sm_0829c1 _square_0829c1"
+            type="button"
+          >
+            <span
+              class="_label_0829c1"
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M2 2l12 12M14 2L2 14"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+        <div
+          class="_body_173cca"
+        >
+          <p>
+            Filter controls
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
 `;
 
 exports[`Dropdown > closed - dom 1`] = `
@@ -2169,12 +2884,14 @@ exports[`Modal > open - dom 1`] = `
 <body
   style="overflow: hidden;"
 >
-  <div />
+  <div
+    aria-hidden="true"
+  />
   <div
     data-smd-portal=""
   >
     <div
-      aria-labelledby="modal-title"
+      aria-labelledby=":r0:"
       aria-modal="true"
       class="_overlay_7cc3ba"
       role="dialog"
@@ -2187,7 +2904,7 @@ exports[`Modal > open - dom 1`] = `
         >
           <h2
             class="_title_7cc3ba"
-            id="modal-title"
+            id=":r0:"
           >
             Confirmation
           </h2>
@@ -2484,6 +3201,474 @@ exports[`PageSection > titleChildren - dom 1`] = `
 </DocumentFragment>
 `;
 
+exports[`Pagination > default - dom 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Pagination"
+    class="_pagination_de4934"
+  >
+    <ul
+      class="_list_de4934"
+    >
+      <li>
+        <button
+          aria-label="Previous page"
+          class="_item_de4934 _md_de4934 _nav_de4934"
+          disabled=""
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M10 4l-4 4 4 4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </li>
+      <li>
+        <button
+          aria-current="page"
+          aria-label="Page 1"
+          class="_item_de4934 _md_de4934 _current_de4934"
+          type="button"
+        >
+          1
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 2"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          2
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 3"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          3
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 4"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          4
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 5"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          5
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Next page"
+          class="_item_de4934 _md_de4934 _nav_de4934"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M6 4l4 4-4 4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`Pagination > last - dom 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Pagination"
+    class="_pagination_de4934"
+  >
+    <ul
+      class="_list_de4934"
+    >
+      <li>
+        <button
+          aria-label="Previous page"
+          class="_item_de4934 _md_de4934 _nav_de4934"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M10 4l-4 4 4 4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 1"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          1
+        </button>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_ellipsis_de4934"
+      >
+        ...
+      </li>
+      <li>
+        <button
+          aria-label="Page 16"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          16
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 17"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          17
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 18"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          18
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 19"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          19
+        </button>
+      </li>
+      <li>
+        <button
+          aria-current="page"
+          aria-label="Page 20"
+          class="_item_de4934 _md_de4934 _current_de4934"
+          type="button"
+        >
+          20
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Next page"
+          class="_item_de4934 _md_de4934 _nav_de4934"
+          disabled=""
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M6 4l4 4-4 4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`Pagination > middle - dom 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Pagination"
+    class="_pagination_de4934"
+  >
+    <ul
+      class="_list_de4934"
+    >
+      <li>
+        <button
+          aria-label="Previous page"
+          class="_item_de4934 _md_de4934 _nav_de4934"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M10 4l-4 4 4 4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 1"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          1
+        </button>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_ellipsis_de4934"
+      >
+        ...
+      </li>
+      <li>
+        <button
+          aria-label="Page 5"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          5
+        </button>
+      </li>
+      <li>
+        <button
+          aria-current="page"
+          aria-label="Page 6"
+          class="_item_de4934 _md_de4934 _current_de4934"
+          type="button"
+        >
+          6
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 7"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          7
+        </button>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_ellipsis_de4934"
+      >
+        ...
+      </li>
+      <li>
+        <button
+          aria-label="Page 20"
+          class="_item_de4934 _md_de4934"
+          type="button"
+        >
+          20
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Next page"
+          class="_item_de4934 _md_de4934 _nav_de4934"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M6 4l4 4-4 4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`Pagination > small - dom 1`] = `
+<DocumentFragment>
+  <nav
+    aria-label="Pagination"
+    class="_pagination_de4934"
+  >
+    <ul
+      class="_list_de4934"
+    >
+      <li>
+        <button
+          aria-label="Previous page"
+          class="_item_de4934 _sm_de4934 _nav_de4934"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M10 4l-4 4 4 4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 1"
+          class="_item_de4934 _sm_de4934"
+          type="button"
+        >
+          1
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 2"
+          class="_item_de4934 _sm_de4934"
+          type="button"
+        >
+          2
+        </button>
+      </li>
+      <li>
+        <button
+          aria-current="page"
+          aria-label="Page 3"
+          class="_item_de4934 _sm_de4934 _current_de4934"
+          type="button"
+        >
+          3
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 4"
+          class="_item_de4934 _sm_de4934"
+          type="button"
+        >
+          4
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Page 5"
+          class="_item_de4934 _sm_de4934"
+          type="button"
+        >
+          5
+        </button>
+      </li>
+      <li
+        aria-hidden="true"
+        class="_ellipsis_de4934"
+      >
+        ...
+      </li>
+      <li>
+        <button
+          aria-label="Page 8"
+          class="_item_de4934 _sm_de4934"
+          type="button"
+        >
+          8
+        </button>
+      </li>
+      <li>
+        <button
+          aria-label="Next page"
+          class="_item_de4934 _sm_de4934 _nav_de4934"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M6 4l4 4-4 4"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+            />
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</DocumentFragment>
+`;
+
 exports[`PieChart > donut - dom 1`] = `
 <DocumentFragment>
   <div
@@ -2504,6 +3689,154 @@ exports[`PieChart > pie - dom 1`] = `
     <div
       data-testid="echarts-chart"
     />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Popover > closed - dom 1`] = `
+<body
+  style=""
+>
+  <div>
+    <span
+      class="_anchor_6d9b5a"
+    >
+      <button
+        aria-expanded="false"
+        aria-haspopup="dialog"
+        type="button"
+      >
+        Actions
+      </button>
+    </span>
+  </div>
+  <div
+    data-smd-portal=""
+  />
+</body>
+`;
+
+exports[`Popover > open - dom 1`] = `
+<body
+  style=""
+>
+  <div>
+    <span
+      class="_anchor_6d9b5a"
+    >
+      <button
+        aria-controls=":r1:"
+        aria-expanded="true"
+        aria-haspopup="dialog"
+        type="button"
+      >
+        Actions
+      </button>
+    </span>
+  </div>
+  <div
+    data-smd-portal=""
+  >
+    <div
+      aria-label="Quick actions"
+      class="_popover_6d9b5a"
+      id=":r1:"
+      role="dialog"
+      style="top: 8px; left: 8px;"
+    >
+      <p>
+        Popover content
+      </p>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Progress > default - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_a46e85"
+  >
+    <div
+      aria-label="Uploading report"
+      aria-valuemax="100"
+      aria-valuemin="0"
+      aria-valuenow="64"
+      class="_track_a46e85 _md_a46e85"
+      role="progressbar"
+    >
+      <div
+        class="_fill_a46e85 _primary_a46e85"
+        style="width: 64%;"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Progress > indeterminate - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_a46e85"
+  >
+    <div
+      aria-label="Loading"
+      class="_track_a46e85 _md_a46e85"
+      role="progressbar"
+    >
+      <div
+        class="_fill_a46e85 _primary_a46e85 _indeterminate_a46e85"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Progress > success - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_a46e85"
+  >
+    <div
+      aria-label="Complete"
+      aria-valuemax="100"
+      aria-valuemin="0"
+      aria-valuenow="100"
+      class="_track_a46e85 _md_a46e85"
+      role="progressbar"
+    >
+      <div
+        class="_fill_a46e85 _success_a46e85"
+        style="width: 100%;"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Progress > withValue - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_a46e85"
+  >
+    <div
+      aria-label="Syncing"
+      aria-valuemax="100"
+      aria-valuemin="0"
+      aria-valuenow="40"
+      class="_track_a46e85 _md_a46e85"
+      role="progressbar"
+    >
+      <div
+        class="_fill_a46e85 _primary_a46e85"
+        style="width: 40%;"
+      />
+    </div>
+    <span
+      class="_value_a46e85"
+    >
+      40%
+    </span>
   </div>
 </DocumentFragment>
 `;
@@ -2999,6 +4332,56 @@ exports[`Select > withOptions - dom 1`] = `
       </option>
     </select>
   </div>
+</DocumentFragment>
+`;
+
+exports[`Separator > default - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_separator_59a6a1 _horizontal_59a6a1"
+    role="none"
+  />
+</DocumentFragment>
+`;
+
+exports[`Separator > labeled - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_labeled_59a6a1"
+    role="none"
+  >
+    <span
+      class="_rule_59a6a1"
+    />
+    <span
+      class="_label_59a6a1"
+    >
+      OR
+    </span>
+    <span
+      class="_rule_59a6a1"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Separator > semantic - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-orientation="horizontal"
+    class="_separator_59a6a1 _horizontal_59a6a1"
+    role="separator"
+  />
+</DocumentFragment>
+`;
+
+exports[`Separator > vertical - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-orientation="vertical"
+    class="_separator_59a6a1 _vertical_59a6a1"
+    role="separator"
+  />
 </DocumentFragment>
 `;
 
@@ -3542,6 +4925,7 @@ exports[`Tabs > pills - dom 1`] = `
       aria-selected="false"
       class="_tab_d3f7cd"
       data-tab-key="week"
+      id=":r0:-tab-week"
       role="tab"
       tabindex="-1"
       type="button"
@@ -3552,6 +4936,7 @@ exports[`Tabs > pills - dom 1`] = `
       aria-selected="true"
       class="_tab_d3f7cd"
       data-tab-key="month"
+      id=":r0:-tab-month"
       role="tab"
       tabindex="0"
       type="button"
@@ -3562,6 +4947,7 @@ exports[`Tabs > pills - dom 1`] = `
       aria-selected="false"
       class="_tab_d3f7cd"
       data-tab-key="year"
+      id=":r0:-tab-year"
       role="tab"
       tabindex="-1"
       type="button"
@@ -3582,6 +4968,7 @@ exports[`Tabs > underline - dom 1`] = `
       aria-selected="true"
       class="_tab_d3f7cd"
       data-tab-key="overview"
+      id=":r0:-tab-overview"
       role="tab"
       tabindex="0"
       type="button"
@@ -3592,6 +4979,7 @@ exports[`Tabs > underline - dom 1`] = `
       aria-selected="false"
       class="_tab_d3f7cd"
       data-tab-key="details"
+      id=":r0:-tab-details"
       role="tab"
       tabindex="-1"
       type="button"
@@ -3602,6 +4990,7 @@ exports[`Tabs > underline - dom 1`] = `
       aria-selected="false"
       class="_tab_d3f7cd"
       data-tab-key="history"
+      id=":r0:-tab-history"
       role="tab"
       tabindex="-1"
       type="button"
@@ -3790,6 +5179,26 @@ exports[`Typeahead > empty - dom 1`] = `
       />
     </div>
   </div>
+</DocumentFragment>
+`;
+
+exports[`VisuallyHidden > default - dom 1`] = `
+<DocumentFragment>
+  <span
+    class="_visuallyHidden_46bc47"
+  >
+    Loading results
+  </span>
+</DocumentFragment>
+`;
+
+exports[`VisuallyHidden > focusable - dom 1`] = `
+<DocumentFragment>
+  <span
+    class="_visuallyHidden_46bc47 _focusable_46bc47"
+  >
+    Skip to main content
+  </span>
 </DocumentFragment>
 `;
 

@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useRef} from 'react';
+import React, {useCallback, useId, useMemo, useRef} from 'react';
 import styles from './Tabs.module.css';
 
 export interface Tab {
@@ -7,6 +7,13 @@ export interface Tab {
   icon?: React.ReactNode;
   badge?: string | number;
   disabled?: boolean;
+  /**
+   * id of the panel this tab controls. When set, the tab exposes
+   * `aria-controls={panelId}`; the panel should carry `role="tabpanel"`,
+   * `id={panelId}`, and `aria-labelledby` set to this tab's id - which is
+   * `${id}-tab-${key}` when you pass an explicit `id` to Tabs.
+   */
+  panelId?: string;
 }
 
 export interface TabsProps {
@@ -16,6 +23,12 @@ export interface TabsProps {
   variant?: 'underline' | 'pills';
   size?: 'sm' | 'md';
   className?: string;
+  /**
+   * Base id for the tablist. Each tab button gets `id={`${id}-tab-${key}`}`, so
+   * a controlled panel can set `aria-labelledby` to a predictable value. Falls
+   * back to a generated id (still unique, but not knowable ahead of render).
+   */
+  id?: string;
 }
 
 export const Tabs = React.memo(function Tabs({
@@ -25,7 +38,10 @@ export const Tabs = React.memo(function Tabs({
   variant = 'underline',
   size = 'md',
   className,
+  id,
 }: TabsProps): React.JSX.Element {
+  const generatedId = useId();
+  const baseId = id ?? generatedId;
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
   const activeTabRef = useRef(activeTab);
   activeTabRef.current = activeTab;
@@ -83,6 +99,7 @@ export const Tabs = React.memo(function Tabs({
         return (
           <button
             key={tab.key}
+            id={`${baseId}-tab-${tab.key}`}
             ref={(el) => {
               if (el) tabRefs.current.set(tab.key, el);
               else tabRefs.current.delete(tab.key);
@@ -91,6 +108,7 @@ export const Tabs = React.memo(function Tabs({
             type="button"
             className={styles.tab}
             aria-selected={isSelected}
+            aria-controls={tab.panelId}
             aria-disabled={isDisabled || undefined}
             disabled={isDisabled}
             tabIndex={isSelected ? 0 : -1}
