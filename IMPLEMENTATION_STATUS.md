@@ -13,6 +13,36 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## Dashboard primitives - SegmentedControl + Stepper  (DONE)
+
+Branch: feat/dashboard-primitives (off main). Two more high-value primitives for
+dashboard/workflow UIs. House pattern: index/css/fixtures/stories/test, tokens
+only, JSDoc, barrel export, harness-discovered (snapshot + axe).
+
+### What shipped
+
+- SegmentedControl: compact single-select toggle for view modes and time ranges
+  (list/grid/board, day/week/month). Implements the radiogroup pattern with
+  button segments - one tab stop, Arrow/Home/End move + select, `aria-checked`
+  tracks the choice. Distinct from RadioGroup (a labelled form field of native
+  inputs); premium libraries ship both. `fullWidth`, sizes, optional icons.
+- Stepper: multi-step progress for intake/approval flows. Ordered list; active
+  step carries `aria-current="step"`; completed steps show a check; horizontal or
+  vertical. `onStepClick` makes completed/current steps navigable buttons
+  (upcoming stay non-interactive).
+
+### New behavioral tests
+
+SegmentedControl (3): radiogroup + single tab stop, click select, Arrow/Home
+selection. Stepper (3): aria-current marking, navigable-only-when-onStepClick,
+no buttons otherwise.
+
+### Gates (all green)
+
+- typecheck clean. Tests: 285 passed (+18 over main: 12 fixture snapshot/axe,
+  +6 behavioral). Both axe-clean. Build clean. Core surface 28.2 kB (80 kB).
+  Stories type-checked (tsconfig.recipes.json). ASCII clean.
+
 ## S7.1 - CI pipeline  (DONE)
 
 Branch: feat/s2-performance (continued).

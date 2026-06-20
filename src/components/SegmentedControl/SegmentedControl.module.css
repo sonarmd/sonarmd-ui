@@ -1,0 +1,65 @@
+.group {
+  display: inline-flex;
+  align-items: stretch;
+  gap: var(--smd-space-px);
+  padding: var(--smd-space-px);
+  background: var(--smd-bg-subtle);
+  border-radius: var(--smd-radius-md);
+}
+
+.fullWidth {
+  display: flex;
+  width: 100%;
+}
+
+.fullWidth .segment {
+  flex: 1;
+}
+
+.segment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--smd-space-2);
+  padding: var(--smd-space-2) var(--smd-space-4);
+  border: 0;
+  border-radius: var(--smd-radius-sm);
+  background: none;
+  color: var(--smd-text-secondary);
+  font-size: var(--smd-font-size-sm);
+  font-weight: var(--smd-font-weight-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--smd-duration-fast) var(--smd-ease-standard),
+    color var(--smd-duration-fast) var(--smd-ease-standard),
+    box-shadow var(--smd-duration-fast) var(--smd-ease-standard);
+}
+
+.sm .segment {
+  padding: var(--smd-space-1) var(--smd-space-3);
+  font-size: var(--smd-font-size-xs);
+}
+
+.segment:hover:not(:disabled):not([aria-checked='true']) {
+  color: var(--smd-text-primary);
+}
+
+.segment[aria-checked='true'] {
+  background: var(--smd-bg-base);
+  color: var(--smd-text-primary);
+  box-shadow: var(--smd-shadow-sm);
+}
+
+.segment:focus-visible {
+  outline: 2px solid var(--smd-border-focus);
+  outline-offset: 1px;
+}
+
+.segment:disabled {
+  color: var(--smd-text-disabled);
+  cursor: not-allowed;
+}
+
+.icon {
+  display: inline-flex;
+}

@@ -2842,6 +2842,129 @@ exports[`SecureField > masked - dom 1`] = `
 </DocumentFragment>
 `;
 
+exports[`SegmentedControl > default - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="View mode"
+    class="_group_c15156 _md_c15156"
+    role="radiogroup"
+  >
+    <button
+      aria-checked="true"
+      class="_segment_c15156"
+      id=":r0:-list"
+      role="radio"
+      tabindex="0"
+      type="button"
+    >
+      List
+    </button>
+    <button
+      aria-checked="false"
+      class="_segment_c15156"
+      id=":r0:-grid"
+      role="radio"
+      tabindex="-1"
+      type="button"
+    >
+      Grid
+    </button>
+    <button
+      aria-checked="false"
+      class="_segment_c15156"
+      id=":r0:-board"
+      role="radio"
+      tabindex="-1"
+      type="button"
+    >
+      Board
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SegmentedControl > fullWidth - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="View mode"
+    class="_group_c15156 _md_c15156 _fullWidth_c15156"
+    role="radiogroup"
+  >
+    <button
+      aria-checked="false"
+      class="_segment_c15156"
+      id=":r0:-list"
+      role="radio"
+      tabindex="-1"
+      type="button"
+    >
+      List
+    </button>
+    <button
+      aria-checked="true"
+      class="_segment_c15156"
+      id=":r0:-grid"
+      role="radio"
+      tabindex="0"
+      type="button"
+    >
+      Grid
+    </button>
+    <button
+      aria-checked="false"
+      class="_segment_c15156"
+      id=":r0:-board"
+      role="radio"
+      tabindex="-1"
+      type="button"
+    >
+      Board
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SegmentedControl > small - dom 1`] = `
+<DocumentFragment>
+  <div
+    aria-label="View mode"
+    class="_group_c15156 _sm_c15156"
+    role="radiogroup"
+  >
+    <button
+      aria-checked="false"
+      class="_segment_c15156"
+      id=":r0:-list"
+      role="radio"
+      tabindex="-1"
+      type="button"
+    >
+      List
+    </button>
+    <button
+      aria-checked="false"
+      class="_segment_c15156"
+      id=":r0:-grid"
+      role="radio"
+      tabindex="-1"
+      type="button"
+    >
+      Grid
+    </button>
+    <button
+      aria-checked="true"
+      class="_segment_c15156"
+      id=":r0:-board"
+      role="radio"
+      tabindex="0"
+      type="button"
+    >
+      Board
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`Select > withOptions - dom 1`] = `
 <DocumentFragment>
   <div
@@ -3093,6 +3216,319 @@ exports[`StackedBarChart > withSeries - dom 1`] = `
   <div
     data-testid="echarts-chart"
   />
+</DocumentFragment>
+`;
+
+exports[`Stepper > default - dom 1`] = `
+<DocumentFragment>
+  <ol
+    aria-label="Progress"
+    class="_stepper_803443 _horizontal_803443"
+  >
+    <li
+      class="_step_803443 _complete_803443"
+    >
+      <span
+        class="_content_803443"
+      >
+        <span
+          aria-hidden="true"
+          class="_indicator_803443"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="14"
+            viewBox="0 0 14 14"
+            width="14"
+          >
+            <path
+              d="M2.5 7l3 3 6-6.5"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.75"
+            />
+          </svg>
+        </span>
+        <span
+          class="_text_803443"
+        >
+          <span
+            class="_label_803443"
+          >
+            Intake
+          </span>
+          <span
+            class="_description_803443"
+          >
+            Patient details
+          </span>
+        </span>
+      </span>
+    </li>
+    <li
+      aria-current="step"
+      class="_step_803443 _current_803443"
+    >
+      <span
+        class="_content_803443"
+      >
+        <span
+          aria-hidden="true"
+          class="_indicator_803443"
+        >
+          2
+        </span>
+        <span
+          class="_text_803443"
+        >
+          <span
+            class="_label_803443"
+          >
+            Review
+          </span>
+          <span
+            class="_description_803443"
+          >
+            Clinical review
+          </span>
+        </span>
+      </span>
+    </li>
+    <li
+      class="_step_803443 _upcoming_803443"
+    >
+      <span
+        class="_content_803443"
+      >
+        <span
+          aria-hidden="true"
+          class="_indicator_803443"
+        >
+          3
+        </span>
+        <span
+          class="_text_803443"
+        >
+          <span
+            class="_label_803443"
+          >
+            Approval
+          </span>
+          <span
+            class="_description_803443"
+          >
+            Sign-off
+          </span>
+        </span>
+      </span>
+    </li>
+  </ol>
+</DocumentFragment>
+`;
+
+exports[`Stepper > first - dom 1`] = `
+<DocumentFragment>
+  <ol
+    aria-label="Progress"
+    class="_stepper_803443 _horizontal_803443"
+  >
+    <li
+      aria-current="step"
+      class="_step_803443 _current_803443"
+    >
+      <span
+        class="_content_803443"
+      >
+        <span
+          aria-hidden="true"
+          class="_indicator_803443"
+        >
+          1
+        </span>
+        <span
+          class="_text_803443"
+        >
+          <span
+            class="_label_803443"
+          >
+            Intake
+          </span>
+          <span
+            class="_description_803443"
+          >
+            Patient details
+          </span>
+        </span>
+      </span>
+    </li>
+    <li
+      class="_step_803443 _upcoming_803443"
+    >
+      <span
+        class="_content_803443"
+      >
+        <span
+          aria-hidden="true"
+          class="_indicator_803443"
+        >
+          2
+        </span>
+        <span
+          class="_text_803443"
+        >
+          <span
+            class="_label_803443"
+          >
+            Review
+          </span>
+          <span
+            class="_description_803443"
+          >
+            Clinical review
+          </span>
+        </span>
+      </span>
+    </li>
+    <li
+      class="_step_803443 _upcoming_803443"
+    >
+      <span
+        class="_content_803443"
+      >
+        <span
+          aria-hidden="true"
+          class="_indicator_803443"
+        >
+          3
+        </span>
+        <span
+          class="_text_803443"
+        >
+          <span
+            class="_label_803443"
+          >
+            Approval
+          </span>
+          <span
+            class="_description_803443"
+          >
+            Sign-off
+          </span>
+        </span>
+      </span>
+    </li>
+  </ol>
+</DocumentFragment>
+`;
+
+exports[`Stepper > vertical - dom 1`] = `
+<DocumentFragment>
+  <ol
+    aria-label="Progress"
+    class="_stepper_803443 _vertical_803443"
+  >
+    <li
+      class="_step_803443 _complete_803443"
+    >
+      <span
+        class="_content_803443"
+      >
+        <span
+          aria-hidden="true"
+          class="_indicator_803443"
+        >
+          <svg
+            aria-hidden="true"
+            fill="none"
+            height="14"
+            viewBox="0 0 14 14"
+            width="14"
+          >
+            <path
+              d="M2.5 7l3 3 6-6.5"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.75"
+            />
+          </svg>
+        </span>
+        <span
+          class="_text_803443"
+        >
+          <span
+            class="_label_803443"
+          >
+            Intake
+          </span>
+          <span
+            class="_description_803443"
+          >
+            Patient details
+          </span>
+        </span>
+      </span>
+    </li>
+    <li
+      aria-current="step"
+      class="_step_803443 _current_803443"
+    >
+      <span
+        class="_content_803443"
+      >
+        <span
+          aria-hidden="true"
+          class="_indicator_803443"
+        >
+          2
+        </span>
+        <span
+          class="_text_803443"
+        >
+          <span
+            class="_label_803443"
+          >
+            Review
+          </span>
+          <span
+            class="_description_803443"
+          >
+            Clinical review
+          </span>
+        </span>
+      </span>
+    </li>
+    <li
+      class="_step_803443 _upcoming_803443"
+    >
+      <span
+        class="_content_803443"
+      >
+        <span
+          aria-hidden="true"
+          class="_indicator_803443"
+        >
+          3
+        </span>
+        <span
+          class="_text_803443"
+        >
+          <span
+            class="_label_803443"
+          >
+            Approval
+          </span>
+          <span
+            class="_description_803443"
+          >
+            Sign-off
+          </span>
+        </span>
+      </span>
+    </li>
+  </ol>
 </DocumentFragment>
 `;
 

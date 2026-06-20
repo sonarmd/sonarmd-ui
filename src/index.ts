@@ -146,6 +146,12 @@ export type {PageSectionProps} from './components/PageSection';
 export {Tabs} from './components/Tabs';
 export type {TabsProps, Tab} from './components/Tabs';
 
+export {SegmentedControl} from './components/SegmentedControl';
+export type {SegmentedControlProps, SegmentedOption} from './components/SegmentedControl';
+
+export {Stepper} from './components/Stepper';
+export type {StepperProps, Step} from './components/Stepper';
+
 export {Sidebar} from './components/Sidebar';
 export type {SidebarProps, NavItem} from './components/Sidebar';
 
