@@ -1,0 +1,513 @@
+{
+  "stamp": "2026-06-21T02:36:27.096Z",
+  "runs": 25,
+  "byLib": {
+    "sonarmd": {
+      "boot": 15.5,
+      "tbt": 0,
+      "perComponent": {
+        "Button": {
+          "count": 500,
+          "mountMedian": 3.7000000178813934,
+          "mountP95": 4.4000000059604645,
+          "updateMedian": 2.5999999940395355,
+          "updateP95": 2.7000000178813934
+        },
+        "Card": {
+          "count": 300,
+          "mountMedian": 2.399999976158142,
+          "mountP95": 2.7999999821186066,
+          "updateMedian": 1.2000000178813934,
+          "updateP95": 1.300000011920929
+        },
+        "Badge": {
+          "count": 500,
+          "mountMedian": 2,
+          "mountP95": 2.300000011920929,
+          "updateMedian": 1.4000000059604645,
+          "updateP95": 1.5999999940395355
+        },
+        "TextInput": {
+          "count": 500,
+          "mountMedian": 4.4000000059604645,
+          "mountP95": 4.5999999940395355,
+          "updateMedian": 3.199999988079071,
+          "updateP95": 3.5
+        },
+        "Checkbox": {
+          "count": 500,
+          "mountMedian": 5.5,
+          "mountP95": 10,
+          "updateMedian": 10.900000005960464,
+          "updateP95": 14
+        },
+        "Radio": {
+          "count": 500,
+          "mountMedian": 5.199999988079071,
+          "mountP95": 7.0999999940395355,
+          "updateMedian": 9.800000011920929,
+          "updateP95": 13
+        },
+        "Select": {
+          "count": 200,
+          "mountMedian": 5.0999999940395355,
+          "mountP95": 5.5,
+          "updateMedian": 1.800000011920929,
+          "updateP95": 2.0999999940395355
+        },
+        "Toggle": {
+          "count": 500,
+          "mountMedian": 6,
+          "mountP95": 8.099999994039536,
+          "updateMedian": 5.699999988079071,
+          "updateP95": 7.800000011920929
+        },
+        "Alert": {
+          "count": 300,
+          "mountMedian": 5,
+          "mountP95": 5.200000017881393,
+          "updateMedian": 1.5,
+          "updateP95": 1.7000000178813934
+        },
+        "Avatar": {
+          "count": 500,
+          "mountMedian": 2.7000000178813934,
+          "mountP95": 2.9000000059604645,
+          "updateMedian": 1.9000000059604645,
+          "updateP95": 2.5999999940395355
+        },
+        "Progress": {
+          "count": 500,
+          "mountMedian": 2.7000000178813934,
+          "mountP95": 3,
+          "updateMedian": 3.5,
+          "updateP95": 4.700000017881393
+        },
+        "Spinner": {
+          "count": 500,
+          "mountMedian": 4.9000000059604645,
+          "mountP95": 5.299999982118607,
+          "updateMedian": 0.10000002384185791,
+          "updateP95": 0.30000001192092896
+        },
+        "Skeleton": {
+          "count": 500,
+          "mountMedian": 2.7999999821186066,
+          "mountP95": 3,
+          "updateMedian": 0.09999999403953552,
+          "updateP95": 0.20000001788139343
+        },
+        "Separator": {
+          "count": 500,
+          "mountMedian": 1.0999999940395355,
+          "mountP95": 1.100000023841858,
+          "updateMedian": 0.20000001788139343,
+          "updateP95": 0.29999998211860657
+        },
+        "Breadcrumbs": {
+          "count": 300,
+          "mountMedian": 5.899999976158142,
+          "mountP95": 6,
+          "updateMedian": 0.09999999403953552,
+          "updateP95": 0.19999998807907104
+        },
+        "Pagination": {
+          "count": 200,
+          "mountMedian": 12.699999988079071,
+          "mountP95": 14.300000011920929,
+          "updateMedian": 5.199999988079071,
+          "updateP95": 8.899999976158142
+        },
+        "Tabs": {
+          "count": 150,
+          "mountMedian": 2.5999999940395355,
+          "mountP95": 2.7000000178813934,
+          "updateMedian": 2.5,
+          "updateP95": 3.0999999940395355
+        },
+        "Tooltip": {
+          "count": 300,
+          "mountMedian": 1.100000023841858,
+          "mountP95": 1.2000000178813934,
+          "updateMedian": 0.30000001192092896,
+          "updateP95": 0.4000000059604645
+        }
+      }
+    },
+    "mui": {
+      "boot": 29,
+      "tbt": 0,
+      "perComponent": {
+        "Button": {
+          "count": 500,
+          "mountMedian": 10.700000017881393,
+          "mountP95": 12.400000005960464,
+          "updateMedian": 10.800000011920929,
+          "updateP95": 14.599999994039536
+        },
+        "Card": {
+          "count": 300,
+          "mountMedian": 3.4000000059604645,
+          "mountP95": 3.5,
+          "updateMedian": 2.5999999940395355,
+          "updateP95": 2.9000000059604645
+        },
+        "Badge": {
+          "count": 500,
+          "mountMedian": 5.9000000059604645,
+          "mountP95": 6.0999999940395355,
+          "updateMedian": 5.5999999940395355,
+          "updateP95": 7.9000000059604645
+        },
+        "TextInput": {
+          "count": 500,
+          "mountMedian": 40.30000001192093,
+          "mountP95": 41.599999994039536,
+          "updateMedian": 27.700000017881393,
+          "updateP95": 30.099999994039536
+        },
+        "Checkbox": {
+          "count": 500,
+          "mountMedian": 19.19999998807907,
+          "mountP95": 30.099999994039536,
+          "updateMedian": 21.400000005960464,
+          "updateP95": 22.69999998807907
+        },
+        "Radio": {
+          "count": 500,
+          "mountMedian": 26.5,
+          "mountP95": 38.30000001192093,
+          "updateMedian": 25,
+          "updateP95": 26
+        },
+        "Select": {
+          "count": 200,
+          "mountMedian": 24,
+          "mountP95": 35.79999998211861,
+          "updateMedian": 19.19999998807907,
+          "updateP95": 20.400000005960464
+        },
+        "Toggle": {
+          "count": 500,
+          "mountMedian": 21.599999994039536,
+          "mountP95": 31.599999994039536,
+          "updateMedian": 24.900000005960464,
+          "updateP95": 26.5
+        },
+        "Alert": {
+          "count": 300,
+          "mountMedian": 8.599999994039536,
+          "mountP95": 9.099999994039536,
+          "updateMedian": 5.5,
+          "updateP95": 5.799999982118607
+        },
+        "Avatar": {
+          "count": 500,
+          "mountMedian": 3.2000000178813934,
+          "mountP95": 3.399999976158142,
+          "updateMedian": 4.0999999940395355,
+          "updateP95": 7
+        },
+        "Progress": {
+          "count": 500,
+          "mountMedian": 5,
+          "mountP95": 5.4000000059604645,
+          "updateMedian": 5.300000011920929,
+          "updateP95": 7.299999982118607
+        },
+        "Spinner": {
+          "count": 500,
+          "mountMedian": 9.400000005960464,
+          "mountP95": 10.699999988079071,
+          "updateMedian": 3.4000000059604645,
+          "updateP95": 4
+        },
+        "Skeleton": {
+          "count": 500,
+          "mountMedian": 4.200000017881393,
+          "mountP95": 4.5999999940395355,
+          "updateMedian": 1.2999999821186066,
+          "updateP95": 1.5
+        },
+        "Separator": {
+          "count": 500,
+          "mountMedian": 2.199999988079071,
+          "mountP95": 2.2000000178813934,
+          "updateMedian": 1.0999999940395355,
+          "updateP95": 1.2000000178813934
+        },
+        "Breadcrumbs": {
+          "count": 300,
+          "mountMedian": 9.699999988079071,
+          "mountP95": 9.900000005960464,
+          "updateMedian": 3.800000011920929,
+          "updateP95": 4
+        },
+        "Pagination": {
+          "count": 200,
+          "mountMedian": 48.69999998807907,
+          "mountP95": 51.599999994039536,
+          "updateMedian": 46,
+          "updateP95": 49.79999998211861
+        },
+        "Tabs": {
+          "count": 150,
+          "mountMedian": 12.800000011920929,
+          "mountP95": 13.599999994039536,
+          "updateMedian": 12.199999988079071,
+          "updateP95": 13.900000005960464
+        },
+        "Tooltip": {
+          "count": 300,
+          "mountMedian": 5,
+          "mountP95": 5.4000000059604645,
+          "updateMedian": 4.4000000059604645,
+          "updateP95": 4.700000017881393
+        }
+      }
+    },
+    "antd": {
+      "boot": 32.099999994039536,
+      "tbt": 0,
+      "perComponent": {
+        "Button": {
+          "count": 500,
+          "mountMedian": 30.899999976158142,
+          "mountP95": 32.19999998807907,
+          "updateMedian": 9.400000005960464,
+          "updateP95": 14.900000005960464
+        },
+        "Card": {
+          "count": 300,
+          "mountMedian": 5.9000000059604645,
+          "mountP95": 6.199999988079071,
+          "updateMedian": 2.5,
+          "updateP95": 2.800000011920929
+        },
+        "Badge": {
+          "count": 500,
+          "mountMedian": 12.599999994039536,
+          "mountP95": 15,
+          "updateMedian": 5.4000000059604645,
+          "updateP95": 6.0999999940395355
+        },
+        "TextInput": {
+          "count": 500,
+          "mountMedian": 24.100000023841858,
+          "mountP95": 35.30000001192093,
+          "updateMedian": 11.200000017881393,
+          "updateP95": 13.200000017881393
+        },
+        "Checkbox": {
+          "count": 500,
+          "mountMedian": 25.099999994039536,
+          "mountP95": 30.80000001192093,
+          "updateMedian": 28.400000005960464,
+          "updateP95": 30.5
+        },
+        "Radio": {
+          "count": 500,
+          "mountMedian": 27.400000005960464,
+          "mountP95": 39.900000005960464,
+          "updateMedian": 33.400000005960464,
+          "updateP95": 36
+        },
+        "Select": {
+          "count": 200,
+          "mountMedian": 43.5,
+          "mountP95": 63.70000001788139,
+          "updateMedian": 24.200000017881393,
+          "updateP95": 25
+        },
+        "Toggle": {
+          "count": 500,
+          "mountMedian": 24.599999994039536,
+          "mountP95": 30.19999998807907,
+          "updateMedian": 31.30000001192093,
+          "updateP95": 34.599999994039536
+        },
+        "Alert": {
+          "count": 300,
+          "mountMedian": 8.400000005960464,
+          "mountP95": 8.800000011920929,
+          "updateMedian": 3.5,
+          "updateP95": 3.7999999821186066
+        },
+        "Avatar": {
+          "count": 500,
+          "mountMedian": 15.299999982118607,
+          "mountP95": 22.599999994039536,
+          "updateMedian": 9,
+          "updateP95": 15.199999988079071
+        },
+        "Progress": {
+          "count": 500,
+          "mountMedian": 27.200000017881393,
+          "mountP95": 35.80000001192093,
+          "updateMedian": 14.300000011920929,
+          "updateP95": 21.5
+        },
+        "Spinner": {
+          "count": 500,
+          "mountMedian": 33.19999998807907,
+          "mountP95": 41.80000001192093,
+          "updateMedian": 7,
+          "updateP95": 11.800000011920929
+        },
+        "Skeleton": {
+          "count": 500,
+          "mountMedian": 16.19999998807907,
+          "mountP95": 17.30000001192093,
+          "updateMedian": 2.5,
+          "updateP95": 2.699999988079071
+        },
+        "Separator": {
+          "count": 500,
+          "mountMedian": 10.100000023841858,
+          "mountP95": 10.5,
+          "updateMedian": 2.2000000178813934,
+          "updateP95": 2.5
+        },
+        "Breadcrumbs": {
+          "count": 300,
+          "mountMedian": 17,
+          "mountP95": 17.400000005960464,
+          "updateMedian": 2.699999988079071,
+          "updateP95": 3.399999976158142
+        },
+        "Pagination": {
+          "count": 200,
+          "mountMedian": 86.59999999403954,
+          "mountP95": 92.09999999403954,
+          "updateMedian": 41,
+          "updateP95": 46.20000001788139
+        },
+        "Tabs": {
+          "count": 150,
+          "mountMedian": 34.39999997615814,
+          "mountP95": 36.10000002384186,
+          "updateMedian": 31.700000017881393,
+          "updateP95": 37.70000001788139
+        },
+        "Tooltip": {
+          "count": 300,
+          "mountMedian": 17.700000017881393,
+          "mountP95": 18.5,
+          "updateMedian": 7.200000017881393,
+          "updateP95": 8
+        }
+      }
+    },
+    "bootstrap": {
+      "boot": 18.30000001192093,
+      "tbt": 0,
+      "perComponent": {
+        "Button": {
+          "count": 500,
+          "mountMedian": 3,
+          "mountP95": 3.300000011920929,
+          "updateMedian": 1.800000011920929,
+          "updateP95": 2
+        },
+        "Card": {
+          "count": 300,
+          "mountMedian": 1.699999988079071,
+          "mountP95": 1.800000011920929,
+          "updateMedian": 1.0999999940395355,
+          "updateP95": 1.100000023841858
+        },
+        "Badge": {
+          "count": 500,
+          "mountMedian": 1.7999999821186066,
+          "mountP95": 2,
+          "updateMedian": 1.5,
+          "updateP95": 1.9000000059604645
+        },
+        "TextInput": {
+          "count": 500,
+          "mountMedian": 2.800000011920929,
+          "mountP95": 3,
+          "updateMedian": 1.5999999940395355,
+          "updateP95": 2
+        },
+        "Checkbox": {
+          "count": 500,
+          "mountMedian": 5.399999976158142,
+          "mountP95": 5.5999999940395355,
+          "updateMedian": 1.9000000059604645,
+          "updateP95": 2.199999988079071
+        },
+        "Radio": {
+          "count": 500,
+          "mountMedian": 4.700000017881393,
+          "mountP95": 4.9000000059604645,
+          "updateMedian": 1.699999988079071,
+          "updateP95": 2.0999999940395355
+        },
+        "Select": {
+          "count": 200,
+          "mountMedian": 4.800000011920929,
+          "mountP95": 5.0999999940395355,
+          "updateMedian": 1.5,
+          "updateP95": 1.699999988079071
+        },
+        "Toggle": {
+          "count": 500,
+          "mountMedian": 4.9000000059604645,
+          "mountP95": 5.4000000059604645,
+          "updateMedian": 5.5,
+          "updateP95": 6.299999982118607
+        },
+        "Alert": {
+          "count": 300,
+          "mountMedian": 2.199999988079071,
+          "mountP95": 2.5999999940395355,
+          "updateMedian": 1.800000011920929,
+          "updateP95": 2.199999988079071
+        },
+        "Progress": {
+          "count": 500,
+          "mountMedian": 2.7999999821186066,
+          "mountP95": 2.9000000059604645,
+          "updateMedian": 3.100000023841858,
+          "updateP95": 3.9000000059604645
+        },
+        "Spinner": {
+          "count": 500,
+          "mountMedian": 4,
+          "mountP95": 4.600000023841858,
+          "updateMedian": 0.29999998211860657,
+          "updateP95": 0.4000000059604645
+        },
+        "Skeleton": {
+          "count": 500,
+          "mountMedian": 3.4000000059604645,
+          "mountP95": 3.7000000178813934,
+          "updateMedian": 0.800000011920929,
+          "updateP95": 0.800000011920929
+        },
+        "Breadcrumbs": {
+          "count": 300,
+          "mountMedian": 7.100000023841858,
+          "mountP95": 7.4000000059604645,
+          "updateMedian": 1.199999988079071,
+          "updateP95": 1.300000011920929
+        },
+        "Pagination": {
+          "count": 200,
+          "mountMedian": 10.200000017881393,
+          "mountP95": 10.900000005960464,
+          "updateMedian": 6,
+          "updateP95": 8.5
+        },
+        "Tabs": {
+          "count": 150,
+          "mountMedian": 7.299999982118607,
+          "mountP95": 9.099999994039536,
+          "updateMedian": 12.199999988079071,
+          "updateP95": 19
+        }
+      }
+    }
+  }
+}

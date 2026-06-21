@@ -1,0 +1,737 @@
+{
+  "stamp": "2026-06-21T01:59:08.208Z",
+  "baseline": {
+    "sonarmd": {
+      "js": 52242,
+      "css": 11337,
+      "total": 63579
+    },
+    "mui": {
+      "js": 52242,
+      "css": 0,
+      "total": 52242
+    },
+    "antd": {
+      "js": 52242,
+      "css": 0,
+      "total": 52242
+    },
+    "bootstrap": {
+      "js": 52242,
+      "css": 22653,
+      "total": 74895
+    }
+  },
+  "rows": [
+    {
+      "name": "Button",
+      "cells": {
+        "sonarmd": {
+          "js": 52878,
+          "css": 11337,
+          "total": 64215,
+          "marginal": 636
+        },
+        "mui": {
+          "js": 82117,
+          "css": 0,
+          "total": 82117,
+          "marginal": 29875
+        },
+        "antd": {
+          "js": 86083,
+          "css": 0,
+          "total": 86083,
+          "marginal": 33841
+        },
+        "bootstrap": {
+          "js": 53232,
+          "css": 22653,
+          "total": 75885,
+          "marginal": 990
+        }
+      }
+    },
+    {
+      "name": "Card",
+      "cells": {
+        "sonarmd": {
+          "js": 52726,
+          "css": 11337,
+          "total": 64063,
+          "marginal": 484
+        },
+        "mui": {
+          "js": 74932,
+          "css": 0,
+          "total": 74932,
+          "marginal": 22690
+        },
+        "antd": {
+          "js": 130008,
+          "css": 0,
+          "total": 130008,
+          "marginal": 77766
+        },
+        "bootstrap": {
+          "js": 53262,
+          "css": 22653,
+          "total": 75915,
+          "marginal": 1020
+        }
+      }
+    },
+    {
+      "name": "Badge / Chip / Tag",
+      "cells": {
+        "sonarmd": {
+          "js": 52682,
+          "css": 11337,
+          "total": 64019,
+          "marginal": 440
+        },
+        "mui": {
+          "js": 82088,
+          "css": 0,
+          "total": 82088,
+          "marginal": 29846
+        },
+        "antd": {
+          "js": 87396,
+          "css": 0,
+          "total": 87396,
+          "marginal": 35154
+        },
+        "bootstrap": {
+          "js": 52884,
+          "css": 22653,
+          "total": 75537,
+          "marginal": 642
+        }
+      }
+    },
+    {
+      "name": "TextInput",
+      "cells": {
+        "sonarmd": {
+          "js": 52953,
+          "css": 11337,
+          "total": 64290,
+          "marginal": 711
+        },
+        "mui": {
+          "js": 96450,
+          "css": 0,
+          "total": 96450,
+          "marginal": 44208
+        },
+        "antd": {
+          "js": 118715,
+          "css": 0,
+          "total": 118715,
+          "marginal": 66473
+        },
+        "bootstrap": {
+          "js": 53486,
+          "css": 22653,
+          "total": 76139,
+          "marginal": 1244
+        }
+      }
+    },
+    {
+      "name": "Checkbox",
+      "cells": {
+        "sonarmd": {
+          "js": 52656,
+          "css": 11337,
+          "total": 63993,
+          "marginal": 414
+        },
+        "mui": {
+          "js": 82293,
+          "css": 0,
+          "total": 82293,
+          "marginal": 30051
+        },
+        "antd": {
+          "js": 97352,
+          "css": 0,
+          "total": 97352,
+          "marginal": 45110
+        },
+        "bootstrap": {
+          "js": 53701,
+          "css": 22653,
+          "total": 76354,
+          "marginal": 1459
+        }
+      }
+    },
+    {
+      "name": "Radio group",
+      "cells": {
+        "sonarmd": {
+          "js": 53554,
+          "css": 11337,
+          "total": 64891,
+          "marginal": 1312
+        },
+        "mui": {
+          "js": 82874,
+          "css": 0,
+          "total": 82874,
+          "marginal": 30632
+        },
+        "antd": {
+          "js": 99161,
+          "css": 0,
+          "total": 99161,
+          "marginal": 46919
+        },
+        "bootstrap": {
+          "js": 53733,
+          "css": 22653,
+          "total": 76386,
+          "marginal": 1491
+        }
+      }
+    },
+    {
+      "name": "Select",
+      "cells": {
+        "sonarmd": {
+          "js": 52865,
+          "css": 11337,
+          "total": 64202,
+          "marginal": 623
+        },
+        "mui": {
+          "js": 98141,
+          "css": 0,
+          "total": 98141,
+          "marginal": 45899
+        },
+        "antd": {
+          "js": 134936,
+          "css": 0,
+          "total": 134936,
+          "marginal": 82694
+        },
+        "bootstrap": {
+          "js": 52909,
+          "css": 22653,
+          "total": 75562,
+          "marginal": 667
+        }
+      }
+    },
+    {
+      "name": "Toggle / Switch",
+      "cells": {
+        "sonarmd": {
+          "js": 52845,
+          "css": 11337,
+          "total": 64182,
+          "marginal": 603
+        },
+        "mui": {
+          "js": 81675,
+          "css": 0,
+          "total": 81675,
+          "marginal": 29433
+        },
+        "antd": {
+          "js": 85594,
+          "css": 0,
+          "total": 85594,
+          "marginal": 33352
+        },
+        "bootstrap": {
+          "js": 53690,
+          "css": 22653,
+          "total": 76343,
+          "marginal": 1448
+        }
+      }
+    },
+    {
+      "name": "Modal / Dialog",
+      "cells": {
+        "sonarmd": {
+          "js": 53964,
+          "css": 11337,
+          "total": 65301,
+          "marginal": 1722
+        },
+        "mui": {
+          "js": 81941,
+          "css": 0,
+          "total": 81941,
+          "marginal": 29699
+        },
+        "antd": {
+          "js": 117567,
+          "css": 0,
+          "total": 117567,
+          "marginal": 65325
+        },
+        "bootstrap": {
+          "js": 60028,
+          "css": 22653,
+          "total": 82681,
+          "marginal": 7786
+        }
+      }
+    },
+    {
+      "name": "Tooltip",
+      "cells": {
+        "sonarmd": {
+          "js": 53114,
+          "css": 11337,
+          "total": 64451,
+          "marginal": 872
+        },
+        "mui": {
+          "js": 87414,
+          "css": 0,
+          "total": 87414,
+          "marginal": 35172
+        },
+        "antd": {
+          "js": 107439,
+          "css": 0,
+          "total": 107439,
+          "marginal": 55197
+        },
+        "bootstrap": {
+          "js": 53113,
+          "css": 22653,
+          "total": 75766,
+          "marginal": 871
+        }
+      }
+    },
+    {
+      "name": "Tabs",
+      "cells": {
+        "sonarmd": {
+          "js": 53072,
+          "css": 11337,
+          "total": 64409,
+          "marginal": 830
+        },
+        "mui": {
+          "js": 85231,
+          "css": 0,
+          "total": 85231,
+          "marginal": 32989
+        },
+        "antd": {
+          "js": 110850,
+          "css": 0,
+          "total": 110850,
+          "marginal": 58608
+        },
+        "bootstrap": {
+          "js": 59373,
+          "css": 22653,
+          "total": 82026,
+          "marginal": 7131
+        }
+      }
+    },
+    {
+      "name": "Alert",
+      "cells": {
+        "sonarmd": {
+          "js": 53090,
+          "css": 11337,
+          "total": 64427,
+          "marginal": 848
+        },
+        "mui": {
+          "js": 83985,
+          "css": 0,
+          "total": 83985,
+          "marginal": 31743
+        },
+        "antd": {
+          "js": 79781,
+          "css": 0,
+          "total": 79781,
+          "marginal": 27539
+        },
+        "bootstrap": {
+          "js": 56987,
+          "css": 22653,
+          "total": 79640,
+          "marginal": 4745
+        }
+      }
+    },
+    {
+      "name": "Accordion / Collapse",
+      "cells": {
+        "sonarmd": {
+          "js": 53207,
+          "css": 11337,
+          "total": 64544,
+          "marginal": 965
+        },
+        "mui": {
+          "js": 78596,
+          "css": 0,
+          "total": 78596,
+          "marginal": 26354
+        },
+        "antd": {
+          "js": 84369,
+          "css": 0,
+          "total": 84369,
+          "marginal": 32127
+        },
+        "bootstrap": {
+          "js": 56587,
+          "css": 22653,
+          "total": 79240,
+          "marginal": 4345
+        }
+      }
+    },
+    {
+      "name": "Avatar",
+      "cells": {
+        "sonarmd": {
+          "js": 53007,
+          "css": 11337,
+          "total": 64344,
+          "marginal": 765
+        },
+        "mui": {
+          "js": 76433,
+          "css": 0,
+          "total": 76433,
+          "marginal": 24191
+        },
+        "antd": {
+          "js": 113536,
+          "css": 0,
+          "total": 113536,
+          "marginal": 61294
+        },
+        "bootstrap": null
+      }
+    },
+    {
+      "name": "Progress bar",
+      "cells": {
+        "sonarmd": {
+          "js": 52804,
+          "css": 11337,
+          "total": 64141,
+          "marginal": 562
+        },
+        "mui": {
+          "js": 76920,
+          "css": 0,
+          "total": 76920,
+          "marginal": 24678
+        },
+        "antd": {
+          "js": 116657,
+          "css": 0,
+          "total": 116657,
+          "marginal": 64415
+        },
+        "bootstrap": {
+          "js": 53254,
+          "css": 22653,
+          "total": 75907,
+          "marginal": 1012
+        }
+      }
+    },
+    {
+      "name": "Spinner",
+      "cells": {
+        "sonarmd": {
+          "js": 52686,
+          "css": 11337,
+          "total": 64023,
+          "marginal": 444
+        },
+        "mui": {
+          "js": 76373,
+          "css": 0,
+          "total": 76373,
+          "marginal": 24131
+        },
+        "antd": {
+          "js": 73978,
+          "css": 0,
+          "total": 73978,
+          "marginal": 21736
+        },
+        "bootstrap": {
+          "js": 52871,
+          "css": 22653,
+          "total": 75524,
+          "marginal": 629
+        }
+      }
+    },
+    {
+      "name": "Breadcrumbs",
+      "cells": {
+        "sonarmd": {
+          "js": 53123,
+          "css": 11337,
+          "total": 64460,
+          "marginal": 881
+        },
+        "mui": {
+          "js": 82116,
+          "css": 0,
+          "total": 82116,
+          "marginal": 29874
+        },
+        "antd": {
+          "js": 131373,
+          "css": 0,
+          "total": 131373,
+          "marginal": 79131
+        },
+        "bootstrap": {
+          "js": 53587,
+          "css": 22653,
+          "total": 76240,
+          "marginal": 1345
+        }
+      }
+    },
+    {
+      "name": "Pagination",
+      "cells": {
+        "sonarmd": {
+          "js": 53155,
+          "css": 11337,
+          "total": 64492,
+          "marginal": 913
+        },
+        "mui": {
+          "js": 83032,
+          "css": 0,
+          "total": 83032,
+          "marginal": 30790
+        },
+        "antd": {
+          "js": 143715,
+          "css": 0,
+          "total": 143715,
+          "marginal": 91473
+        },
+        "bootstrap": {
+          "js": 53662,
+          "css": 22653,
+          "total": 76315,
+          "marginal": 1420
+        }
+      }
+    },
+    {
+      "name": "Drawer / Offcanvas",
+      "cells": {
+        "sonarmd": {
+          "js": 54082,
+          "css": 11337,
+          "total": 65419,
+          "marginal": 1840
+        },
+        "mui": {
+          "js": 82598,
+          "css": 0,
+          "total": 82598,
+          "marginal": 30356
+        },
+        "antd": {
+          "js": 102093,
+          "css": 0,
+          "total": 102093,
+          "marginal": 49851
+        },
+        "bootstrap": {
+          "js": 60009,
+          "css": 22653,
+          "total": 82662,
+          "marginal": 7767
+        }
+      }
+    },
+    {
+      "name": "Popover",
+      "cells": {
+        "sonarmd": {
+          "js": 53244,
+          "css": 11337,
+          "total": 64581,
+          "marginal": 1002
+        },
+        "mui": {
+          "js": 82817,
+          "css": 0,
+          "total": 82817,
+          "marginal": 30575
+        },
+        "antd": {
+          "js": 108361,
+          "css": 0,
+          "total": 108361,
+          "marginal": 56119
+        },
+        "bootstrap": {
+          "js": 53221,
+          "css": 22653,
+          "total": 75874,
+          "marginal": 979
+        }
+      }
+    },
+    {
+      "name": "Data table",
+      "cells": {
+        "sonarmd": {
+          "js": 56636,
+          "css": 11337,
+          "total": 67973,
+          "marginal": 4394
+        },
+        "mui": {
+          "js": 75756,
+          "css": 0,
+          "total": 75756,
+          "marginal": 23514
+        },
+        "antd": {
+          "js": 217669,
+          "css": 0,
+          "total": 217669,
+          "marginal": 165427
+        },
+        "bootstrap": {
+          "js": 52948,
+          "css": 22653,
+          "total": 75601,
+          "marginal": 706
+        }
+      }
+    },
+    {
+      "name": "Stepper / Steps",
+      "cells": {
+        "sonarmd": {
+          "js": 52860,
+          "css": 11337,
+          "total": 64197,
+          "marginal": 618
+        },
+        "mui": {
+          "js": 77694,
+          "css": 0,
+          "total": 77694,
+          "marginal": 25452
+        },
+        "antd": {
+          "js": 119233,
+          "css": 0,
+          "total": 119233,
+          "marginal": 66991
+        },
+        "bootstrap": null
+      }
+    },
+    {
+      "name": "Segmented control",
+      "cells": {
+        "sonarmd": {
+          "js": 52945,
+          "css": 11337,
+          "total": 64282,
+          "marginal": 703
+        },
+        "mui": {
+          "js": 80908,
+          "css": 0,
+          "total": 80908,
+          "marginal": 28666
+        },
+        "antd": {
+          "js": 78295,
+          "css": 0,
+          "total": 78295,
+          "marginal": 26053
+        },
+        "bootstrap": {
+          "js": 54413,
+          "css": 22653,
+          "total": 77066,
+          "marginal": 2171
+        }
+      }
+    },
+    {
+      "name": "Skeleton",
+      "cells": {
+        "sonarmd": {
+          "js": 52700,
+          "css": 11337,
+          "total": 64037,
+          "marginal": 458
+        },
+        "mui": {
+          "js": 76356,
+          "css": 0,
+          "total": 76356,
+          "marginal": 24114
+        },
+        "antd": {
+          "js": 73871,
+          "css": 0,
+          "total": 73871,
+          "marginal": 21629
+        },
+        "bootstrap": {
+          "js": 53568,
+          "css": 22653,
+          "total": 76221,
+          "marginal": 1326
+        }
+      }
+    },
+    {
+      "name": "Separator / Divider",
+      "cells": {
+        "sonarmd": {
+          "js": 52573,
+          "css": 11337,
+          "total": 63910,
+          "marginal": 331
+        },
+        "mui": {
+          "js": 75209,
+          "css": 0,
+          "total": 75209,
+          "marginal": 22967
+        },
+        "antd": {
+          "js": 72612,
+          "css": 0,
+          "total": 72612,
+          "marginal": 20370
+        },
+        "bootstrap": null
+      }
+    }
+  ]
+}
