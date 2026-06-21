@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { FieldWrapper } from '../FieldWrapper';
+import {sonarFC} from '../../internal/sonarFC';
 import styles from './TextArea.module.css';
 
 export interface TextAreaProps
@@ -15,7 +16,7 @@ export interface TextAreaProps
 }
 
 export const TextArea = React.memo(
-  React.forwardRef<HTMLTextAreaElement, TextAreaProps>(function TextArea(
+  sonarFC<HTMLTextAreaElement, TextAreaProps>('TextArea', (
     {
       label,
       error,
@@ -33,7 +34,7 @@ export const TextArea = React.memo(
       ...textareaProps
     },
     forwardedRef,
-  ) {
+  ) => {
     const innerRef = useRef<HTMLTextAreaElement>(null);
     const lineHeightRef = useRef<number>(20);
 
@@ -117,5 +118,3 @@ export const TextArea = React.memo(
     );
   }),
 );
-
-TextArea.displayName = 'TextArea';

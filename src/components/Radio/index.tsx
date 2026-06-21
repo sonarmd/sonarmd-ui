@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import styles from './Radio.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface RadioProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
@@ -8,10 +9,10 @@ export interface RadioProps
 }
 
 export const Radio = React.memo(
-  React.forwardRef<HTMLInputElement, RadioProps>(function Radio(
+  sonarFC<HTMLInputElement, RadioProps>('Radio', (
     { label, size = 'md', className, ...inputProps },
     ref,
-  ) {
+  ) => {
     const rootClasses = useMemo(
       () =>
         [styles.root, size !== 'md' ? styles[size] : '', className].filter(Boolean).join(' '),
@@ -27,5 +28,3 @@ export const Radio = React.memo(
     );
   }),
 );
-
-Radio.displayName = 'Radio';

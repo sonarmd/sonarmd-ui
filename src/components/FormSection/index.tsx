@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import styles from './FormSection.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface FormSectionProps
   extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
@@ -14,10 +15,10 @@ export interface FormSectionProps
  * readers a group name for every control inside, satisfying WCAG grouping.
  */
 export const FormSection = React.memo(
-  React.forwardRef<HTMLFieldSetElement, FormSectionProps>(function FormSection(
+  sonarFC<HTMLFieldSetElement, FormSectionProps>('FormSection', (
     {title, description, className, children, ...rest},
     ref,
-  ) {
+  ) => {
     const classes = useMemo(
       () => [styles.section, className].filter(Boolean).join(' '),
       [className],
@@ -32,5 +33,3 @@ export const FormSection = React.memo(
     );
   }),
 );
-
-FormSection.displayName = 'FormSection';

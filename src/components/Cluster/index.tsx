@@ -1,5 +1,6 @@
-import {forwardRef, HTMLAttributes} from 'react';
+import {HTMLAttributes} from 'react';
 import styles from './Cluster.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 type SpaceKey = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '8' | '10' | '12' | '16';
 
@@ -14,10 +15,12 @@ export interface ClusterProps extends HTMLAttributes<HTMLDivElement> {
   wrap?: boolean;
 }
 
-export const Cluster = forwardRef<HTMLDivElement, ClusterProps>(function Cluster(
+export const Cluster = sonarFC<HTMLDivElement, ClusterProps>(
+  'Cluster',
+  (
   {gap = '3', align = 'center', justify = 'start', wrap = true, className, style, children, ...rest},
   ref,
-) {
+) => {
   return (
     <div
       ref={ref}
@@ -34,4 +37,5 @@ export const Cluster = forwardRef<HTMLDivElement, ClusterProps>(function Cluster
       {children}
     </div>
   );
-});
+  },
+);

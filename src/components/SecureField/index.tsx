@@ -1,5 +1,6 @@
 import React, {useMemo, useState, useCallback} from 'react';
 import {FieldWrapper} from '../FieldWrapper';
+import {sonarFC} from '../../internal/sonarFC';
 import styles from './SecureField.module.css';
 
 const EYE = (
@@ -33,7 +34,7 @@ export interface SecureFieldProps
  * PHI is never captured by browsers or password managers.
  */
 export const SecureField = React.memo(
-  React.forwardRef<HTMLInputElement, SecureFieldProps>(function SecureField(
+  sonarFC<HTMLInputElement, SecureFieldProps>('SecureField', (
     {
       label,
       error,
@@ -48,7 +49,7 @@ export const SecureField = React.memo(
       ...inputProps
     },
     ref,
-  ) {
+  ) => {
     const [revealed, setRevealed] = useState(false);
 
     const inputId = useMemo(
@@ -122,5 +123,3 @@ export const SecureField = React.memo(
     );
   }),
 );
-
-SecureField.displayName = 'SecureField';

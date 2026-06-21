@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import styles from './Card.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export type CardVariant = 'default' | 'outlined' | 'elevated';
 export type CardDensity = 'comfortable' | 'compact';
@@ -23,10 +24,10 @@ export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 't
  * from semantic tokens.
  */
 export const Card = React.memo(
-  React.forwardRef<HTMLDivElement, CardProps>(function Card(
+  sonarFC<HTMLDivElement, CardProps>('Card', (
     {variant = 'default', density = 'comfortable', title, subtitle, action, className, children, ...rest},
     ref,
-  ): React.JSX.Element {
+  ): React.JSX.Element => {
     const classes = useMemo(
       () =>
         [styles.card, styles[variant], styles[density], className].filter(Boolean).join(' '),
@@ -51,5 +52,3 @@ export const Card = React.memo(
     );
   }),
 );
-
-Card.displayName = 'Card';

@@ -1,4 +1,5 @@
 import React from 'react';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface FormProps
   extends Omit<React.FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
@@ -11,10 +12,10 @@ export interface FormProps
  * consistent and accessible rather than relying on native browser bubbles.
  */
 export const Form = React.memo(
-  React.forwardRef<HTMLFormElement, FormProps>(function Form(
+  sonarFC<HTMLFormElement, FormProps>('Form', (
     {onSubmit, children, ...rest},
     ref,
-  ) {
+  ) => {
     return (
       <form ref={ref} noValidate onSubmit={onSubmit} {...rest}>
         {children}
@@ -22,5 +23,3 @@ export const Form = React.memo(
     );
   }),
 );
-
-Form.displayName = 'Form';

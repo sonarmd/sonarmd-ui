@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import styles from './FormActions.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface FormActionsProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Horizontal placement of the actions. */
@@ -13,10 +14,10 @@ export interface FormActionsProps extends React.HTMLAttributes<HTMLDivElement> {
  * last). `sticky` keeps it in view for long forms without trapping focus.
  */
 export const FormActions = React.memo(
-  React.forwardRef<HTMLDivElement, FormActionsProps>(function FormActions(
+  sonarFC<HTMLDivElement, FormActionsProps>('FormActions', (
     {align = 'end', sticky = false, className, children, ...rest},
     ref,
-  ) {
+  ) => {
     const classes = useMemo(
       () =>
         [styles.actions, styles[align], sticky ? styles.sticky : '', className]
@@ -32,5 +33,3 @@ export const FormActions = React.memo(
     );
   }),
 );
-
-FormActions.displayName = 'FormActions';

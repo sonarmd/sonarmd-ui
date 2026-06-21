@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { FieldWrapper } from '../FieldWrapper';
+import {sonarFC} from '../../internal/sonarFC';
 import styles from './Select.module.css';
 
 export interface SelectOption {
@@ -19,7 +20,7 @@ export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectE
 }
 
 export const Select = React.memo(
-  React.forwardRef<HTMLSelectElement, SelectProps>(function Select(
+  sonarFC<HTMLSelectElement, SelectProps>('Select', (
     {
       label,
       error,
@@ -34,7 +35,7 @@ export const Select = React.memo(
       ...selectProps
     },
     ref,
-  ) {
+  ) => {
     const selectId = useMemo(
       () => id ?? (name ? `select-${name}` : undefined),
       [id, name],
@@ -89,5 +90,3 @@ export const Select = React.memo(
     );
   }),
 );
-
-Select.displayName = 'Select';

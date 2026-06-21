@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { FieldWrapper } from '../FieldWrapper';
+import {sonarFC} from '../../internal/sonarFC';
 import styles from './TextInput.module.css';
 
 export interface TextInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -13,7 +14,7 @@ export interface TextInputProps extends Omit<React.InputHTMLAttributes<HTMLInput
 }
 
 export const TextInput = React.memo(
-  React.forwardRef<HTMLInputElement, TextInputProps>(function TextInput(
+  sonarFC<HTMLInputElement, TextInputProps>('TextInput', (
     {
       label,
       error,
@@ -28,7 +29,7 @@ export const TextInput = React.memo(
       ...inputProps
     },
     ref,
-  ) {
+  ) => {
     const inputId = useMemo(
       () => id ?? (name ? `input-${name}` : undefined),
       [id, name],
@@ -84,5 +85,3 @@ export const TextInput = React.memo(
     );
   }),
 );
-
-TextInput.displayName = 'TextInput';

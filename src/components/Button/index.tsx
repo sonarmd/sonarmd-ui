@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import styles from './Button.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg';
@@ -28,7 +29,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
  * spinner without changing width and forces the disabled state.
  */
 export const Button = React.memo(
-  React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  sonarFC<HTMLButtonElement, ButtonProps>('Button', (
     {
       variant = 'primary',
       size = 'md',
@@ -44,7 +45,7 @@ export const Button = React.memo(
       ...rest
     },
     ref,
-  ): React.JSX.Element {
+  ): React.JSX.Element => {
     const classes = useMemo(
       () =>
         [
@@ -79,5 +80,3 @@ export const Button = React.memo(
     );
   }),
 );
-
-Button.displayName = 'Button';

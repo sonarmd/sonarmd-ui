@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useMemo } from 'react';
 import styles from './Checkbox.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface CheckboxProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'type'> {
@@ -9,10 +10,10 @@ export interface CheckboxProps
 }
 
 export const Checkbox = React.memo(
-  React.forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
+  sonarFC<HTMLInputElement, CheckboxProps>('Checkbox', (
     { label, size = 'md', indeterminate, className, ...inputProps },
     forwardedRef,
-  ) {
+  ) => {
     const innerRef = useRef<HTMLInputElement>(null);
     const resolvedRef = (forwardedRef as React.RefObject<HTMLInputElement>) ?? innerRef;
 
@@ -37,5 +38,3 @@ export const Checkbox = React.memo(
     );
   }),
 );
-
-Checkbox.displayName = 'Checkbox';

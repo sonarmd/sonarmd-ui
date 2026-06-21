@@ -1,5 +1,6 @@
-import {forwardRef, HTMLAttributes} from 'react';
+import {HTMLAttributes} from 'react';
 import styles from './Columns.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 type SpaceKey = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '8' | '10' | '12' | '16';
 
@@ -14,10 +15,12 @@ export interface ColumnsProps extends HTMLAttributes<HTMLDivElement> {
   minWidth?: string;
 }
 
-export const Columns = forwardRef<HTMLDivElement, ColumnsProps>(function Columns(
+export const Columns = sonarFC<HTMLDivElement, ColumnsProps>(
+  'Columns',
+  (
   {cols = 2, template, gap = '4', minWidth, className, style, children, ...rest},
   ref,
-) {
+) => {
   const gridTemplate = template
     ? template
     : minWidth
@@ -37,4 +40,5 @@ export const Columns = forwardRef<HTMLDivElement, ColumnsProps>(function Columns
       {children}
     </div>
   );
-});
+  },
+);
