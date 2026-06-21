@@ -27,12 +27,33 @@ table, form, modal, navigation.
 
 ```
 cd benchmarks
-npm install          # uses file:.. for @sonarmd/ui (builds the library)
-npm run measure      # builds each app, writes results/report.md
+npm install              # uses file:.. for @sonarmd/ui (builds the library)
+npm run measure          # whole-shell comparison -> results/report.md
+npm run measure:components  # per-component comparison -> results/components.md
 ```
 
 The library dependency graph never includes these competitor packages; they are
 benchmark-only devDependencies under this folder.
+
+## Per-component benchmark
+
+`measure-components.mjs` answers a sharper question: for every component, how
+many bytes does a page that uses ONLY that component ship, per library? It builds
+a minimal production app (react + react-dom + one component + the library CSS
+floor) for each of @sonarmd/ui, Material UI, Ant Design, and React Bootstrap and
+measures total brotli (JS + CSS). The mapping lives in `components.manifest.mjs`;
+`null` marks a library with no direct equivalent.
+
+Two views are written to `results/components.md`:
+
+- Total shipped per component (the headline; smallest total wins the row).
+- Marginal cost over the library floor (isolates the per-component JS that
+  tree-shaking adds, on top of each library's fixed floor).
+
+The floor differs by CSS strategy: @sonarmd/ui and React Bootstrap ship a single
+CSS file (paid once, amortized across every component used); Material UI and Ant
+Design ship CSS inside JS (emotion / cssinjs runtime, pulled in with the first
+component).
 
 ## Metrics
 

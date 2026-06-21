@@ -104,8 +104,13 @@ const renderReport = (results, stamp) => {
 
 const main = () => {
   if (!existsSync(RESULTS_DIR)) mkdirSync(RESULTS_DIR, {recursive: true});
+  // Only measure apps that map to a known library label. Demo apps under apps/
+  // (e.g. perfdemo) are not competitor shells and must not pollute the
+  // library-vs-library comparison.
   const appNames = existsSync(APPS_DIR)
-    ? readdirSync(APPS_DIR, {withFileTypes: true}).filter((e) => e.isDirectory()).map((e) => e.name)
+    ? readdirSync(APPS_DIR, {withFileTypes: true})
+        .filter((e) => e.isDirectory() && LABELS[e.name])
+        .map((e) => e.name)
     : [];
   const results = [];
   for (const name of appNames) {
