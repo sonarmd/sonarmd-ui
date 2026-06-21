@@ -55,6 +55,27 @@ CSS file (paid once, amortized across every component used); Material UI and Ant
 Design ship CSS inside JS (emotion / cssinjs runtime, pulled in with the first
 component).
 
+## Per-component runtime benchmark
+
+`measure-runtime.mjs` measures SPEED, not size. Each library has a tiny Vite app
+under `apps-rt/<lib>` exposing `window.__bench` (see `apps-rt/_harness.tsx`); the
+runner builds it, static-serves the production build, drives the cached Playwright
+chrome-headless-shell, and for every component mounts N instances and re-renders
+them, reporting the median over many iterations. Timing is taken in
+`useLayoutEffect` after a forced synchronous layout, so render + commit + style
+injection + layout are included (everything but async paint) at sub-frame
+resolution - measuring to paint would floor every fast render at one frame
+(~16.7 ms) and hide real differences.
+
+```
+npm run measure:runtime   # -> results/runtime.md + runtime.json
+```
+
+Outputs: per-library boot + total blocking time, a mount-time matrix, and a
+re-render-time matrix (smallest median wins each row). Playwright is a
+benchmark-only devDependency and reuses the already-cached Chromium via an
+explicit executablePath (no browser download).
+
 ## Metrics
 
 - JS transferred (gzip + brotli)

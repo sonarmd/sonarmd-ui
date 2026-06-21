@@ -6,6 +6,7 @@
   "scripts": {
     "measure": "node measure.mjs",
     "measure:components": "node measure-components.mjs",
+    "measure:runtime": "node measure-runtime.mjs",
     "check": "node check-budgets.mjs"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "@vitejs/plugin-react": "^4.3.0",
     "antd": "^5.21.0",
     "bootstrap": "^5.3.3",
+    "playwright": "^1.49.1",
     "react-bootstrap": "^2.10.5",
     "vite": "^6.0.0"
   }
