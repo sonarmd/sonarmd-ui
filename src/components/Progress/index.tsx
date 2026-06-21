@@ -1,5 +1,6 @@
-import React, {forwardRef, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import styles from './Progress.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export type ProgressTone = 'primary' | 'success' | 'warning' | 'danger';
 
@@ -29,10 +30,12 @@ function clampPct(value: number, max: number): number {
  * (exposes role="progressbar" with aria-valuenow/min/max); indeterminate
  * otherwise. Animation respects prefers-reduced-motion centrally.
  */
-export const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progress(
+export const Progress = sonarFC<HTMLDivElement, ProgressProps>(
+  'Progress',
+  (
   {value, max = 100, tone = 'primary', size = 'md', label, showValue = false, className},
   ref,
-) {
+) => {
   const indeterminate = value == null;
   const pct = useMemo(() => (indeterminate ? 0 : clampPct(value, max)), [indeterminate, value, max]);
 
@@ -63,4 +66,5 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progr
       )}
     </div>
   );
-});
+  },
+);

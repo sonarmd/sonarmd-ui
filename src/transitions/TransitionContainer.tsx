@@ -1,5 +1,4 @@
 import {
-  forwardRef,
   HTMLAttributes,
   ReactNode,
   useCallback,
@@ -9,6 +8,7 @@ import {
   useState,
 } from 'react';
 import {PatternName, patterns, DEFAULT_PATTERN, reducedPattern} from './patterns';
+import {sonarFC} from '../internal/sonarFC';
 
 const prefersReduced =
   typeof window !== 'undefined'
@@ -58,11 +58,12 @@ function animate(
  * Does NOT import react-router. Drive it from createTransitionOutlet or any
  * custom adapter.
  */
-export const TransitionContainer = forwardRef<HTMLDivElement, TransitionContainerProps>(
-  function TransitionContainer(
+export const TransitionContainer = sonarFC<HTMLDivElement, TransitionContainerProps>(
+  'TransitionContainer',
+  (
     {locationKey, direction = 'forward', pattern, children, style, ...rest},
     ref,
-  ) {
+  ) => {
     const [outgoing, setOutgoing] = useState<Slot | null>(null);
     const [incoming, setIncoming] = useState<Slot>({key: locationKey, node: children});
 

@@ -1,5 +1,6 @@
 import React, { useId, useCallback, useMemo } from 'react';
 import styles from './Toggle.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface ToggleProps {
   label: string;
@@ -12,10 +13,10 @@ export interface ToggleProps {
 }
 
 export const Toggle = React.memo(
-  React.forwardRef<HTMLInputElement, ToggleProps>(function Toggle(
+  sonarFC<HTMLInputElement, ToggleProps>('Toggle', (
     { label, checked, onChange, size = 'md', disabled, name, labelPosition = 'right' },
     ref,
-  ) {
+  ) => {
     const inputId = useId();
 
     const rootClasses = useMemo(
@@ -64,5 +65,3 @@ export const Toggle = React.memo(
     );
   }),
 );
-
-Toggle.displayName = 'Toggle';

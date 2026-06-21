@@ -1,5 +1,6 @@
-import React, {forwardRef, useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import styles from './Avatar.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type AvatarStatus = 'online' | 'offline' | 'busy' | 'away';
@@ -36,10 +37,12 @@ function initialsOf(name: string): string {
  * there is neither. An optional presence `status` dot is announced to
  * assistive technology.
  */
-export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
+export const Avatar = sonarFC<HTMLSpanElement, AvatarProps>(
+  'Avatar',
+  (
   {src, name, size = 'md', shape = 'circle', status, className},
   ref,
-) {
+) => {
   const [failed, setFailed] = useState(false);
   const initials = useMemo(() => (name ? initialsOf(name) : ''), [name]);
   const showImage = src != null && !failed;
@@ -74,4 +77,5 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
       )}
     </span>
   );
-});
+  },
+);

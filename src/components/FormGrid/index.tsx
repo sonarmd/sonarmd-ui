@@ -1,5 +1,6 @@
 import React, {useMemo, Children} from 'react';
 import styles from './FormGrid.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface FormGridProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Column count on wide viewports. Collapses to 1 column on narrow screens. */
@@ -18,10 +19,10 @@ export interface FormGridProps extends React.HTMLAttributes<HTMLDivElement> {
  * (disabled under prefers-reduced-motion).
  */
 export const FormGrid = React.memo(
-  React.forwardRef<HTMLDivElement, FormGridProps>(function FormGrid(
+  sonarFC<HTMLDivElement, FormGridProps>('FormGrid', (
     {columns = 1, gap = 'md', stagger = false, staggerStep = 60, className, children, ...rest},
     ref,
-  ) {
+  ) => {
     const classes = useMemo(
       () =>
         [styles.grid, styles[`cols${columns}`], styles[`gap${gap}`], className]
@@ -56,5 +57,3 @@ export const FormGrid = React.memo(
     );
   }),
 );
-
-FormGrid.displayName = 'FormGrid';

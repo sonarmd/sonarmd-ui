@@ -1,5 +1,6 @@
-import React, {forwardRef} from 'react';
+import React from 'react';
 import styles from './VisuallyHidden.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface VisuallyHiddenProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -26,8 +27,9 @@ export interface VisuallyHiddenProps extends React.HTMLAttributes<HTMLElement> {
  * clip/position hacks so the hiding technique lives in one place. Polymorphic
  * via `as` so a focusable skip link is the focusable element itself.
  */
-export const VisuallyHidden = forwardRef<HTMLElement, VisuallyHiddenProps>(
-  function VisuallyHidden({as: Tag = 'span', focusable = false, className, children, ...rest}, ref) {
+export const VisuallyHidden = sonarFC<HTMLElement, VisuallyHiddenProps>(
+  'VisuallyHidden',
+  ({as: Tag = 'span', focusable = false, className, children, ...rest}, ref) => {
     const classes = [styles.visuallyHidden, focusable ? styles.focusable : '', className]
       .filter(Boolean)
       .join(' ');

@@ -1,5 +1,6 @@
-import React, {forwardRef} from 'react';
+import React from 'react';
 import styles from './Separator.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface SeparatorProps {
   /** Layout axis. Vertical separators need a sized flex/inline context. */
@@ -19,10 +20,12 @@ export interface SeparatorProps {
  * caption between two rules. Decorative separators are hidden from assistive
  * technology; semantic ones expose `role="separator"` with orientation.
  */
-export const Separator = forwardRef<HTMLDivElement, SeparatorProps>(function Separator(
+export const Separator = sonarFC<HTMLDivElement, SeparatorProps>(
+  'Separator',
+  (
   {orientation = 'horizontal', decorative = true, label, className},
   ref,
-) {
+) => {
   const a11y = decorative
     ? ({role: 'none'} as const)
     : ({role: 'separator', 'aria-orientation': orientation} as const);
@@ -48,4 +51,5 @@ export const Separator = forwardRef<HTMLDivElement, SeparatorProps>(function Sep
       {...a11y}
     />
   );
-});
+  },
+);

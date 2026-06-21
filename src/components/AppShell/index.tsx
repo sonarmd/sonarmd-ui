@@ -1,5 +1,6 @@
-import React, {forwardRef, HTMLAttributes, ReactNode, useCallback, useEffect, useRef, useState} from 'react';
+import React, {HTMLAttributes, ReactNode, useCallback, useEffect, useRef, useState} from 'react';
 import styles from './AppShell.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface AppShellProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   /** The sidebar column (typically a Sidebar component). */
@@ -19,7 +20,9 @@ export interface AppShellProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
  * Context rail collapses first (to an overlay drawer), then sidebar.
  * Uses container queries where supported, ResizeObserver fallback.
  */
-export const AppShell = forwardRef<HTMLDivElement, AppShellProps>(function AppShell(
+export const AppShell = sonarFC<HTMLDivElement, AppShellProps>(
+  'AppShell',
+  (
   {
     sidebar,
     contextRail,
@@ -30,7 +33,7 @@ export const AppShell = forwardRef<HTMLDivElement, AppShellProps>(function AppSh
     ...rest
   },
   ref,
-) {
+) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [railCollapsed, setRailCollapsed] = useState(false);
   const [railDrawerOpen, setRailDrawerOpen] = useState(false);
@@ -120,4 +123,6 @@ export const AppShell = forwardRef<HTMLDivElement, AppShellProps>(function AppSh
       )}
     </div>
   );
-});
+  },
+);
+

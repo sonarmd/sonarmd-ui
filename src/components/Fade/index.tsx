@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import styles from './Fade.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface FadeProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Delay before the entrance animation starts, in milliseconds. */
@@ -11,10 +12,10 @@ export interface FadeProps extends React.HTMLAttributes<HTMLDivElement> {
  * and fully disabled under prefers-reduced-motion.
  */
 export const Fade = React.memo(
-  React.forwardRef<HTMLDivElement, FadeProps>(function Fade(
+  sonarFC<HTMLDivElement, FadeProps>('Fade', (
     {delay, className, style, children, ...rest},
     ref,
-  ) {
+  ) => {
     const classes = useMemo(
       () => [styles.fade, className].filter(Boolean).join(' '),
       [className],
@@ -32,5 +33,3 @@ export const Fade = React.memo(
     );
   }),
 );
-
-Fade.displayName = 'Fade';

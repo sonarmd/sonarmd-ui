@@ -1,5 +1,4 @@
 import React, {
-  forwardRef,
   useCallback,
   useEffect,
   useId,
@@ -10,6 +9,7 @@ import React, {
 import ReactDOM from 'react-dom';
 import { FieldWrapper } from '../FieldWrapper';
 import { usePortal } from '../../hooks/usePortal';
+import {sonarFC} from '../../internal/sonarFC';
 import styles from './DatePicker.module.css';
 
 export interface DatePickerProps {
@@ -103,8 +103,9 @@ function isDisabled(day: Date, minDate?: Date, maxDate?: Date): boolean {
 }
 
 export const DatePicker = React.memo(
-  forwardRef<HTMLInputElement, DatePickerProps>(
-    function DatePicker(
+  sonarFC<HTMLInputElement, DatePickerProps>(
+    'DatePicker',
+    (
       {
         label,
         error,
@@ -121,7 +122,7 @@ export const DatePicker = React.memo(
         name,
       },
       ref,
-    ) {
+    ) => {
       const inputId = useId();
       const today = useRef(new Date()).current;
 

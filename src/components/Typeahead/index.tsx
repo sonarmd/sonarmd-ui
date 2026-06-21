@@ -1,5 +1,4 @@
 import React, {
-  forwardRef,
   useCallback,
   useEffect,
   useId,
@@ -11,6 +10,7 @@ import ReactDOM from 'react-dom';
 import { List, RowComponentProps } from 'react-window';
 import { FieldWrapper } from '../FieldWrapper';
 import { usePortal } from '../../hooks/usePortal';
+import {sonarFC} from '../../internal/sonarFC';
 import styles from './Typeahead.module.css';
 
 export interface TypeaheadOption {
@@ -49,8 +49,9 @@ function XIcon() {
 }
 
 export const Typeahead = React.memo(
-  forwardRef<HTMLInputElement, TypeaheadProps>(
-    function Typeahead(
+  sonarFC<HTMLInputElement, TypeaheadProps>(
+    'Typeahead',
+    (
       {
         label,
         error,
@@ -72,7 +73,7 @@ export const Typeahead = React.memo(
         name,
       },
       ref,
-    ) {
+    ) => {
       const inputId = useId();
       const menuId = `${inputId}-listbox`;
       // Stable per-row id so the combobox can point aria-activedescendant at the

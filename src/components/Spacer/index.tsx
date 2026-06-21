@@ -1,5 +1,6 @@
-import {forwardRef, HTMLAttributes} from 'react';
+import {HTMLAttributes} from 'react';
 import styles from './Spacer.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 type SpaceKey = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '8' | '10' | '12' | '16';
 
@@ -10,10 +11,12 @@ export interface SpacerProps extends HTMLAttributes<HTMLDivElement> {
   axis?: 'horizontal' | 'vertical';
 }
 
-export const Spacer = forwardRef<HTMLDivElement, SpacerProps>(function Spacer(
+export const Spacer = sonarFC<HTMLDivElement, SpacerProps>(
+  'Spacer',
+  (
   {size, axis = 'vertical', className, style, ...rest},
   ref,
-) {
+) => {
   const isHorizontal = axis === 'horizontal';
   const sizeValue = size ? `var(--smd-space-${size})` : undefined;
   return (
@@ -31,4 +34,5 @@ export const Spacer = forwardRef<HTMLDivElement, SpacerProps>(function Spacer(
       {...rest}
     />
   );
-});
+  },
+);

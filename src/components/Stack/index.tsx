@@ -1,5 +1,6 @@
-import {forwardRef, HTMLAttributes} from 'react';
+import {HTMLAttributes} from 'react';
 import styles from './Stack.module.css';
+import {sonarFC} from '../../internal/sonarFC';
 
 type SpaceKey = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '8' | '10' | '12' | '16';
 
@@ -12,10 +13,12 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   justify?: 'start' | 'center' | 'end' | 'space-between';
 }
 
-export const Stack = forwardRef<HTMLDivElement, StackProps>(function Stack(
+export const Stack = sonarFC<HTMLDivElement, StackProps>(
+  'Stack',
+  (
   {gap = '4', align = 'stretch', justify = 'start', className, style, children, ...rest},
   ref,
-) {
+) => {
   return (
     <div
       ref={ref}
@@ -31,4 +34,5 @@ export const Stack = forwardRef<HTMLDivElement, StackProps>(function Stack(
       {children}
     </div>
   );
-});
+  },
+);

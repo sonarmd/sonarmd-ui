@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, type ButtonProps} from '../Button';
 import {Tooltip} from '../Tooltip';
+import {sonarFC} from '../../internal/sonarFC';
 
 export interface IconButtonProps extends Omit<ButtonProps, 'iconLeft' | 'iconRight' | 'loading' | 'square'> {
   /**
@@ -20,10 +21,10 @@ export interface IconButtonProps extends Omit<ButtonProps, 'iconLeft' | 'iconRig
  * that label as a Tooltip on hover and focus-visible.
  */
 export const IconButton = React.memo(
-  React.forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
+  sonarFC<HTMLButtonElement, IconButtonProps>('IconButton', (
     {label, children, tooltipPlacement = 'top', variant = 'ghost', ...rest},
     ref,
-  ): React.JSX.Element {
+  ): React.JSX.Element => {
     return (
       <Tooltip content={label} placement={tooltipPlacement}>
         <Button ref={ref} square variant={variant} aria-label={label} {...rest}>
@@ -33,5 +34,3 @@ export const IconButton = React.memo(
     );
   }),
 );
-
-IconButton.displayName = 'IconButton';
