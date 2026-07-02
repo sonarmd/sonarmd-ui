@@ -61,6 +61,32 @@ describe('DataGrid', () => {
     expect(Number(handle.getAttribute('aria-valuenow'))).toBe(64);
   });
 
+  test('wide container: auto columns above MAX_WIDTH keep valid aria and never snap down', () => {
+    // Two auto columns in a 2000px container distribute to 1000px each -
+    // legitimately above the 800px manual-resize ceiling.
+    const widthSpy = vi.spyOn(HTMLElement.prototype, 'offsetWidth', 'get').mockReturnValue(2000);
+    render(
+      <DataGrid
+        columns={[{key: 'a', header: 'A'}, {key: 'b', header: 'B'}]}
+        rows={rows}
+        keyExtractor={keyExtractor}
+      />,
+    );
+    const handle = screen.getByRole('separator', {name: 'Resize A column'});
+    expect(Number(handle.getAttribute('aria-valuenow'))).toBe(1000);
+    // aria stays valid: max rises to the current width, never below valuenow.
+    expect(Number(handle.getAttribute('aria-valuemax'))).toBe(1000);
+    // Growing past the effective ceiling holds; it must never snap DOWN to 800.
+    fireEvent.keyDown(handle, {key: 'ArrowRight'});
+    expect(Number(handle.getAttribute('aria-valuenow'))).toBe(1000);
+    fireEvent.keyDown(handle, {key: 'End'});
+    expect(Number(handle.getAttribute('aria-valuenow'))).toBe(1000);
+    // Shrinking still works normally.
+    fireEvent.keyDown(handle, {key: 'ArrowLeft'});
+    expect(Number(handle.getAttribute('aria-valuenow'))).toBe(984);
+    widthSpy.mockRestore();
+  });
+
   test('resizableColumns={false} renders no separators', () => {
     render(
       <DataGrid columns={columns} rows={rows} keyExtractor={keyExtractor} resizableColumns={false} />,

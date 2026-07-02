@@ -249,13 +249,23 @@ function DataGridInner<T = Record<string, unknown>>({
     [widths, containerWidth],
   );
 
+  // Resize ceiling per column. MAX_WIDTH stops runaway manual resize, but a
+  // wide container can legitimately hand an auto column more than MAX_WIDTH -
+  // in that case the ceiling rises to the current width so the keyboard path
+  // never snaps a column DOWN and aria-valuenow never exceeds aria-valuemax.
+  const resizeMax = useCallback(
+    (index: number) => Math.max(MAX_WIDTH, widths[index] ?? 0),
+    [widths],
+  );
+
   const clampWidth = useCallback(
     (key: string, width: number) => {
-      const col = columns.find((c) => c.key === key);
-      const min = col?.minWidth ?? MIN_WIDTH_DEFAULT;
-      return Math.min(MAX_WIDTH, Math.max(min, Math.round(width)));
+      const index = columns.findIndex((c) => c.key === key);
+      const min = columns[index]?.minWidth ?? MIN_WIDTH_DEFAULT;
+      const max = index >= 0 ? Math.max(MAX_WIDTH, widths[index] ?? 0) : MAX_WIDTH;
+      return Math.min(max, Math.max(min, Math.round(width)));
     },
-    [columns],
+    [columns, widths],
   );
 
   const setOverride = useCallback(
@@ -311,12 +321,12 @@ function DataGridInner<T = Record<string, unknown>>({
       if (e.key === 'ArrowLeft') next = widths[index] - RESIZE_STEP;
       else if (e.key === 'ArrowRight') next = widths[index] + RESIZE_STEP;
       else if (e.key === 'Home') next = min;
-      else if (e.key === 'End') next = MAX_WIDTH;
+      else if (e.key === 'End') next = resizeMax(index);
       if (next == null) return;
       e.preventDefault();
       setOverride(key, next);
     },
-    [columns, widths, setOverride],
+    [columns, widths, setOverride, resizeMax],
   );
 
   // --- Sort + row interaction ---------------------------------------------
@@ -441,7 +451,7 @@ function DataGridInner<T = Record<string, unknown>>({
                     aria-orientation="vertical"
                     aria-label={`Resize ${col.header} column`}
                     aria-valuemin={col.minWidth ?? MIN_WIDTH_DEFAULT}
-                    aria-valuemax={MAX_WIDTH}
+                    aria-valuemax={resizeMax(i)}
                     aria-valuenow={widths[i]}
                     tabIndex={0}
                     data-col-key={col.key}
@@ -469,7 +479,13 @@ function DataGridInner<T = Record<string, unknown>>({
             rowProps={rowProps}
             onRowsRendered={infinite ? onRowsRendered : undefined}
             overscanCount={overscanCount}
-            style={{height, overflowY: 'auto', width: totalWidth}}
+            // overflowX hidden: when the vertical scrollbar appears it narrows
+            // the List's client box below totalWidth, which would otherwise turn
+            // the List into a SECOND horizontal scroller and let the body pan
+            // out from under the pinned header. The parent .scroller is the one
+            // horizontal scroller; worst case the last cell loses scrollbar-
+            // width px of its padding, alignment is preserved.
+            style={{height, overflowY: 'auto', overflowX: 'hidden', width: totalWidth}}
           />
         )}
         <span className={styles.srOnly} role="status" aria-live="polite">
