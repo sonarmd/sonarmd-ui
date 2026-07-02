@@ -1,0 +1,190 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Horizontal scroller: header + body share it, so the header is pinned
+   vertically by construction (the List owns the vertical scroll) while
+   still tracking horizontal scroll with the columns. */
+.scroller {
+  overflow-x: auto;
+}
+
+.header {
+  display: flex;
+  box-sizing: border-box;
+  background: var(--smd-bg-subtle);
+  border-bottom: var(--smd-space-px) solid var(--smd-border-default);
+}
+
+.headerCell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: var(--smd-space-3) var(--smd-space-4);
+  font-size: var(--smd-font-size-sm);
+  font-weight: var(--smd-font-weight-semibold);
+  color: var(--smd-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.headerLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sortButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--smd-space-1);
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  border-radius: var(--smd-radius-sm);
+}
+
+.sortButton:hover {
+  color: var(--smd-text-secondary);
+}
+
+.sortButton:focus-visible {
+  outline: none;
+  box-shadow: var(--smd-shadow-focus);
+}
+
+.sortIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.resizeHandle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: var(--smd-space-2);
+  cursor: col-resize;
+  touch-action: none;
+  border-radius: var(--smd-radius-sm);
+}
+
+.resizeHandle::after {
+  content: '';
+  position: absolute;
+  top: var(--smd-space-1);
+  bottom: var(--smd-space-1);
+  right: var(--smd-space-px);
+  width: var(--smd-space-px);
+  background: var(--smd-border-default);
+}
+
+.resizeHandle:hover::after,
+.resizeHandle:focus-visible::after {
+  width: var(--smd-space-1);
+  background: var(--smd-color-primary-50);
+}
+
+.resizeHandle:focus-visible {
+  outline: none;
+  box-shadow: var(--smd-shadow-focus);
+}
+
+.row {
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: var(--smd-space-px) solid var(--smd-border-default);
+  color: var(--smd-text-primary);
+  font-size: var(--smd-font-size-sm);
+  background: var(--smd-bg-base);
+}
+
+.rowClickable {
+  cursor: pointer;
+}
+
+.rowClickable:hover {
+  background: var(--smd-bg-subtle);
+}
+
+.rowClickable:focus-visible {
+  outline: none;
+  box-shadow: var(--smd-shadow-focus) inset;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 var(--smd-space-4);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alignCenter {
+  justify-content: center;
+}
+
+.alignRight {
+  justify-content: flex-end;
+}
+
+.loaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  color: var(--smd-text-tertiary);
+}
+
+.spinner {
+  width: var(--smd-space-5);
+  height: var(--smd-space-5);
+  border: var(--smd-space-px) solid var(--smd-border-default);
+  border-top-color: var(--smd-color-primary-50);
+  border-radius: var(--smd-radius-full);
+  animation: smd-grid-spin 0.7s linear infinite;
+}
+
+@keyframes smd-grid-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--smd-text-tertiary);
+  font-size: var(--smd-font-size-sm);
+}
+
+.paginationBar {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--smd-space-3);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: calc(-1 * var(--smd-space-px));
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

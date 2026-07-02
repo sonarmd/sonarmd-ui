@@ -1520,6 +1520,733 @@ exports[`ConfirmDialog > open - dom 1`] = `
 </body>
 `;
 
+exports[`DataGrid > empty - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_6965d8"
+  >
+    <div
+      aria-label="Patients"
+      class="_scroller_6965d8"
+      role="group"
+    >
+      <div
+        class="_header_6965d8"
+        style="width: 248px;"
+      >
+        <div
+          class="_headerCell_6965d8"
+          style="width: 64px; flex-shrink: 0;"
+        >
+          <span
+            class="_headerLabel_6965d8"
+          >
+            Name
+          </span>
+          <div
+            aria-label="Resize Name column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="64"
+            class="_resizeHandle_6965d8"
+            data-col-key="name"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+        <div
+          class="_headerCell_6965d8"
+          style="width: 120px; flex-shrink: 0;"
+        >
+          <span
+            class="_headerLabel_6965d8"
+          >
+            Status
+          </span>
+          <div
+            aria-label="Resize Status column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="120"
+            class="_resizeHandle_6965d8"
+            data-col-key="status"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+        <div
+          class="_headerCell_6965d8 _alignRight_6965d8"
+          style="width: 64px; flex-shrink: 0;"
+        >
+          <span
+            class="_headerLabel_6965d8"
+          >
+            Score
+          </span>
+          <div
+            aria-label="Resize Score column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="64"
+            class="_resizeHandle_6965d8"
+            data-col-key="score"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+      </div>
+      <div
+        class="_emptyState_6965d8"
+        style="height: 400px;"
+      >
+        No patients found
+      </div>
+      <span
+        aria-live="polite"
+        class="_srOnly_6965d8"
+        role="status"
+      >
+        0 rows
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`DataGrid > loadingMore - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_6965d8"
+  >
+    <div
+      aria-busy="true"
+      aria-label="Patients"
+      class="_scroller_6965d8"
+      role="group"
+    >
+      <div
+        class="_header_6965d8"
+        style="width: 248px;"
+      >
+        <div
+          class="_headerCell_6965d8"
+          style="width: 64px; flex-shrink: 0;"
+        >
+          <span
+            class="_headerLabel_6965d8"
+          >
+            Name
+          </span>
+          <div
+            aria-label="Resize Name column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="64"
+            class="_resizeHandle_6965d8"
+            data-col-key="name"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+        <div
+          class="_headerCell_6965d8"
+          style="width: 120px; flex-shrink: 0;"
+        >
+          <span
+            class="_headerLabel_6965d8"
+          >
+            Status
+          </span>
+          <div
+            aria-label="Resize Status column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="120"
+            class="_resizeHandle_6965d8"
+            data-col-key="status"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+        <div
+          class="_headerCell_6965d8 _alignRight_6965d8"
+          style="width: 64px; flex-shrink: 0;"
+        >
+          <span
+            class="_headerLabel_6965d8"
+          >
+            Score
+          </span>
+          <div
+            aria-label="Resize Score column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="64"
+            class="_resizeHandle_6965d8"
+            data-col-key="score"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+      </div>
+      <div
+        data-testid="virtual-list"
+      >
+        <div
+          class="_row_6965d8"
+          data-row-key="1"
+          style="width: 248px;"
+        >
+          <div
+            class="_cell_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            Patient 1
+          </div>
+          <div
+            class="_cell_6965d8"
+            style="width: 120px; flex-shrink: 0;"
+          >
+            Review
+          </div>
+          <div
+            class="_cell_6965d8 _alignRight_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            0
+          </div>
+        </div>
+        <div
+          class="_row_6965d8"
+          data-row-key="2"
+          style="width: 248px;"
+        >
+          <div
+            class="_cell_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            Patient 2
+          </div>
+          <div
+            class="_cell_6965d8"
+            style="width: 120px; flex-shrink: 0;"
+          >
+            Active
+          </div>
+          <div
+            class="_cell_6965d8 _alignRight_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            0.1
+          </div>
+        </div>
+        <div
+          class="_row_6965d8"
+          data-row-key="3"
+          style="width: 248px;"
+        >
+          <div
+            class="_cell_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            Patient 3
+          </div>
+          <div
+            class="_cell_6965d8"
+            style="width: 120px; flex-shrink: 0;"
+          >
+            Active
+          </div>
+          <div
+            class="_cell_6965d8 _alignRight_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            0.2
+          </div>
+        </div>
+      </div>
+      <span
+        aria-live="polite"
+        class="_srOnly_6965d8"
+        role="status"
+      >
+        Loading more rows
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`DataGrid > paginated - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_6965d8"
+  >
+    <div
+      aria-label="Patients"
+      class="_scroller_6965d8"
+      role="group"
+    >
+      <div
+        class="_header_6965d8"
+        style="width: 248px;"
+      >
+        <div
+          class="_headerCell_6965d8"
+          style="width: 64px; flex-shrink: 0;"
+        >
+          <span
+            class="_headerLabel_6965d8"
+          >
+            Name
+          </span>
+          <div
+            aria-label="Resize Name column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="64"
+            class="_resizeHandle_6965d8"
+            data-col-key="name"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+        <div
+          class="_headerCell_6965d8"
+          style="width: 120px; flex-shrink: 0;"
+        >
+          <span
+            class="_headerLabel_6965d8"
+          >
+            Status
+          </span>
+          <div
+            aria-label="Resize Status column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="120"
+            class="_resizeHandle_6965d8"
+            data-col-key="status"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+        <div
+          class="_headerCell_6965d8 _alignRight_6965d8"
+          style="width: 64px; flex-shrink: 0;"
+        >
+          <span
+            class="_headerLabel_6965d8"
+          >
+            Score
+          </span>
+          <div
+            aria-label="Resize Score column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="64"
+            class="_resizeHandle_6965d8"
+            data-col-key="score"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+      </div>
+      <div
+        data-testid="virtual-list"
+      >
+        <div
+          class="_row_6965d8"
+          data-row-key="1"
+          style="width: 248px;"
+        >
+          <div
+            class="_cell_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            Patient 1
+          </div>
+          <div
+            class="_cell_6965d8"
+            style="width: 120px; flex-shrink: 0;"
+          >
+            Review
+          </div>
+          <div
+            class="_cell_6965d8 _alignRight_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            0
+          </div>
+        </div>
+        <div
+          class="_row_6965d8"
+          data-row-key="2"
+          style="width: 248px;"
+        >
+          <div
+            class="_cell_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            Patient 2
+          </div>
+          <div
+            class="_cell_6965d8"
+            style="width: 120px; flex-shrink: 0;"
+          >
+            Active
+          </div>
+          <div
+            class="_cell_6965d8 _alignRight_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            0.1
+          </div>
+        </div>
+        <div
+          class="_row_6965d8"
+          data-row-key="3"
+          style="width: 248px;"
+        >
+          <div
+            class="_cell_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            Patient 3
+          </div>
+          <div
+            class="_cell_6965d8"
+            style="width: 120px; flex-shrink: 0;"
+          >
+            Active
+          </div>
+          <div
+            class="_cell_6965d8 _alignRight_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            0.2
+          </div>
+        </div>
+      </div>
+      <span
+        aria-live="polite"
+        class="_srOnly_6965d8"
+        role="status"
+      >
+        10 rows
+      </span>
+    </div>
+    <div
+      class="_paginationBar_6965d8"
+    >
+      <nav
+        aria-label="Pagination"
+        class="_pagination_de4934"
+      >
+        <ul
+          class="_list_de4934"
+        >
+          <li>
+            <button
+              aria-label="Previous page"
+              class="_item_de4934 _sm_de4934 _nav_de4934"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M10 4l-4 4 4 4"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </button>
+          </li>
+          <li>
+            <button
+              aria-label="Page 1"
+              class="_item_de4934 _sm_de4934"
+              type="button"
+            >
+              1
+            </button>
+          </li>
+          <li>
+            <button
+              aria-current="page"
+              aria-label="Page 2"
+              class="_item_de4934 _sm_de4934 _current_de4934"
+              type="button"
+            >
+              2
+            </button>
+          </li>
+          <li>
+            <button
+              aria-label="Page 3"
+              class="_item_de4934 _sm_de4934"
+              type="button"
+            >
+              3
+            </button>
+          </li>
+          <li>
+            <button
+              aria-label="Page 4"
+              class="_item_de4934 _sm_de4934"
+              type="button"
+            >
+              4
+            </button>
+          </li>
+          <li>
+            <button
+              aria-label="Page 5"
+              class="_item_de4934 _sm_de4934"
+              type="button"
+            >
+              5
+            </button>
+          </li>
+          <li>
+            <button
+              aria-label="Next page"
+              class="_item_de4934 _sm_de4934 _nav_de4934"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M6 4l4 4-4 4"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`DataGrid > withRows - dom 1`] = `
+<DocumentFragment>
+  <div
+    class="_wrapper_6965d8"
+  >
+    <div
+      aria-label="Patients"
+      class="_scroller_6965d8"
+      role="group"
+    >
+      <div
+        class="_header_6965d8"
+        style="width: 248px;"
+      >
+        <div
+          class="_headerCell_6965d8"
+          style="width: 64px; flex-shrink: 0;"
+        >
+          <button
+            aria-label="Sort by Name"
+            class="_sortButton_6965d8"
+            data-col-key="name"
+            type="button"
+          >
+            <span
+              class="_headerLabel_6965d8"
+            >
+              Name
+            </span>
+            <span
+              aria-hidden="true"
+              class="_sortIcon_6965d8"
+            >
+              <svg
+                fill="currentColor"
+                height="11"
+                viewBox="0 0 8 11"
+                width="8"
+              >
+                <path
+                  d="M4 0l3 4H1z"
+                  opacity="0.3"
+                />
+                <path
+                  d="M4 11l3-4H1z"
+                  opacity="0.3"
+                />
+              </svg>
+            </span>
+          </button>
+          <div
+            aria-label="Resize Name column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="64"
+            class="_resizeHandle_6965d8"
+            data-col-key="name"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+        <div
+          class="_headerCell_6965d8"
+          style="width: 120px; flex-shrink: 0;"
+        >
+          <span
+            class="_headerLabel_6965d8"
+          >
+            Status
+          </span>
+          <div
+            aria-label="Resize Status column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="120"
+            class="_resizeHandle_6965d8"
+            data-col-key="status"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+        <div
+          class="_headerCell_6965d8 _alignRight_6965d8"
+          style="width: 64px; flex-shrink: 0;"
+        >
+          <span
+            class="_headerLabel_6965d8"
+          >
+            Score
+          </span>
+          <div
+            aria-label="Resize Score column"
+            aria-orientation="vertical"
+            aria-valuemax="800"
+            aria-valuemin="64"
+            aria-valuenow="64"
+            class="_resizeHandle_6965d8"
+            data-col-key="score"
+            role="separator"
+            tabindex="0"
+          />
+        </div>
+      </div>
+      <div
+        data-testid="virtual-list"
+      >
+        <div
+          class="_row_6965d8"
+          data-row-key="1"
+          style="width: 248px;"
+        >
+          <div
+            class="_cell_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            Patient 1
+          </div>
+          <div
+            class="_cell_6965d8"
+            style="width: 120px; flex-shrink: 0;"
+          >
+            Review
+          </div>
+          <div
+            class="_cell_6965d8 _alignRight_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            0
+          </div>
+        </div>
+        <div
+          class="_row_6965d8"
+          data-row-key="2"
+          style="width: 248px;"
+        >
+          <div
+            class="_cell_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            Patient 2
+          </div>
+          <div
+            class="_cell_6965d8"
+            style="width: 120px; flex-shrink: 0;"
+          >
+            Active
+          </div>
+          <div
+            class="_cell_6965d8 _alignRight_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            0.1
+          </div>
+        </div>
+        <div
+          class="_row_6965d8"
+          data-row-key="3"
+          style="width: 248px;"
+        >
+          <div
+            class="_cell_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            Patient 3
+          </div>
+          <div
+            class="_cell_6965d8"
+            style="width: 120px; flex-shrink: 0;"
+          >
+            Active
+          </div>
+          <div
+            class="_cell_6965d8 _alignRight_6965d8"
+            style="width: 64px; flex-shrink: 0;"
+          >
+            0.2
+          </div>
+        </div>
+      </div>
+      <span
+        aria-live="polite"
+        class="_srOnly_6965d8"
+        role="status"
+      >
+        30 rows
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`DataTable > empty - dom 1`] = `
 <DocumentFragment>
   <div
