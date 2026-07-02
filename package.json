@@ -63,6 +63,11 @@
       "import": "./dist/components/DataTable/index.js",
       "require": "./dist/components/DataTable/index.cjs"
     },
+    "./data-grid": {
+      "types": "./dist/components/DataGrid/index.d.ts",
+      "import": "./dist/components/DataGrid/index.js",
+      "require": "./dist/components/DataGrid/index.cjs"
+    },
     "./tokens": {
       "types": "./dist/sonarmd-tokens.d.ts",
       "import": "./dist/sonarmd-tokens.js",

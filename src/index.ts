@@ -124,6 +124,14 @@ export type {KpiGridProps} from './components/KpiGrid';
 export {DataTable} from './components/DataTable';
 export type {DataTableProps, Column} from './components/DataTable';
 
+export {DataGrid} from './components/DataGrid';
+export type {
+  DataGridProps,
+  DataGridColumn,
+  DataGridPagination,
+  DataGridInfinite,
+} from './components/DataGrid';
+
 export {InfiniteList} from './components/InfiniteList';
 export type {InfiniteListProps} from './components/InfiniteList';
 
