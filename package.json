@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "description": "SonarMD design system - reusable React component library",
   "type": "module",
-  "engines": {
-    "node": "^22.18.0"
-  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
