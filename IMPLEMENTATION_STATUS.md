@@ -13,6 +13,45 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## Toolchain - Node 24  (DONE)
+
+Branch: feature/Upgrade-to-node. Moves the repo from Node 22.18.0 to 24.21.0.
+Toolchain-only upgrade. No library source changes.
+
+### What shipped
+
+- `.node-version` 22.18.0 -> 24.21.0, now the single exact Node pin.
+- `ci.yml` and `publish.yml` read that pin via `setup-node`'s
+  `node-version-file` instead of restating `node-version: '22.18.0'`, so the
+  version exists in exactly one place.
+- `package.json`: `engines.node` `^22.18.0` -> `>=22.18.0`. Deliberately a
+  compatibility floor, not a second pin - `.node-version` says which Node we
+  build with, `engines` says which Node a consuming app may run. The old caret
+  range excluded 24.x entirely.
+- `package.json`: `@types/node` `^22.19.21` -> `^24.13.4` so the ambient Node
+  types match the runtime. `package-lock.json` updated for that bump only
+  (`@types/node` and its transitive `undici-types`; no other resolution moved).
+
+### Self-made decisions
+
+- `engines.node` was widened rather than pinned to 24.x. This is a published
+  browser component library whose Node requirement is build tooling only;
+  pinning would force every consuming app onto Node 24. The floor stays at
+  22.18.0 so apps still on that version keep installing.
+
+### Verification
+
+Under Node 24.21.0: `npm ci`, `npm run typecheck`, `npx tsc -p
+tsconfig.recipes.json`, `npm test` (402 passed / 29 files), `npm run build`,
+`npm run size` (all six budgets within limit), and the benchmarks
+`npm run measure` + `npm run check` budget gate all pass.
+
+### Follow-up
+
+- `publish.yml` previously noted that the Node pin matched AuraPlatform's
+  `engines` pin. That comment is gone with the hardcoded version; confirm
+  AuraPlatform's own Node target so the two repos do not silently diverge.
+
 ## Infinite scroll - virtualized + basic (2 hooks + list)  (DONE)
 
 Branch: feat/infinite-virtualized. Lazy-load paginated data on scroll, with

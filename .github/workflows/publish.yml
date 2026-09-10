@@ -19,9 +19,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          # Pinned to the version in .node-version (matches AuraPlatform's
-          # engines pin). Update both together.
-          node-version: '22.18.0'
+          node-version-file: '.node-version'
           registry-url: 'https://npm.pkg.github.com'
           scope: '@sonarmd'
 
