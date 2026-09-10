@@ -31,8 +31,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          # Pinned to .node-version; update both together.
-          node-version: '22.18.0'
+          node-version-file: '.node-version'
 
       - name: Install
         run: npm ci
