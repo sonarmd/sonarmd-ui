@@ -5,7 +5,7 @@ name: CI
 # sonarmd/workflows service orchestrator, which is for deployable services).
 # Release-blocking: typecheck, tests (incl. tree-shaking reachability + token
 # completeness), build, size budgets, and the benchmark budget gate. publish.yml
-# owns npm publishing and is untouched.
+# owns publishing (installs with Yarn 4, publishes with `npm publish`).
 
 on:
   pull_request:
@@ -33,35 +33,40 @@ jobs:
         with:
           node-version-file: '.node-version'
 
+      # Yarn 4 is pinned in package.json "packageManager"; Corepack ships with
+      # the Node version above and activates that exact version.
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Install
-        run: npm ci
+        run: yarn install --immutable
 
       - name: Typecheck
-        run: npm run typecheck
+        run: yarn run typecheck
 
       - name: Typecheck recipes and doc stories
-        run: npx tsc --noEmit -p tsconfig.recipes.json
+        run: yarn tsc --noEmit -p tsconfig.recipes.json
 
       - name: Test (includes tree-shaking reachability + token completeness)
-        run: npm test
+        run: yarn run test
 
       - name: Build
-        run: npm run build
+        run: yarn run build
 
       - name: Size budgets
-        run: npm run size
+        run: yarn run size
 
       - name: Benchmarks - install
         working-directory: benchmarks
-        run: npm ci
+        run: yarn install --immutable
 
       - name: Benchmarks - measure
         working-directory: benchmarks
-        run: npm run measure
+        run: yarn run measure
 
       - name: Benchmarks - budget gate
         working-directory: benchmarks
-        run: npm run check
+        run: yarn run check
 
       - name: Upload benchmark report
         if: always()

@@ -162,13 +162,25 @@ complete, type-checked, copy-paste composition:
 
 ## Development
 
+This repository uses Yarn 4 (Berry), pinned in `package.json` via
+`packageManager` and activated by Corepack (bundled with the Node version in
+`.node-version`):
+
 ```sh
-npm run dev         # Ladle dev workbench
-npm test            # Vitest (includes static checks)
-npm run typecheck   # tsc --noEmit
-npm run build       # Vite library build
-npm run size        # size-limit bundle budgets
+corepack enable     # once per machine
+yarn install        # install dependencies
 ```
+
+```sh
+yarn dev            # Ladle dev workbench
+yarn test           # Vitest (includes static checks)
+yarn typecheck      # tsc --noEmit
+yarn build          # Vite library build
+yarn size           # size-limit bundle budgets
+```
+
+`yarn size` reads `dist/`, so run `yarn build` first. Unlike npm, `yarn install`
+does not run the `prepare` script, so installing does not build the library.
 
 Budget limits (brotli): core 80kB, charts 120kB, transitions 2.5kB, motion 2.5kB, data 4kB.
 

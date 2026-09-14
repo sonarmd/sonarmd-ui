@@ -26,10 +26,18 @@ table, form, modal, navigation.
 ## Run
 
 ```
+yarn build           # build the library first; the harness measures dist/
 cd benchmarks
-npm install          # uses file:.. for @sonarmd/ui (builds the library)
-npm run measure      # builds each app, writes results/report.md
+yarn install         # portal:.. symlinks @sonarmd/ui to the repo root
+yarn run measure     # builds each app, writes results/report.md
+yarn run check       # budget gate
 ```
+
+This is a separate Yarn 4 project, not a workspace of the root package, so it
+has its own `yarn.lock`. `portal:..` symlinks `@sonarmd/ui` to the repository
+root (matching what npm's `file:..` did), so the harness always measures the
+current `dist/` - but `yarn install` does not build it, so run `yarn build` at
+the root after any library change.
 
 The library dependency graph never includes these competitor packages; they are
 benchmark-only devDependencies under this folder.

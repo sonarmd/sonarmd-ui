@@ -45,7 +45,7 @@ const measureApp = (name) => {
   if (!existsSync(join(appDir, 'index.html'))) return null;
 
   process.stdout.write(`Building ${name}... `);
-  execSync('npx vite build', {cwd: appDir, stdio: ['ignore', 'ignore', 'inherit']});
+  execSync('yarn vite build', {cwd: appDir, stdio: ['ignore', 'ignore', 'inherit']});
 
   const distDir = join(appDir, 'dist');
   const assets = walk(distDir).filter((f) => /\.(js|css)$/.test(f));

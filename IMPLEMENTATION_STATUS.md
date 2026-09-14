@@ -13,6 +13,89 @@ Tracks delivery of V1_SPEC.md, one workstream at a time. Newest on top.
   standard brotli metric. If a literal gzip ceiling is required, switch
   echartsCore to SVGRenderer (frees ~15 kB and matches the pre-v1 behavior).
 
+## Toolchain - Yarn 4 (Berry) package manager  (DONE)
+
+Branch: feature/migrate-to-yarn. Migrates the repo from npm to Yarn 4 (Berry)
+via Corepack, per team direction to standardize repositories on Yarn 4.
+Toolchain-only. No library source changes.
+
+Node is untouched: `.node-version` is byte-identical at 24.21.0, `engines.node`
+and `@types/node` are unchanged, and both `setup-node` blocks are unchanged.
+The Node 24 upgrade below is a separate, already-validated change.
+
+### What shipped
+
+- Yarn pinned as `"packageManager": "yarn@4.18.0+sha512.fcb8716f..."`
+  (Corepack's hash-verified form) in package.json and, so the standalone
+  benchmarks project does not implicitly inherit its parent's manifest, in
+  benchmarks/package.json. The two pins must be bumped together. Corepack ships
+  with Node 24, so no global Yarn install is required.
+- `.yarnrc.yml` (new, root) and `benchmarks/.yarnrc.yml` (new):
+  `nodeLinker: node-modules` (PnP is not supported by this toolchain -
+  size-limit, Ladle, vite-plugin-dts and the benchmark apps all resolve through
+  a real node_modules tree), `enableGlobalCache: true` (no zero-installs,
+  `.yarn/cache` is never committed), and `enableScripts: true`.
+- `enableScripts: true` is set explicitly so dependency install scripts keep
+  running as they did under npm. Changing dependency-script security policy is
+  out of scope for a package-manager migration.
+- `package-lock.json` and `benchmarks/package-lock.json` deleted; `yarn.lock`
+  and `benchmarks/yarn.lock` generated and committed. No npm lockfiles remain.
+- `package.json` scripts: `prepare` and `prepublishOnly` now call `yarn build`.
+- `ci.yml`: `corepack enable` after `setup-node`; `npm ci` ->
+  `yarn install --immutable` (root and benchmarks); `npm run <x>` ->
+  `yarn run <x>`; `npx tsc` -> `yarn tsc`. `yarn run <script>` rather than bare
+  `yarn <script>` so a script name cannot be shadowed by a Yarn builtin.
+- `publish.yml`: `corepack enable` + `yarn install --immutable`, but
+  `npm publish` is unchanged and still owns publishing. `setup-node` writes the
+  GitHub Packages registry and NODE_AUTH_TOKEN into an `.npmrc`, which Yarn 4
+  does not read, so installing with Yarn and publishing with npm leaves
+  registry, authentication and the published artifact unchanged.
+- `benchmarks/` stays a separate Yarn project, not a workspace - a workspace
+  would hoist MUI/antd/bootstrap into the root node_modules and break the
+  harness isolation. `@sonarmd/ui` moved from `file:..` to `portal:..`:
+  Yarn's `file:` protocol copies the package, which would make the harness
+  measure a stale `dist/`; `portal:..` reproduces npm's symlink
+  (`benchmarks/node_modules/@sonarmd/ui -> ../../..`), verified. Yarn requires
+  `benchmarks/yarn.lock` to exist for a nested standalone project.
+  `benchmarks/measure.mjs`: `npx vite build` -> `yarn vite build`.
+- Docs updated for contributors: README.md, benchmarks/README.md, CLAUDE.md.
+  Consumer-facing `npm install @sonarmd/ui` examples left alone.
+- `.gitignore` (both): ignore `.yarn/*` (keeping `.yarn/patches`) and `.pnp.*`.
+
+### Behavior change to know about
+
+`yarn install` does not run the package's `prepare` script, so installing no
+longer builds `dist/` the way `npm ci` did (verified directly). CI already has
+an explicit Build step before size budgets and benchmarks, and `npm publish`
+still runs `prepare`/`prepublishOnly`, so both pipelines are unaffected. Local
+flows that read `dist/` need an explicit `yarn build` first; documented in
+README.md, benchmarks/README.md and CLAUDE.md.
+
+Regenerating the lockfiles re-resolved dependencies within their existing
+declared ranges (no range was edited); `@types/node` and typescript did not
+move. Tests, snapshots and all six size budgets are unaffected.
+`benchmarks/results/*` is deliberately not updated here - the benchmark gate
+was run to prove it passes under Yarn, and the generated artifacts reverted.
+
+### Verification
+
+Under Node 24.21.0 with Yarn 4.18.0: `yarn install --immutable`,
+`yarn run typecheck` (0 errors), `yarn tsc --noEmit -p tsconfig.recipes.json`
+(0 errors), `yarn run test` (402 passed / 29 files - identical to the npm
+baseline), `yarn run build` (including declaration emit), `yarn run size` (all
+six budgets within limit), `yarn run dev` (Vite dev server ready on :5173), and
+in benchmarks/ `yarn install --immutable`, `yarn run measure`, `yarn run check`
+(budget gate passed, @sonarmd/ui smallest total) all pass.
+
+### Follow-up
+
+- V1_SPEC.md S8a still says `npm run dev` (lines 321 and 325). Left alone: it
+  is the delivery contract, not contributor setup docs. Worth a one-line fix
+  next time the spec is touched.
+- Historical records under `.claude/plans/` and `team/tickets/` still reference
+  npm commands. Left as-is - they are closed audit records of what was run at
+  the time.
+
 ## Toolchain - Node 24  (DONE)
 
 Branch: feature/Upgrade-to-node. Moves the repo from Node 22.18.0 to 24.21.0.

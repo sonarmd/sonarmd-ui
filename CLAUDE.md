@@ -24,7 +24,15 @@ Work autonomously. Do not ask the user questions. Every architectural decision i
 
 ## Resolved decisions (do not revisit, do not ask)
 
-- Package manager: npm. Delete yarn.lock.
+- Package manager: Yarn 4 (Berry) via Corepack, pinned in package.json
+  `packageManager`. `yarn.lock` and `benchmarks/yarn.lock` are committed and
+  must never be deleted; there are no npm lockfiles in this repo. Install with
+  `yarn install` (`yarn install --immutable` in CI). `nodeLinker: node-modules`
+  in `.yarnrc.yml` - do not switch to Plug'n'Play. Publishing deliberately stays
+  on `npm publish` so GitHub Packages auth via .npmrc keeps working.
+- `benchmarks/` is a separate Yarn project, not a workspace (keeps MUI/antd/
+  bootstrap out of the root dependency graph). Its empty-then-generated
+  `yarn.lock` is what marks it standalone.
 - Docs/stories: Ladle. Bundle budgets: size-limit. Versioning: changesets.
 - Static checks (token completeness, raw-hex/raw-px detection, fixture completeness) are implemented as vitest suites under `src/testing/static/`, not as ESLint/stylelint plugins. One test runner for everything.
 - Browser targets: evergreen, last 2 versions. `linear()` easing with `ease-out` fallback.
@@ -43,10 +51,14 @@ Work autonomously. Do not ask the user questions. Every architectural decision i
 
 ## Commands
 
-- `npm run dev` dev workbench (after S8a; currently watch-build)
-- `npm test` vitest run including static check suites
-- `npm run typecheck` tsc noEmit
-- `npm run build` vite build + declaration emit; must stay green after every workstream
+- `yarn dev` dev workbench (after S8a; currently watch-build)
+- `yarn test` vitest run including static check suites
+- `yarn typecheck` tsc noEmit
+- `yarn build` vite build + declaration emit; must stay green after every workstream
+- `yarn size` size-limit bundle budgets
+- Note: unlike npm, `yarn install` does not run the package's `prepare` script, so
+  `dist/` is not built on install. Run `yarn build` before anything that reads
+  `dist/` (size budgets, benchmarks).
 
 ## Execution protocol
 
