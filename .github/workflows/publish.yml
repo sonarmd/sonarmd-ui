@@ -23,8 +23,18 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           scope: '@sonarmd'
 
-      - run: npm ci
+      # Yarn 4 is pinned in package.json "packageManager"; Corepack ships with
+      # the Node version resolved above and activates that exact version.
+      - run: corepack enable
 
+      - run: yarn install --immutable
+
+      # Publishing stays on `npm publish` deliberately: the setup-node step
+      # above writes the GitHub Packages registry and NODE_AUTH_TOKEN into an
+      # .npmrc, which Yarn 4 does not read. Installing with Yarn and
+      # publishing with npm keeps the registry, authentication and published
+      # artifact byte-for-byte unchanged. npm still runs the package's
+      # prepare/prepublishOnly hooks, which build dist before packing.
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

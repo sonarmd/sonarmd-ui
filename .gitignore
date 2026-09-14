@@ -2,3 +2,9 @@ node_modules/
 dist/
 *.local
 .DS_Store
+
+# Yarn 4 (Berry): the global cache lives outside the repo (no zero-installs),
+# so only Yarn's local state needs ignoring. yarn.lock IS committed.
+.yarn/*
+!.yarn/patches
+.pnp.*

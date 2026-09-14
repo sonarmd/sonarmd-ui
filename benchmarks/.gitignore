@@ -1,3 +1,8 @@
 node_modules/
 apps/*/dist/
 *.local
+
+# Yarn 4 (Berry) local state; benchmarks/yarn.lock IS committed.
+.yarn/*
+!.yarn/patches
+.pnp.*

@@ -1,6 +1,6 @@
 // Benchmark budget gate (CI release blocker). Reads results/results.json and
 // budgets.json and exits non-zero if @sonarmd/ui regresses past budget or is no
-// longer the smallest total. Run after `npm run measure`.
+// longer the smallest total. Run after `yarn measure`.
 
 import {existsSync, readFileSync} from 'node:fs';
 import {dirname, join} from 'node:path';
@@ -13,7 +13,7 @@ const resultsPath = join(ROOT, 'results', 'results.json');
 const budgetsPath = join(ROOT, 'budgets.json');
 
 if (!existsSync(resultsPath)) {
-  console.error('No results/results.json. Run `npm run measure` first.');
+  console.error('No results/results.json. Run `yarn measure` first.');
   process.exit(1);
 }
 
