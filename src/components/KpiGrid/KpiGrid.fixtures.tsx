@@ -1,4 +1,4 @@
-import {KpiGrid} from './index';
+import {KpiGrid} from './KpiGrid';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(KpiGrid, {

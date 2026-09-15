@@ -1,4 +1,4 @@
-import {Popover} from './index';
+import {Popover} from './Popover';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Popover, {

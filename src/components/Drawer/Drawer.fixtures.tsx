@@ -1,4 +1,4 @@
-import {Drawer} from './index';
+import {Drawer} from './Drawer';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

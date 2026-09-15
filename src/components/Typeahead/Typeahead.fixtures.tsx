@@ -1,4 +1,4 @@
-import {Typeahead} from './index';
+import {Typeahead} from './Typeahead';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

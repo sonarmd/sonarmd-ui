@@ -1,4 +1,4 @@
-import {VisuallyHidden} from './index';
+import {VisuallyHidden} from './VisuallyHidden';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(VisuallyHidden, {

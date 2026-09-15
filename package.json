@@ -24,49 +24,49 @@
       "require": "./dist/charts/index.cjs"
     },
     "./button": {
-      "types": "./dist/components/Button/index.d.ts",
-      "import": "./dist/components/Button/index.js",
-      "require": "./dist/components/Button/index.cjs"
+      "types": "./dist/components/Button/Button.d.ts",
+      "import": "./dist/components/Button/Button.js",
+      "require": "./dist/components/Button/Button.cjs"
     },
     "./card": {
-      "types": "./dist/components/Card/index.d.ts",
-      "import": "./dist/components/Card/index.js",
-      "require": "./dist/components/Card/index.cjs"
+      "types": "./dist/components/Card/Card.d.ts",
+      "import": "./dist/components/Card/Card.js",
+      "require": "./dist/components/Card/Card.cjs"
     },
     "./icon-button": {
-      "types": "./dist/components/IconButton/index.d.ts",
-      "import": "./dist/components/IconButton/index.js",
-      "require": "./dist/components/IconButton/index.cjs"
+      "types": "./dist/components/IconButton/IconButton.d.ts",
+      "import": "./dist/components/IconButton/IconButton.js",
+      "require": "./dist/components/IconButton/IconButton.cjs"
     },
     "./breadcrumbs": {
-      "types": "./dist/components/Breadcrumbs/index.d.ts",
-      "import": "./dist/components/Breadcrumbs/index.js",
-      "require": "./dist/components/Breadcrumbs/index.cjs"
+      "types": "./dist/components/Breadcrumbs/Breadcrumbs.d.ts",
+      "import": "./dist/components/Breadcrumbs/Breadcrumbs.js",
+      "require": "./dist/components/Breadcrumbs/Breadcrumbs.cjs"
     },
     "./badge": {
-      "types": "./dist/components/Badge/index.d.ts",
-      "import": "./dist/components/Badge/index.js",
-      "require": "./dist/components/Badge/index.cjs"
+      "types": "./dist/components/Badge/Badge.d.ts",
+      "import": "./dist/components/Badge/Badge.js",
+      "require": "./dist/components/Badge/Badge.cjs"
     },
     "./text-input": {
-      "types": "./dist/components/TextInput/index.d.ts",
-      "import": "./dist/components/TextInput/index.js",
-      "require": "./dist/components/TextInput/index.cjs"
+      "types": "./dist/components/TextInput/TextInput.d.ts",
+      "import": "./dist/components/TextInput/TextInput.js",
+      "require": "./dist/components/TextInput/TextInput.cjs"
     },
     "./modal": {
-      "types": "./dist/components/Modal/index.d.ts",
-      "import": "./dist/components/Modal/index.js",
-      "require": "./dist/components/Modal/index.cjs"
+      "types": "./dist/components/Modal/Modal.d.ts",
+      "import": "./dist/components/Modal/Modal.js",
+      "require": "./dist/components/Modal/Modal.cjs"
     },
     "./data-table": {
-      "types": "./dist/components/DataTable/index.d.ts",
-      "import": "./dist/components/DataTable/index.js",
-      "require": "./dist/components/DataTable/index.cjs"
+      "types": "./dist/components/DataTable/DataTable.d.ts",
+      "import": "./dist/components/DataTable/DataTable.js",
+      "require": "./dist/components/DataTable/DataTable.cjs"
     },
     "./data-grid": {
-      "types": "./dist/components/DataGrid/index.d.ts",
-      "import": "./dist/components/DataGrid/index.js",
-      "require": "./dist/components/DataGrid/index.cjs"
+      "types": "./dist/components/DataGrid/DataGrid.d.ts",
+      "import": "./dist/components/DataGrid/DataGrid.js",
+      "require": "./dist/components/DataGrid/DataGrid.cjs"
     },
     "./tokens": {
       "types": "./dist/sonarmd-tokens.d.ts",

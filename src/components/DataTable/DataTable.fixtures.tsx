@@ -1,4 +1,4 @@
-import {DataTable} from './index';
+import {DataTable} from './DataTable';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const columns = [

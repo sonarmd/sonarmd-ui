@@ -35,7 +35,7 @@ beforeEach(() => {
 
 // Centralized mocks (hoisted): charts render through ChartCanvas (mocked to a
 // stub so echarts/canvas never load), and react-window renders a few rows.
-vi.mock('../charts/ChartCanvas', () => ({
+vi.mock('../charts/ChartCanvas/ChartCanvas', () => ({
   ChartCanvas: () => <div data-testid="echarts-chart" />,
 }));
 

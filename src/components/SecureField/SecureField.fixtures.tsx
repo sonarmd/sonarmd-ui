@@ -1,4 +1,4 @@
-import {SecureField} from './index';
+import {SecureField} from './SecureField';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(SecureField, {

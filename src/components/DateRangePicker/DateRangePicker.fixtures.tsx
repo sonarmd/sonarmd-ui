@@ -1,4 +1,4 @@
-import {DateRangePicker} from './index';
+import {DateRangePicker} from './DateRangePicker';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

@@ -20,12 +20,12 @@ const dirFiles = (dir: string): string[] => readdirSync(join(COMPONENTS_DIR, dir
 
 const hasFixture = (dir: string): boolean => dirFiles(dir).some((f) => f.endsWith('.fixtures.tsx'));
 
-// A real component is a directory that ships an index.tsx (ignores empty/leftover dirs).
+// A real component is a directory that ships a <Name>.tsx (ignores empty/leftover dirs).
 const componentDirs = (): string[] =>
   readdirSync(COMPONENTS_DIR, {withFileTypes: true})
     .filter((e) => e.isDirectory())
     .map((e) => e.name)
-    .filter((d) => dirFiles(d).includes('index.tsx'));
+    .filter((d) => dirFiles(d).includes(`${d}.tsx`));
 
 test('every component has a fixtures file (or is tracked in the migration backlog)', () => {
   const missing = componentDirs().filter((d) => !hasFixture(d));

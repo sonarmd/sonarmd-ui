@@ -7,12 +7,12 @@
  */
 import React from 'react';
 import {useForm} from '../../src/hooks/useForm';
-import {FormSection} from '../../src/components/FormSection';
-import {FormErrorSummary} from '../../src/components/FormErrorSummary';
-import {SecureField} from '../../src/components/SecureField';
-import {TextInput} from '../../src/components/TextInput';
-import {Button} from '../../src/components/Button';
-import {Stack} from '../../src/components/Stack';
+import {FormSection} from '../../src/components/FormSection/FormSection';
+import {FormErrorSummary} from '../../src/components/FormErrorSummary/FormErrorSummary';
+import {SecureField} from '../../src/components/SecureField/SecureField';
+import {TextInput} from '../../src/components/TextInput/TextInput';
+import {Button} from '../../src/components/Button/Button';
+import {Stack} from '../../src/components/Stack/Stack';
 
 interface PatientForm extends Record<string, unknown> {
   firstName: string;

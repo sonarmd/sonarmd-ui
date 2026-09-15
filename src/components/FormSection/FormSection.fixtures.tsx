@@ -1,5 +1,5 @@
-import {FormSection} from './index';
-import {TextInput} from '../TextInput';
+import {FormSection} from './FormSection';
+import {TextInput} from '../TextInput/TextInput';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(FormSection, {

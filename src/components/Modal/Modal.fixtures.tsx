@@ -1,4 +1,4 @@
-import {Modal} from './index';
+import {Modal} from './Modal';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

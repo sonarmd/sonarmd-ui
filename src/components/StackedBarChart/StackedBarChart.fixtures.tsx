@@ -1,4 +1,4 @@
-import {StackedBarChart} from './index';
+import {StackedBarChart} from './StackedBarChart';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const DATA = [

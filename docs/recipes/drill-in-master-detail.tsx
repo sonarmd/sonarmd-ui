@@ -6,8 +6,8 @@
  */
 import React, {useState} from 'react';
 import {TransitionContainer} from '../../src/transitions/TransitionContainer';
-import {DataTable, Column} from '../../src/components/DataTable';
-import {Button} from '../../src/components/Button';
+import {DataTable, Column} from '../../src/components/DataTable/DataTable';
+import {Button} from '../../src/components/Button/Button';
 
 interface Patient extends Record<string, unknown> {
   id: string;

@@ -1,4 +1,4 @@
-import {StackedAreaChart} from './index';
+import {StackedAreaChart} from './StackedAreaChart';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const DATA = [

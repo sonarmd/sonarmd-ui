@@ -1,4 +1,4 @@
-import {PieChart} from './index';
+import {PieChart} from './PieChart';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const DATA = [

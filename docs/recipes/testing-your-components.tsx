@@ -9,8 +9,8 @@
  */
 import React from 'react';
 import {defineComponentFixtures} from '../../src/testing/defineComponentFixtures';
-import {Badge} from '../../src/components/Badge';
-import {Card} from '../../src/components/Card';
+import {Badge} from '../../src/components/Badge/Badge';
+import {Card} from '../../src/components/Card/Card';
 
 // --- Your component ---
 

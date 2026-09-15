@@ -1,4 +1,4 @@
-import {Sidebar} from './index';
+import {Sidebar} from './Sidebar';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

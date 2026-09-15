@@ -1,4 +1,4 @@
-import {Fade} from './index';
+import {Fade} from './Fade';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Fade, {

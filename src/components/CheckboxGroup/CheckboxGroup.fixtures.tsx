@@ -1,4 +1,4 @@
-import {CheckboxGroup} from './index';
+import {CheckboxGroup} from './CheckboxGroup';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const OPTIONS = [

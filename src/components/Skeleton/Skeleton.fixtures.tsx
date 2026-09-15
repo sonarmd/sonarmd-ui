@@ -1,4 +1,4 @@
-import {Skeleton} from './index';
+import {Skeleton} from './Skeleton';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Skeleton, {

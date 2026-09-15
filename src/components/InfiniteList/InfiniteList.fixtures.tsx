@@ -1,4 +1,4 @@
-import {InfiniteList} from './index';
+import {InfiniteList} from './InfiniteList';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const items = Array.from({length: 40}, (_, i) => ({id: i, label: `Row ${i + 1}`}));

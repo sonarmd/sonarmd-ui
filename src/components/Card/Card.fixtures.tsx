@@ -1,4 +1,4 @@
-import {Card} from './index';
+import {Card} from './Card';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Card, {

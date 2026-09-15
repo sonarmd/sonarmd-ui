@@ -1,5 +1,5 @@
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
-import {AppErrorBoundary} from './index';
+import {AppErrorBoundary} from './AppErrorBoundary';
 
 // AppErrorBoundary is a class component - the harness renders children normally.
 // The errored state is not snapshotable via fixtures (requires a throwing child).

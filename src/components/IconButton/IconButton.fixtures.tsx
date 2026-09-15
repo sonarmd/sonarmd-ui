@@ -1,5 +1,5 @@
 import React from "react";
-import {IconButton} from './index';
+import {IconButton} from './IconButton';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const GearIcon = (): React.JSX.Element => (

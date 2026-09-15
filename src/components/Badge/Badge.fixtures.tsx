@@ -1,4 +1,4 @@
-import {Badge} from './index';
+import {Badge} from './Badge';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Badge, {

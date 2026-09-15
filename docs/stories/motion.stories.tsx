@@ -12,7 +12,7 @@
 import React, {useState} from 'react';
 import type {Story} from '@ladle/react';
 import {TransitionContainer} from '../../src/transitions/TransitionContainer';
-import {Button} from '../../src/components/Button';
+import {Button} from '../../src/components/Button/Button';
 
 type PatternName = 'nav-forward' | 'nav-back' | 'drill-in' | 'drill-out' | 'modal-enter' | 'settle' | 'cross-fade';
 

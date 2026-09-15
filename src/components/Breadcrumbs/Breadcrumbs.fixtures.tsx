@@ -1,4 +1,4 @@
-import {Breadcrumbs} from './index';
+import {Breadcrumbs} from './Breadcrumbs';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Breadcrumbs, {

@@ -5,7 +5,7 @@
  * Import: `import { ChartCanvas } from '@sonarmd/ui/charts'`
  */
 import React, {useMemo} from 'react';
-import {ChartCanvas} from '../../src/charts/ChartCanvas';
+import {ChartCanvas} from '../../src/charts/ChartCanvas/ChartCanvas';
 import type {ECOption} from '../../src/charts/echartsCore';
 
 interface RiskDistribution {

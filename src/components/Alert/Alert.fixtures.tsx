@@ -1,4 +1,4 @@
-import {Alert} from './index';
+import {Alert} from './Alert';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Alert, {

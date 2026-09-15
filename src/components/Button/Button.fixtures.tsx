@@ -1,4 +1,4 @@
-import {Button} from './index';
+import {Button} from './Button';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Button, {

@@ -1,4 +1,4 @@
-import {Tooltip} from './index';
+import {Tooltip} from './Tooltip';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Tooltip, {

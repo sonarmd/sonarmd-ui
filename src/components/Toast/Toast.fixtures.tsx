@@ -1,4 +1,4 @@
-import {ToastProvider} from './index';
+import {ToastProvider} from './Toast';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(ToastProvider, {

@@ -1,4 +1,4 @@
-import {LineChart} from './index';
+import {LineChart} from './LineChart';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const DATA = [

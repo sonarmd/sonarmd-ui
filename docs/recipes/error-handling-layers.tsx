@@ -6,8 +6,8 @@
  * Widget boundaries contain failures to individual widgets.
  */
 import React, {useState} from 'react';
-import {AppErrorBoundary} from '../../src/components/AppErrorBoundary';
-import {WidgetErrorBoundary} from '../../src/components/WidgetErrorBoundary';
+import {AppErrorBoundary} from '../../src/components/AppErrorBoundary/AppErrorBoundary';
+import {WidgetErrorBoundary} from '../../src/components/WidgetErrorBoundary/WidgetErrorBoundary';
 
 function BrokenChart(): React.JSX.Element {
   throw new Error('chart render failed');

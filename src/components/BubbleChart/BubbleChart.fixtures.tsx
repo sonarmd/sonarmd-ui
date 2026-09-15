@@ -1,4 +1,4 @@
-import {BubbleChart} from './index';
+import {BubbleChart} from './BubbleChart';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(BubbleChart, {

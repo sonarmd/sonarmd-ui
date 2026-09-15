@@ -1,4 +1,4 @@
-import {ConfirmDialog} from './index';
+import {ConfirmDialog} from './ConfirmDialog';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

@@ -1,4 +1,4 @@
-import {KpiCard} from './index';
+import {KpiCard} from './KpiCard';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(KpiCard, {

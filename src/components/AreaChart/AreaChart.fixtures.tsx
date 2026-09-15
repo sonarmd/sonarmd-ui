@@ -1,4 +1,4 @@
-import {AreaChart} from './index';
+import {AreaChart} from './AreaChart';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const DATA = [

@@ -1,4 +1,4 @@
-import {Select} from './index';
+import {Select} from './Select';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const OPTIONS = [

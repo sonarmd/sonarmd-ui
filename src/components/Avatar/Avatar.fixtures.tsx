@@ -1,4 +1,4 @@
-import {Avatar} from './index';
+import {Avatar} from './Avatar';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Avatar, {
