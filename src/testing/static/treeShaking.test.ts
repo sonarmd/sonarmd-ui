@@ -66,7 +66,7 @@ test('root entry never reaches echarts', () => {
 });
 
 test('importing Button does not pull Modal, Table, or charts', () => {
-  const g = collectGraph(join(SRC, 'components', 'Button', 'index.tsx'));
+  const g = collectGraph(join(SRC, 'components', 'Button', 'Button.tsx'));
   expect(reaches(g, join('components', 'Modal'))).toBe(false);
   expect(reaches(g, join('components', 'DataTable'))).toBe(false);
   expect(reaches(g, join('charts', ''))).toBe(false);

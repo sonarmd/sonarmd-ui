@@ -1,4 +1,4 @@
-import {ChartCard} from './index';
+import {ChartCard} from './ChartCard';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(ChartCard, {

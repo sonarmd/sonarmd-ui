@@ -1,7 +1,7 @@
 import {ComponentType} from 'react';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
-import {QueryBoundary} from './index';
-import type {QueryBoundaryProps} from './index';
+import {QueryBoundary} from './QueryBoundary';
+import type {QueryBoundaryProps} from './QueryBoundary';
 
 const noop = (): void => {};
 

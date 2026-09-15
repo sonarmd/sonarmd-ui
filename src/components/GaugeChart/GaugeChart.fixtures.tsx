@@ -1,4 +1,4 @@
-import {GaugeChart} from './index';
+import {GaugeChart} from './GaugeChart';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(GaugeChart, {

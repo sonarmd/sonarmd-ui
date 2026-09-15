@@ -1,4 +1,4 @@
-import {TextArea} from './index';
+import {TextArea} from './TextArea';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(TextArea, {

@@ -1,5 +1,5 @@
 import React from "react";
-import {FormErrorSummary} from './index';
+import {FormErrorSummary} from './FormErrorSummary';
 import {useForm} from '../../hooks/useForm';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 

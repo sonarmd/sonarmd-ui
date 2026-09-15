@@ -1,4 +1,4 @@
-import {Accordion} from './index';
+import {Accordion} from './Accordion';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const items = [

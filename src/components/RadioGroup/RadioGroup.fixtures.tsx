@@ -1,4 +1,4 @@
-import {RadioGroup} from './index';
+import {RadioGroup} from './RadioGroup';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const OPTIONS = [

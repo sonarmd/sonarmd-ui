@@ -9,7 +9,7 @@ import {useState} from 'react';
 import {render, fireEvent, screen} from '@testing-library/react';
 import {test, expect, vi} from 'vitest';
 import {useForm, type UseFormReturn} from './useForm';
-import {FormErrorSummary} from '../components/FormErrorSummary';
+import {FormErrorSummary} from '../components/FormErrorSummary/FormErrorSummary';
 
 /** Subscribes to one field. Lives in a separate component so the input host
  *  does NOT subscribe -- which is exactly the freeze scenario register must

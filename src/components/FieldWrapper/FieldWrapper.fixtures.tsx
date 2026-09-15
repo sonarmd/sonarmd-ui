@@ -1,4 +1,4 @@
-import {FieldWrapper} from './index';
+import {FieldWrapper} from './FieldWrapper';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(FieldWrapper, {

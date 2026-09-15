@@ -1,4 +1,4 @@
-import {Tabs} from './index';
+import {Tabs} from './Tabs';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

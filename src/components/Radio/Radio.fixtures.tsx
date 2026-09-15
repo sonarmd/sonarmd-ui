@@ -1,4 +1,4 @@
-import {Radio} from './index';
+import {Radio} from './Radio';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Radio, {

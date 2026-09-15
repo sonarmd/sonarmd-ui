@@ -1,4 +1,4 @@
-import {Toggle} from './index';
+import {Toggle} from './Toggle';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

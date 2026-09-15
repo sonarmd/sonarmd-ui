@@ -1,4 +1,4 @@
-import {PageSection} from './index';
+import {PageSection} from './PageSection';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(PageSection, {

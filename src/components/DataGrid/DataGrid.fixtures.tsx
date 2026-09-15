@@ -1,4 +1,4 @@
-import {DataGrid} from './index';
+import {DataGrid} from './DataGrid';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const columns = [

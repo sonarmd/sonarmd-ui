@@ -5,9 +5,9 @@
  */
 import React from 'react';
 import {usePaginatedQuery} from '../../src/data/usePaginatedQuery';
-import {QueryBoundary} from '../../src/components/QueryBoundary';
-import {DataTable, Column} from '../../src/components/DataTable';
-import {FilterBar} from '../../src/components/FilterBar';
+import {QueryBoundary} from '../../src/components/QueryBoundary/QueryBoundary';
+import {DataTable, Column} from '../../src/components/DataTable/DataTable';
+import {FilterBar} from '../../src/components/FilterBar/FilterBar';
 
 interface Patient {
   id: string;

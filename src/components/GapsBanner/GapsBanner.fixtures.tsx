@@ -1,4 +1,4 @@
-import {GapsBanner} from './index';
+import {GapsBanner} from './GapsBanner';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

@@ -1,4 +1,4 @@
-import {Checkbox} from './index';
+import {Checkbox} from './Checkbox';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Checkbox, {

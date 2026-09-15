@@ -5,10 +5,10 @@
  * All tokens, no hardcoded colors or px values in component code.
  */
 import React from 'react';
-import {AppShell} from '../../src/components/AppShell';
-import {KpiGrid} from '../../src/components/KpiGrid';
-import {DataTable, Column} from '../../src/components/DataTable';
-import type {KpiCardProps} from '../../src/components/KpiCard';
+import {AppShell} from '../../src/components/AppShell/AppShell';
+import {KpiGrid} from '../../src/components/KpiGrid/KpiGrid';
+import {DataTable, Column} from '../../src/components/DataTable/DataTable';
+import type {KpiCardProps} from '../../src/components/KpiCard/KpiCard';
 
 const Nav = (): React.JSX.Element => (
   <nav aria-label="Main navigation" style={{padding: 16}}>

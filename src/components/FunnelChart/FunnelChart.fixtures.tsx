@@ -1,4 +1,4 @@
-import {FunnelChart} from './index';
+import {FunnelChart} from './FunnelChart';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(FunnelChart, {

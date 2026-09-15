@@ -1,5 +1,5 @@
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
-import {WidgetErrorBoundary} from './index';
+import {WidgetErrorBoundary} from './WidgetErrorBoundary';
 
 export default defineComponentFixtures(WidgetErrorBoundary, {
   fixtures: {

@@ -1,4 +1,4 @@
-import {PageHeader} from './index';
+import {PageHeader} from './PageHeader';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(PageHeader, {

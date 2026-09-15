@@ -1,4 +1,4 @@
-import {TextInput} from './index';
+import {TextInput} from './TextInput';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(TextInput, {

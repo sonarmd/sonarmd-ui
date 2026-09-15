@@ -1,4 +1,4 @@
-import {SegmentedControl} from './index';
+import {SegmentedControl} from './SegmentedControl';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

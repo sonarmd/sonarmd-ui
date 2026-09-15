@@ -12,10 +12,10 @@
  *   import '@sonarmd/ui/style.css';
  */
 import React, {useState} from 'react';
-import {Toggle} from '../../src/components/Toggle';
-import {Badge} from '../../src/components/Badge';
-import {Card} from '../../src/components/Card';
-import {Button} from '../../src/components/Button';
+import {Toggle} from '../../src/components/Toggle/Toggle';
+import {Badge} from '../../src/components/Badge/Badge';
+import {Card} from '../../src/components/Card/Card';
+import {Button} from '../../src/components/Button/Button';
 
 /**
  * Apply theme to a target element (defaults to document.documentElement).

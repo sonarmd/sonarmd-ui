@@ -1,5 +1,5 @@
-import {Form} from './index';
-import {Button} from '../Button';
+import {Form} from './Form';
+import {Button} from '../Button/Button';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Form, {

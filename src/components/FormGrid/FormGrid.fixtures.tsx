@@ -1,5 +1,5 @@
-import {FormGrid} from './index';
-import {TextInput} from '../TextInput';
+import {FormGrid} from './FormGrid';
+import {TextInput} from '../TextInput/TextInput';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(FormGrid, {

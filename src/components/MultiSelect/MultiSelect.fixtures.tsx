@@ -1,4 +1,4 @@
-import {MultiSelect} from './index';
+import {MultiSelect} from './MultiSelect';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const OPTIONS = [

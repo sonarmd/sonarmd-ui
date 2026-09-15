@@ -1,5 +1,5 @@
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
-import {AppShell} from './index';
+import {AppShell} from './AppShell';
 
 const Nav = () => <nav style={{width: 200, padding: '16px', background: '#f5f5fa'}}>Nav</nav>;
 const Rail = () => <div style={{width: 240, padding: '16px', background: '#ededf3'}}>Rail</div>;

@@ -1,4 +1,4 @@
-import {Stepper} from './index';
+import {Stepper} from './Stepper';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const steps = [

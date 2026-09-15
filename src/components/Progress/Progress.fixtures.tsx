@@ -1,4 +1,4 @@
-import {Progress} from './index';
+import {Progress} from './Progress';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Progress, {

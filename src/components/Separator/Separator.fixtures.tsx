@@ -1,4 +1,4 @@
-import {Separator} from './index';
+import {Separator} from './Separator';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 export default defineComponentFixtures(Separator, {

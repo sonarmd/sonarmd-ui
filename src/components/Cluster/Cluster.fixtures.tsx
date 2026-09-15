@@ -1,5 +1,5 @@
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
-import {Cluster} from './index';
+import {Cluster} from './Cluster';
 
 export default defineComponentFixtures(Cluster, {
   fixtures: {

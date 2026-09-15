@@ -1,4 +1,4 @@
-import {Dropdown} from './index';
+import {Dropdown} from './Dropdown';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const OPTIONS = [

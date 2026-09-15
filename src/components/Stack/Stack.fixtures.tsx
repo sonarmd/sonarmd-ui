@@ -1,5 +1,5 @@
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
-import {Stack} from './index';
+import {Stack} from './Stack';
 
 export default defineComponentFixtures(Stack, {
   fixtures: {

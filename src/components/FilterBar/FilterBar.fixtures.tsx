@@ -1,4 +1,4 @@
-import {FilterBar} from './index';
+import {FilterBar} from './FilterBar';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

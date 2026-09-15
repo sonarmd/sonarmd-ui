@@ -1,6 +1,6 @@
 /** @type {import('@ladle/react').UserConfig} */
 export default {
-  stories: '{src/components/**/*.stories.tsx,docs/stories/**/*.stories.tsx}',
+  stories: '{src/stories/**/*.stories.tsx,docs/stories/**/*.stories.tsx}',
   addons: {
     theme: {
       enabled: true,

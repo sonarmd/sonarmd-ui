@@ -1,4 +1,4 @@
-import {Pagination} from './index';
+import {Pagination} from './Pagination';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

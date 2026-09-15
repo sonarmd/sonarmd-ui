@@ -1,5 +1,5 @@
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
-import {Spacer} from './index';
+import {Spacer} from './Spacer';
 
 export default defineComponentFixtures(Spacer, {
   fixtures: {

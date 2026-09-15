@@ -1,4 +1,4 @@
-import {EmptyState} from './index';
+import {EmptyState} from './EmptyState';
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
 
 const noop = (): void => {};

@@ -6,10 +6,10 @@
  * and the settle transition pattern.
  */
 import React, {useState, useCallback} from 'react';
-import {QueryBoundary} from '../../src/components/QueryBoundary';
-import {EmptyState} from '../../src/components/EmptyState';
-import {Badge} from '../../src/components/Badge';
-import {Button} from '../../src/components/Button';
+import {QueryBoundary} from '../../src/components/QueryBoundary/QueryBoundary';
+import {EmptyState} from '../../src/components/EmptyState/EmptyState';
+import {Badge} from '../../src/components/Badge/Badge';
+import {Button} from '../../src/components/Button/Button';
 import {useQuery} from '../../src/data/useQuery';
 import {useMutation} from '../../src/data/useMutation';
 import {createApiClient} from '../../src/data/client';

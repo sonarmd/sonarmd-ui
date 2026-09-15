@@ -1,5 +1,5 @@
 import {defineComponentFixtures} from '../../testing/defineComponentFixtures';
-import {Columns} from './index';
+import {Columns} from './Columns';
 
 const Box = ({label}: {label: string}) => (
   <div style={{padding: '8px', background: '#eee'}}>{label}</div>
